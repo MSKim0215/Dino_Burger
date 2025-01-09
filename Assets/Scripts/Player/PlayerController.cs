@@ -45,7 +45,10 @@ namespace MSKim.Player
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if(handUpObject != null)
+                ray = new Ray(new Vector3(transform.position.x, 0.2f, transform.position.z), transform.forward);
+                Debug.DrawLine(ray.origin, ray.origin + ray.direction * raycastDistance, Color.red);
+
+                if (handUpObject != null)
                 {
                     PickDown();
                     return;
@@ -57,6 +60,19 @@ namespace MSKim.Player
 
         private void PickDown()
         {
+            int layerMask = 1 << LayerMask.NameToLayer("HandNotAble");
+            if (Physics.Raycast(ray, out hit, raycastDistance, layerMask))
+            {
+                var hitObj = hit.collider.gameObject;
+                if(hitObj != null)
+                {
+                    handUpObject.transform.SetParent(hitObj.transform);
+                    handUpObject.transform.localPosition = new Vector3(0f, handUpObject.transform.localScale.y - hitObj.transform.position.y, 0f);
+                    handUpObject = null;
+                }
+                return;
+            }
+
             handUpObject.transform.SetParent(null);
             handUpObject.transform.localPosition = new Vector3(handUpObject.transform.localPosition.x, handUpObject.transform.localScale.y / 2f, handUpObject.transform.localPosition.z);
             handUpObject = null;
@@ -64,11 +80,8 @@ namespace MSKim.Player
 
         private void PickUp()
         {
-            Debug.DrawLine(ray.origin, ray.origin + ray.direction * raycastDistance, Color.red);
-
-            ray = new Ray(transform.position, transform.forward);
-
-            if (Physics.Raycast(ray, out hit, raycastDistance))
+            int layerMask = 1 << LayerMask.NameToLayer("HandAble");
+            if (Physics.Raycast(ray, out hit, raycastDistance, layerMask))
             {
                 var hitObj = hit.collider.gameObject;
                 if (hitObj != null)
