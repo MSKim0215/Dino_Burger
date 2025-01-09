@@ -80,15 +80,27 @@ namespace MSKim.Player
 
         private void PickUp()
         {
-            int layerMask = 1 << LayerMask.NameToLayer("HandAble");
+            int layerMask = (1 << LayerMask.NameToLayer("HandAble")) + (1 << LayerMask.NameToLayer("HandNotAble"));
             if (Physics.Raycast(ray, out hit, raycastDistance, layerMask))
             {
                 var hitObj = hit.collider.gameObject;
                 if (hitObj != null)
                 {
-                    handUpObject = hitObj;
-                    handUpObject.transform.SetParent(handTransform);
-                    handUpObject.transform.localPosition = Vector3.zero;
+                    if(hitObj.layer == LayerMask.NameToLayer("HandAble"))
+                    {
+                        handUpObject = hitObj;
+                        handUpObject.transform.SetParent(handTransform);
+                        handUpObject.transform.localPosition = Vector3.zero;
+                    }
+                    else if(hitObj.layer == LayerMask.NameToLayer("HandNotAble"))
+                    {
+                        if(hitObj.transform.GetChild(0) != null)
+                        {
+                            handUpObject = hitObj.transform.GetChild(0).gameObject;
+                            handUpObject.transform.SetParent(handTransform);
+                            handUpObject.transform.localPosition = Vector3.zero;
+                        }
+                    }
                 }
             }
         }
