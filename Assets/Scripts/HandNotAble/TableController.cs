@@ -4,6 +4,10 @@ namespace MSKim.HandNotAble
 {
     public class TableController : MonoBehaviour
     {
+        [Header("Table Type")]
+        [SerializeField] private Utils.TableType tableType;
+
+        [Header("My Hand")]
         [SerializeField] private Hand hand;
 
         public void Take(GameObject takeObject) => hand.GetHandUp(takeObject);

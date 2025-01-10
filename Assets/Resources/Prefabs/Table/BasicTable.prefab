@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 2426887737701517600}
   - component: {fileID: 8407532882210615527}
   m_Layer: 7
-  m_Name: Table
+  m_Name: BasicTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1309bc8b35fa67b44a9e88f1194b7ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tableType: 0
   hand:
     handRoot: {fileID: 4030682639167103975}
     handUpObject: {fileID: 0}

@@ -4,7 +4,6 @@ using UnityEngine;
 [Serializable]
 public class Hand
 {
-    [Header("My Hand")]
     [SerializeField] private Transform handRoot;
     [SerializeField] private GameObject handUpObject;
 
