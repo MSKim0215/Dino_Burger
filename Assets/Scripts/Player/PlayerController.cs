@@ -73,7 +73,7 @@ namespace MSKim.Player
                 return;
             }
 
-            hand.GetHandDown(null, new Vector3(hand.HandUpObject.transform.position.x, hand.HandUpObject.transform.localScale.y / 2f, hand.HandUpObject.transform.position.z));
+            hand.GetHandDown(null, hand.HandUpObject.transform.localPosition);
         }
 
         private void PickUp()
@@ -92,7 +92,7 @@ namespace MSKim.Player
                         return;
                     }
 
-                    hand.GetHandUp(hitObj);
+                    hand.GetHandUp(hitObj.transform.parent.gameObject);
                 }
             }
         }
