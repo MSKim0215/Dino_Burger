@@ -4,6 +4,7 @@ namespace MSKim.Player
 {
     public class PlayerController : MonoBehaviour
     {
+        [Header("My Hand")]
         [SerializeField] private Hand hand;
 
         private float xAxis;
@@ -73,7 +74,7 @@ namespace MSKim.Player
                 return;
             }
 
-            hand.GetHandDown(null, hand.HandUpObject.transform.localPosition);
+            hand.GetHandDown(null, new Vector3(hand.HandUpObject.transform.position.x, 0f, hand.HandUpObject.transform.position.z));
         }
 
         private void PickUp()
