@@ -64,7 +64,11 @@ namespace MSKim.Player
                 var hitObj = handHit.collider.gameObject;
                 if(hitObj != null)
                 {
-                    hand.GetHandDown(hitObj.transform, new Vector3(0f, hand.HandUpObject.transform.localScale.y * hitObj.transform.localPosition.y, 0f));
+                    if(hitObj.TryGetComponent<HandNotAble.TableController>(out var table))
+                    {
+                        table.Take(hand.HandUpObject);
+                        hand.ClearHand();
+                    }
                 }
                 return;
             }
@@ -81,9 +85,9 @@ namespace MSKim.Player
                 {
                     if(hitObj.layer == LayerMask.NameToLayer("HandNotAble"))
                     {
-                        if(hitObj.transform.childCount >= 1)
+                        if(hitObj.TryGetComponent<HandNotAble.TableController>(out var table))
                         {
-                            hand.GetHandUp(hitObj.transform.GetChild(0).gameObject);
+                            hand.GetHandUp(table.Give());
                         }
                         return;
                     }

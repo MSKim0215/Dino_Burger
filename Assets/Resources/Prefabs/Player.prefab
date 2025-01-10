@@ -154,5 +154,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand:
-    handTransform: {fileID: 3129521107098646028}
+    handRoot: {fileID: 3129521107098646028}
     handUpObject: {fileID: 0}
