@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 9d70c8ef131cd65499237238e258d887
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282790
+  packageName: KayKit - Restaurant Bits (for Unity)
+  packageVersion: 1.0.0
+  assetPath: Assets/KayKit/Packs/Bits/KayKit - Restaurant Bits (For Unity)/Prefabs/floor_kitchen.prefab
+  uploadId: 678586

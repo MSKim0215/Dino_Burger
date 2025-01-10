@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ba17710e4d74b1c4f9196c2ea50fe7df
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282790
+  packageName: KayKit - Restaurant Bits (for Unity)
+  packageVersion: 1.0.0
+  assetPath: Assets/KayKit/Packs/Bits/KayKit - Restaurant Bits (For Unity)/Prefabs/table_round_A_small_decorated.prefab
+  uploadId: 678586

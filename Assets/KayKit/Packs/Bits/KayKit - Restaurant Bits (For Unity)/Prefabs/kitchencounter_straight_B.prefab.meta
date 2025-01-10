@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 386f8e759a90d4748972c190a462c6c5
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282790
+  packageName: KayKit - Restaurant Bits (for Unity)
+  packageVersion: 1.0.0
+  assetPath: Assets/KayKit/Packs/Bits/KayKit - Restaurant Bits (For Unity)/Prefabs/kitchencounter_straight_B.prefab
+  uploadId: 678586

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: bfa0fd7d9d11b8745b0ccf07a3e16f9d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282790
+  packageName: KayKit - Restaurant Bits (for Unity)
+  packageVersion: 1.0.0
+  assetPath: Assets/KayKit/Packs/Bits/KayKit - Restaurant Bits (For Unity)/Prefabs/food_ingredient_potato_mashed.prefab
+  uploadId: 678586

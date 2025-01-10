@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f6e653ffe1da22e499b84f8c1478a6fe
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282790
+  packageName: KayKit - Restaurant Bits (for Unity)
+  packageVersion: 1.0.0
+  assetPath: Assets/KayKit/Packs/Bits/KayKit - Restaurant Bits (For Unity)/Prefabs/wall_half.prefab
+  uploadId: 678586

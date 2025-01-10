@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 811d5748f74f19a42be57e783476ca1f
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282790
+  packageName: KayKit - Restaurant Bits (for Unity)
+  packageVersion: 1.0.0
+  assetPath: Assets/KayKit/Packs/Bits/KayKit - Restaurant Bits (For Unity)/Prefabs/kitchencabinet_corner_half.prefab
+  uploadId: 678586

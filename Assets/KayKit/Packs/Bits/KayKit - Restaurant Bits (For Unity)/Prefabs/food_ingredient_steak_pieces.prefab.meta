@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6e310ef14d11a3d43b3d95444c8719c2
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282790
+  packageName: KayKit - Restaurant Bits (for Unity)
+  packageVersion: 1.0.0
+  assetPath: Assets/KayKit/Packs/Bits/KayKit - Restaurant Bits (For Unity)/Prefabs/food_ingredient_steak_pieces.prefab
+  uploadId: 678586

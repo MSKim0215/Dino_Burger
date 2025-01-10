@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 22529a686d466ba46a87cfed883afb1a
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282790
+  packageName: KayKit - Restaurant Bits (for Unity)
+  packageVersion: 1.0.0
+  assetPath: Assets/KayKit/Packs/Bits/KayKit - Restaurant Bits (For Unity)/Prefabs/wall_orderwindow_decorated.prefab
+  uploadId: 678586

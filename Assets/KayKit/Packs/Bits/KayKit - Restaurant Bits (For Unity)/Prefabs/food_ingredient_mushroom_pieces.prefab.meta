@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 07269bfb4f316ea47b3232ae25889277
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282790
+  packageName: KayKit - Restaurant Bits (for Unity)
+  packageVersion: 1.0.0
+  assetPath: Assets/KayKit/Packs/Bits/KayKit - Restaurant Bits (For Unity)/Prefabs/food_ingredient_mushroom_pieces.prefab
+  uploadId: 678586

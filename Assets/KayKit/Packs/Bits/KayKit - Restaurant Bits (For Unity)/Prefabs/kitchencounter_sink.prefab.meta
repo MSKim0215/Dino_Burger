@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: dc3d3696e0d47284dac0c3d5f5de5f05
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282790
+  packageName: KayKit - Restaurant Bits (for Unity)
+  packageVersion: 1.0.0
+  assetPath: Assets/KayKit/Packs/Bits/KayKit - Restaurant Bits (For Unity)/Prefabs/kitchencounter_sink.prefab
+  uploadId: 678586

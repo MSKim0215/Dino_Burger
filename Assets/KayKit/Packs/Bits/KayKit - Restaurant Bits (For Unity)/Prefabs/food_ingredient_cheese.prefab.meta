@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 5190baedd8294b54f89cf0e5f4bc8041
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282790
+  packageName: KayKit - Restaurant Bits (for Unity)
+  packageVersion: 1.0.0
+  assetPath: Assets/KayKit/Packs/Bits/KayKit - Restaurant Bits (For Unity)/Prefabs/food_ingredient_cheese.prefab
+  uploadId: 678586

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 00743f20054140e499005763b9e2e2fe
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282790
+  packageName: KayKit - Restaurant Bits (for Unity)
+  packageVersion: 1.0.0
+  assetPath: Assets/KayKit/Packs/Bits/KayKit - Restaurant Bits (For Unity)/Prefabs/food_ingredient_burger_uncooked.prefab
+  uploadId: 678586

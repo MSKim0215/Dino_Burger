@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a84dcf2d4dffa0a40b0761fd4b9402a3
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282790
+  packageName: KayKit - Restaurant Bits (for Unity)
+  packageVersion: 1.0.0
+  assetPath: Assets/KayKit/Packs/Bits/KayKit - Restaurant Bits (For Unity)/Prefabs/food_pizza_mushroom_slice.prefab
+  uploadId: 678586

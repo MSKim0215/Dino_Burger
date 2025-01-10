@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 5b3295c09bdca5f499815e8554f9d31c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282790
+  packageName: KayKit - Restaurant Bits (for Unity)
+  packageVersion: 1.0.0
+  assetPath: Assets/KayKit/Packs/Bits/KayKit - Restaurant Bits (For Unity)/Prefabs/kitchencounter_outercorner.prefab
+  uploadId: 678586
