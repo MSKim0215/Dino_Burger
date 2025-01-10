@@ -9,7 +9,7 @@ namespace MSKim.Player
 
         private float xAxis;
         private float zAxis;
-        private float moveSpeed = 30f;
+        private float moveSpeed = 10f;
         private float rotateSpeed = 10f;
         
         private RaycastHit handHit;
@@ -39,11 +39,12 @@ namespace MSKim.Player
         private void Update()
         {
             Pick();
+            InterAction();
         }
 
         private void Pick()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetMouseButtonDown(0))
             {
                 handRay = new Ray(new Vector3(transform.position.x, 0.2f, transform.position.z), transform.forward);
                 Debug.DrawLine(handRay.origin, handRay.origin + handRay.direction * handlingDistance, Color.red);
@@ -94,6 +95,31 @@ namespace MSKim.Player
                     }
 
                     hand.GetHandUp(hitObj.transform.parent.gameObject);
+                }
+            }
+        }
+
+        private void InterAction()
+        {
+            if(Input.GetMouseButton(1))
+            {
+                handRay = new Ray(new Vector3(transform.position.x, 0.2f, transform.position.z), transform.forward);
+                Debug.DrawLine(handRay.origin, handRay.origin + handRay.direction * handlingDistance, Color.red);
+
+                if(Physics.Raycast(handRay, out handHit, handlingDistance, LayerHandNotAble))
+                {
+                    var hitObj = handHit.collider.gameObject;
+                    if(hitObj != null)
+                    {
+                        if(hitObj.TryGetComponent<HandNotAble.TableController>(out var table))
+                        {
+                            switch(table.TableType)
+                            {
+                                case Utils.TableType.CuttingBoard: (table as HandNotAble.CuttingBoardTableController).Cutting(); break;
+                                case Utils.TableType.Packaging: (table as HandNotAble.PackagingTableController).Packaging(); break;
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -8,7 +8,9 @@ namespace MSKim.HandNotAble
         [SerializeField] private Utils.TableType tableType;
 
         [Header("My Hand")]
-        [SerializeField] private Hand hand;
+        [SerializeField] protected Hand hand;
+
+        public Utils.TableType TableType => tableType;
 
         public void Take(GameObject takeObject) => hand.GetHandUp(takeObject);
 
