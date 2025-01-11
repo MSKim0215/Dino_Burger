@@ -11,6 +11,8 @@ namespace MSKim.HandNotAble
 
         private void Grill()
         {
+            UniTask
+
             if (hand.HandUpObject == null) return;
 
             Debug.Log("굽는 중!~~!~!");
