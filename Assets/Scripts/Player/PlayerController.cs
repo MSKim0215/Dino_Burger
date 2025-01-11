@@ -90,7 +90,15 @@ namespace MSKim.Player
                         if(hitObj.TryGetComponent<HandNotAble.TableController>(out var table))
                         {
                             hand.GetHandUp(table.Give());
+                            return;
                         }
+                        
+                        if(hitObj.TryGetComponent<HandNotAble.CrateController>(out var crate))
+                        {
+                            hand.GetHandUp(crate.Give());
+                            return;
+                        }
+
                         return;
                     }
 

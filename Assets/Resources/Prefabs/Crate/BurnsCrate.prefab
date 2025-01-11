@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6228652755157973563}
   - component: {fileID: 7720284335504082998}
   - component: {fileID: -845604847772956140}
+  - component: {fileID: 8591848792625546912}
   m_Layer: 7
   m_Name: BurnsCrate
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5396088933043377893}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8, y: 0, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -108,3 +109,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.0000002, y: 0.8023816, z: 2.0000048}
   m_Center: {x: 0.00000011920929, y: 0.40118882, z: -0.00000017881393}
+--- !u!114 &8591848792625546912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5396088933043377893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 146cc6b367b37644e9fbfe1436aa48b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crateType: 0
+  ingredientPrefab: {fileID: 8544778946697118956, guid: 1eddec99902dc5c46a12d8d6c2e7312d, type: 3}
+  ingredientRoot: {fileID: 0}
