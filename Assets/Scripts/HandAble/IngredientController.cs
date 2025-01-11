@@ -14,6 +14,8 @@ namespace MSKim.HandAble
         
         private Dictionary<Utils.CrateType, GameObject> ingredientDict = new();
 
+        public Utils.CrateType IngredientType => ingredientType;
+
         public void Initialize(Utils.CrateType ingredientType)
         {
             InitializeDict();

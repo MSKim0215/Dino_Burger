@@ -11,6 +11,8 @@ namespace MSKim.HandNotAble
         [SerializeField] private HandAble.IngredientController ingredientPrefab;
         [SerializeField] private Transform ingredientRoot;
 
+        public Utils.CrateType CrateType => crateType;
+
         public void Take(GameObject takeObject) => Destroy(takeObject);
 
         public GameObject Give()

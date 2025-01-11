@@ -12,7 +12,10 @@ namespace MSKim.HandNotAble
 
         public Utils.TableType TableType => tableType;
 
-        public void Take(GameObject takeObject) => hand.GetHandUp(takeObject);
+        public void Take(GameObject takeObject)
+        {
+            hand.GetHandUp(takeObject);
+        }
 
         public GameObject Give()
         {

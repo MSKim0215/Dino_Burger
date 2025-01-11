@@ -68,15 +68,13 @@ namespace MSKim.Player
                 {
                     if(hitObj.TryGetComponent<HandNotAble.TableController>(out var table))
                     {
-                        table.Take(hand.HandUpObject);
-                        hand.ClearHand();
+                        TableInteraction(table);
                         return;
                     }
 
                     if(hitObj.TryGetComponent<HandNotAble.CrateController>(out var crate))
                     {
-                        crate.Take(hand.HandUpObject);
-                        hand.ClearHand();
+                        CrateInteraction(crate);
                         return;
                     }
                 }
@@ -84,6 +82,56 @@ namespace MSKim.Player
             }
 
             hand.GetHandDown(null, new Vector3(hand.HandUpObject.transform.position.x, 0f, hand.HandUpObject.transform.position.z));
+        }
+
+        private void TableInteraction(HandNotAble.TableController table)
+        {
+            if (table.TableType == Utils.TableType.Basic || table.TableType == Utils.TableType.Packaging)
+            {
+                table.Take(hand.HandUpObject);
+                hand.ClearHand();
+                return;
+            }
+
+            if (hand.HandUpObject.TryGetComponent<HandAble.IngredientController>(out var ingredient))
+            {
+                bool canTake = false;
+
+                switch (table.TableType)
+                {
+                    case Utils.TableType.CuttingBoard: 
+                        canTake = ingredient.IngredientType != Utils.CrateType.Meat; 
+                        break;
+
+                    case Utils.TableType.Pot:
+                        canTake = ingredient.IngredientType == Utils.CrateType.Lettuce ||
+                                ingredient.IngredientType == Utils.CrateType.Onion ||
+                                ingredient.IngredientType == Utils.CrateType.Tomato;
+                        break;
+
+                    case Utils.TableType.GasStove:
+                        canTake = ingredient.IngredientType == Utils.CrateType.Meat;
+                        break;
+                }
+
+                if(canTake)
+                {
+                    table.Take(hand.HandUpObject);
+                    hand.ClearHand();
+                }
+            }
+        }
+
+        private void CrateInteraction(HandNotAble.CrateController crate)
+        {
+            if (hand.HandUpObject.TryGetComponent<HandAble.IngredientController>(out var ingredient))
+            {
+                if (crate.CrateType == ingredient.IngredientType)
+                {
+                    crate.Take(hand.HandUpObject);
+                    hand.ClearHand();
+                }
+            }
         }
 
         private void PickUp()
