@@ -11,6 +11,10 @@ namespace MSKim.HandAble
 
                 if (currentCookTime >= Utils.CUTTING_CHEESE_COOK_TIME)
                 {
+                    ChangeCookStateObject(Utils.CookState.OverCook);
+                }
+                else if(currentCookTime > 0 && currentCookTime < Utils.CUTTING_CHEESE_COOK_TIME)
+                {
                     ChangeCookStateObject(Utils.CookState.Cook);
                 }
                 else
