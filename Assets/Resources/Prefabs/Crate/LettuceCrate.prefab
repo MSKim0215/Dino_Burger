@@ -122,5 +122,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crateType: 2
-  ingredientPrefab: {fileID: 4717897729915268240, guid: 1eddec99902dc5c46a12d8d6c2e7312d, type: 3}
+  ingredientPrefab: {fileID: 4717897729915268240, guid: 9ec17534f327321489ae50852d0aba22, type: 3}
   ingredientRoot: {fileID: 0}
