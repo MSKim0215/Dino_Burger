@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 5392095470269961901}
   - component: {fileID: 7585459128025272678}
   - component: {fileID: 6816219615463910560}
-  m_Layer: 0
+  - component: {fileID: -6832538114294218948}
+  m_Layer: 7
   m_Name: TomatoesCrate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,3 +87,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &-6832538114294218948
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2573474045682272058}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.0000002, y: 0.9233165, z: 2.0000048}
+  m_Center: {x: 0.00000011920929, y: 0.46165627, z: -0.00000017881393}
