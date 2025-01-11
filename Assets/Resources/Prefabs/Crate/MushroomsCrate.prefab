@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9128912241730573643}
   - component: {fileID: 571980271033306636}
   - component: {fileID: 8463969820252012278}
+  - component: {fileID: 2511641411483393212}
   m_Layer: 7
   m_Name: MushroomsCrate
   m_TagString: Untagged
@@ -108,3 +109,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.0000002, y: 0.9179152, z: 2.0000048}
   m_Center: {x: 0.00000011920929, y: 0.45895565, z: -0.00000017881393}
+--- !u!114 &2511641411483393212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5097077474055798571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 146cc6b367b37644e9fbfe1436aa48b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crateType: 3
+  ingredientPrefab: {fileID: 4717897729915268240, guid: 1eddec99902dc5c46a12d8d6c2e7312d, type: 3}
+  ingredientRoot: {fileID: 0}

@@ -7,6 +7,6 @@ public static class Utils
 
     public enum CrateType
     {
-        Burn, Cheese, Lettuce, Mushroom, Onion, Tomato, Meat
+        Bun, Cheese, Lettuce, Mushroom, Onion, Tomato, Meat
     }   // 빵, 치즈, 양상추, 버섯, 양파, 토마토, 고기
 }

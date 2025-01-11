@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7150815320413495818}
   - component: {fileID: 6430544000572215906}
   - component: {fileID: -3532609502042016410}
+  - component: {fileID: -1404213050057657330}
   m_Layer: 7
   m_Name: FridgeMeat
   m_TagString: Untagged
@@ -110,6 +111,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.0000005, y: 2.5, z: 1.5000005}
   m_Center: {x: 0, y: 1.25, z: -0.25000012}
+--- !u!114 &-1404213050057657330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905378745773130924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 146cc6b367b37644e9fbfe1436aa48b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crateType: 6
+  ingredientPrefab: {fileID: 4717897729915268240, guid: 1eddec99902dc5c46a12d8d6c2e7312d, type: 3}
+  ingredientRoot: {fileID: 0}
 --- !u!1 &3998344862236866336
 GameObject:
   m_ObjectHideFlags: 0

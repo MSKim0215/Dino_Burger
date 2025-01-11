@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7585459128025272678}
   - component: {fileID: 6816219615463910560}
   - component: {fileID: -6832538114294218948}
+  - component: {fileID: 2841645087476990688}
   m_Layer: 7
   m_Name: TomatoesCrate
   m_TagString: Untagged
@@ -108,3 +109,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.0000002, y: 0.9233165, z: 2.0000048}
   m_Center: {x: 0.00000011920929, y: 0.46165627, z: -0.00000017881393}
+--- !u!114 &2841645087476990688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2573474045682272058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 146cc6b367b37644e9fbfe1436aa48b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crateType: 5
+  ingredientPrefab: {fileID: 4717897729915268240, guid: 1eddec99902dc5c46a12d8d6c2e7312d, type: 3}
+  ingredientRoot: {fileID: 0}

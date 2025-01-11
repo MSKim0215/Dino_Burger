@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -845604847772956140}
   - component: {fileID: 8591848792625546912}
   m_Layer: 7
-  m_Name: BurnsCrate
+  m_Name: BunsCrate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,5 +122,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crateType: 0
-  ingredientPrefab: {fileID: 8544778946697118956, guid: 1eddec99902dc5c46a12d8d6c2e7312d, type: 3}
+  ingredientPrefab: {fileID: 4717897729915268240, guid: 1eddec99902dc5c46a12d8d6c2e7312d, type: 3}
   ingredientRoot: {fileID: 0}
