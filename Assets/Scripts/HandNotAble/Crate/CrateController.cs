@@ -8,18 +8,16 @@ namespace MSKim.HandNotAble
         [SerializeField] private Utils.CrateType crateType;
 
         [Header("Pool Settings")]
-        [SerializeField] private GameObject ingredientPrefab;
+        [SerializeField] private HandAble.IngredientController ingredientPrefab;
         [SerializeField] private Transform ingredientRoot;
+
+        public void Take(GameObject takeObject) => Destroy(takeObject);
 
         public GameObject Give()
         {
-            GameObject ingredient = Instantiate(ingredientPrefab);
-            return ingredient;
-        }
-
-        public void Take(GameObject takeObject)
-        {
-            Destroy(takeObject);
+            var ingredient = Instantiate(ingredientPrefab);
+            ingredient.Initialize(crateType);
+            return ingredient.gameObject;
         }
     }
 }
