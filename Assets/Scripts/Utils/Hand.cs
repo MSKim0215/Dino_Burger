@@ -9,6 +9,15 @@ public class Hand
 
     public GameObject HandUpObject => handUpObject;
 
+    public MSKim.HandAble.IngredientController GetHandUpIngredient()
+    {
+        if(handUpObject.TryGetComponent<MSKim.HandAble.IngredientController>(out var ingredient))
+        {
+            return ingredient;
+        }
+        return null;
+    }
+
     public void ClearHand() => handUpObject = null;
 
     public void GetHandDown(Transform downTransform, Vector3 downPosition)

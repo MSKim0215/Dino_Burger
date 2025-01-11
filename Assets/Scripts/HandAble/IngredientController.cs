@@ -9,29 +9,42 @@ namespace MSKim.HandAble
         [Header("Ingredient Type")]
         [SerializeField] private Utils.CrateType ingredientType;
 
-        [Header("Ingredient Objects")]
-        [SerializeField] private GameObject[] ingredientObjects;
-        
-        private Dictionary<Utils.CrateType, GameObject> ingredientDict = new();
+        [Header("Ingredient State Objects")]
+        [SerializeField] private GameObject[] ingredientStateObjects;
+
+        [Header("Cooking Time")]
+        [SerializeField] protected float currentCookTime;
+
+        private Dictionary<Utils.CookState, GameObject> ingredientCookStateDict = new();
+
+        public virtual float CurrentCookTime { get => currentCookTime; set => currentCookTime = value; }
 
         public Utils.CrateType IngredientType => ingredientType;
 
         public void Initialize(Utils.CrateType ingredientType)
         {
-            InitializeDict();
-
             this.ingredientType = ingredientType;
             name = this.ingredientType.ToString();
 
-            ingredientDict[this.ingredientType].SetActive(true);
+            InitializeCookState();
         }
 
-        private void InitializeDict()
+        private void InitializeCookState()
         {
-            for(int i = 0; i < ingredientObjects.Length; i++)
+            for(int i = 0; i < ingredientStateObjects.Length; i++)
             {
-                var type = (Utils.CrateType)Enum.Parse(typeof(Utils.CrateType), ingredientObjects[i].name);
-                ingredientDict.Add(type, ingredientObjects[i]);
+                ingredientCookStateDict.Add((Utils.CookState)i, ingredientStateObjects[i]);
+            }
+
+            CurrentCookTime = 0f;
+        }
+
+        protected void ChangeCookStateObject(Utils.CookState targetState)
+        {
+            foreach(var ingredient in ingredientCookStateDict)
+            {
+                if (ingredient.Value.activeSelf && ingredient.Key == targetState) continue;
+                ingredient.Value.SetActive(ingredient.Key == targetState);
             }
         }
     }

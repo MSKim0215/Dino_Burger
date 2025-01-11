@@ -46,7 +46,7 @@ namespace MSKim.Player
         {
             if (Input.GetMouseButtonDown(0))
             {
-                handRay = new Ray(new Vector3(transform.position.x, 0.2f, transform.position.z), transform.forward);
+                handRay = new Ray(new Vector3(transform.position.x, 0.1f, transform.position.z), transform.forward);
                 Debug.DrawLine(handRay.origin, handRay.origin + handRay.direction * handlingDistance, Color.red);
 
                 if (hand.HandUpObject != null)
@@ -158,7 +158,7 @@ namespace MSKim.Player
                         return;
                     }
 
-                    hand.GetHandUp(hitObj.transform.parent.gameObject);
+                    hand.GetHandUp(hitObj);
                 }
             }
         }
