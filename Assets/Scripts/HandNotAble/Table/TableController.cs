@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace MSKim.HandNotAble
 {
-    public class TableController : MonoBehaviour
+    public class TableController : MonoBehaviour, IInterAction
     {
         [Header("Table Type")]
         [SerializeField] private Utils.TableType tableType;

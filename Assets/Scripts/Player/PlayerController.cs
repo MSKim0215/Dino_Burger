@@ -70,6 +70,14 @@ namespace MSKim.Player
                     {
                         table.Take(hand.HandUpObject);
                         hand.ClearHand();
+                        return;
+                    }
+
+                    if(hitObj.TryGetComponent<HandNotAble.CrateController>(out var crate))
+                    {
+                        crate.Take(hand.HandUpObject);
+                        hand.ClearHand();
+                        return;
                     }
                 }
                 return;
