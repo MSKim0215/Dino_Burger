@@ -17,4 +17,5 @@ public static class Utils
 
     public const float GRILL_COOK_TIME = 5f;            // 고기 굽기 완성 시간
     public const float GRILL_OVERCOOKED_TIME = 8f;      // 고기 굽기 실패 시간
+    public const float CUTTING_CHEESE_COOK_TIME = 4f;   // 치즈 손질 시간
 }

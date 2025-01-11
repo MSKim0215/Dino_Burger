@@ -1,8 +1,6 @@
-using UnityEngine;
-
 namespace MSKim.HandAble
 {
-    public class MeatIngredientController : IngredientController
+    public class CheeseIngredientController : IngredientController
     {
         public override float CurrentCookTime
         {
@@ -11,11 +9,7 @@ namespace MSKim.HandAble
             {
                 currentCookTime = value;
 
-                if(currentCookTime >= Utils.GRILL_OVERCOOKED_TIME)
-                {
-                    ChangeCookStateObject(Utils.CookState.OverCook);
-                }
-                else if(currentCookTime >= Utils.GRILL_COOK_TIME)
+                if (currentCookTime >= Utils.CUTTING_CHEESE_COOK_TIME)
                 {
                     ChangeCookStateObject(Utils.CookState.Cook);
                 }
