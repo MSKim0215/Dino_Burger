@@ -12,6 +12,8 @@ namespace MSKim.HandNotAble
 
         public Utils.TableType TableType => tableType;
 
+        public bool IsHandEmpty => hand.HandUpObject == null;
+
         public virtual void Take(GameObject takeObject)
         {
             hand.GetHandUp(takeObject);

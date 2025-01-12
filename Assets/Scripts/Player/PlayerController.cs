@@ -86,6 +86,8 @@ namespace MSKim.Player
 
         private void TableInteraction(HandNotAble.TableController table)
         {
+            if (!table.IsHandEmpty) return;
+
             if (table.TableType == Utils.TableType.Basic || table.TableType == Utils.TableType.Packaging)
             {
                 table.Take(hand.HandUpObject);
