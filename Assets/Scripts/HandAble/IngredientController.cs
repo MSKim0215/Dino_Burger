@@ -14,10 +14,13 @@ namespace MSKim.HandAble
 
         [Header("Cooking Time")]
         [SerializeField] protected float currentCookTime;
+        [SerializeField] protected float maximumCookTime;
 
         private Dictionary<Utils.CookState, GameObject> ingredientCookStateDict = new();
 
         public virtual float CurrentCookTime { get => currentCookTime; set => currentCookTime = value; }
+
+        public float MaximumCookTime => maximumCookTime;
 
         public Utils.CrateType IngredientType => ingredientType;
 
@@ -29,7 +32,7 @@ namespace MSKim.HandAble
             InitializeCookState();
         }
 
-        private void InitializeCookState()
+        protected virtual void InitializeCookState()
         {
             for(int i = 0; i < ingredientStateObjects.Length; i++)
             {

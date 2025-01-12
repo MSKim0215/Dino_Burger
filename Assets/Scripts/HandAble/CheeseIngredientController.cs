@@ -9,11 +9,11 @@ namespace MSKim.HandAble
             {
                 currentCookTime = value;
 
-                if (currentCookTime >= Utils.CUTTING_CHEESE_COOK_TIME)
+                if (currentCookTime >= maximumCookTime)
                 {
                     ChangeCookStateObject(Utils.CookState.OverCook);
                 }
-                else if(currentCookTime > 0 && currentCookTime < Utils.CUTTING_CHEESE_COOK_TIME)
+                else if(currentCookTime > 0 && currentCookTime < maximumCookTime)
                 {
                     ChangeCookStateObject(Utils.CookState.Cook);
                 }
@@ -22,6 +22,13 @@ namespace MSKim.HandAble
                     ChangeCookStateObject(Utils.CookState.UnCook);
                 }
             }
+        }
+
+        protected override void InitializeCookState()
+        {
+            maximumCookTime = Utils.CUTTING_CHEESE_COOK_TIME;
+
+            base.InitializeCookState();
         }
     }
 }

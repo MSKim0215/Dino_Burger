@@ -75,6 +75,7 @@ MonoBehaviour:
   - {fileID: 4909299698062775951}
   - {fileID: 3694237532447138981}
   currentCookTime: 0
+  maximumCookTime: 0
 --- !u!1001 &2666120056759299569
 PrefabInstance:
   m_ObjectHideFlags: 0

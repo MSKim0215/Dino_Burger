@@ -6,10 +6,10 @@ namespace MSKim.HandNotAble
     {
         public void Cutting()
         {
-            var ingredient = hand.GetHandUpIngredient() as HandAble.CheeseIngredientController;
+            var ingredient = hand.GetHandUpIngredient();
             if (ingredient == null || hand.HandUpObject == null) return;
 
-            if (ingredient.CurrentCookTime >= Utils.CUTTING_CHEESE_COOK_TIME)
+            if (ingredient.CurrentCookTime >= ingredient.MaximumCookTime)
             {
                 Debug.Log($"{ingredient.IngredientType}의 손질이 완료되었습니다.");
                 return;
