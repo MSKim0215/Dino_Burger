@@ -9,7 +9,7 @@ namespace MSKim.HandAble
             {
                 currentCookTime = value;
 
-                if(currentCookTime >= maximumCookTime)
+                if(currentCookTime >= Utils.GRILL_OVERCOOKED_TIME)
                 {
                     ChangeCookStateObject(Utils.CookState.OverCook);
                 }
