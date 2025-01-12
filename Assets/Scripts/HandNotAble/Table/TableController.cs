@@ -19,7 +19,7 @@ namespace MSKim.HandNotAble
             hand.GetHandUp(takeObject);
         }
 
-        public GameObject Give()
+        public virtual GameObject Give()
         {
             GameObject tableObject = hand.HandUpObject;
 

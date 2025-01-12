@@ -29,13 +29,21 @@ public class Hand
 
     public void GetHandUp(GameObject target)
     {
-        if(target == null)
-        {
-            Debug.Log("target 없음!");
-            return;
-        }
+        SetHandUpObject(target);
+        GetHandUp();
+    }
+
+    public void SetHandUpObject(GameObject target)
+    {
+        if (target == null) return;
 
         handUpObject = target;
+    }
+
+    public void GetHandUp()
+    {
+        if (handUpObject == null) return;
+
         handUpObject.transform.SetParent(handRoot);
         handUpObject.transform.localPosition = Vector3.zero;
     }
