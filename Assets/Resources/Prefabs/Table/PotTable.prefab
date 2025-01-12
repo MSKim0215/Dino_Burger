@@ -159,6 +159,8 @@ MonoBehaviour:
     handUpObject: {fileID: 0}
   stewObject: {fileID: 5889672131192540811}
   stewFoodPrefab: {fileID: 6018837424437621513, guid: 266d043f7ba48de4bbd1fe761e4d9af8, type: 3}
+  stewIngredientList: 020000000400000005000000
+  currentIngredientList: 
 --- !u!1001 &6736602503048262618
 PrefabInstance:
   m_ObjectHideFlags: 0

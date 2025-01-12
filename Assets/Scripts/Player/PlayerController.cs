@@ -106,7 +106,7 @@ namespace MSKim.Player
                         break;
 
                     case Utils.TableType.Pot:
-                        canTake = ingredient.IngredientState == Utils.IngredientState.Cutting &&
+                        canTake = ingredient.IngredientState == Utils.IngredientState.CutOver &&
                                 (ingredient.IngredientType == Utils.CrateType.Lettuce ||
                                 ingredient.IngredientType == Utils.CrateType.Onion ||
                                 ingredient.IngredientType == Utils.CrateType.Tomato);

@@ -27,4 +27,5 @@ public static class Utils
     public const float CUTTING_MUSHROOM_COOK_TIME = 3f;     // 버섯 손질 시간
     public const float CUTTING_ONION_COOK_TIME = 2.5f;      // 양파 손질 시간
     public const float CUTTING_TOMATO_COOK_TIME = 3f;       // 토마토 손질 시간
+    public const float BOIL_STEW_COOK_TIME = 5f;            // 스튜 제작 시간
 }
