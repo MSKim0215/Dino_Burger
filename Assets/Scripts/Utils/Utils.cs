@@ -15,6 +15,11 @@ public static class Utils
         UnCook, Cook, OverCook
     }   // 비조리, 조리, 타버림
 
+    public enum IngredientState
+    {
+        Basic, Cutting, Grill
+    }   // 기본 상태, 칼질 상태, 구워진 상태
+
     public const float GRILL_COOK_TIME = 5f;            // 고기 굽기 완성 시간
     public const float GRILL_OVERCOOKED_TIME = 8f;      // 고기 굽기 실패 시간
     public const float CUTTING_CHEESE_COOK_TIME = 2f;       // 치즈 손질 시간

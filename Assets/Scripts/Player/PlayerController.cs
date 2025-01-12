@@ -106,9 +106,10 @@ namespace MSKim.Player
                         break;
 
                     case Utils.TableType.Pot:
-                        canTake = ingredient.IngredientType == Utils.CrateType.Lettuce ||
+                        canTake = ingredient.IngredientState == Utils.IngredientState.Cutting &&
+                                (ingredient.IngredientType == Utils.CrateType.Lettuce ||
                                 ingredient.IngredientType == Utils.CrateType.Onion ||
-                                ingredient.IngredientType == Utils.CrateType.Tomato;
+                                ingredient.IngredientType == Utils.CrateType.Tomato);
                         break;
 
                     case Utils.TableType.GasStove:

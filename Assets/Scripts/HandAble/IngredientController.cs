@@ -10,6 +10,7 @@ namespace MSKim.HandAble
         [SerializeField] private Utils.CrateType ingredientType;
 
         [Header("Ingredient State Objects")]
+        [SerializeField] private Utils.IngredientState ingredientState = Utils.IngredientState.Basic;
         [SerializeField] private GameObject[] ingredientStateObjects;
 
         [Header("Cooking Time")]
@@ -23,6 +24,8 @@ namespace MSKim.HandAble
         public float MaximumCookTime => maximumCookTime;
 
         public Utils.CrateType IngredientType => ingredientType;
+
+        public Utils.IngredientState IngredientState => ingredientState;
 
         public void Initialize(Utils.CrateType ingredientType)
         {
@@ -49,6 +52,12 @@ namespace MSKim.HandAble
                 if (ingredient.Value.activeSelf && ingredient.Key == targetState) continue;
                 ingredient.Value.SetActive(ingredient.Key == targetState);
             }
+        }
+
+        public void SetIngredientState(Utils.IngredientState targetState)
+        {
+            if (targetState == ingredientState) return;
+            ingredientState = targetState;
         }
     }
 }

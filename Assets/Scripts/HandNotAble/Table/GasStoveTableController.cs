@@ -20,14 +20,15 @@ namespace MSKim.HandNotAble
 
                 await UniTask.Yield();
 
-                if(ingredient.CurrentCookTime >= Utils.GRILL_OVERCOOKED_TIME)
+                if(ingredient.CurrentCookTime >= ingredient.MaximumCookTime)
                 {
                     Debug.Log($"{ingredient.IngredientType}이 탔습니다.");
                     break;
                 }
-                else if(ingredient.CurrentCookTime >= Utils.GRILL_COOK_TIME)
+                else if(ingredient.CurrentCookTime >= ingredient.MaximumCookTime)
                 {
                     Debug.Log($"{ingredient.IngredientType}이 잘 구워졌습니다.");
+                    ingredient.SetIngredientState(Utils.IngredientState.Grill);
                 }
             }
         }
