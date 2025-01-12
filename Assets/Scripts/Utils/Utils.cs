@@ -17,8 +17,8 @@ public static class Utils
 
     public enum IngredientState
     {
-        Basic, Cutting, Grill
-    }   // 기본 상태, 칼질 상태, 구워진 상태
+        Basic, Cutting, CutOver, Grilling, GrillOver
+    }   // 기본 상태, 칼질중 상태, 칼질 완료 상태, 구워지는중 상태, 구워진 상태
 
     public const float GRILL_COOK_TIME = 5f;            // 고기 굽기 완성 시간
     public const float GRILL_OVERCOOKED_TIME = 8f;      // 고기 굽기 실패 시간

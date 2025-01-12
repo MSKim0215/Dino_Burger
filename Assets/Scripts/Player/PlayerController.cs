@@ -131,6 +131,8 @@ namespace MSKim.Player
             {
                 if (crate.CrateType == ingredient.IngredientType)
                 {
+                    if (ingredient.IngredientState != Utils.IngredientState.Basic) return;
+
                     crate.Take(hand.HandUpObject);
                     hand.ClearHand();
                 }

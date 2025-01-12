@@ -28,8 +28,10 @@ namespace MSKim.HandNotAble
                 else if(ingredient.CurrentCookTime >= ingredient.MaximumCookTime)
                 {
                     Debug.Log($"{ingredient.IngredientType}이 잘 구워졌습니다.");
-                    ingredient.SetIngredientState(Utils.IngredientState.Grill);
+                    ingredient.SetIngredientState(Utils.IngredientState.GrillOver);
                 }
+
+                ingredient.SetIngredientState(Utils.IngredientState.Grilling);
             }
         }
     }
