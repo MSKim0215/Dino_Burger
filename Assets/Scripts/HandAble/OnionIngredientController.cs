@@ -1,6 +1,6 @@
 namespace MSKim.HandAble
 {
-    public class MeatIngredientController : IngredientController
+    public class OnionIngredientController : IngredientController
     {
         public override float CurrentCookTime
         {
@@ -9,11 +9,11 @@ namespace MSKim.HandAble
             {
                 currentCookTime = value;
 
-                if(currentCookTime >= maximumCookTime)
+                if (currentCookTime >= maximumCookTime)
                 {
                     ChangeCookStateObject(Utils.CookState.OverCook);
                 }
-                else if(currentCookTime >= maximumCookTime)
+                else if (currentCookTime > 0 && currentCookTime < maximumCookTime)
                 {
                     ChangeCookStateObject(Utils.CookState.Cook);
                 }
@@ -26,7 +26,7 @@ namespace MSKim.HandAble
 
         protected override void InitializeCookState()
         {
-            maximumCookTime = Utils.GRILL_COOK_TIME;
+            maximumCookTime = Utils.CUTTING_ONION_COOK_TIME;
 
             base.InitializeCookState();
         }

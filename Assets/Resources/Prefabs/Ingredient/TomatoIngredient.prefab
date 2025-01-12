@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2009923164616684966}
   - component: {fileID: 5113191199447852626}
-  - component: {fileID: 4717897729915268240}
+  - component: {fileID: 7944510258430666475}
   m_Layer: 8
   m_Name: TomatoIngredient
   m_TagString: Untagged
@@ -56,7 +56,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.75, y: 0.70000005, z: 0.75}
   m_Center: {x: 0, y: 0.35, z: 0}
---- !u!114 &4717897729915268240
+--- !u!114 &7944510258430666475
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8544778946697118956}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53b275135af16424fb1b00485f329f7e, type: 3}
+  m_Script: {fileID: 11500000, guid: 3851e83d0ac21f34fac17b5390074dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientType: 5
@@ -73,6 +73,7 @@ MonoBehaviour:
   - {fileID: 4766419153532739795}
   - {fileID: 4049137552129523965}
   currentCookTime: 0
+  maximumCookTime: 0
 --- !u!1001 &3814554344987901356
 PrefabInstance:
   m_ObjectHideFlags: 0
