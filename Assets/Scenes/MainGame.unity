@@ -887,7 +887,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1892879715680658477, guid: 6f6a2ad52336c8e42b6e14ae9a13293f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 1892879715680658477, guid: 6f6a2ad52336c8e42b6e14ae9a13293f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1062,7 +1062,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5392095470269961901, guid: 2d5c9e250ccf03d4292c8334c20d945d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5392095470269961901, guid: 2d5c9e250ccf03d4292c8334c20d945d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1162,63 +1162,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4dca325f094951e4eb3d70127ef8bd4e, type: 3}
---- !u!1001 &6666911458200882524
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5097077474055798571, guid: 5687756e91ef0884b95abeecc35006c5, type: 3}
-      propertyPath: m_Name
-      value: MushroomsCrate
-      objectReference: {fileID: 0}
-    - target: {fileID: 8668503708034577673, guid: 5687756e91ef0884b95abeecc35006c5, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8668503708034577673, guid: 5687756e91ef0884b95abeecc35006c5, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8668503708034577673, guid: 5687756e91ef0884b95abeecc35006c5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8668503708034577673, guid: 5687756e91ef0884b95abeecc35006c5, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8668503708034577673, guid: 5687756e91ef0884b95abeecc35006c5, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8668503708034577673, guid: 5687756e91ef0884b95abeecc35006c5, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8668503708034577673, guid: 5687756e91ef0884b95abeecc35006c5, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8668503708034577673, guid: 5687756e91ef0884b95abeecc35006c5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8668503708034577673, guid: 5687756e91ef0884b95abeecc35006c5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8668503708034577673, guid: 5687756e91ef0884b95abeecc35006c5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5687756e91ef0884b95abeecc35006c5, type: 3}
 --- !u!1001 &7596683486525755082
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1294,6 +1237,5 @@ SceneRoots:
   - {fileID: 42386293}
   - {fileID: 6124825757062131146}
   - {fileID: 2256916365920064933}
-  - {fileID: 6666911458200882524}
   - {fileID: 1512007661929296621}
   - {fileID: 6083417112167852085}
