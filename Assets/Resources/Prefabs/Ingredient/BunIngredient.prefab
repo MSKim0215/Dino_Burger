@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2009923164616684966}
   - component: {fileID: 5113191199447852626}
-  - component: {fileID: 4717897729915268240}
+  - component: {fileID: 7027789523447751974}
   m_Layer: 8
   m_Name: BunIngredient
   m_TagString: Untagged
@@ -55,7 +55,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7, y: 0.50719917, z: 0.7}
   m_Center: {x: 0, y: 0.25359958, z: 0}
---- !u!114 &4717897729915268240
+--- !u!114 &7027789523447751974
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,13 +64,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 8544778946697118956}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53b275135af16424fb1b00485f329f7e, type: 3}
+  m_Script: {fileID: 11500000, guid: aa072a8493d8a76449a68565d287e5a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientType: 0
+  ingredientState: 0
   ingredientStateObjects:
   - {fileID: 6127054472395197314}
   currentCookTime: 0
+  maximumCookTime: 0
+  ingredientRenderer: {fileID: 5622559299583224407}
+  hitbox: {fileID: 5113191199447852626}
+  burgerPrefab: {fileID: 7507328935687779529, guid: cbe7f07eb2d60ea48a493c50b8133ccc, type: 3}
 --- !u!1001 &6469071518094112467
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -136,6 +141,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e47d10a0c2138664d9b741cad139bc6d, type: 3}
+--- !u!23 &5622559299583224407 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: e47d10a0c2138664d9b741cad139bc6d, type: 3}
+  m_PrefabInstance: {fileID: 6469071518094112467}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6127054472395197314 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e47d10a0c2138664d9b741cad139bc6d, type: 3}

@@ -6,7 +6,7 @@ namespace MSKim.HandNotAble
     {
         public void Cutting()
         {
-            var ingredient = hand.GetHandUpIngredient();
+            var ingredient = hand.GetHandUpComponent<HandAble.IngredientController>();
             if (ingredient == null || hand.HandUpObject == null) return;
 
             if (ingredient.CurrentCookTime >= ingredient.MaximumCookTime)

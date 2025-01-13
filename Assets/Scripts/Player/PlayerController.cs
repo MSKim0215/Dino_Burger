@@ -86,7 +86,44 @@ namespace MSKim.Player
 
         private void TableInteraction(HandNotAble.TableController table)
         {
-            if (!table.IsHandEmpty) return;
+            if (!table.IsHandEmpty)
+            {
+                if(table.IsHandUpObjectBurger())
+                {
+                    if (hand.HandUpObjectType != Utils.CrateType.None &&
+                    hand.HandUpObjectType != Utils.CrateType.Bun)
+                    {
+                        if (hand.HandUpObjectState != Utils.IngredientState.None &&
+                            hand.HandUpObjectState != Utils.IngredientState.Basic)
+                        {
+                            if (table.HandUpObject.TryGetComponent<HandAble.BurgerFoodController>(out var burger))
+                            {
+                                burger.Stack(hand.HandUpObject);
+                                hand.ClearHand();
+                            }
+                        }
+                    }
+                    return;
+                }
+
+                if (hand.IsHandUpObjectFood()) return;
+                if (table.HandUpObjectType != Utils.CrateType.Bun) return;
+
+                if (hand.HandUpObjectType != Utils.CrateType.None &&
+                    hand.HandUpObjectType != Utils.CrateType.Bun)
+                {
+                    if (hand.HandUpObjectState != Utils.IngredientState.None &&
+                        hand.HandUpObjectState != Utils.IngredientState.Basic)
+                    {
+                        if(table.HandUpObject.TryGetComponent<HandAble.BunIngredientController>(out var burger))
+                        {
+                            burger.StartCooking(table, hand.HandUpObject);
+                            hand.ClearHand();
+                        }
+                    }
+                }
+                return;
+            }
 
             if (table.TableType == Utils.TableType.Basic || table.TableType == Utils.TableType.Packaging)
             {

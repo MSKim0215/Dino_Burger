@@ -13,7 +13,7 @@ namespace MSKim.HandNotAble
 
         private async void Grill()
         {
-            var ingredient = hand.GetHandUpIngredient() as HandAble.MeatIngredientController;
+            var ingredient = hand.GetHandUpComponent<HandAble.MeatIngredientController>();
             while(ingredient != null && hand.HandUpObject != null)
             {
                 ingredient.CurrentCookTime += Time.deltaTime;

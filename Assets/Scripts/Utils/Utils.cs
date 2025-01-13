@@ -7,7 +7,7 @@ public static class Utils
 
     public enum CrateType
     {
-        Bun, Cheese, Lettuce, Mushroom, Onion, Tomato, Meat
+        Bun, Cheese, Lettuce, Mushroom, Onion, Tomato, Meat, None
     }   // 빵, 치즈, 양상추, 버섯, 양파, 토마토, 고기
 
     public enum CookState
@@ -17,7 +17,7 @@ public static class Utils
 
     public enum IngredientState
     {
-        Basic, Cutting, CutOver, Grilling, GrillOver
+        Basic, Cutting, CutOver, Grilling, GrillOver, None
     }   // 기본 상태, 칼질중 상태, 칼질 완료 상태, 구워지는중 상태, 구워진 상태
 
     public const float GRILL_COOK_TIME = 5f;            // 고기 굽기 완성 시간

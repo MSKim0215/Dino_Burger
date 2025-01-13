@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,6 +16,10 @@ namespace MSKim.HandAble
         [SerializeField] protected float currentCookTime;
         [SerializeField] protected float maximumCookTime;
 
+        [Header("Other Component")]
+        [SerializeField] private Renderer ingredientRenderer;
+        [SerializeField] private Collider hitbox;
+
         private Dictionary<Utils.CookState, GameObject> ingredientCookStateDict = new();
 
         public virtual float CurrentCookTime { get => currentCookTime; set => currentCookTime = value; }
@@ -26,6 +29,10 @@ namespace MSKim.HandAble
         public Utils.CrateType IngredientType => ingredientType;
 
         public Utils.IngredientState IngredientState => ingredientState;
+
+        public Collider HitBox => hitbox;
+
+        public float RendererHeight => ingredientRenderer.bounds.size.y;
 
         public void Initialize(Utils.CrateType ingredientType)
         {

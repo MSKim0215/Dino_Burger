@@ -9,13 +9,30 @@ public class Hand
 
     public GameObject HandUpObject => handUpObject;
 
-    public MSKim.HandAble.IngredientController GetHandUpIngredient()
+    public Utils.CrateType HandUpObjectType
     {
-        if(handUpObject.TryGetComponent<MSKim.HandAble.IngredientController>(out var ingredient))
+        get
         {
-            return ingredient;
+            var ingredient = GetHandUpComponent<MSKim.HandAble.IngredientController>();
+            return ingredient != null ? ingredient.IngredientType : Utils.CrateType.None;
         }
-        return null;
+    }
+
+    public Utils.IngredientState HandUpObjectState
+    {
+        get
+        {
+            var ingredient = GetHandUpComponent<MSKim.HandAble.IngredientController>();
+            return ingredient != null ? ingredient.IngredientState : Utils.IngredientState.None;
+        }
+    }
+
+    public bool IsHandUpObjectFood() => handUpObject.CompareTag("Food");
+
+    public T GetHandUpComponent<T>()
+    {
+        if (handUpObject == null) return default;
+        return handUpObject.TryGetComponent(out T component) ? component : default;
     }
 
     public void ClearHand() => handUpObject = null;

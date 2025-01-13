@@ -70,12 +70,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientType: 4
+  ingredientState: 0
   ingredientStateObjects:
   - {fileID: 7835607539640021873}
   - {fileID: 3416121179329772615}
   - {fileID: 6200020848538132026}
   currentCookTime: 0
   maximumCookTime: 0
+  ingredientRenderer: {fileID: 5551278545664098287}
+  hitbox: {fileID: 5113191199447852626}
 --- !u!1001 &2569842129600676118
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -208,6 +211,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 617ccad34f4bbbe4286467573ae87bbc, type: 3}
+--- !u!23 &5551278545664098287 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 617ccad34f4bbbe4286467573ae87bbc, type: 3}
+  m_PrefabInstance: {fileID: 6542480995141854059}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6200020848538132026 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 617ccad34f4bbbe4286467573ae87bbc, type: 3}

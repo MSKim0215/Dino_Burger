@@ -5,45 +5,74 @@ namespace MSKim.HandAble
 {
     public class BurgerFoodController : MonoBehaviour
     {
-        [SerializeField] private GameObject burgerBottom;
-        [SerializeField] private GameObject burgerTop;
-        [SerializeField] private List<GameObject> ingredientList = new();
+        [Header("Other Object")]
+        [SerializeField] private Renderer bottom;
+        [SerializeField] private Renderer top;
+
+        [Header("Allow Ingredient List")]
+        [SerializeField] private List<Utils.CrateType> allowIngredientList = new();
+
+        [Header("Current Ingredient List")]
+        [SerializeField] private List<IngredientController> ingredientList = new();
 
         private Dictionary<Utils.CrateType, float> correctionHeightDict = new();
+        private float currentHeight = 0f;
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        public float CurrentHeight
         {
-            correctionHeightDict.Add(Utils.CrateType.Cheese, 0.06f);
-            correctionHeightDict.Add(Utils.CrateType.Onion, 0.06f);
-            correctionHeightDict.Add(Utils.CrateType.Lettuce, 0.05f);
-
-            float height = burgerBottom.GetComponent<Renderer>().bounds.size.y;
-
-            for(int i = 0; i < ingredientList.Count; i++)
+            get => currentHeight;
+            set
             {
-                var ingredient = ingredientList[i].GetComponent<IngredientController>();
-                if(ingredient.IngredientType == Utils.CrateType.Cheese)
-                {
-                    height -= correctionHeightDict[ingredient.IngredientType];
-                }
-
-                ingredientList[i].transform.localPosition += new Vector3(0, height, 0);
-                height += ingredientList[i].GetComponentInChildren<Renderer>().bounds.size.y;
-
-                if(ingredient.IngredientType == Utils.CrateType.Lettuce || ingredient.IngredientType == Utils.CrateType.Onion)
-                {
-                    height -= correctionHeightDict[ingredient.IngredientType];
-                }
+                currentHeight = value;
+                MoveTopPosition();
             }
-
-            burgerTop.transform.localPosition += new Vector3(0, height, 0);
         }
 
-        // Update is called once per frame
-        void Update()
-        {   
+        public void Initialize()
+        {
+            currentHeight = bottom.bounds.size.y;
 
+            correctionHeightDict.Add(Utils.CrateType.Cheese, 0.06f);
+            correctionHeightDict.Add(Utils.CrateType.Onion, 0.05f);
+            correctionHeightDict.Add(Utils.CrateType.Lettuce, 0.05f);
+        }
+
+        public void Stack(GameObject ingredientObject)
+        {
+            if (ingredientObject == null) return;
+
+            if(ingredientObject.TryGetComponent<IngredientController>(out var ingredient))
+            {
+                if (!allowIngredientList.Contains(ingredient.IngredientType)) return;
+
+                ingredientObject.transform.SetParent(transform);
+                ingredientObject.transform.localPosition = Vector3.zero;
+                ingredient.HitBox.enabled = false;
+                ingredientList.Add(ingredient);
+
+                if (ingredient.IngredientType == Utils.CrateType.Cheese)
+                {
+                    CurrentHeight -= correctionHeightDict[ingredient.IngredientType];
+                }
+
+                MovePosition(ingredientObject);
+                CurrentHeight += ingredient.RendererHeight;
+
+                if (ingredient.IngredientType == Utils.CrateType.Lettuce || ingredient.IngredientType == Utils.CrateType.Onion)
+                {
+                    CurrentHeight -= correctionHeightDict[ingredient.IngredientType];
+                }
+            }
+        }
+
+        private void MovePosition(GameObject target)
+        {
+            target.transform.localPosition += new Vector3(0f, currentHeight, 0f);
+        }
+
+        private void MoveTopPosition()
+        {
+            top.transform.localPosition = new Vector3(0f, currentHeight, 0f);
         }
     }
 }

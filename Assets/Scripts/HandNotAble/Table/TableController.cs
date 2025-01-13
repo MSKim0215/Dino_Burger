@@ -12,7 +12,13 @@ namespace MSKim.HandNotAble
 
         public Utils.TableType TableType => tableType;
 
+        public GameObject HandUpObject => hand.HandUpObject;
+
         public bool IsHandEmpty => hand.HandUpObject == null;
+
+        public Utils.CrateType HandUpObjectType => hand.HandUpObjectType;
+
+        public bool IsHandUpObjectBurger() => hand.GetHandUpComponent<HandAble.BurgerFoodController>() != null;
 
         public virtual void Take(GameObject takeObject)
         {
