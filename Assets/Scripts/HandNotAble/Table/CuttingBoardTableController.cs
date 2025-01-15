@@ -4,6 +4,18 @@ namespace MSKim.HandNotAble
 {
     public class CuttingBoardTableController : TableController
     {
+        public override GameObject Give()
+        {
+            var ingredient = hand.GetHandUpComponent<HandAble.IngredientController>();
+            if (ingredient == null) return base.Give();
+            if (ingredient.IngredientState != Utils.IngredientState.CutOver) return base.Give();
+            if (ingredient.YieldAmount <= 1) return base.Give();
+
+            ingredient.YieldAmount--;
+
+            return Instantiate(hand.HandUpObject);
+        }
+
         public void Cutting()
         {
             var ingredient = hand.GetHandUpComponent<HandAble.IngredientController>();

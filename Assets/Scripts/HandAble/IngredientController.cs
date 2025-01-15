@@ -7,7 +7,7 @@ namespace MSKim.HandAble
     {
         [Header("Ingredient Info")]
         [SerializeField] private Utils.CrateType ingredientType;
-        [SerializeField] private int ingredientYieldAmount;
+        [SerializeField] protected int yieldAmount;
 
         [Header("Ingredient State Objects")]
         [SerializeField] private Utils.IngredientState ingredientState = Utils.IngredientState.Basic;
@@ -22,6 +22,8 @@ namespace MSKim.HandAble
         [SerializeField] private Collider hitbox;
 
         private Dictionary<Utils.CookState, GameObject> ingredientCookStateDict = new();
+
+        public virtual int YieldAmount { get => yieldAmount; set => yieldAmount = value; }
 
         public virtual float CurrentCookTime { get => currentCookTime; set => currentCookTime = value; }
 
@@ -46,7 +48,7 @@ namespace MSKim.HandAble
 
         private void SetYieldAmount()
         {
-            ingredientYieldAmount = ingredientType switch
+            yieldAmount = ingredientType switch
             {
                 Utils.CrateType.Cheese => Utils.CHEESE_INCREDIENT_YIELD,
                 Utils.CrateType.Lettuce => Utils.LETTUCE_INCREDIENT_YIELD,
