@@ -64,10 +64,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8544778946697118956}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa072a8493d8a76449a68565d287e5a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 4513550f4cfe8a54bbbd7c3d745e02b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientType: 0
+  ingredientYieldAmount: 0
   ingredientState: 0
   ingredientStateObjects:
   - {fileID: 6127054472395197314}

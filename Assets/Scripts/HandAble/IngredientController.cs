@@ -5,8 +5,9 @@ namespace MSKim.HandAble
 {
     public class IngredientController : MonoBehaviour
     {
-        [Header("Ingredient Type")]
+        [Header("Ingredient Info")]
         [SerializeField] private Utils.CrateType ingredientType;
+        [SerializeField] private int ingredientYieldAmount;
 
         [Header("Ingredient State Objects")]
         [SerializeField] private Utils.IngredientState ingredientState = Utils.IngredientState.Basic;
@@ -39,7 +40,20 @@ namespace MSKim.HandAble
             this.ingredientType = ingredientType;
             name = this.ingredientType.ToString();
 
+            SetYieldAmount();
             InitializeCookState();
+        }
+
+        private void SetYieldAmount()
+        {
+            ingredientYieldAmount = ingredientType switch
+            {
+                Utils.CrateType.Cheese => Utils.CHEESE_INCREDIENT_YIELD,
+                Utils.CrateType.Lettuce => Utils.LETTUCE_INCREDIENT_YIELD,
+                Utils.CrateType.Onion => Utils.ONION_INCREDIENT_YIELD,
+                Utils.CrateType.Tomato => Utils.TOMATO_INCREDIENT_YIELD,
+                _ => 1,
+            };
         }
 
         protected virtual void InitializeCookState()

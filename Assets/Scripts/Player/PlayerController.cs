@@ -115,7 +115,7 @@ namespace MSKim.Player
                     if (hand.HandUpObjectState != Utils.IngredientState.None &&
                         hand.HandUpObjectState != Utils.IngredientState.Basic)
                     {
-                        if(table.HandUpObject.TryGetComponent<HandAble.BunIngredientController>(out var burger))
+                        if (table.HandUpObject.TryGetComponent<HandAble.BunIngredientController>(out var burger))
                         {
                             burger.StartCooking(table, hand.HandUpObject);
                             hand.ClearHand();

@@ -41,7 +41,7 @@ namespace MSKim.HandAble
         {
             if (ingredientObject == null) return;
 
-            if(ingredientObject.TryGetComponent<IngredientController>(out var ingredient))
+            if (ingredientObject.TryGetComponent<IngredientController>(out var ingredient))
             {
                 if (!allowIngredientList.Contains(ingredient.IngredientType)) return;
 
