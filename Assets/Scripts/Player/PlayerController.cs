@@ -2,15 +2,13 @@ using UnityEngine;
 
 namespace MSKim.Player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : CharacterController
     {
         [Header("My Hand")]
         [SerializeField] private Hand hand;
 
         private float xAxis;
         private float zAxis;
-        private float moveSpeed = 10f;
-        private float rotateSpeed = 10f;
         
         private RaycastHit handHit;
         private Ray handRay;
@@ -24,17 +22,19 @@ namespace MSKim.Player
             Move();
         }
 
-        private void Move()
+        public override void Move()
         {
             xAxis = Input.GetAxis("Horizontal");
             zAxis = Input.GetAxis("Vertical");
 
             if (xAxis == 0f && zAxis == 0f) return;
 
-            var velocity = new Vector3(xAxis, 0f, zAxis);
-            transform.position += velocity * moveSpeed * Time.deltaTime;
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(velocity), rotateSpeed * Time.deltaTime);
+            base.Move();
         }
+
+        public override Vector3 GetVelocity() => new(xAxis, 0f, zAxis);
+
+        public override void MovePosition(Vector3 velocity) => transform.position += velocity * moveSpeed * Time.deltaTime;
 
         private void Update()
         {
