@@ -3,23 +3,69 @@ using UnityEngine;
 
 namespace MSKim.NonPlayer
 {
-    public class GuestController : MonoBehaviour
+    public class GuestController : CharacterController
     {
         [Header("Waypoint Settings")]
         [SerializeField] private int currentPointIndex = 0;
         [SerializeField] private List<Transform> wayPointList = new();
+        [SerializeField] private float checkDistance = 0.01f;
 
-        private void Update()
+        private void Start()
+        {
+            moveSpeed = 1f;
+            rotateSpeed = 5f;
+        }
+
+        private void FixedUpdate()
+        {
+            if (currentPointIndex >= 2) return;
+
+            base.Move();
+            CheckDistance();
+        }
+
+        public override void MovePosition()
         {
             transform.position =
-              Vector3.MoveTowards(gameObject.transform.position, wayPointList[currentPointIndex].transform.position, 0.01f);
-            
-            if(currentPointIndex < 2)
+                Vector3.MoveTowards(transform.position, wayPointList[currentPointIndex].position, moveSpeed * Time.deltaTime);
+        }
+
+        public override void MoveRotation()
+        {
+            var direction = wayPointList[currentPointIndex].position - transform.position;
+            direction.Normalize();
+
+            var rotationFixedY = CalculateRotationY(transform.rotation, direction);
+            var rotationY = rotationFixedY;
+
+            if (rotationY * rotationFixedY > 0f)
             {
-                if (Vector3.Distance(wayPointList[currentPointIndex].position, transform.position) <= 0.01f)
-                {
-                    currentPointIndex++;
-                }
+                Quaternion rotationAmount = Quaternion.Euler(0f, rotateSpeed * rotationFixedY * Time.deltaTime, 0f);
+                rotationY -= rotationFixedY * Time.deltaTime;
+                transform.rotation *= rotationAmount;
+            }
+        }
+
+        private float CalculateRotationY(Quaternion now, Vector3 targetDirection)
+        {
+            float seta = (90 - now.eulerAngles.y) / 180 * Mathf.PI;
+            float x = Mathf.Cos(seta);
+            float z = Mathf.Sin(seta);
+
+            float inner = targetDirection.x * x + targetDirection.z * z;
+            float outer = targetDirection.x * z - targetDirection.z * x;
+
+            float delta1 = (Mathf.Acos(inner) * 180) / Mathf.PI;
+            float delta2 = (Mathf.Asin(outer) * 180) / Mathf.PI;
+
+            return (delta2 >= 0) ? delta1 : -delta1;
+        }
+
+        private void CheckDistance()
+        {
+            if (Vector3.Distance(wayPointList[currentPointIndex].position, transform.position) <= checkDistance)
+            {
+                currentPointIndex++;
             }
         }
     }

@@ -17,6 +17,12 @@ namespace MSKim.Player
         private int LayerHandAble { get => 1 << LayerMask.NameToLayer("HandAble"); }
         private int LayerHandNotAble { get => 1 << LayerMask.NameToLayer("HandNotAble"); }
 
+        private void Start()
+        {
+            moveSpeed = 10f;
+            rotateSpeed = 10f;
+        }
+
         private void FixedUpdate()
         {
             Move();
@@ -34,7 +40,15 @@ namespace MSKim.Player
 
         public override Vector3 GetVelocity() => new(xAxis, 0f, zAxis);
 
-        public override void MovePosition(Vector3 velocity) => transform.position += velocity * moveSpeed * Time.deltaTime;
+        public override void MovePosition()
+        {
+            transform.position += GetVelocity() * moveSpeed * Time.deltaTime;
+        }
+
+        public override void MoveRotation()
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(GetVelocity()), rotateSpeed * Time.deltaTime);
+        }
 
         private void Update()
         {

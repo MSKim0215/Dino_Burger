@@ -4,28 +4,25 @@ public interface ICharacterMove
 {
     public void Move();
     public Vector3 GetVelocity();
-    public void MovePosition(Vector3 velocity);
-    public void MoveRotation(Vector3 velocity);
+    public void MovePosition();
+    public void MoveRotation();
 }
 
 public abstract class CharacterController : MonoBehaviour, ICharacterMove
 {
-    protected float moveSpeed;
-    protected float rotateSpeed;
+    [Header("Character Settings")]
+    [SerializeField] protected float moveSpeed;
+    [SerializeField] protected float rotateSpeed;
 
-    public abstract Vector3 GetVelocity();
+    public virtual Vector3 GetVelocity() => Vector3.zero;
 
     public virtual void Move()
     {
-        var velocity = GetVelocity();
-        MovePosition(velocity);
-        MoveRotation(velocity);
+        MovePosition();
+        MoveRotation();
     }
 
-    public abstract void MovePosition(Vector3 velocity);
+    public abstract void MovePosition();
 
-    public void MoveRotation(Vector3 velocity)
-    {
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(velocity), rotateSpeed * Time.deltaTime);
-    }
+    public abstract void MoveRotation();
 }
