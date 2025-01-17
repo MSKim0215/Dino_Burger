@@ -127,6 +127,11 @@ namespace MSKim.NonPlayer
             }
         }
 
+        public void SetTargetWaypoint(List<Transform> targetWaypointList)
+        {
+            this.targetWaypointList = targetWaypointList;
+        }
+
         public override void Release()
         {
             currentPointIndex = 0;

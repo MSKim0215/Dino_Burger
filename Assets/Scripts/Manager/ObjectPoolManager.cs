@@ -16,7 +16,7 @@ namespace MSKim.Manager
             public int maxCount;
         }
 
-        public static ObjectPoolManager instance;
+        private static ObjectPoolManager instance;
 
         [Header("Pool Settings")]
         [SerializeField] private List<ObjectInfo> poolObjectList = new();
@@ -24,6 +24,15 @@ namespace MSKim.Manager
         private Dictionary<string, IObjectPool<GameObject>> poolObjectDict = new();
         private Dictionary<string, GameObject> createDict = new();
         private string createObjectName;
+
+        public static ObjectPoolManager Instance
+        {
+            get
+            {
+                if (instance == null) instance = new();
+                return instance;
+            }
+        }
 
         private void Awake()
         {

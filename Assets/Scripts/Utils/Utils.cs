@@ -20,6 +20,11 @@ public static class Utils
         Basic, Cutting, CutOver, Grilling, GrillOver, None
     }   // 기본 상태, 칼질중 상태, 칼질 완료 상태, 구워지는중 상태, 구워진 상태
 
+    public enum WaypointType
+    {
+        MoveStore, Outside_R, Outside_L
+    }   // 가게로 이동, 밖으로 이동(오른쪽), 밖으로 이동(왼쪽)
+
     public const float GRILL_COOK_TIME = 5f;            // 고기 굽기 완성 시간
     public const float GRILL_OVERCOOKED_TIME = 8f;      // 고기 굽기 실패 시간
     public const float CUTTING_CHEESE_COOK_TIME = 2f;       // 치즈 손질 시간

@@ -22,7 +22,7 @@ namespace MSKim.Manager
             if(currSpawnTime >= maxSpawnTime)
             {
                 var spawnPoint = spawnPointList[Random.Range(0, spawnPointList.Count)];
-                var guest = ObjectPoolManager.instance.GetPoolObject("Guest");
+                var guest = ObjectPoolManager.Instance.GetPoolObject("Guest");
                 guest.transform.position = new(spawnPoint.position.x, spawnPoint.position.y, Random.Range(17, 20));
                 guest.GetComponent<NonPlayer.GuestController>().Initialize();
 
