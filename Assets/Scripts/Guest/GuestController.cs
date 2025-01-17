@@ -1,11 +1,21 @@
 using MSKim.Manager;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MSKim.NonPlayer
 {
     public class GuestController : CharacterController
     {
+        private enum BehaviourState
+        {
+            Idle, Walk
+        }
+
+        [Header("Behaviour State")]
+        [SerializeField] private BehaviourState currBehaviourState;
+
         [Header("Waypoint Settings")]
+        [SerializeField] private List<Transform> targetWaypointList = new();
         [SerializeField] private int currentPointIndex = 0;
         [SerializeField] private float checkDistance = 0.5f;
 
@@ -13,16 +23,25 @@ namespace MSKim.NonPlayer
         private bool isOutside = false;
         private Vector3 outsidePoint;
 
-        private void Start()
+        public void Initialize()
         {
             moveSpeed = 1.5f;
             rotateSpeed = 5f;
             checkDistance = 0.8f;
 
             firstSpawnPointZ = transform.position.z;
+            currBehaviourState = BehaviourState.Walk;
         }
 
         private void FixedUpdate()
+        {
+            switch(currBehaviourState)
+            {
+                case BehaviourState.Walk: FixedUpdateWalk(); break;
+            }
+        }
+
+        private void FixedUpdateWalk()
         {
             if (currentPointIndex >= 2) return;
 
