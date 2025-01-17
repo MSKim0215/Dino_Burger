@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &174593229 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1822693421285416879, guid: 13f273e676883f84090be25e7c37f11c, type: 3}
+  m_PrefabInstance: {fileID: 1774339552430696996}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &288138622
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,6 +427,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 518065958}
+  - component: {fileID: 518065961}
   - component: {fileID: 518065959}
   - component: {fileID: 518065960}
   m_Layer: 0
@@ -482,24 +488,42 @@ MonoBehaviour:
     - {fileID: 684040436}
   - type: 1
     pointList:
-    - {fileID: 786334673}
     - {fileID: 582268651}
   - type: 2
     pointList:
-    - {fileID: 786334673}
     - {fileID: 468800277}
-  wayPointList:
-  - {fileID: 786334673}
-  - {fileID: 684040436}
-  outsideRightPointList:
-  - {fileID: 786334673}
-  - {fileID: 582268651}
-  outsideLeftPointList:
-  - {fileID: 786334673}
-  - {fileID: 468800277}
+  - type: 3
+    pointList:
+    - {fileID: 1375992651}
+  - type: 4
+    pointList:
+    - {fileID: 1353340438}
+  - type: 5
+    pointList:
+    - {fileID: 174593229}
+  - type: 6
+    pointList:
+    - {fileID: 659701545}
+--- !u!114 &518065961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518065957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca03c8ca737f814a8221de23f4e0522, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &582268651 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6948480140334683271, guid: 13f273e676883f84090be25e7c37f11c, type: 3}
+  m_PrefabInstance: {fileID: 1774339552430696996}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &659701545 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 66077819285664568, guid: 13f273e676883f84090be25e7c37f11c, type: 3}
   m_PrefabInstance: {fileID: 1774339552430696996}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &684040436 stripped
@@ -698,6 +722,16 @@ MonoBehaviour:
     createPrefab: {fileID: 7619004492911756383, guid: 835e8342e3c0cbe44bf063ef15ee4c73, type: 3}
     createCount: 10
     maxCount: 15
+--- !u!4 &1353340438 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1790137326850847238, guid: 13f273e676883f84090be25e7c37f11c, type: 3}
+  m_PrefabInstance: {fileID: 1774339552430696996}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1375992651 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6946164194401816662, guid: 13f273e676883f84090be25e7c37f11c, type: 3}
+  m_PrefabInstance: {fileID: 1774339552430696996}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1774339552430696996
 PrefabInstance:
   m_ObjectHideFlags: 0
