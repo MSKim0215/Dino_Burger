@@ -1,4 +1,5 @@
 using MSKim.Manager;
+using System;
 using UnityEngine;
 
 namespace MSKim.NonPlayer
@@ -52,7 +53,7 @@ namespace MSKim.NonPlayer
 
         private void FixedUpdateWalk()
         {
-            if (currentPointIndex >= 2) return;
+            if (currentPointIndex >= WaypointManager.Instance.GetCurrentWaypointMaxIndex(currentWaypointType)) return;
 
             base.Move();
             CheckDistance();
@@ -75,10 +76,9 @@ namespace MSKim.NonPlayer
                     MoveHoldZPosition(targetPoint);
                     return;
                 }
-
-                MovePosition(targetPoint);
-                return;
             }
+
+            MovePosition(targetPoint);
         }
 
         private void MovePosition(Vector3 targetPoint)
@@ -157,24 +157,43 @@ namespace MSKim.NonPlayer
 
                 if (currentDistance <= checkDistance)
                 {
-                    currentPointIndex++;
+                    if(currentPointIndex == 0)
+                    {
+                        var rand = UnityEngine.Random.Range(0, 2);  // 0: store, 1: out
 
-                    var rand = Random.Range(0, 2);  // 0: store, 1: out
-                    if(rand == 0)
-                    {
-                        CurrentWaypointType = Random.Range(0, 2) == 0 ? Utils.WaypointType.Outside_R : Utils.WaypointType.Outside_L;
+                        if (!GameManager.Instance.CanMoveWaitingChair ||
+                            rand == 0)
+                        {
+                            CurrentWaypointType = UnityEngine.Random.Range(0, 2) == 0 ? Utils.WaypointType.Outside_R : Utils.WaypointType.Outside_L;
+                            return;
+                        }
                     }
-                    else
-                    {
-                        // TODO: 만약 가게에 들어갈 수 없는 상황이면 그냥 바로 out
-                    }
+
+                    currentPointIndex++;
 
                     if (currentPointIndex >= WaypointManager.Instance.GetCurrentWaypointMaxIndex(currentWaypointType))
                     {
-                        // TODO: 픽업존 이동
+                        if(GameManager.Instance.CanMovePickupTable)
+                        {
+                            GameManager.Instance.AddPickupZone(this);
+                        }
+                        else
+                        {
+                            if(GameManager.Instance.CanMoveWaitingChair)
+                            {
+                                GameManager.Instance.AddWaitingZone(this);
+                                checkDistance = 0.01f;
+                            }
+                        }
                     }
                 }
                 return;
+            }
+
+            currentDistance = Vector3.Distance(transform.position, targetPoint);
+            if (currentDistance <= checkDistance)
+            {
+                currentPointIndex++;
             }
         }
 

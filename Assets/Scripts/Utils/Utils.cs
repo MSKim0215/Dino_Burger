@@ -23,8 +23,9 @@ public static class Utils
     public enum WaypointType
     {
         MoveStore, Outside_R, Outside_L, 
-        PickupZone_1, PickupZone_2, PickupZone_3, PickupZone_4
-    }   // 가게로 이동, 밖으로 이동(오른쪽), 밖으로 이동(왼쪽), 픽업존 1 ~ 4
+        PickupZone_1, PickupZone_2, PickupZone_3, PickupZone_4,
+        WaitingZone_1, WaitingZone_2, WaitingZone_3, WaitingZone_4, WaitingZone_5, WaitingZone_6, WaitingZone_7, WaitingZone_8,
+    }   // 가게로 이동, 밖으로 이동(오른쪽), 밖으로 이동(왼쪽), 픽업존 1 ~ 4, 웨이팅존 1 ~ 8
 
     public const float GRILL_COOK_TIME = 5f;            // 고기 굽기 완성 시간
     public const float GRILL_OVERCOOKED_TIME = 8f;      // 고기 굽기 실패 시간
