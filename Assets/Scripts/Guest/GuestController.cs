@@ -10,6 +10,8 @@ namespace MSKim.NonPlayer
         [SerializeField] private float checkDistance = 0.5f;
 
         private float firstSpawnPointZ;
+        private bool isOutside = false;
+        private Vector3 outsidePoint;
 
         private void Start()
         {
@@ -30,8 +32,17 @@ namespace MSKim.NonPlayer
 
         public override void MovePosition()
         {
+            var targetPoint = WaypointManager.Instance.GetCurrentWayPoint(currentPointIndex);
+
+            if(!isOutside && currentPointIndex == 1)
+            {
+                isOutside = true;
+                outsidePoint = Random.Range(0, 2) == 0 ? WaypointManager.Instance.GetOutsideRightPoint(currentPointIndex)
+                    : WaypointManager.Instance.GetOutsideLeftPoint(currentPointIndex);
+            }
+
             transform.position =
-                Vector3.MoveTowards(transform.position, WaypointManager.Instance.GetCurrentWayPoint(currentPointIndex), moveSpeed * Time.deltaTime);
+                Vector3.MoveTowards(transform.position, currentPointIndex == 1 ? outsidePoint : targetPoint, moveSpeed * Time.deltaTime);
             if(currentPointIndex == 0)
             {
                 transform.position = new(transform.position.x, transform.position.y, firstSpawnPointZ);

@@ -408,6 +408,11 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!4 &468800277 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8978732585362955215, guid: 13f273e676883f84090be25e7c37f11c, type: 3}
+  m_PrefabInstance: {fileID: 1774339552430696996}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &518065957
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,6 +479,17 @@ MonoBehaviour:
   wayPointList:
   - {fileID: 786334673}
   - {fileID: 684040436}
+  outsideRightPointList:
+  - {fileID: 786334673}
+  - {fileID: 582268651}
+  outsideLeftPointList:
+  - {fileID: 786334673}
+  - {fileID: 468800277}
+--- !u!4 &582268651 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6948480140334683271, guid: 13f273e676883f84090be25e7c37f11c, type: 3}
+  m_PrefabInstance: {fileID: 1774339552430696996}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &684040436 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 401571491904850195, guid: 13f273e676883f84090be25e7c37f11c, type: 3}
@@ -629,10 +645,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2702949707944368807, guid: 13f273e676883f84090be25e7c37f11c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 16.2
-      objectReference: {fileID: 0}
     - target: {fileID: 2706861233133821099, guid: 13f273e676883f84090be25e7c37f11c, type: 3}
       propertyPath: m_Name
       value: WayPoints

@@ -18,6 +18,8 @@ namespace MSKim.Manager
 
         [Header("Guest Waypoint Settings")]
         [SerializeField] private List<Transform> wayPointList = new();
+        [SerializeField] private List<Transform> outsideRightPointList = new();      // 안들어가고 바로 나가는 경우
+        [SerializeField] private List<Transform> outsideLeftPointList = new();      // 안들어가고 바로 나가는 경우
 
         private void Awake()
         {
@@ -34,6 +36,16 @@ namespace MSKim.Manager
         public Vector3 GetCurrentWayPoint(int currentIndex)
         {
             return wayPointList[currentIndex].position;
+        }
+
+        public Vector3 GetOutsideRightPoint(int currIndex)
+        {
+            return outsideRightPointList[currIndex].position;
+        }
+
+        public Vector3 GetOutsideLeftPoint(int currIndex)
+        {
+            return outsideLeftPointList[currIndex].position;
         }
     }
 }
