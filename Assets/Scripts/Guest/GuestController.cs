@@ -21,6 +21,16 @@ namespace MSKim.NonPlayer
 
         private float holdPointZ;
 
+        public Utils.WaypointType CurrentWaypointType
+        {
+            get => currentWaypointType;
+            set
+            {
+                currentWaypointType = value;
+                currentPointIndex = 0;
+            }
+        }
+
         public void Initialize()
         {
             moveSpeed = 1.5f;
@@ -29,7 +39,7 @@ namespace MSKim.NonPlayer
 
             holdPointZ = transform.position.z;
             currBehaviourState = BehaviourState.Walk;
-            currentWaypointType = Utils.WaypointType.MoveStore;
+            CurrentWaypointType = Utils.WaypointType.MoveStore;
         }
 
         private void FixedUpdate()
@@ -152,12 +162,16 @@ namespace MSKim.NonPlayer
                     var rand = Random.Range(0, 2);  // 0: store, 1: out
                     if(rand == 0)
                     {
-                        currentWaypointType = Random.Range(0, 2) == 0 ? Utils.WaypointType.Outside_R : Utils.WaypointType.Outside_L;
+                        CurrentWaypointType = Random.Range(0, 2) == 0 ? Utils.WaypointType.Outside_R : Utils.WaypointType.Outside_L;
+                    }
+                    else
+                    {
+                        // TODO: 만약 가게에 들어갈 수 없는 상황이면 그냥 바로 out
                     }
 
                     if (currentPointIndex >= WaypointManager.Instance.GetCurrentWaypointMaxIndex(currentWaypointType))
                     {
-                        Release();
+                        // TODO: 픽업존 이동
                     }
                 }
                 return;
