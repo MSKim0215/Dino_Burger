@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using MSKim.Manager;
 using UnityEngine;
 
 namespace MSKim.NonPlayer
@@ -7,13 +7,12 @@ namespace MSKim.NonPlayer
     {
         [Header("Waypoint Settings")]
         [SerializeField] private int currentPointIndex = 0;
-        [SerializeField] private List<Transform> wayPointList = new();
         [SerializeField] private float checkDistance = 0.01f;
 
         private void Start()
         {
-            moveSpeed = 1f;
-            rotateSpeed = 5f;
+            moveSpeed = Random.Range(1f, 2.5f);
+            rotateSpeed = 5f;   
         }
 
         private void FixedUpdate()
@@ -27,12 +26,12 @@ namespace MSKim.NonPlayer
         public override void MovePosition()
         {
             transform.position =
-                Vector3.MoveTowards(transform.position, wayPointList[currentPointIndex].position, moveSpeed * Time.deltaTime);
+                Vector3.MoveTowards(transform.position, WaypointManager.Instance.GetCurrentWayPoint(currentPointIndex), moveSpeed * Time.deltaTime);
         }
 
         public override void MoveRotation()
         {
-            var direction = wayPointList[currentPointIndex].position - transform.position;
+            var direction = WaypointManager.Instance.GetCurrentWayPoint(currentPointIndex) - transform.position;
             direction.Normalize();
 
             var rotationFixedY = CalculateRotationY(transform.rotation, direction);
@@ -63,7 +62,7 @@ namespace MSKim.NonPlayer
 
         private void CheckDistance()
         {
-            if (Vector3.Distance(wayPointList[currentPointIndex].position, transform.position) <= checkDistance)
+            if (Vector3.Distance(WaypointManager.Instance.GetCurrentWayPoint(currentPointIndex), transform.position) <= checkDistance)
             {
                 currentPointIndex++;
             }
