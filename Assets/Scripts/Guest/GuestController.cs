@@ -1,5 +1,4 @@
 using MSKim.Manager;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace MSKim.NonPlayer
@@ -15,13 +14,12 @@ namespace MSKim.NonPlayer
         [SerializeField] private BehaviourState currBehaviourState;
 
         [Header("Waypoint Settings")]
-        [SerializeField] private List<Transform> targetWaypointList = new();
+        [SerializeField] private Utils.WaypointType currentWaypointType;
         [SerializeField] private int currentPointIndex = 0;
+        [SerializeField] private float currentDistance = 0f;
         [SerializeField] private float checkDistance = 0.5f;
 
-        private float firstSpawnPointZ;
-        private bool isOutside = false;
-        private Vector3 outsidePoint;
+        private float holdPointZ;
 
         public void Initialize()
         {
@@ -29,8 +27,9 @@ namespace MSKim.NonPlayer
             rotateSpeed = 5f;
             checkDistance = 0.8f;
 
-            firstSpawnPointZ = transform.position.z;
+            holdPointZ = transform.position.z;
             currBehaviourState = BehaviourState.Walk;
+            currentWaypointType = Utils.WaypointType.MoveStore;
         }
 
         private void FixedUpdate()
@@ -51,26 +50,48 @@ namespace MSKim.NonPlayer
 
         public override void MovePosition()
         {
-            var targetPoint = WaypointManager.Instance.GetCurrentWayPoint(currentPointIndex);
+            var targetPoint = WaypointManager.Instance.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
 
-            if(!isOutside && currentPointIndex == 1)
+            if (currentWaypointType == Utils.WaypointType.Outside_L || currentWaypointType == Utils.WaypointType.Outside_R)
             {
-                isOutside = true;
-                outsidePoint = Random.Range(0, 2) == 0 ? WaypointManager.Instance.GetOutsideRightPoint(currentPointIndex)
-                    : WaypointManager.Instance.GetOutsideLeftPoint(currentPointIndex);
+                MoveHoldZPosition(targetPoint);
+                return;
             }
 
-            transform.position =
-                Vector3.MoveTowards(transform.position, currentPointIndex == 1 ? outsidePoint : targetPoint, moveSpeed * Time.deltaTime);
-            if(currentPointIndex == 0)
+            if (currentWaypointType == Utils.WaypointType.MoveStore)
             {
-                transform.position = new(transform.position.x, transform.position.y, firstSpawnPointZ);
+                if(currentPointIndex == 0)
+                {
+                    MoveHoldZPosition(targetPoint);
+                    return;
+                }
+
+                MovePosition(targetPoint);
+                return;
             }
+        }
+
+        private void MovePosition(Vector3 targetPoint)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPoint, moveSpeed * Time.deltaTime);
+        }
+
+        private void MoveHoldZPosition(Vector3 targetPoint)
+        {
+            MovePosition(new(targetPoint.x, targetPoint.y, holdPointZ));
         }
 
         public override void MoveRotation()
         {
-            var direction = WaypointManager.Instance.GetCurrentWayPoint(currentPointIndex) - transform.position;
+            var targetPoint = WaypointManager.Instance.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
+            
+            if (currentWaypointType == Utils.WaypointType.Outside_L || currentWaypointType == Utils.WaypointType.Outside_R ||
+                (currentWaypointType == Utils.WaypointType.MoveStore && currentPointIndex == 0))
+            {
+                targetPoint = new(targetPoint.x, targetPoint.y, holdPointZ);
+            }
+
+            var direction = targetPoint - transform.position;
             direction.Normalize();
 
             var rotationFixedY = CalculateRotationY(transform.rotation, direction);
@@ -101,35 +122,46 @@ namespace MSKim.NonPlayer
 
         private void CheckDistance()
         {
-            if(currentPointIndex == 0)
+            var targetPoint = WaypointManager.Instance.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
+
+            if (currentWaypointType == Utils.WaypointType.Outside_L || currentWaypointType == Utils.WaypointType.Outside_R)
             {
-                var target = WaypointManager.Instance.GetCurrentWayPoint(currentPointIndex);
-                float currDistance = Vector3.Distance(new(target.x, 0f, 0f), new(transform.position.x, 0f, 0f));
-                if (currDistance <= checkDistance)
+                currentDistance = Mathf.Abs(targetPoint.x - transform.position.x);
+                if(currentDistance <= checkDistance)
                 {
                     currentPointIndex++;
+
+                    if(currentPointIndex >= WaypointManager.Instance.GetCurrentWaypointMaxIndex(currentWaypointType))
+                    {
+                        Release();
+                    }
                 }
                 return;
             }
 
-            if (Vector3.Distance(WaypointManager.Instance.GetOutsideLeftPoint(currentPointIndex), transform.position) <= checkDistance)
+            if(currentWaypointType == Utils.WaypointType.MoveStore)
             {
-                currentPointIndex++;
-                Release();
+                currentDistance = currentPointIndex == 0 ?
+                    Mathf.Abs(targetPoint.x - transform.position.x) :
+                    Vector3.Distance(transform.position, targetPoint);
+
+                if (currentDistance <= checkDistance)
+                {
+                    currentPointIndex++;
+
+                    var rand = Random.Range(0, 2);  // 0: store, 1: out
+                    if(rand == 0)
+                    {
+                        currentWaypointType = Random.Range(0, 2) == 0 ? Utils.WaypointType.Outside_R : Utils.WaypointType.Outside_L;
+                    }
+
+                    if (currentPointIndex >= WaypointManager.Instance.GetCurrentWaypointMaxIndex(currentWaypointType))
+                    {
+                        Release();
+                    }
+                }
                 return;
             }
-
-            if (Vector3.Distance(WaypointManager.Instance.GetOutsideRightPoint(currentPointIndex), transform.position) <= checkDistance)
-            {
-                currentPointIndex++;
-                Release();
-                return;
-            }
-        }
-
-        public void SetTargetWaypoint(List<Transform> targetWaypointList)
-        {
-            this.targetWaypointList = targetWaypointList;
         }
 
         public override void Release()

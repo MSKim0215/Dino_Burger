@@ -27,13 +27,7 @@ namespace MSKim.Manager
         [Header("Guest Waypoint Settings")]
         [SerializeField] private List<WayPointInfo> waypointInfoList = new();
 
-        private Dictionary<Utils.WaypointType, WayPointInfo> waypointDict = new();
-
-
-        
-        [SerializeField] private List<Transform> wayPointList = new();
-        [SerializeField] private List<Transform> outsideRightPointList = new();      // 안들어가고 바로 나가는 경우
-        [SerializeField] private List<Transform> outsideLeftPointList = new();      // 안들어가고 바로 나가는 경우
+        private readonly Dictionary<Utils.WaypointType, List<Transform>> waypointDict = new();
 
         private void Awake()
         {
@@ -45,21 +39,26 @@ namespace MSKim.Manager
 
             instance = this;
             DontDestroyOnLoad(gameObject);
+
+            Initailize();
         }
 
-        public Vector3 GetCurrentWayPoint(int currentIndex)
+        private void Initailize()
         {
-            return wayPointList[currentIndex].position;
+            foreach(var waypoint in waypointInfoList)
+            {
+                waypointDict.Add(waypoint.type, waypoint.pointList);
+            }
         }
 
-        public Vector3 GetOutsideRightPoint(int currIndex)
+        public Vector3 GetCurrentWaypoint(Utils.WaypointType targetType, int currentIndex)
         {
-            return outsideRightPointList[currIndex].position;
+            return waypointDict[targetType][currentIndex].position;
         }
 
-        public Vector3 GetOutsideLeftPoint(int currIndex)
+        public int GetCurrentWaypointMaxIndex(Utils.WaypointType targetType)
         {
-            return outsideLeftPointList[currIndex].position;
+            return waypointDict[targetType].Count;
         }
     }
 }
