@@ -25,7 +25,7 @@ namespace MSKim.Manager
             {
                 var spawnPoint = spawnPointList[Random.Range(0, spawnPointList.Count)];
                 var guest = Instantiate(guestPrefab, spawnPoint);
-                guest.transform.position = spawnPoint.position;
+                guest.transform.position = new(spawnPoint.position.x, spawnPoint.position.y, Random.Range(17, 20));
 
                 currSpawnTime = 0f;
                 maxSpawnTime = Random.Range(3, 6);
