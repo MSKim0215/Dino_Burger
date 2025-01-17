@@ -8,7 +8,7 @@ public interface ICharacterMove
     public void MoveRotation();
 }
 
-public abstract class CharacterController : MonoBehaviour, ICharacterMove
+public abstract class CharacterController : PoolAble, ICharacterMove
 {
     [Header("Character Settings")]
     [SerializeField] protected float moveSpeed;

@@ -5,10 +5,8 @@ namespace MSKim.Manager
 {
     public class GuestManager : MonoBehaviour
     {
-        [Header("Pool Settings")]
-        [SerializeField] private NonPlayer.GuestController guestPrefab;
+        [Header("Spawn Settings")]
         [SerializeField] private List<Transform> spawnPointList = new();
-
         [SerializeField] private float currSpawnTime = 0f;
         [SerializeField] private float maxSpawnTime;
 
@@ -24,9 +22,9 @@ namespace MSKim.Manager
             if(currSpawnTime >= maxSpawnTime)
             {
                 var spawnPoint = spawnPointList[Random.Range(0, spawnPointList.Count)];
-                var guest = Instantiate(guestPrefab, spawnPoint);
+                var guest = ObjectPoolManager.instance.GetPoolObject("Guest");
                 guest.transform.position = new(spawnPoint.position.x, spawnPoint.position.y, Random.Range(17, 20));
-                guest.Initialize();
+                guest.GetComponent<NonPlayer.GuestController>().Initialize();
 
                 currSpawnTime = 0f;
                 maxSpawnTime = Random.Range(3, 6);

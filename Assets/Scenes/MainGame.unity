@@ -424,6 +424,7 @@ GameObject:
   - component: {fileID: 518065958}
   - component: {fileID: 518065959}
   - component: {fileID: 518065960}
+  - component: {fileID: 518065961}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -458,7 +459,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e3a13cacde3c74b9479d743acab303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guestPrefab: {fileID: 5128568223019551879, guid: 835e8342e3c0cbe44bf063ef15ee4c73, type: 3}
   spawnPointList:
   - {fileID: 1187719491}
   - {fileID: 288138623}
@@ -485,6 +485,23 @@ MonoBehaviour:
   outsideLeftPointList:
   - {fileID: 786334673}
   - {fileID: 468800277}
+--- !u!114 &518065961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518065957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50323c3580ea6b64f8914079a8234e0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolObjectList:
+  - createObjectName: Guest
+    createPrefab: {fileID: 7619004492911756383, guid: 835e8342e3c0cbe44bf063ef15ee4c73, type: 3}
+    createCount: 10
+    maxCount: 15
 --- !u!4 &582268651 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6948480140334683271, guid: 13f273e676883f84090be25e7c37f11c, type: 3}

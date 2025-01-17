@@ -112,10 +112,25 @@ namespace MSKim.NonPlayer
                 return;
             }
 
-            if (Vector3.Distance(WaypointManager.Instance.GetCurrentWayPoint(currentPointIndex), transform.position) <= checkDistance)
+            if (Vector3.Distance(WaypointManager.Instance.GetOutsideLeftPoint(currentPointIndex), transform.position) <= checkDistance)
             {
                 currentPointIndex++;
+                Release();
+                return;
             }
+
+            if (Vector3.Distance(WaypointManager.Instance.GetOutsideRightPoint(currentPointIndex), transform.position) <= checkDistance)
+            {
+                currentPointIndex++;
+                Release();
+                return;
+            }
+        }
+
+        public override void Release()
+        {
+            currentPointIndex = 0;
+            base.Release();
         }
     }
 }
