@@ -516,6 +516,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ca03c8ca737f814a8221de23f4e0522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waitChairList: []
+  pickupTableList: []
+  currentWaitNumber: 0
 --- !u!4 &582268651 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6948480140334683271, guid: 13f273e676883f84090be25e7c37f11c, type: 3}
