@@ -31,6 +31,9 @@ namespace MSKim.Manager
             DontDestroyOnLoad(gameObject);
         }
 
-        public Vector3 GetCurrentWayPoint(int currentIndex) => wayPointList[currentIndex].position;
+        public Vector3 GetCurrentWayPoint(int currentIndex)
+        {
+            return wayPointList[currentIndex].position;
+        }
     }
 }

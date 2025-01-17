@@ -7,12 +7,17 @@ namespace MSKim.NonPlayer
     {
         [Header("Waypoint Settings")]
         [SerializeField] private int currentPointIndex = 0;
-        [SerializeField] private float checkDistance = 0.01f;
+        [SerializeField] private float checkDistance = 0.5f;
+
+        private float firstSpawnPointZ;
 
         private void Start()
         {
-            moveSpeed = Random.Range(1f, 2.5f);
-            rotateSpeed = 5f;   
+            moveSpeed = 1.5f;
+            rotateSpeed = 5f;
+            checkDistance = 0.8f;
+
+            firstSpawnPointZ = transform.position.z;
         }
 
         private void FixedUpdate()
@@ -27,6 +32,10 @@ namespace MSKim.NonPlayer
         {
             transform.position =
                 Vector3.MoveTowards(transform.position, WaypointManager.Instance.GetCurrentWayPoint(currentPointIndex), moveSpeed * Time.deltaTime);
+            if(currentPointIndex == 0)
+            {
+                transform.position = new(transform.position.x, transform.position.y, firstSpawnPointZ);
+            }
         }
 
         public override void MoveRotation()
@@ -62,6 +71,17 @@ namespace MSKim.NonPlayer
 
         private void CheckDistance()
         {
+            if(currentPointIndex == 0)
+            {
+                var target = WaypointManager.Instance.GetCurrentWayPoint(currentPointIndex);
+                float currDistance = Vector3.Distance(new(target.x, 0f, 0f), new(transform.position.x, 0f, 0f));
+                if (currDistance <= checkDistance)
+                {
+                    currentPointIndex++;
+                }
+                return;
+            }
+
             if (Vector3.Distance(WaypointManager.Instance.GetCurrentWayPoint(currentPointIndex), transform.position) <= checkDistance)
             {
                 currentPointIndex++;
