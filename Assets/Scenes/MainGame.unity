@@ -533,6 +533,16 @@ MonoBehaviour:
   - type: 14
     pointList:
     - {fileID: 1532071697}
+  - type: 15
+    pointList:
+    - {fileID: 684040436}
+    - {fileID: 786334673}
+    - {fileID: 582268651}
+  - type: 16
+    pointList:
+    - {fileID: 684040436}
+    - {fileID: 786334673}
+    - {fileID: 468800277}
 --- !u!114 &518065961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,6 +570,9 @@ MonoBehaviour:
   - {fileID: 405504199}
   - {fileID: 1745729128}
   currentWaitNumber: 0
+  pickupZoneGuests: []
+  canPickupSeats: 
+  canWaitSeats: 
 --- !u!4 &573568951 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5449706949132329380, guid: 13f273e676883f84090be25e7c37f11c, type: 3}
@@ -820,7 +833,7 @@ MonoBehaviour:
   - createObjectName: Guest
     createPrefab: {fileID: 7619004492911756383, guid: 835e8342e3c0cbe44bf063ef15ee4c73, type: 3}
     createCount: 10
-    maxCount: 15
+    maxCount: 30
 --- !u!4 &1353340438 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1790137326850847238, guid: 13f273e676883f84090be25e7c37f11c, type: 3}

@@ -68,6 +68,15 @@ namespace MSKim.NonPlayer
         {
             var targetPoint = WaypointManager.Instance.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
 
+            if(currentWaypointType == Utils.WaypointType.Pickup_Outside_L || currentWaypointType == Utils.WaypointType.Pickup_Outside_R)
+            {
+                if (currentPointIndex == 2)
+                {
+                    MoveHoldZPosition(targetPoint);
+                    return;
+                }
+            }
+
             if (currentWaypointType == Utils.WaypointType.Outside_L || currentWaypointType == Utils.WaypointType.Outside_R)
             {
                 MoveHoldZPosition(targetPoint);
@@ -101,7 +110,8 @@ namespace MSKim.NonPlayer
             var targetPoint = WaypointManager.Instance.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
             
             if (currentWaypointType == Utils.WaypointType.Outside_L || currentWaypointType == Utils.WaypointType.Outside_R ||
-                (currentWaypointType == Utils.WaypointType.MoveStore && currentPointIndex == 0))
+                (currentWaypointType == Utils.WaypointType.MoveStore && currentPointIndex == 0) ||
+                ((currentWaypointType == Utils.WaypointType.Pickup_Outside_L || currentWaypointType == Utils.WaypointType.Pickup_Outside_R) && currentPointIndex == 2))
             {
                 targetPoint = new(targetPoint.x, targetPoint.y, holdPointZ);
             }
@@ -147,6 +157,24 @@ namespace MSKim.NonPlayer
                     currentPointIndex++;
 
                     if(currentPointIndex >= WaypointManager.Instance.GetCurrentWaypointMaxIndex(currentWaypointType))
+                    {
+                        Release();
+                    }
+                }
+                return;
+            }
+
+            if(currentWaypointType == Utils.WaypointType.Pickup_Outside_L || currentWaypointType == Utils.WaypointType.Pickup_Outside_R)
+            {
+                currentDistance = currentPointIndex == 2 ?
+                    Mathf.Abs(targetPoint.x - transform.position.x) :
+                    Vector3.Distance(transform.position, targetPoint);
+
+                if (currentDistance <= checkDistance)
+                {
+                    currentPointIndex++;
+
+                    if (currentPointIndex >= WaypointManager.Instance.GetCurrentWaypointMaxIndex(currentWaypointType))
                     {
                         Release();
                     }
@@ -222,6 +250,7 @@ namespace MSKim.NonPlayer
             if(testTimer > testTimerMax)
             {
                 testTimer = 0f;
+                currBehaviourState = BehaviourState.Walk;
                 GameManager.Instance.RemovePickupZone(this);
             }
         }

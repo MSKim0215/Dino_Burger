@@ -101,7 +101,7 @@ namespace MSKim.Manager
         {
             pickupZoneGuests.Remove(guest);
             ResetPickupSeat(guest);
-            guest.Release();
+            guest.CurrentWaypointType = UnityEngine.Random.Range(0, 2) == 0 ? Utils.WaypointType.Pickup_Outside_L : Utils.WaypointType.Pickup_Outside_R;
         }
 
         private void ResetPickupSeat(NonPlayer.GuestController guest)
