@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace MSKim.Manager
@@ -25,6 +26,7 @@ namespace MSKim.Manager
         [SerializeField] private int currentWaitNumber;
         [SerializeField] private Queue<NonPlayer.GuestController> pickupZoneGuests = new();
         [SerializeField] private Queue<NonPlayer.GuestController> waitingZoneGuests = new();
+        [SerializeField] private bool[] canWaitSeats;
 
         public bool CanMovePickupTable => pickupZoneGuests.Count < pickupTableList.Count;
 
@@ -40,6 +42,21 @@ namespace MSKim.Manager
 
             instance = this;
             DontDestroyOnLoad(gameObject);
+        }
+
+        private void Start()
+        {
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            canWaitSeats = new bool[waitChairList.Count];
+            
+            for(int i = 0; i < waitChairList.Count; i++)
+            {
+                canWaitSeats[i] = true;
+            }
         }
 
         private void Update()
@@ -58,8 +75,24 @@ namespace MSKim.Manager
 
         public void AddWaitingZone(NonPlayer.GuestController guest)
         {
+            guest.CurrentWaypointType = GetRandomWaitingZoneType();
             waitingZoneGuests.Enqueue(guest);
-            guest.CurrentWaypointType = (Utils.WaypointType)Enum.Parse(typeof(Utils.WaypointType), $"WaitingZone_{waitingZoneGuests.Count}");
+            guest.WaitingNumber = waitingZoneGuests.Count;
+        }
+
+        private Utils.WaypointType GetRandomWaitingZoneType()
+        {
+            while(CanMoveWaitingChair)
+            {
+                var randIndex = UnityEngine.Random.Range(0, waitChairList.Count);
+
+                if (canWaitSeats[randIndex])
+                {
+                    canWaitSeats[randIndex] = false;
+                    return (Utils.WaypointType)Enum.Parse(typeof(Utils.WaypointType), $"WaitingZone_{++randIndex}");
+                }
+            }
+            return Utils.WaypointType.Outside_L;
         }
     }
 }

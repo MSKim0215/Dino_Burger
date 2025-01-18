@@ -1,5 +1,4 @@
 using MSKim.Manager;
-using System;
 using UnityEngine;
 
 namespace MSKim.NonPlayer
@@ -21,6 +20,8 @@ namespace MSKim.NonPlayer
         [SerializeField] private float checkDistance = 0.5f;
 
         private float holdPointZ;
+
+        public int WaitingNumber { get; set; }
 
         public Utils.WaypointType CurrentWaypointType
         {
