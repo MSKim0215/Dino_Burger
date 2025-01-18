@@ -177,6 +177,7 @@ namespace MSKim.NonPlayer
                         if(GameManager.Instance.CanMovePickupTable)
                         {
                             GameManager.Instance.AddPickupZone(this);
+                            checkDistance = 0.01f;
                         }
                         else
                         {

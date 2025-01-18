@@ -26,6 +26,7 @@ namespace MSKim.Manager
         [SerializeField] private int currentWaitNumber;
         [SerializeField] private Queue<NonPlayer.GuestController> pickupZoneGuests = new();
         [SerializeField] private Queue<NonPlayer.GuestController> waitingZoneGuests = new();
+        [SerializeField] private bool[] canPickupSeats;
         [SerializeField] private bool[] canWaitSeats;
 
         public bool CanMovePickupTable => pickupZoneGuests.Count < pickupTableList.Count;
@@ -52,10 +53,16 @@ namespace MSKim.Manager
         private void Initialize()
         {
             canWaitSeats = new bool[waitChairList.Count];
+            canPickupSeats = new bool[pickupTableList.Count];
             
             for(int i = 0; i < waitChairList.Count; i++)
             {
                 canWaitSeats[i] = true;
+            }
+
+            for (int i = 0; i < pickupTableList.Count; i++)
+            {
+                canPickupSeats[i] = true;
             }
         }
 
@@ -69,8 +76,23 @@ namespace MSKim.Manager
 
         public void AddPickupZone(NonPlayer.GuestController guest)
         {
+            guest.CurrentWaypointType = GetRandomPickupZoneType();
             pickupZoneGuests.Enqueue(guest);
-            guest.CurrentWaypointType = (Utils.WaypointType)Enum.Parse(typeof(Utils.WaypointType), $"PickupZone_{pickupZoneGuests.Count}");
+        }
+
+        private Utils.WaypointType GetRandomPickupZoneType()
+        {
+            while(CanMovePickupTable)
+            {
+                var randIndex = UnityEngine.Random.Range(0, pickupTableList.Count);
+
+                if (canPickupSeats[randIndex])
+                {
+                    canPickupSeats[randIndex] = false;
+                    return (Utils.WaypointType)Enum.Parse(typeof(Utils.WaypointType), $"PickupZone_{++randIndex}");
+                }
+            }
+            return Utils.WaypointType.Outside_R;
         }
 
         public void AddWaitingZone(NonPlayer.GuestController guest)
