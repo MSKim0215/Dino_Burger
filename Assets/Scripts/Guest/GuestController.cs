@@ -7,7 +7,7 @@ namespace MSKim.NonPlayer
     {
         private enum BehaviourState
         {
-            Idle, Walk
+            Walk, Pickup, Waiting
         }
 
         [Header("Behaviour State")]
@@ -18,6 +18,8 @@ namespace MSKim.NonPlayer
         [SerializeField] private int currentPointIndex = 0;
         [SerializeField] private float currentDistance = 0f;
         [SerializeField] private float checkDistance = 0.5f;
+        [SerializeField] private float testTimer = 0f;
+        private float testTimerMax = 30f;
 
         private float holdPointZ;
 
@@ -49,6 +51,8 @@ namespace MSKim.NonPlayer
             switch(currBehaviourState)
             {
                 case BehaviourState.Walk: FixedUpdateWalk(); break;
+                case BehaviourState.Pickup: FixedUpdatePickup(); break;
+                case BehaviourState.Waiting: FixedUpdateWaiting(); break;
             }
         }
 
@@ -174,18 +178,21 @@ namespace MSKim.NonPlayer
 
                     if (currentPointIndex >= WaypointManager.Instance.GetCurrentWaypointMaxIndex(currentWaypointType))
                     {
+                        checkDistance = 0.01f;
+
                         if(GameManager.Instance.CanMovePickupTable)
                         {
-                            GameManager.Instance.AddPickupZone(this);
-                            checkDistance = 0.01f;
-                        }
-                        else
-                        {
-                            if(GameManager.Instance.CanMoveWaitingChair)
+                            if(!GameManager.Instance.IsExistWaitingGuest)
                             {
-                                GameManager.Instance.AddWaitingZone(this);
-                                checkDistance = 0.01f;
+                                GameManager.Instance.AddPickupZone(this);
+                                return;
                             }
+                        }
+
+                        if (GameManager.Instance.CanMoveWaitingChair)
+                        {
+                            GameManager.Instance.AddWaitingZone(this);
+                            return;
                         }
                     }
                 }
@@ -196,7 +203,36 @@ namespace MSKim.NonPlayer
             if (currentDistance <= checkDistance)
             {
                 currentPointIndex++;
+
+                if(currentWaypointType.ToString().Contains("Pickup"))
+                {
+                    currBehaviourState = BehaviourState.Pickup;
+                }
+                else if(currentWaypointType.ToString().Contains("Waiting"))
+                {
+                    currBehaviourState = BehaviourState.Waiting;
+                }
             }
+        }
+
+        private void FixedUpdatePickup()
+        {
+            testTimer += Time.deltaTime;
+
+            if(testTimer > testTimerMax)
+            {
+                testTimer = 0f;
+                GameManager.Instance.RemovePickupZone(this);
+            }
+        }
+
+        private void FixedUpdateWaiting()
+        {
+            if (WaitingNumber != 1) return;
+            if (!GameManager.Instance.CanMovePickupTable) return;
+
+            GameManager.Instance.RemoveWaitingZone();
+            currBehaviourState = BehaviourState.Walk;
         }
 
         public override void Release()

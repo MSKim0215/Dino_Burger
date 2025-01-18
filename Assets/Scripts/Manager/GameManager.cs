@@ -24,7 +24,7 @@ namespace MSKim.Manager
 
         [Header("Info Viewer")]
         [SerializeField] private int currentWaitNumber;
-        [SerializeField] private Queue<NonPlayer.GuestController> pickupZoneGuests = new();
+        [SerializeField] private List<NonPlayer.GuestController> pickupZoneGuests = new();
         [SerializeField] private Queue<NonPlayer.GuestController> waitingZoneGuests = new();
         [SerializeField] private bool[] canPickupSeats;
         [SerializeField] private bool[] canWaitSeats;
@@ -32,6 +32,8 @@ namespace MSKim.Manager
         public bool CanMovePickupTable => pickupZoneGuests.Count < pickupTableList.Count;
 
         public bool CanMoveWaitingChair => waitingZoneGuests.Count < waitChairList.Count;
+
+        public bool IsExistWaitingGuest => waitingZoneGuests.Count >= 1;
 
         private void Awake()
         {
@@ -77,7 +79,7 @@ namespace MSKim.Manager
         public void AddPickupZone(NonPlayer.GuestController guest)
         {
             guest.CurrentWaypointType = GetRandomPickupZoneType();
-            pickupZoneGuests.Enqueue(guest);
+            pickupZoneGuests.Add(guest);
         }
 
         private Utils.WaypointType GetRandomPickupZoneType()
@@ -93,6 +95,19 @@ namespace MSKim.Manager
                 }
             }
             return Utils.WaypointType.Outside_R;
+        }
+
+        public void RemovePickupZone(NonPlayer.GuestController guest)
+        {
+            pickupZoneGuests.Remove(guest);
+            ResetPickupSeat(guest);
+            guest.Release();
+        }
+
+        private void ResetPickupSeat(NonPlayer.GuestController guest)
+        {
+            var typeIndex = int.Parse(guest.CurrentWaypointType.ToString().Last().ToString());
+            canPickupSeats[typeIndex - 1] = true;
         }
 
         public void AddWaitingZone(NonPlayer.GuestController guest)
@@ -115,6 +130,33 @@ namespace MSKim.Manager
                 }
             }
             return Utils.WaypointType.Outside_L;
+        }
+
+        public void RemoveWaitingZone()
+        {
+            RefreshNumberTicket();
+
+            var nextGuest = waitingZoneGuests.Dequeue();
+            ResetWaitingSeat(nextGuest);
+            AddPickupZone(nextGuest);
+        }
+
+        private void ResetWaitingSeat(NonPlayer.GuestController guest)
+        {
+            var typeIndex = int.Parse(guest.CurrentWaypointType.ToString().Last().ToString());
+            canWaitSeats[typeIndex - 1] = true;
+        }
+
+        private void RefreshNumberTicket()
+        {
+            var guestsArray = waitingZoneGuests.ToArray();
+            waitingZoneGuests.Clear();
+
+            for (int i = 0; i < guestsArray.Length; i++)
+            {
+                guestsArray[i].WaitingNumber--;
+                waitingZoneGuests.Enqueue(guestsArray[i]);
+            }
         }
     }
 }
