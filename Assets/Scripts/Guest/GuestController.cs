@@ -5,14 +5,6 @@ namespace MSKim.NonPlayer
 {
     public class GuestController : CharacterController
     {
-        private enum BehaviourState
-        {
-            Walk, Pickup, Waiting
-        }
-
-        [Header("Behaviour State")]
-        [SerializeField] private BehaviourState currBehaviourState;
-
         [Header("Waypoint Settings")]
         [SerializeField] private Utils.WaypointType currentWaypointType;
         [SerializeField] private int currentPointIndex = 0;
@@ -35,6 +27,16 @@ namespace MSKim.NonPlayer
             }
         }
 
+        protected override void SettingState()
+        {
+            stateDict = new()
+            {
+                { ICharacterState.BehaviourState.Move, new MoveState() },
+                { ICharacterState.BehaviourState.Waiting, new WaitingState() },
+                { ICharacterState.BehaviourState.Pickup, new PickupState() }
+            };
+        }
+
         public void Initialize()
         {
             moveSpeed = 1.5f;
@@ -42,57 +44,49 @@ namespace MSKim.NonPlayer
             checkDistance = 0.8f;
 
             holdPointZ = transform.position.z;
-            currBehaviourState = BehaviourState.Walk;
             CurrentWaypointType = Utils.WaypointType.MoveStore;
+
+            ChangeState(ICharacterState.BehaviourState.Move);
         }
 
         private void FixedUpdate()
         {
-            switch(currBehaviourState)
-            {
-                case BehaviourState.Walk: FixedUpdateWalk(); break;
-                case BehaviourState.Pickup: FixedUpdatePickup(); break;
-                case BehaviourState.Waiting: FixedUpdateWaiting(); break;
-            }
+            if (state.CurrentState.Get() != ICharacterState.BehaviourState.Move) return;
+
+            FixedUpdateWalk();
         }
 
         private void FixedUpdateWalk()
         {
-            if (currentPointIndex >= WaypointManager.Instance.GetCurrentWaypointMaxIndex(currentWaypointType)) return;
+            if(IsAtLastWaypoint()) return;
 
             base.Move();
             CheckDistance();
+        }
+
+        private bool IsAtLastWaypoint()
+        {
+            return (currentPointIndex >= WaypointManager.Instance.GetCurrentWaypointMaxIndex(currentWaypointType));
         }
 
         public override void MovePosition()
         {
             var targetPoint = WaypointManager.Instance.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
 
-            if(currentWaypointType == Utils.WaypointType.Pickup_Outside_L || currentWaypointType == Utils.WaypointType.Pickup_Outside_R)
-            {
-                if (currentPointIndex == 2)
-                {
-                    MoveHoldZPosition(targetPoint);
-                    return;
-                }
-            }
-
-            if (currentWaypointType == Utils.WaypointType.Outside_L || currentWaypointType == Utils.WaypointType.Outside_R)
+            if(ShouldHoldZPosition())
             {
                 MoveHoldZPosition(targetPoint);
                 return;
             }
 
-            if (currentWaypointType == Utils.WaypointType.MoveStore)
-            {
-                if(currentPointIndex == 0)
-                {
-                    MoveHoldZPosition(targetPoint);
-                    return;
-                }
-            }
-
             MovePosition(targetPoint);
+        }
+
+        private bool ShouldHoldZPosition()
+        {
+            return (((currentWaypointType == Utils.WaypointType.Pickup_Outside_L || currentWaypointType == Utils.WaypointType.Pickup_Outside_R) && currentPointIndex == 2) ||
+                (currentWaypointType == Utils.WaypointType.Outside_L || currentWaypointType == Utils.WaypointType.Outside_R) ||
+                (currentWaypointType == Utils.WaypointType.MoveStore && currentPointIndex == 0));
         }
 
         private void MovePosition(Vector3 targetPoint)
@@ -145,52 +139,63 @@ namespace MSKim.NonPlayer
             return (delta2 >= 0) ? delta1 : -delta1;
         }
 
+        private bool IsMoveOutside()
+        {
+            return currentWaypointType == Utils.WaypointType.Outside_L || currentWaypointType == Utils.WaypointType.Outside_R;
+        }
+
+        private bool IsMovePickupOutside()
+        {
+            return currentWaypointType == Utils.WaypointType.Pickup_Outside_L || currentWaypointType == Utils.WaypointType.Pickup_Outside_R;
+        }
+
+        private bool IsMoveStore()
+        {
+            return currentWaypointType == Utils.WaypointType.MoveStore;
+        }
+
+        private void NextPointIndex(bool isRelease = false)
+        {
+            if(currentDistance <= checkDistance)
+            {
+                currentPointIndex++;
+
+                if (isRelease)
+                {
+                    Release();
+                }
+            }
+        }
+
+        private float GetDistanceWithPointIndex(int baseIndex, Vector3 targetPoint)
+        {
+            return currentPointIndex == baseIndex ?
+                Mathf.Abs(targetPoint.x - transform.position.x) : Vector3.Distance(transform.position, targetPoint);
+        }
+
         private void CheckDistance()
         {
             var targetPoint = WaypointManager.Instance.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
 
-            if (currentWaypointType == Utils.WaypointType.Outside_L || currentWaypointType == Utils.WaypointType.Outside_R)
-            {
+            if (IsMoveOutside())
+            {   // 거리 -> 거리 퇴장
+                int maxIndex = WaypointManager.Instance.GetCurrentWaypointMaxIndex(currentWaypointType) - 1;
                 currentDistance = Mathf.Abs(targetPoint.x - transform.position.x);
-                if(currentDistance <= checkDistance)
-                {
-                    currentPointIndex++;
-
-                    if(currentPointIndex >= WaypointManager.Instance.GetCurrentWaypointMaxIndex(currentWaypointType))
-                    {
-                        Release();
-                    }
-                }
-                return;
+                NextPointIndex(maxIndex <= currentPointIndex);
             }
-
-            if(currentWaypointType == Utils.WaypointType.Pickup_Outside_L || currentWaypointType == Utils.WaypointType.Pickup_Outside_R)
-            {
-                currentDistance = currentPointIndex == 2 ?
-                    Mathf.Abs(targetPoint.x - transform.position.x) :
-                    Vector3.Distance(transform.position, targetPoint);
+            else if (IsMovePickupOutside())
+            {   // 픽업 테이블 -> 거리 퇴장
+                int maxIndex = WaypointManager.Instance.GetCurrentWaypointMaxIndex(currentWaypointType) - 1;
+                currentDistance = GetDistanceWithPointIndex(maxIndex, targetPoint);
+                NextPointIndex(maxIndex <= currentPointIndex);
+            }
+            else if (IsMoveStore())
+            {   // 거리 -> 가게 안으로 이동
+                currentDistance = GetDistanceWithPointIndex(0, targetPoint);
 
                 if (currentDistance <= checkDistance)
                 {
-                    currentPointIndex++;
-
-                    if (currentPointIndex >= WaypointManager.Instance.GetCurrentWaypointMaxIndex(currentWaypointType))
-                    {
-                        Release();
-                    }
-                }
-                return;
-            }
-
-            if(currentWaypointType == Utils.WaypointType.MoveStore)
-            {
-                currentDistance = currentPointIndex == 0 ?
-                    Mathf.Abs(targetPoint.x - transform.position.x) :
-                    Vector3.Distance(transform.position, targetPoint);
-
-                if (currentDistance <= checkDistance)
-                {
-                    if(currentPointIndex == 0)
+                    if (currentPointIndex == 0)
                     {
                         var rand = UnityEngine.Random.Range(0, 2);  // 0: store, 1: out
 
@@ -204,13 +209,13 @@ namespace MSKim.NonPlayer
 
                     currentPointIndex++;
 
-                    if (currentPointIndex >= WaypointManager.Instance.GetCurrentWaypointMaxIndex(currentWaypointType))
+                    if (IsAtLastWaypoint())
                     {
                         checkDistance = 0.01f;
 
-                        if(GameManager.Instance.CanMovePickupTable)
+                        if (GameManager.Instance.CanMovePickupTable)
                         {
-                            if(!GameManager.Instance.IsExistWaitingGuest)
+                            if (!GameManager.Instance.IsExistWaitingGuest)
                             {
                                 GameManager.Instance.AddPickupZone(this);
                                 return;
@@ -224,44 +229,56 @@ namespace MSKim.NonPlayer
                         }
                     }
                 }
-                return;
             }
-
-            currentDistance = Vector3.Distance(transform.position, targetPoint);
-            if (currentDistance <= checkDistance)
+            else
             {
-                currentPointIndex++;
+                currentDistance = Vector3.Distance(transform.position, targetPoint);
+                if (currentDistance <= checkDistance)
+                {
+                    currentPointIndex++;
 
-                if(currentWaypointType.ToString().Contains("Pickup"))
-                {
-                    currBehaviourState = BehaviourState.Pickup;
-                }
-                else if(currentWaypointType.ToString().Contains("Waiting"))
-                {
-                    currBehaviourState = BehaviourState.Waiting;
+                    if (currentWaypointType.ToString().Contains("Pickup"))
+                    {
+                        ChangeState(ICharacterState.BehaviourState.Pickup);
+                    }
+                    else if (currentWaypointType.ToString().Contains("Waiting"))
+                    {
+                        ChangeState(ICharacterState.BehaviourState.Waiting);
+                    }
                 }
             }
         }
 
-        private void FixedUpdatePickup()
+        private void Update()
+        {
+            if (state.CurrentState.Get() == ICharacterState.BehaviourState.Move) return;
+
+            switch(state.CurrentState.Get())
+            {
+                case ICharacterState.BehaviourState.Waiting: UpdateWaiting(); break;
+                case ICharacterState.BehaviourState.Pickup: UpdatePickup(); break;
+            }
+        }
+
+        private void UpdatePickup()
         {
             testTimer += Time.deltaTime;
 
             if(testTimer > testTimerMax)
             {
                 testTimer = 0f;
-                currBehaviourState = BehaviourState.Walk;
                 GameManager.Instance.RemovePickupZone(this);
+                ChangeState(ICharacterState.BehaviourState.Move);
             }
         }
 
-        private void FixedUpdateWaiting()
+        private void UpdateWaiting()
         {
             if (WaitingNumber != 1) return;
             if (!GameManager.Instance.CanMovePickupTable) return;
 
             GameManager.Instance.RemoveWaitingZone();
-            currBehaviourState = BehaviourState.Walk;
+            ChangeState(ICharacterState.BehaviourState.Move);
         }
 
         public override void Release()

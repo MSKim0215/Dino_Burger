@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public interface ICharacterMove
@@ -14,7 +15,20 @@ public abstract class CharacterController : PoolAble, ICharacterMove
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float rotateSpeed;
 
+    protected StateController state;
+    protected Dictionary<ICharacterState.BehaviourState, ICharacterState> stateDict = new();
+
+    private void Awake()
+    {
+        state = new(this);
+        SettingState();
+    }
+    
+    protected abstract void SettingState();
+
     public virtual Vector3 GetVelocity() => Vector3.zero;
+
+    protected void ChangeState(ICharacterState.BehaviourState changeState) => state.ChangeState(stateDict[changeState]);
 
     public virtual void Move()
     {

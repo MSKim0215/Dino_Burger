@@ -243,5 +243,10 @@ namespace MSKim.Player
                 }
             }
         }
+
+        protected override void SettingState()
+        {
+
+        }
     }
 }
