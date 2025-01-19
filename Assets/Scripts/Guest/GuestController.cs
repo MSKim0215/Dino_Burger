@@ -1,4 +1,6 @@
+using Cysharp.Threading.Tasks;
 using MSKim.Manager;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MSKim.NonPlayer
@@ -11,7 +13,18 @@ namespace MSKim.NonPlayer
         [SerializeField] private float currentDistance = 0f;
         [SerializeField] private float checkDistance = 0.5f;
         [SerializeField] private float testTimer = 0f;
-        private float testTimerMax = 30f;
+
+        [Header("Order Settings")]
+        [SerializeField] private float maximumOrderTime = 60f;
+
+        [Header("Info Viewer")]
+        [SerializeField] private bool isOrderSuccess = false;
+        [SerializeField] private float currentOrderTime = 0f;
+        [SerializeField] private HandNotAble.TableController myPickupTable;
+        [SerializeField] private List<Utils.CrateType> orderBurger = new();
+        [SerializeField] private bool isOrderStew = false;
+        [SerializeField] private bool isGetBurger = false;
+        [SerializeField] private bool isGetStew = false;
 
         private float holdPointZ;
 
@@ -263,14 +276,18 @@ namespace MSKim.NonPlayer
 
         private void UpdateOrder()
         {
-            testTimer += Time.deltaTime;
+            if (isOrderSuccess) return;
 
-            if(testTimer > testTimerMax)
-            {
-                testTimer = 0f;
-                GameManager.Instance.RemovePickupZone(this);
-                ChangeState(ICharacterState.BehaviourState.Move);
-            }
+
+
+            //testTimer += Time.deltaTime;
+
+            //if(testTimer > testTimerMax)
+            //{
+            //    testTimer = 0f;
+            //    GameManager.Instance.RemovePickupZone(this);
+            //    ChangeState(ICharacterState.BehaviourState.Move);
+            //}
         }
 
         private void UpdateWaiting()
@@ -282,9 +299,79 @@ namespace MSKim.NonPlayer
             ChangeState(ICharacterState.BehaviourState.Move);
         }
 
+        public async void Order(List<Utils.CrateType> orderBurger, bool isOrderStew)
+        {
+            while(true)
+            {
+                if(!isGetBurger)
+                {
+                    if (!myPickupTable.IsHandEmpty && myPickupTable.IsHandUpObjectBurger())
+                    {
+                        if (myPickupTable.HandUpObject.TryGetComponent<HandAble.BurgerFoodController>(out var burger))
+                        {
+                            if (burger.IngredientList.Equals(orderBurger))
+                            {
+                                isGetBurger = true;
+                                Destroy(myPickupTable.Give());
+                            }
+                        }
+                    }
+                }
+
+                if(!isGetStew && isOrderStew)
+                {
+                    if(!myPickupTable.IsHandEmpty && myPickupTable.IsHandUpObjectStew())
+                    {
+                        if(myPickupTable.HandUpObject.TryGetComponent<HandAble.StewFoodController>(out var stew))
+                        {
+                            isGetStew = true;
+                            Destroy(myPickupTable.Give());
+                        }
+                    }
+                }
+
+                if(isGetBurger)
+                {
+                    if(isOrderStew)
+                    {
+                        if(isGetStew)
+                        {
+                            isOrderSuccess = true;
+                        }
+                    }
+                    else
+                    {
+                        isOrderSuccess = true;
+                    }
+                }
+
+                if(isOrderSuccess)
+                {
+                    Debug.Log("주문한거 받음");
+                    break;
+                }
+
+                currentOrderTime += Time.deltaTime;
+
+                await UniTask.Yield();
+
+                if(currentOrderTime >= maximumOrderTime)
+                {
+                    Debug.Log("주문한거 못받음");
+                    break;
+                }
+            }
+
+            GameManager.Instance.RemovePickupZone(this);
+            ChangeState(ICharacterState.BehaviourState.Move);
+        }
+
         public override void Release()
         {
             currentPointIndex = 0;
+            isOrderSuccess = false;
+            isGetBurger = false;
+            isGetStew = false;
             base.Release();
         }
     }

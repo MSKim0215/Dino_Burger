@@ -20,6 +20,8 @@ namespace MSKim.HandNotAble
 
         public bool IsHandUpObjectBurger() => hand.GetHandUpComponent<HandAble.BurgerFoodController>() != null;
 
+        public bool IsHandUpObjectStew() => hand.GetHandUpComponent<HandAble.StewFoodController>() != null;
+
         public virtual void Take(GameObject takeObject)
         {
             hand.GetHandUp(takeObject);

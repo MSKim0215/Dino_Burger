@@ -18,6 +18,8 @@ namespace MSKim.HandAble
         private Dictionary<Utils.CrateType, float> correctionHeightDict = new();
         private float currentHeight = 0f;
 
+        public List<IngredientController> IngredientList => ingredientList;
+
         public float CurrentHeight
         {
             get => currentHeight;
