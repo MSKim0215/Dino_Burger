@@ -285,16 +285,7 @@ namespace MSKim.NonPlayer
         {
             if (isOrderSuccess) return;
 
-
-
-            //testTimer += Time.deltaTime;
-
-            //if(testTimer > testTimerMax)
-            //{
-            //    testTimer = 0f;
-            //    GameManager.Instance.RemovePickupZone(this);
-            //    ChangeState(ICharacterState.BehaviourState.Move);
-            //}
+            CheckOrderFood();
         }
 
         private void UpdateWaiting()
@@ -306,74 +297,58 @@ namespace MSKim.NonPlayer
             ChangeState(ICharacterState.BehaviourState.Move);
         }
 
+        private void CheckOrderFood()
+        {
+            if (myPickupTable == null) return;
+            if (myPickupTable.IsHandEmpty) return;
+
+            CheckOrderBurger();
+            CheckOrderStew();
+
+            isOrderSuccess = isGetBurger && (!isOrderStew || isGetStew);
+        }
+
+        private void CheckOrderBurger()
+        {
+            if (isGetBurger) return;
+
+            if (myPickupTable.HandUpObject.TryGetComponent<HandAble.BurgerFoodController>(out var burger))
+            {
+                if (Enumerable.SequenceEqual(burger.GetCurrentIncredients().OrderBy(e => e), orderBurger.OrderBy(e => e)))
+                {
+                    isGetBurger = true;
+                    Destroy(myPickupTable.Give());
+                }
+            }
+        }
+
+        private void CheckOrderStew()
+        {
+            if (!isOrderStew) return;
+            if (isGetStew) return;
+
+            if (myPickupTable.HandUpObject.TryGetComponent<HandAble.StewFoodController>(out var stew))
+            {
+                isGetStew = true;
+                Destroy(myPickupTable.Give());
+            }
+        }
+
         public async void Order(List<Utils.CrateType> orderBurger, bool isOrderStew)
         {
             this.orderBurger = orderBurger;
             this.isOrderStew = isOrderStew;
 
-            handRay = new Ray(new Vector3(transform.position.x, 0.1f, transform.position.z), transform.forward);
-            Debug.DrawLine(handRay.origin, handRay.origin + handRay.direction * handlingDistance, Color.blue);
+            FindPickupTable();
 
-            if (Physics.Raycast(handRay, out handHit, handlingDistance, LayerHandNotAble))
+            if(!IsFindPickupTable())
             {
-                var hitObj = handHit.collider.gameObject;
-                if(hitObj != null)
-                {
-                    if(hitObj.TryGetComponent(out myPickupTable))
-                    {
-                        if(myPickupTable == null)
-                        {
-                            Debug.LogWarning("픽업 테이블 못찾음!");
-                            return;
-                        }
-                    }
-                }
+                Debug.LogWarning("픽업테이블 못찾음");
+                return;
             }
-
+            
             while (true)
             {
-                if(!isGetBurger)
-                {
-                    if (!myPickupTable.IsHandEmpty && myPickupTable.IsHandUpObjectBurger())
-                    {
-                        if (myPickupTable.HandUpObject.TryGetComponent<HandAble.BurgerFoodController>(out var burger))
-                        {
-                            if (Enumerable.SequenceEqual(burger.GetCurrentIncredients().OrderBy(e => e), orderBurger.OrderBy(e => e)))
-                            {
-                                isGetBurger = true;
-                                Destroy(myPickupTable.Give());
-                            }
-                        }
-                    }
-                }
-
-                if(!isGetStew && isOrderStew)
-                {
-                    if(!myPickupTable.IsHandEmpty && myPickupTable.IsHandUpObjectStew())
-                    {
-                        if(myPickupTable.HandUpObject.TryGetComponent<HandAble.StewFoodController>(out var stew))
-                        {
-                            isGetStew = true;
-                            Destroy(myPickupTable.Give());
-                        }
-                    }
-                }
-
-                if(isGetBurger)
-                {
-                    if(isOrderStew)
-                    {
-                        if(isGetStew)
-                        {
-                            isOrderSuccess = true;
-                        }
-                    }
-                    else
-                    {
-                        isOrderSuccess = true;
-                    }
-                }
-
                 if(isOrderSuccess)
                 {
                     Debug.Log("주문한거 받음");
@@ -394,6 +369,23 @@ namespace MSKim.NonPlayer
             GameManager.Instance.RemovePickupZone(this);
             ChangeState(ICharacterState.BehaviourState.Move);
         }
+
+        private void FindPickupTable()
+        {
+            handRay = new Ray(new Vector3(transform.position.x, 0.1f, transform.position.z), transform.forward);
+            Debug.DrawLine(handRay.origin, handRay.origin + handRay.direction * handlingDistance, Color.blue);
+
+            if (Physics.Raycast(handRay, out handHit, handlingDistance, LayerHandNotAble))
+            {
+                var hitObj = handHit.collider.gameObject;
+                if (hitObj != null)
+                {
+                    hitObj.TryGetComponent(out myPickupTable);
+                }
+            }
+        }
+
+        private bool IsFindPickupTable() => myPickupTable != null;
 
         public override void Release()
         {

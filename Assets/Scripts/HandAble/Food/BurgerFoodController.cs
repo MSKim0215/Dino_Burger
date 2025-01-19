@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace MSKim.HandAble
@@ -77,14 +78,7 @@ namespace MSKim.HandAble
 
         public List<Utils.CrateType> GetCurrentIncredients()
         {
-            var incredients = new List<Utils.CrateType>();
-
-            for(int i = 0; i < ingredientList.Count; i++)
-            {
-                incredients.Add(ingredientList[i].IngredientType);
-            }
-
-            return incredients;
+            return ingredientList.Select(ingredient => ingredient.IngredientType).ToList();
         }
     }
 }
