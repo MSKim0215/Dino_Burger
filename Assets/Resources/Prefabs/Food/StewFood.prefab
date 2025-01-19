@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8026328806884189718}
   - component: {fileID: 5226366686701146844}
   - component: {fileID: 7866893188587648690}
+  - component: {fileID: 2430872380921608837}
   m_Layer: 8
   m_Name: StewFood
   m_TagString: Food
@@ -108,3 +109,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.95000005, y: 0.37, z: 0.95000005}
   m_Center: {x: 0, y: 0.18, z: 0}
+--- !u!114 &2430872380921608837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6018837424437621513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d76eeba6917da594fb9f509c889e0726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
