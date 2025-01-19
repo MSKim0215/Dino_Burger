@@ -33,7 +33,8 @@ namespace MSKim.NonPlayer
             {
                 { ICharacterState.BehaviourState.Move, new MoveState() },
                 { ICharacterState.BehaviourState.Waiting, new WaitingState() },
-                { ICharacterState.BehaviourState.Pickup, new PickupState() }
+                { ICharacterState.BehaviourState.Pickup, new PickupState() },
+                { ICharacterState.BehaviourState.Order, new OrderState() },
             };
         }
 
@@ -239,7 +240,7 @@ namespace MSKim.NonPlayer
 
                     if (currentWaypointType.ToString().Contains("Pickup"))
                     {
-                        ChangeState(ICharacterState.BehaviourState.Pickup);
+                        ChangeState(ICharacterState.BehaviourState.Order);
                     }
                     else if (currentWaypointType.ToString().Contains("Waiting"))
                     {
@@ -256,11 +257,11 @@ namespace MSKim.NonPlayer
             switch(state.CurrentState.Get())
             {
                 case ICharacterState.BehaviourState.Waiting: UpdateWaiting(); break;
-                case ICharacterState.BehaviourState.Pickup: UpdatePickup(); break;
+                case ICharacterState.BehaviourState.Order: UpdateOrder(); break;
             }
         }
 
-        private void UpdatePickup()
+        private void UpdateOrder()
         {
             testTimer += Time.deltaTime;
 

@@ -2,7 +2,7 @@ public interface ICharacterState
 {
     public enum BehaviourState
     {
-        Move, Pickup, Waiting
+        Move, Pickup, Waiting, Order
     }
 
     public void Convert(CharacterController controller);
@@ -14,7 +14,7 @@ public class MoveState : ICharacterState
 {
     public void Convert(CharacterController controller)
     {
-        UnityEngine.Debug.Log("걷기");
+        UnityEngine.Debug.Log("걷기 시작");
     }
 
     public ICharacterState.BehaviourState Get()
@@ -27,7 +27,7 @@ public class WaitingState : ICharacterState
 {
     public void Convert(CharacterController controller)
     {
-        UnityEngine.Debug.Log("기다리기");
+        UnityEngine.Debug.Log("기다리기 시작!!");
     }
 
     public ICharacterState.BehaviourState Get()
@@ -40,12 +40,25 @@ public class PickupState : ICharacterState
 {
     public void Convert(CharacterController controller)
     {
-        UnityEngine.Debug.Log("픽업하러가기");
+        UnityEngine.Debug.Log("픽업 완료!! 돌아간다!");
     }
 
     public ICharacterState.BehaviourState Get()
     {
         return ICharacterState.BehaviourState.Pickup;
+    }
+}
+
+public class OrderState : ICharacterState
+{
+    public void Convert(CharacterController controller)
+    {
+        UnityEngine.Debug.Log("주문 요청!");
+    }
+
+    public ICharacterState.BehaviourState Get()
+    {
+        return ICharacterState.BehaviourState.Order;
     }
 }
 
