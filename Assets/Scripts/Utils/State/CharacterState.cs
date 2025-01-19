@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public interface ICharacterState
 {
     public enum BehaviourState
@@ -53,8 +55,28 @@ public class OrderState : ICharacterState
 {
     public void Convert(CharacterController controller)
     {
-        UnityEngine.Debug.Log("주문 요청!");
+        var guest = controller as MSKim.NonPlayer.GuestController;
+        if (guest == null) return;
+
+        guest.Order(GetOrderBurger(), IsOrderStew());
     }
+
+    private List<Utils.CrateType> GetOrderBurger()
+    {
+        var orderIngredients = new List<Utils.CrateType>();
+        var toppingCount = UnityEngine.Random.Range(1, Utils.BURGER_TOPPING_COUNT_MAX + 1);
+        var allowList = MSKim.Manager.GameManager.Instance.AllowIncredientList;
+
+        for(int i = 0; i < toppingCount; i++)
+        {
+            var selectIncredientIndex = UnityEngine.Random.Range(0, allowList.Count);
+            orderIngredients.Add(allowList[selectIncredientIndex]);
+        }
+
+        return orderIngredients;
+    }
+
+    private bool IsOrderStew() => UnityEngine.Random.Range(0, 2) == 0;
 
     public ICharacterState.BehaviourState Get()
     {

@@ -569,6 +569,7 @@ MonoBehaviour:
   - {fileID: 710014792}
   - {fileID: 405504199}
   - {fileID: 1745729128}
+  allowIncredientList: 0100000002000000040000000500000006000000
   currentWaitNumber: 0
   pickupZoneGuests: []
   canPickupSeats: 

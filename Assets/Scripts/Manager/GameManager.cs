@@ -21,6 +21,7 @@ namespace MSKim.Manager
         [Header("Settings")]
         [SerializeField] private List<GameObject> waitChairList = new();
         [SerializeField] private List<GameObject> pickupTableList = new();
+        [SerializeField] private List<Utils.CrateType> allowIncredientList = new();
 
         [Header("Info Viewer")]
         [SerializeField] private int currentWaitNumber;
@@ -28,6 +29,8 @@ namespace MSKim.Manager
         [SerializeField] private Queue<NonPlayer.GuestController> waitingZoneGuests = new();
         [SerializeField] private bool[] canPickupSeats;
         [SerializeField] private bool[] canWaitSeats;
+
+        public List<Utils.CrateType> AllowIncredientList { get => allowIncredientList; }
 
         public bool CanMovePickupTable => pickupZoneGuests.Count < pickupTableList.Count;
 
