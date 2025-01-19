@@ -18,8 +18,6 @@ namespace MSKim.HandAble
         private Dictionary<Utils.CrateType, float> correctionHeightDict = new();
         private float currentHeight = 0f;
 
-        public List<IngredientController> IngredientList => ingredientList;
-
         public float CurrentHeight
         {
             get => currentHeight;
@@ -75,6 +73,18 @@ namespace MSKim.HandAble
         private void MoveTopPosition()
         {
             top.transform.localPosition = new Vector3(0f, currentHeight, 0f);
+        }
+
+        public List<Utils.CrateType> GetCurrentIncredients()
+        {
+            var incredients = new List<Utils.CrateType>();
+
+            for(int i = 0; i < ingredientList.Count; i++)
+            {
+                incredients.Add(ingredientList[i].IngredientType);
+            }
+
+            return incredients;
         }
     }
 }

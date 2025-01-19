@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using MSKim.Manager;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace MSKim.NonPlayer
@@ -25,8 +26,14 @@ namespace MSKim.NonPlayer
         [SerializeField] private bool isOrderStew = false;
         [SerializeField] private bool isGetBurger = false;
         [SerializeField] private bool isGetStew = false;
-
+        
+        private RaycastHit handHit;
+        private Ray handRay;
+        private float handlingDistance = 1.5f;
         private float holdPointZ;
+
+        private int LayerHandAble { get => 1 << LayerMask.NameToLayer("HandAble"); }
+        private int LayerHandNotAble { get => 1 << LayerMask.NameToLayer("HandNotAble"); }
 
         public int WaitingNumber { get; set; }
 
@@ -301,7 +308,29 @@ namespace MSKim.NonPlayer
 
         public async void Order(List<Utils.CrateType> orderBurger, bool isOrderStew)
         {
-            while(true)
+            this.orderBurger = orderBurger;
+            this.isOrderStew = isOrderStew;
+
+            handRay = new Ray(new Vector3(transform.position.x, 0.1f, transform.position.z), transform.forward);
+            Debug.DrawLine(handRay.origin, handRay.origin + handRay.direction * handlingDistance, Color.blue);
+
+            if (Physics.Raycast(handRay, out handHit, handlingDistance, LayerHandNotAble))
+            {
+                var hitObj = handHit.collider.gameObject;
+                if(hitObj != null)
+                {
+                    if(hitObj.TryGetComponent(out myPickupTable))
+                    {
+                        if(myPickupTable == null)
+                        {
+                            Debug.LogWarning("픽업 테이블 못찾음!");
+                            return;
+                        }
+                    }
+                }
+            }
+
+            while (true)
             {
                 if(!isGetBurger)
                 {
@@ -309,7 +338,7 @@ namespace MSKim.NonPlayer
                     {
                         if (myPickupTable.HandUpObject.TryGetComponent<HandAble.BurgerFoodController>(out var burger))
                         {
-                            if (burger.IngredientList.Equals(orderBurger))
+                            if (Enumerable.SequenceEqual(burger.GetCurrentIncredients().OrderBy(e => e), orderBurger.OrderBy(e => e)))
                             {
                                 isGetBurger = true;
                                 Destroy(myPickupTable.Give());

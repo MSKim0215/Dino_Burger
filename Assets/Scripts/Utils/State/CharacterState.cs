@@ -1,4 +1,6 @@
+using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using UnityEngine;
 
 public interface ICharacterState
 {
@@ -27,9 +29,20 @@ public class MoveState : ICharacterState
 
 public class WaitingState : ICharacterState
 {
-    public void Convert(CharacterController controller)
+    public async void Convert(CharacterController controller)
     {
+        var guest = controller as MSKim.NonPlayer.GuestController;
+        if (guest == null) return;
+
         UnityEngine.Debug.Log("기다리기 시작!!");
+        var targetRotation = Quaternion.Euler(new(0, 180, 0));
+        while (Quaternion.Angle(controller.transform.rotation, targetRotation) > 0.1f)
+        {
+            controller.transform.rotation =
+                Quaternion.Slerp(controller.transform.rotation, targetRotation, 15f * Time.deltaTime);
+
+            await UniTask.Yield();
+        }
     }
 
     public ICharacterState.BehaviourState Get()
@@ -53,10 +66,19 @@ public class PickupState : ICharacterState
 
 public class OrderState : ICharacterState
 {
-    public void Convert(CharacterController controller)
+    public async void Convert(CharacterController controller)
     {
         var guest = controller as MSKim.NonPlayer.GuestController;
         if (guest == null) return;
+
+        var targetRotation = Quaternion.Euler(new(0, 180, 0));
+        while (Quaternion.Angle(controller.transform.rotation, targetRotation) > 0.1f)
+        {
+            controller.transform.rotation = 
+                Quaternion.Slerp(controller.transform.rotation, targetRotation, 15f * Time.deltaTime);
+
+            await UniTask.Yield();
+        }
 
         guest.Order(GetOrderBurger(), IsOrderStew());
     }
