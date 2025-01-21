@@ -20,6 +20,11 @@ public static class Utils
         Basic, Cutting, CutOver, Grilling, GrillOver, None
     }   // 기본 상태, 칼질중 상태, 칼질 완료 상태, 구워지는중 상태, 구워진 상태
 
+    public enum FoodType
+    {
+        Hamburger, Stew
+    }   // 햄버거, 스튜
+
     // 가게로 이동, 밖으로 이동(오른쪽), 밖으로 이동(왼쪽),
     // 픽업존 1 ~ 4,
     // 웨이팅존 1 ~ 8
