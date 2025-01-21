@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MSKim.HandAble
 {
-    public class BurgerFoodController : MonoBehaviour
+    public class BurgerFoodController : FoodController
     {
         [Header("Other Object")]
         [SerializeField] private Renderer bottom;
@@ -29,8 +29,10 @@ namespace MSKim.HandAble
             }
         }
 
-        public void Initialize()
+        public override void Initialize(Utils.FoodType foodType)
         {
+            base.Initialize(foodType);
+
             currentHeight = bottom.bounds.size.y;
 
             correctionHeightDict.Add(Utils.CrateType.Cheese, 0.06f);

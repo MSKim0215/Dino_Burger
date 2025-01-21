@@ -10,6 +10,9 @@ namespace MSKim.Manager
         [Header("Ingredient Data")]
         [SerializeField] private Data.IngredientsData ingredientDatas;
 
+        [Header("Food Data")]
+        [SerializeField] private Data.FoodsData foodDatas;
+
         public static GameDataManager Instance
         {
             get
@@ -22,6 +25,10 @@ namespace MSKim.Manager
         public List<Data.IngredientData> IngredientDatas => ingredientDatas.IngredientDataList;
 
         public Data.IngredientData GetIngredientData(Utils.CrateType ingredientType) => IngredientDatas.Find(ingredient => ingredient.Type == ingredientType);
+
+        public List<Data.FoodData> FoodDatas => foodDatas.FoodDataList;
+
+        public Data.FoodData GetFoodData(Utils.FoodType foodType) => FoodDatas.Find(food => food.Type == foodType);
 
         private void Awake()
         {

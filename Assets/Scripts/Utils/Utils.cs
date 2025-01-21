@@ -46,10 +46,5 @@ public static class Utils
     public const float CUTTING_TOMATO_COOK_TIME = 3f;       // 토마토 손질 시간
     public const float BOIL_STEW_COOK_TIME = 5f;            // 스튜 제작 시간
 
-    public const int CHEESE_INCREDIENT_YIELD = 3;       // 치즈 재료 수율
-    public const int LETTUCE_INCREDIENT_YIELD = 6;      // 양상추 재료 수율
-    public const int ONION_INCREDIENT_YIELD = 5;        // 양파 재료 수율
-    public const int TOMATO_INCREDIENT_YIELD = 4;       // 토마토 재료 수율
-
     public const int BURGER_TOPPING_COUNT_MAX = 5;      // 햄버거 토핑 최대 개수
 }
