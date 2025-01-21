@@ -435,6 +435,7 @@ GameObject:
   - component: {fileID: 518065961}
   - component: {fileID: 518065959}
   - component: {fileID: 518065960}
+  - component: {fileID: 518065962}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -574,6 +575,19 @@ MonoBehaviour:
   pickupZoneGuests: []
   canPickupSeats: 
   canWaitSeats: 
+--- !u!114 &518065962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518065957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adb6aefbe833e5a4d9b5358f80191be1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientDatas: {fileID: 11400000, guid: c2afd1cc819cc4b47810cff4fc0ea56f, type: 2}
 --- !u!4 &573568951 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5449706949132329380, guid: 13f273e676883f84090be25e7c37f11c, type: 3}

@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using MSKim.Manager;
 
 namespace MSKim.HandAble
 {
     public class IngredientController : MonoBehaviour
     {
-        [Header("Ingredient Info")]
-        [SerializeField] private Utils.CrateType ingredientType;
-        [SerializeField] protected int yieldAmount;
+        [Header("Ingredient Data Info")]
+        [SerializeField] protected Data.IngredientData data;
 
         [Header("Ingredient State Objects")]
         [SerializeField] private Utils.IngredientState ingredientState = Utils.IngredientState.Basic;
@@ -15,7 +15,6 @@ namespace MSKim.HandAble
 
         [Header("Cooking Time")]
         [SerializeField] protected float currentCookTime;
-        [SerializeField] protected float maximumCookTime;
 
         [Header("Other Component")]
         [SerializeField] private Renderer ingredientRenderer;
@@ -23,13 +22,13 @@ namespace MSKim.HandAble
 
         private Dictionary<Utils.CookState, GameObject> ingredientCookStateDict = new();
 
-        public virtual int YieldAmount { get => yieldAmount; set => yieldAmount = value; }
+        public virtual int YieldAmount { get => data.YieldAmount; set => data.YieldAmount = value; }
 
         public virtual float CurrentCookTime { get => currentCookTime; set => currentCookTime = value; }
 
-        public float MaximumCookTime => maximumCookTime;
+        public float MaximumCookTime => data.CookTime;
 
-        public Utils.CrateType IngredientType => ingredientType;
+        public Utils.CrateType IngredientType => data.Type;
 
         public Utils.IngredientState IngredientState => ingredientState;
 
@@ -39,23 +38,11 @@ namespace MSKim.HandAble
 
         public void Initialize(Utils.CrateType ingredientType)
         {
-            this.ingredientType = ingredientType;
-            name = this.ingredientType.ToString();
+            data = GameDataManager.Instance.GetIngredientData(ingredientType);
 
-            SetYieldAmount();
+            name = data.Name;
+
             InitializeCookState();
-        }
-
-        private void SetYieldAmount()
-        {
-            yieldAmount = ingredientType switch
-            {
-                Utils.CrateType.Cheese => Utils.CHEESE_INCREDIENT_YIELD,
-                Utils.CrateType.Lettuce => Utils.LETTUCE_INCREDIENT_YIELD,
-                Utils.CrateType.Onion => Utils.ONION_INCREDIENT_YIELD,
-                Utils.CrateType.Tomato => Utils.TOMATO_INCREDIENT_YIELD,
-                _ => 1,
-            };
         }
 
         protected virtual void InitializeCookState()

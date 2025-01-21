@@ -13,7 +13,7 @@ namespace MSKim.HandAble
                 {
                     ChangeCookStateObject(Utils.CookState.OverCook);
                 }
-                else if(currentCookTime >= maximumCookTime)
+                else if(currentCookTime >= data.CookTime)
                 {
                     ChangeCookStateObject(Utils.CookState.Cook);
                 }
@@ -22,13 +22,6 @@ namespace MSKim.HandAble
                     ChangeCookStateObject(Utils.CookState.UnCook);
                 }
             }
-        }
-
-        protected override void InitializeCookState()
-        {
-            maximumCookTime = Utils.GRILL_COOK_TIME;
-
-            base.InitializeCookState();
         }
     }
 }

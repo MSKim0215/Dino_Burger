@@ -9,7 +9,7 @@ namespace MSKim.HandAble
             {
                 currentCookTime = value;
 
-                if (currentCookTime >= maximumCookTime)
+                if (currentCookTime >= data.CookTime)
                 {
                     ChangeCookStateObject(Utils.CookState.Cook);
                 }
@@ -18,13 +18,6 @@ namespace MSKim.HandAble
                     ChangeCookStateObject(Utils.CookState.UnCook);
                 }
             }
-        }
-
-        protected override void InitializeCookState()
-        {
-            maximumCookTime = Utils.CUTTING_TOMATO_COOK_TIME;
-
-            base.InitializeCookState();
         }
     }
 }

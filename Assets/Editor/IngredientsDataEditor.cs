@@ -22,11 +22,15 @@ public class IngredientsDataEditor : Editor
         {
             EditorGUILayout.BeginHorizontal();
 
-            if (GUILayout.Button("TextDataLoad") == true)
+            if (GUILayout.Button("Data Load From Text"))
+            {
                 Load(_target.Json.text);
+            }
 
-            if (GUILayout.Button("TextDataSave") == true)
+            if (GUILayout.Button("Save Data With Text"))
+            {
                 Save();
+            }
 
             EditorGUILayout.EndHorizontal();
         }
