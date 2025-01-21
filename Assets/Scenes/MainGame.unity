@@ -588,6 +588,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientDatas: {fileID: 11400000, guid: c2afd1cc819cc4b47810cff4fc0ea56f, type: 2}
+  foodDatas: {fileID: 11400000, guid: 41f63df3dcab36344960970c3549e835, type: 2}
+  playerDatas: {fileID: 11400000, guid: 1f4be02259412124cbf2e1eca0d241fa, type: 2}
+  guestDatas: {fileID: 11400000, guid: 83f344d2ec0184549a90f7c436438222, type: 2}
 --- !u!4 &573568951 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5449706949132329380, guid: 13f273e676883f84090be25e7c37f11c, type: 3}
