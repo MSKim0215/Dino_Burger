@@ -17,7 +17,7 @@ namespace MSKim.HandAble
             Destroy(gameObject);
             Destroy(tableObject);
 
-            burger.Initialize();
+            burger.Initialize(Utils.FoodType.Hamburger);
             burger.Stack(playerHandUpObject);
         }
     }
