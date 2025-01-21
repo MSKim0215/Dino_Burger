@@ -1,0 +1,10 @@
+[
+  {
+    "Name": "햄버거 빵",
+    "Type": 0,
+    "YieldAmount": 1,
+    "CookTime": 0.0,
+    "ShopBuyPrice": 0,
+    "GuestSellPrice": 0
+  }
+]
