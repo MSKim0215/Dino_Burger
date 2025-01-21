@@ -1,0 +1,12 @@
+[
+  {
+    "MinimumToppingCount": 1,
+    "MaximumToppingCount": 5,
+    "Patience": 60.0,
+    "Name": "손님 1",
+    "Type": 1,
+    "MoveSpeed": 3.0,
+    "RotateSpeed": 10.0,
+    "HandLength": 1.5
+  }
+]

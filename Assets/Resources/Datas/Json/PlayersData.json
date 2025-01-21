@@ -1,0 +1,9 @@
+[
+  {
+    "Name": "플레이어1",
+    "Type": 0,
+    "MoveSpeed": 10.0,
+    "RotateSpeed": 10.0,
+    "HandLength": 1.5
+  }
+]

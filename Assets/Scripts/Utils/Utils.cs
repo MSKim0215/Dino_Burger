@@ -25,6 +25,11 @@ public static class Utils
         Hamburger, Stew
     }   // 햄버거, 스튜
 
+    public enum CharacterType
+    {
+        Player, NPC
+    }   // 플레이어, NPC
+
     // 가게로 이동, 밖으로 이동(오른쪽), 밖으로 이동(왼쪽),
     // 픽업존 1 ~ 4,
     // 웨이팅존 1 ~ 8

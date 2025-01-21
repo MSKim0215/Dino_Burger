@@ -31,16 +31,16 @@ public abstract class BaseGameDataEditor : Editor
         EditorGUILayout.EndHorizontal();
     }
 
-    protected virtual void Load<T>(List<T> dataList, string data) 
+    protected virtual void Load<T>(List<T> dataList, string json) 
     {
-        if (string.IsNullOrEmpty(data)) return;
+        if (string.IsNullOrEmpty(json)) return;
 
         dataList.Clear();
 
-        var jsonArray = JArray.Parse(data);
-        foreach(var json in jsonArray)
+        var jsonArray = JArray.Parse(json);
+        foreach(var value in jsonArray)
         {
-            var jsonData = json.ToObject<T>();
+            var jsonData = value.ToObject<T>();
             dataList.Add(jsonData);
         }
     }

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bd5075107a538c41bb5ebb42bdc8af4, type: 3}
+  m_Name: GuestsData
+  m_EditorClassIdentifier: 
+  Json: {fileID: 4900000, guid: 5dad5a1d99c946a4699ce46bcd594728, type: 3}
+  GuestDataList:
+  - Name: "\uC190\uB2D8 1"
+    Type: 1
+    MoveSpeed: 3
+    RotateSpeed: 10
+    HandLength: 1.5
+    MinimumToppingCount: 1
+    MaximumToppingCount: 5
+    Patience: 60
