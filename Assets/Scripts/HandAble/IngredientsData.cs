@@ -5,9 +5,8 @@ using UnityEngine;
 namespace MSKim.Data
 {
     [CreateAssetMenu(fileName = "IngredientsData", menuName = "GameData/Ingredient")]
-    public class IngredientsData : ScriptableObject
+    public class IngredientsData : BaseGameData
     {
-        public TextAsset Json;
         public List<IngredientData> IngredientDataList = new();
     }
 
