@@ -100,6 +100,13 @@ namespace MSKim.Player
 
         private void TableInteraction(HandNotAble.TableController table)
         {
+            if(table.TableType == Utils.TableType.TrashCan)
+            {
+                table.Take(hand.HandUpObject);
+                hand.ClearHand();
+                return;
+            }
+
             if (!table.IsHandEmpty)
             {
                 if(table.IsHandUpObjectBurger())
@@ -139,11 +146,24 @@ namespace MSKim.Player
                 return;
             }
 
-            if (table.TableType == Utils.TableType.Basic || table.TableType == Utils.TableType.Packaging)
+            if (table.TableType == Utils.TableType.Basic || 
+                (table.TableType == Utils.TableType.Packaging && hand.IsHandUpObjectFood()))
             {
                 table.Take(hand.HandUpObject);
                 hand.ClearHand();
                 return;
+            }
+
+            if(table.TableType == Utils.TableType.Pickup)
+            {
+                if(hand.HandUpObject.TryGetComponent<HandAble.FoodController>(out var food))
+                {
+                    if (food.CurrentFoodState == Utils.FoodState.None) return;
+
+                    table.Take(hand.HandUpObject);
+                    hand.ClearHand();
+                    return;
+                }
             }
 
             if (hand.HandUpObject.TryGetComponent<HandAble.IngredientController>(out var ingredient))
@@ -236,7 +256,6 @@ namespace MSKim.Player
                             switch(table.TableType)
                             {
                                 case Utils.TableType.CuttingBoard: (table as HandNotAble.CuttingBoardTableController).Cutting(); break;
-                                case Utils.TableType.Packaging: (table as HandNotAble.PackagingTableController).Packaging(); break;
                             }
                         }
                     }

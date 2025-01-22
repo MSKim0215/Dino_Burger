@@ -1,14 +1,19 @@
 using MSKim.Manager;
 using UnityEngine;
 
-public abstract class FoodController : MonoBehaviour
+namespace MSKim.HandAble
 {
-    [Header("Food Data Info")]
-    [SerializeField] protected MSKim.Data.FoodData data;
-
-    public virtual void Initialize(Utils.FoodType foodType)
+    public abstract class FoodController : MonoBehaviour
     {
-        data = GameDataManager.Instance.GetFoodData(foodType);
-        name = data.Name;
+        [Header("Food Data Info")]
+        [SerializeField] protected Data.FoodData data;
+
+        public Utils.FoodState CurrentFoodState { get; set; }
+
+        public virtual void Initialize(Utils.FoodType foodType)
+        {
+            data = GameDataManager.Instance.GetFoodData(foodType);
+            name = data.Name;
+        }
     }
 }

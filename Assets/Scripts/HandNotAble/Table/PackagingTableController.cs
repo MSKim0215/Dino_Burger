@@ -13,6 +13,16 @@ namespace MSKim.HandNotAble
 
         private bool isPackaging = false;
 
+        public override void Take(GameObject takeObject)
+        {
+            if(takeObject.TryGetComponent<HandAble.FoodController>(out var food))
+            {
+                food.CurrentFoodState = Utils.FoodState.Packaging;
+            }
+
+            base.Take(takeObject);
+        }
+
         public void Packaging()
         {
             if (isPackaging)
