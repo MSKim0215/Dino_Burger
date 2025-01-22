@@ -8,29 +8,29 @@ namespace MSKim.NonPlayer
 {
     public class GuestController : CharacterController
     {
+        [Header("Guest Data Info")]
+        [SerializeField] private Data.GuestData data;
+
         [Header("Waypoint Settings")]
         [SerializeField] private Utils.WaypointType currentWaypointType;
         [SerializeField] private int currentPointIndex = 0;
         [SerializeField] private float currentDistance = 0f;
         [SerializeField] private float checkDistance = 0.5f;
-        [SerializeField] private float testTimer = 0f;
-
-        [Header("Order Settings")]
-        [SerializeField] private float maximumOrderTime = 60f;
 
         [Header("Info Viewer")]
         [SerializeField] private bool isOrderSuccess = false;
-        [SerializeField] private float currentOrderTime = 0f;
+        [SerializeField] private float currentPatientTime = 0f;
         [SerializeField] private HandNotAble.TableController myPickupTable;
         [SerializeField] private List<Utils.CrateType> orderBurger = new();
         [SerializeField] private bool isOrderStew = false;
         [SerializeField] private bool isGetBurger = false;
         [SerializeField] private bool isGetStew = false;
-        
+
         private RaycastHit handHit;
         private Ray handRay;
-        private float handlingDistance = 1.5f;
         private float holdPointZ;
+
+        public Data.GuestData Data => data;
 
         private int LayerHandAble { get => 1 << LayerMask.NameToLayer("HandAble"); }
         private int LayerHandNotAble { get => 1 << LayerMask.NameToLayer("HandNotAble"); }
@@ -60,9 +60,11 @@ namespace MSKim.NonPlayer
 
         public void Initialize()
         {
-            moveSpeed = 1.5f;
-            rotateSpeed = 5f;
-            checkDistance = 0.8f;
+            if(data == null)
+            {
+                data = GameDataManager.Instance.GetGuestData(Utils.CharacterType.NPC);
+                name = data.Name;
+            }
 
             holdPointZ = transform.position.z;
             CurrentWaypointType = Utils.WaypointType.MoveStore;
@@ -112,7 +114,7 @@ namespace MSKim.NonPlayer
 
         private void MovePosition(Vector3 targetPoint)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPoint, moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPoint, data.MoveSpeed * Time.deltaTime);
         }
 
         private void MoveHoldZPosition(Vector3 targetPoint)
@@ -139,7 +141,7 @@ namespace MSKim.NonPlayer
 
             if (rotationY * rotationFixedY > 0f)
             {
-                Quaternion rotationAmount = Quaternion.Euler(0f, rotateSpeed * rotationFixedY * Time.deltaTime, 0f);
+                Quaternion rotationAmount = Quaternion.Euler(0f, data.RotateSpeed * rotationFixedY * Time.deltaTime, 0f);
                 rotationY -= rotationFixedY * Time.deltaTime;
                 transform.rotation *= rotationAmount;
             }
@@ -355,11 +357,11 @@ namespace MSKim.NonPlayer
                     break;
                 }
 
-                currentOrderTime += Time.deltaTime;
+                currentPatientTime += Time.deltaTime;
 
                 await UniTask.Yield();
 
-                if(currentOrderTime >= maximumOrderTime)
+                if(currentPatientTime >= data.Patience)
                 {
                     Debug.Log("주문한거 못받음");
                     break;
@@ -373,9 +375,9 @@ namespace MSKim.NonPlayer
         private void FindPickupTable()
         {
             handRay = new Ray(new Vector3(transform.position.x, 0.1f, transform.position.z), transform.forward);
-            Debug.DrawLine(handRay.origin, handRay.origin + handRay.direction * handlingDistance, Color.blue);
+            Debug.DrawLine(handRay.origin, handRay.origin + handRay.direction * data.HandLength, Color.blue);
 
-            if (Physics.Raycast(handRay, out handHit, handlingDistance, LayerHandNotAble))
+            if (Physics.Raycast(handRay, out handHit, data.HandLength, LayerHandNotAble))
             {
                 var hitObj = handHit.collider.gameObject;
                 if (hitObj != null)

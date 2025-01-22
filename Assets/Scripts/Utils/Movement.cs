@@ -11,10 +11,6 @@ public interface ICharacterMove
 
 public abstract class CharacterController : PoolAble, ICharacterMove
 {
-    [Header("Character Settings")]
-    [SerializeField] protected float moveSpeed;
-    [SerializeField] protected float rotateSpeed;
-
     protected StateController state;
     protected Dictionary<ICharacterState.BehaviourState, ICharacterState> stateDict = new();
 

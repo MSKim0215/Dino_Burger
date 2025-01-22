@@ -80,13 +80,13 @@ public class OrderState : ICharacterState
             await UniTask.Yield();
         }
 
-        guest.Order(GetOrderBurger(), IsOrderStew());
+        guest.Order(GetOrderBurger(guest.Data.MinimumToppingCount, guest.Data.MaximumToppingCount), IsOrderStew());
     }
 
-    private List<Utils.CrateType> GetOrderBurger()
+    private List<Utils.CrateType> GetOrderBurger(int minCount, int maxCount)
     {
         var orderIngredients = new List<Utils.CrateType>();
-        var toppingCount = UnityEngine.Random.Range(1, Utils.BURGER_TOPPING_COUNT_MAX + 1);
+        var toppingCount = UnityEngine.Random.Range(minCount, maxCount);
         var allowList = MSKim.Manager.GameManager.Instance.AllowIncredientList;
 
         for(int i = 0; i < toppingCount; i++)

@@ -1,9 +1,13 @@
+using MSKim.Manager;
 using UnityEngine;
 
 namespace MSKim.Player
 {
     public class PlayerController : CharacterController
     {
+        [Header("Player Data Info")]
+        [SerializeField] private Data.CharacterData data;
+
         [Header("My Hand")]
         [SerializeField] private Hand hand;
 
@@ -12,15 +16,18 @@ namespace MSKim.Player
         
         private RaycastHit handHit;
         private Ray handRay;
-        private float handlingDistance = 1.5f;
-
         private int LayerHandAble { get => 1 << LayerMask.NameToLayer("HandAble"); }
         private int LayerHandNotAble { get => 1 << LayerMask.NameToLayer("HandNotAble"); }
 
         private void Start()
         {
-            moveSpeed = 10f;
-            rotateSpeed = 10f;
+            Initailize();
+        }
+
+        public void Initailize()
+        {
+            data = GameDataManager.Instance.GetPlayerData(Utils.CharacterType.Player);
+            name = data.Name;
         }
 
         private void FixedUpdate()
@@ -42,12 +49,12 @@ namespace MSKim.Player
 
         public override void MovePosition()
         {
-            transform.position += GetVelocity() * moveSpeed * Time.deltaTime;
+            transform.position += GetVelocity() * data.MoveSpeed * Time.deltaTime;
         }
 
         public override void MoveRotation()
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(GetVelocity()), rotateSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(GetVelocity()), data.RotateSpeed * Time.deltaTime);
         }
 
         private void Update()
@@ -61,7 +68,7 @@ namespace MSKim.Player
             if (Input.GetMouseButtonDown(0))
             {
                 handRay = new Ray(new Vector3(transform.position.x, 0.1f, transform.position.z), transform.forward);
-                Debug.DrawLine(handRay.origin, handRay.origin + handRay.direction * handlingDistance, Color.red);
+                Debug.DrawLine(handRay.origin, handRay.origin + handRay.direction * data.HandLength, Color.red);
 
                 if (hand.HandUpObject != null)
                 {
@@ -75,7 +82,7 @@ namespace MSKim.Player
 
         private void PickDown()
         {
-            if (Physics.Raycast(handRay, out handHit, handlingDistance, LayerHandNotAble))
+            if (Physics.Raycast(handRay, out handHit, data.HandLength, LayerHandNotAble))
             {
                 var hitObj = handHit.collider.gameObject;
                 if(hitObj != null)
@@ -212,7 +219,7 @@ namespace MSKim.Player
 
         private void PickUp()
         {
-            if (Physics.Raycast(handRay, out handHit, handlingDistance, LayerHandAble + LayerHandNotAble))
+            if (Physics.Raycast(handRay, out handHit, data.HandLength, LayerHandAble + LayerHandNotAble))
             {
                 var hitObj = handHit.collider.gameObject;
                 if (hitObj != null)
@@ -244,9 +251,9 @@ namespace MSKim.Player
             if(Input.GetMouseButton(1))
             {
                 handRay = new Ray(new Vector3(transform.position.x, 0.2f, transform.position.z), transform.forward);
-                Debug.DrawLine(handRay.origin, handRay.origin + handRay.direction * handlingDistance, Color.red);
+                Debug.DrawLine(handRay.origin, handRay.origin + handRay.direction * data.HandLength, Color.red);
 
-                if(Physics.Raycast(handRay, out handHit, handlingDistance, LayerHandNotAble))
+                if(Physics.Raycast(handRay, out handHit, data.HandLength, LayerHandNotAble))
                 {
                     var hitObj = handHit.collider.gameObject;
                     if(hitObj != null)

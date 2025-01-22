@@ -45,7 +45,6 @@ namespace MSKim.Manager
 
         public Data.GuestData GetGuestData(Utils.CharacterType type) => GuestDatas.Find(guest => guest.Type == type);
 
-
         public List<Data.TableData> TableDatas => tableDatas.TableDataList;
 
         public Data.TableData GetTableData(Utils.TableType type) => TableDatas.Find(table => table.Type == type);
