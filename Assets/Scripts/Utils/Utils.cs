@@ -2,8 +2,8 @@ public static class Utils
 {
     public enum TableType
     {
-        Basic, CuttingBoard, Pot, GasStove, Packaging, Pickup
-    }   // 일반, 도마, 냄비, 가스레인지, 포장, 픽업
+        Basic, CuttingBoard, Pot, GasStove, Packaging, Pickup, TrashCan
+    }   // 일반, 도마, 냄비, 가스레인지, 포장, 픽업, 쓰레기통
 
     public enum CrateType
     {
