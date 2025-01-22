@@ -22,7 +22,9 @@ namespace MSKim.HandAble
 
         private Dictionary<Utils.CookState, GameObject> ingredientCookStateDict = new();
 
-        public virtual int YieldAmount { get => data.YieldAmount; set => data.YieldAmount = value; }
+        private int currentYieldAmount;
+
+        public virtual int YieldAmount { get => currentYieldAmount; set => currentYieldAmount = value; }
 
         public virtual float CurrentCookTime { get => currentCookTime; set => currentCookTime = value; }
 
@@ -39,8 +41,8 @@ namespace MSKim.HandAble
         public void Initialize(Utils.CrateType ingredientType)
         {
             data = GameDataManager.Instance.GetIngredientData(ingredientType);
-
             name = data.Name;
+            currentYieldAmount = data.YieldAmount;
 
             InitializeCookState();
         }
