@@ -1,4 +1,5 @@
 using MSKim.Manager;
+using UnityEngine;
 
 namespace MSKim.HandNotAble
 {
@@ -8,6 +9,11 @@ namespace MSKim.HandNotAble
         {
             data = GameDataManager.Instance.GetTableData(Utils.TableType.TrashCan);
             name = data.Name;
+        }
+
+        public override void Take(GameObject takeObject)
+        {
+            Destroy(takeObject);
         }
     }
 }

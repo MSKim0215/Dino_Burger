@@ -25,6 +25,11 @@ public static class Utils
         Hamburger, Stew
     }   // 햄버거, 스튜
 
+    public enum FoodState
+    {
+        None, Packaging
+    }   // 비포장, 포장
+
     public enum CharacterType
     {
         Player, NPC
