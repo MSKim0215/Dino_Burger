@@ -60,11 +60,8 @@ namespace MSKim.NonPlayer
 
         public void Initialize()
         {
-            if(data == null)
-            {
-                data = GameDataManager.Instance.GetGuestData(Utils.CharacterType.NPC);
-                name = data.Name;
-            }
+            data = GameDataManager.Instance.GetGuestData(Utils.CharacterType.NPC);
+            name = data.Name;
 
             holdPointZ = transform.position.z;
             CurrentWaypointType = Utils.WaypointType.MoveStore;
@@ -354,6 +351,7 @@ namespace MSKim.NonPlayer
                 if(isOrderSuccess)
                 {
                     Debug.Log("주문한거 받음");
+                    currentPatientTime = 0f;
                     break;
                 }
 
@@ -364,6 +362,7 @@ namespace MSKim.NonPlayer
                 if(currentPatientTime >= data.Patience)
                 {
                     Debug.Log("주문한거 못받음");
+                    currentPatientTime = 0f;
                     break;
                 }
             }
