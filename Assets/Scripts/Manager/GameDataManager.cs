@@ -17,6 +17,9 @@ namespace MSKim.Manager
         [SerializeField] private Data.PlayersData playerDatas;
         [SerializeField] private Data.GuestsData guestDatas;
 
+        [Header("Table Data")]
+        [SerializeField] private Data.TablesData tableDatas;
+
         public static GameDataManager Instance
         {
             get
@@ -28,20 +31,24 @@ namespace MSKim.Manager
 
         public List<Data.IngredientData> IngredientDatas => ingredientDatas.IngredientDataList;
 
-        public Data.IngredientData GetIngredientData(Utils.CrateType ingredientType) => IngredientDatas.Find(ingredient => ingredient.Type == ingredientType);
+        public Data.IngredientData GetIngredientData(Utils.CrateType type) => IngredientDatas.Find(ingredient => ingredient.Type == type);
 
         public List<Data.FoodData> FoodDatas => foodDatas.FoodDataList;
 
-        public Data.FoodData GetFoodData(Utils.FoodType foodType) => FoodDatas.Find(food => food.Type == foodType);
+        public Data.FoodData GetFoodData(Utils.FoodType type) => FoodDatas.Find(food => food.Type == type);
 
         public List<Data.CharacterData> PlayerDatas => playerDatas.PlayerDataList;
 
-        public Data.CharacterData GetPlayerData(Utils.CharacterType characterType) => PlayerDatas.Find(player => player.Type == characterType);
+        public Data.CharacterData GetPlayerData(Utils.CharacterType type) => PlayerDatas.Find(player => player.Type == type);
 
         public List<Data.GuestData> GuestDatas => guestDatas.GuestDataList;
 
-        public Data.GuestData GetGuestData(Utils.CharacterType characterType) => GuestDatas.Find(guest => guest.Type == characterType);
+        public Data.GuestData GetGuestData(Utils.CharacterType type) => GuestDatas.Find(guest => guest.Type == type);
 
+
+        public List<Data.TableData> TableDatas => tableDatas.TableDataList;
+
+        public Data.TableData GetTableData(Utils.TableType type) => TableDatas.Find(table => table.Type == type);
 
         private void Awake()
         {
