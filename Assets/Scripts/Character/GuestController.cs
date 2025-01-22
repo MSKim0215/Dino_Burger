@@ -26,6 +26,9 @@ namespace MSKim.NonPlayer
         [SerializeField] private bool isGetBurger = false;
         [SerializeField] private bool isGetStew = false;
 
+        [SerializeField] private List<Material> skinMatList = new();
+        [SerializeField] private List<SkinnedMeshRenderer> skinRendererList = new();
+
         private RaycastHit handHit;
         private Ray handRay;
         private float holdPointZ;
@@ -67,6 +70,19 @@ namespace MSKim.NonPlayer
             CurrentWaypointType = Utils.WaypointType.MoveStore;
 
             ChangeState(ICharacterState.BehaviourState.Move);
+        }
+
+        private void SetGuestModel()
+        {
+            HashSet<int> exclude = new() { 6, 7 };
+            var range = Enumerable.Range(0, skinMatList.Count).Where(index => !exclude.Contains(index));
+            var rand = new System.Random();
+            int index = rand.Next(0, skinMatList.Count - exclude.Count);
+
+            for (int i = 0; i < skinRendererList.Count; i++)
+            {
+                skinRendererList[i].material = skinMatList[index];
+            }
         }
 
         private void FixedUpdate()
@@ -387,6 +403,11 @@ namespace MSKim.NonPlayer
         }
 
         private bool IsFindPickupTable() => myPickupTable != null;
+
+        private void OnEnable()
+        {
+            SetGuestModel();
+        }
 
         public override void Release()
         {
