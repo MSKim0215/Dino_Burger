@@ -1,10 +1,17 @@
 using Cysharp.Threading.Tasks;
+using MSKim.Manager;
 using UnityEngine;
 
 namespace MSKim.HandNotAble
 {
     public class GasStoveTableController : TableController
     {
+        protected override void Initialize()
+        {
+            data = GameDataManager.Instance.GetTableData(Utils.TableType.GasStove);
+            name = data.Name;
+        }
+
         public override void Take(GameObject takeObject)
         {
             base.Take(takeObject);

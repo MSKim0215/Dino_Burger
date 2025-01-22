@@ -1,9 +1,16 @@
+using MSKim.Manager;
 using UnityEngine;
 
 namespace MSKim.HandNotAble
 {
     public class PackagingTableController : TableController
     {
+        protected override void Initialize()
+        {
+            data = GameDataManager.Instance.GetTableData(Utils.TableType.Packaging);
+            name = data.Name;
+        }
+
         private bool isPackaging = false;
 
         public void Packaging()

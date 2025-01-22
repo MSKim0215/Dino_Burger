@@ -64,6 +64,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2010034365965910892}
   - {fileID: 5852142586604034081}
   m_Father: {fileID: 6530527622101134810}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -153,7 +154,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f707f5802b8e26944b947f16f9808dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tableType: 4
+  data:
+    Name: 
+    Type: 0
   hand:
     handRoot: {fileID: 6779133204770091541}
     handUpObject: {fileID: 0}
@@ -253,6 +256,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6530527622101134810}
+  - component: {fileID: 2570802567497889817}
   m_Layer: 0
   m_Name: PackagingTable
   m_TagString: Untagged
@@ -274,20 +278,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7733394859488493191}
-  - {fileID: 2010034365965910892}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2570802567497889817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8249358168345280972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f707f5802b8e26944b947f16f9808dd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    Name: 
+    Type: 0
+  hand:
+    handRoot: {fileID: 6779133204770091541}
+    handUpObject: {fileID: 0}
 --- !u!1001 &2049044261621769351
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6530527622101134810}
+    m_TransformParent: {fileID: 7733394859488493191}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 14cb919adec7cad48a38000267139233, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14cb919adec7cad48a38000267139233, type: 3}
       propertyPath: m_LocalPosition.y
@@ -299,7 +320,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14cb919adec7cad48a38000267139233, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14cb919adec7cad48a38000267139233, type: 3}
       propertyPath: m_LocalRotation.x
@@ -307,7 +328,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14cb919adec7cad48a38000267139233, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14cb919adec7cad48a38000267139233, type: 3}
       propertyPath: m_LocalRotation.z
@@ -327,7 +348,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 14cb919adec7cad48a38000267139233, type: 3}
       propertyPath: m_Name
-      value: kitchencounter_straight_A_decorated
+      value: decorated
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 14cb919adec7cad48a38000267139233, type: 3}
       propertyPath: m_StaticEditorFlags

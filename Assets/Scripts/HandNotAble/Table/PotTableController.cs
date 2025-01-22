@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using MSKim.Manager;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +19,12 @@ namespace MSKim.HandNotAble
 
         [Header("Stew Cooking Time")]
         [SerializeField] private float currentCookTime = 0f;
+
+        protected override void Initialize()
+        {
+            data = GameDataManager.Instance.GetTableData(Utils.TableType.Pot);
+            name = data.Name;
+        }
 
         public override void Take(GameObject takeObject)
         {

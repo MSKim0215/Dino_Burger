@@ -1,9 +1,16 @@
+using MSKim.Manager;
 using UnityEngine;
 
 namespace MSKim.HandNotAble
 {
     public class CuttingBoardTableController : TableController
     {
+        protected override void Initialize()
+        {
+            data = GameDataManager.Instance.GetTableData(Utils.TableType.CuttingBoard);
+            name = data.Name;
+        }
+
         public override GameObject Give()
         {
             var ingredient = hand.GetHandUpComponent<HandAble.IngredientController>();

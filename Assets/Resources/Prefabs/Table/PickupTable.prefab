@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7941166624027474486}
   - component: {fileID: 1611738452462840782}
   - component: {fileID: 187569511887483605}
-  - component: {fileID: 5249954941052385338}
+  - component: {fileID: 8580352080342504851}
   m_Layer: 7
   m_Name: PickupTable
   m_TagString: Untagged
@@ -110,7 +110,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 1, z: 2.041903}
   m_Center: {x: 0, y: 0.49999997, z: 0.02095151}
---- !u!114 &5249954941052385338
+--- !u!114 &8580352080342504851
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,10 +119,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 787762241645099682}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1309bc8b35fa67b44a9e88f1194b7ae8, type: 3}
+  m_Script: {fileID: 11500000, guid: feab5d484d45eda4a95d1b99f65ba18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tableType: 0
+  data:
+    Name: 
+    Type: 0
   hand:
     handRoot: {fileID: 503048305694670089}
     handUpObject: {fileID: 0}
