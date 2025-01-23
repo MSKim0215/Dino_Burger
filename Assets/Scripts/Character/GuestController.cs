@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using MSKim.Manager;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -56,8 +57,12 @@ namespace MSKim.NonPlayer
             {
                 { ICharacterState.BehaviourState.Move, new MoveState() },
                 { ICharacterState.BehaviourState.Waiting, new WaitingState() },
-                { ICharacterState.BehaviourState.Pickup, new PickupState() },
                 { ICharacterState.BehaviourState.Order, new OrderState() },
+                { ICharacterState.BehaviourState.OrderSuccess, new OrderSuccessState() },
+                { ICharacterState.BehaviourState.OrderFailure, new OrderFailureState() },
+                { ICharacterState.BehaviourState.MoveSuccess, new MoveSuccessState() },
+                { ICharacterState.BehaviourState.MoveFailure, new MoveFailureState() },
+                { ICharacterState.BehaviourState.None, new NoneState() }
             };
         }
 
@@ -87,7 +92,9 @@ namespace MSKim.NonPlayer
 
         private void FixedUpdate()
         {
-            if (state.CurrentState.Get() != ICharacterState.BehaviourState.Move) return;
+            if (state.CurrentState.Get() != ICharacterState.BehaviourState.Move &&
+                state.CurrentState.Get() != ICharacterState.BehaviourState.MoveSuccess &&
+                state.CurrentState.Get() != ICharacterState.BehaviourState.MoveFailure) return;
 
             FixedUpdateWalk();
         }
@@ -287,7 +294,9 @@ namespace MSKim.NonPlayer
 
         private void Update()
         {
-            if (state.CurrentState.Get() == ICharacterState.BehaviourState.Move) return;
+            if (state.CurrentState.Get() == ICharacterState.BehaviourState.Move ||
+                state.CurrentState.Get() == ICharacterState.BehaviourState.MoveFailure ||
+                state.CurrentState.Get() == ICharacterState.BehaviourState.MoveSuccess) return;
 
             switch(state.CurrentState.Get())
             {
@@ -299,6 +308,7 @@ namespace MSKim.NonPlayer
         private void UpdateOrder()
         {
             if (isOrderSuccess) return;
+            if (state.CurrentState.Get() != ICharacterState.BehaviourState.Order) return;
 
             CheckOrderFood();
         }
@@ -367,6 +377,7 @@ namespace MSKim.NonPlayer
                 if(isOrderSuccess)
                 {
                     Debug.Log("주문한거 받음");
+                    ChangeState(ICharacterState.BehaviourState.OrderSuccess);
                     currentPatientTime = 0f;
                     break;
                 }
@@ -378,13 +389,24 @@ namespace MSKim.NonPlayer
                 if(currentPatientTime >= data.Patience)
                 {
                     Debug.Log("주문한거 못받음");
+                    ChangeState(ICharacterState.BehaviourState.OrderFailure);
                     currentPatientTime = 0f;
                     break;
                 }
             }
 
+            await UniTask.Delay(TimeSpan.FromSeconds(1f));
+
             GameManager.Instance.RemovePickupZone(this);
-            ChangeState(ICharacterState.BehaviourState.Move);
+
+            if(isOrderSuccess)
+            {
+                ChangeState(ICharacterState.BehaviourState.MoveSuccess);
+            }
+            else
+            {
+                ChangeState(ICharacterState.BehaviourState.MoveFailure);
+            }
         }
 
         private void FindPickupTable()
@@ -411,6 +433,8 @@ namespace MSKim.NonPlayer
 
         public override void Release()
         {
+            ChangeState(ICharacterState.BehaviourState.None);
+
             currentPointIndex = 0;
             isOrderSuccess = false;
             isGetBurger = false;

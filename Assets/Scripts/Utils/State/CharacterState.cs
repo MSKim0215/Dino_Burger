@@ -6,7 +6,7 @@ public interface ICharacterState
 {
     public enum BehaviourState
     {
-        Move, Pickup, Waiting, Order
+        Move, Waiting, Order, OrderSuccess, OrderFailure, MoveSuccess, MoveFailure, InterAction, None
     }
 
     public void Convert(CharacterController controller);
@@ -18,7 +18,7 @@ public class MoveState : ICharacterState
 {
     public void Convert(CharacterController controller)
     {
-        UnityEngine.Debug.Log("걷기 시작");
+        controller.View.PlayAnimation(Get());
     }
 
     public ICharacterState.BehaviourState Get()
@@ -34,33 +34,24 @@ public class WaitingState : ICharacterState
         var guest = controller as MSKim.NonPlayer.GuestController;
         if (guest == null) return;
 
-        UnityEngine.Debug.Log("기다리기 시작!!");
         var targetRotation = Quaternion.Euler(new(0, 180, 0));
-        while (Quaternion.Angle(controller.transform.rotation, targetRotation) > 0.1f)
+        while (controller != null &&
+            Quaternion.Angle(controller.transform.rotation, targetRotation) > 0.1f)
         {
             controller.transform.rotation =
                 Quaternion.Slerp(controller.transform.rotation, targetRotation, 15f * Time.deltaTime);
 
             await UniTask.Yield();
         }
+
+        if (controller == null) return;
+
+        controller.View.PlayAnimation(Get());
     }
 
     public ICharacterState.BehaviourState Get()
     {
         return ICharacterState.BehaviourState.Waiting;
-    }
-}
-
-public class PickupState : ICharacterState
-{
-    public void Convert(CharacterController controller)
-    {
-        UnityEngine.Debug.Log("픽업 완료!! 돌아간다!");
-    }
-
-    public ICharacterState.BehaviourState Get()
-    {
-        return ICharacterState.BehaviourState.Pickup;
     }
 }
 
@@ -72,7 +63,8 @@ public class OrderState : ICharacterState
         if (guest == null) return;
 
         var targetRotation = Quaternion.Euler(new(0, 180, 0));
-        while (Quaternion.Angle(controller.transform.rotation, targetRotation) > 0.1f)
+        while (controller != null &&
+            Quaternion.Angle(controller.transform.rotation, targetRotation) > 0.1f)
         {
             controller.transform.rotation = 
                 Quaternion.Slerp(controller.transform.rotation, targetRotation, 15f * Time.deltaTime);
@@ -80,7 +72,10 @@ public class OrderState : ICharacterState
             await UniTask.Yield();
         }
 
+        if (controller == null) return;
+
         guest.Order(GetOrderBurger(guest.Data.MinimumToppingCount, guest.Data.MaximumToppingCount), IsOrderStew());
+        controller.View.PlayAnimation(Get());
     }
 
     private List<Utils.CrateType> GetOrderBurger(int minCount, int maxCount)
@@ -103,6 +98,81 @@ public class OrderState : ICharacterState
     public ICharacterState.BehaviourState Get()
     {
         return ICharacterState.BehaviourState.Order;
+    }
+}
+
+public class OrderSuccessState : ICharacterState
+{
+    public void Convert(CharacterController controller)
+    {
+        controller.View.PlayAnimation(Get());
+    }
+
+    public ICharacterState.BehaviourState Get()
+    {
+        return ICharacterState.BehaviourState.OrderSuccess;
+    }
+}
+
+public class OrderFailureState : ICharacterState
+{
+    public void Convert(CharacterController controller)
+    {
+        controller.View.PlayAnimation(Get());
+    }
+
+    public ICharacterState.BehaviourState Get()
+    {
+        return ICharacterState.BehaviourState.OrderFailure;
+    }
+}
+
+public class MoveSuccessState : ICharacterState
+{
+    public void Convert(CharacterController controller)
+    {
+        controller.View.PlayAnimation(Get());
+    }
+
+    public ICharacterState.BehaviourState Get()
+    {
+        return ICharacterState.BehaviourState.MoveSuccess;
+    }
+}
+
+public class MoveFailureState : ICharacterState
+{
+    public void Convert(CharacterController controller)
+    {
+        controller.View.PlayAnimation(Get());
+    }
+
+    public ICharacterState.BehaviourState Get()
+    {
+        return ICharacterState.BehaviourState.MoveFailure;
+    }
+}
+
+public class InterActionState : ICharacterState
+{
+    public void Convert(CharacterController controller)
+    {
+        controller.View.PlayAnimation(Get());
+    }
+
+    public ICharacterState.BehaviourState Get()
+    {
+        return ICharacterState.BehaviourState.InterAction;
+    }
+}
+
+public class NoneState : ICharacterState
+{
+    public void Convert(CharacterController controller) { }
+
+    public ICharacterState.BehaviourState Get()
+    {
+        return ICharacterState.BehaviourState.None;
     }
 }
 
