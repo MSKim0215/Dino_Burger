@@ -31,6 +31,13 @@ public class WaitingState : ICharacterState
 {
     public async void Convert(CharacterController controller)
     {
+        var player = controller as MSKim.Player.PlayerController;
+        if(player != null)
+        {
+            controller.View.PlayAnimation(Get());
+            return;
+        }
+
         var guest = controller as MSKim.NonPlayer.GuestController;
         if (guest == null) return;
 

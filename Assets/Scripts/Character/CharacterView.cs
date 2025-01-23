@@ -24,13 +24,9 @@ public class CharacterView
 
     public void PlayAnimation(ICharacterState.BehaviourState targetState) => SetInt(aimationCodeDict[targetState]);
 
-    public bool IsPlayOverAnimation() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f;
-
     private void SetInt(string parameter = "key,value")
     {
         string[] param = parameter.Split(separator);
         animator.SetInteger(param[0], Convert.ToInt32(param[1]));
-
-        Debug.Log($"애니메이션 재생: {param[0]}, {param[1]}");
     }
 }

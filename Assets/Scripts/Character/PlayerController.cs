@@ -19,6 +19,16 @@ namespace MSKim.Player
         private int LayerHandAble { get => 1 << LayerMask.NameToLayer("HandAble"); }
         private int LayerHandNotAble { get => 1 << LayerMask.NameToLayer("HandNotAble"); }
 
+        protected override void SettingState()
+        {
+            stateDict = new()
+            {
+                { ICharacterState.BehaviourState.Move, new MoveState() },
+                { ICharacterState.BehaviourState.Waiting, new WaitingState() },
+                { ICharacterState.BehaviourState.InterAction, new InterActionState() }
+            };
+        }
+
         private void Start()
         {
             Initailize();
@@ -28,6 +38,8 @@ namespace MSKim.Player
         {
             data = GameDataManager.Instance.GetPlayerData(Utils.CharacterType.Player);
             name = data.Name;
+
+            ChangeState(ICharacterState.BehaviourState.Waiting);
         }
 
         private void FixedUpdate()
@@ -40,8 +52,13 @@ namespace MSKim.Player
             xAxis = Input.GetAxis("Horizontal");
             zAxis = Input.GetAxis("Vertical");
 
-            if (xAxis == 0f && zAxis == 0f) return;
+            if (xAxis == 0f && zAxis == 0f)
+            {
+                ChangeState(ICharacterState.BehaviourState.Waiting);
+                return;
+            }
 
+            ChangeState(ICharacterState.BehaviourState.Move);
             base.Move();
         }
 
@@ -262,17 +279,17 @@ namespace MSKim.Player
                         {
                             switch(table.TableType)
                             {
-                                case Utils.TableType.CuttingBoard: (table as HandNotAble.CuttingBoardTableController).Cutting(); break;
+                                case Utils.TableType.CuttingBoard:
+                                    {
+                                        ChangeState(ICharacterState.BehaviourState.InterAction);
+                                        (table as HandNotAble.CuttingBoardTableController).Cutting();
+                                    }
+                                    break;
                             }
                         }
                     }
                 }
             }
-        }
-
-        protected override void SettingState()
-        {
-
         }
     }
 }
