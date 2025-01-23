@@ -379,6 +379,20 @@ namespace MSKim.NonPlayer
                     Debug.Log("주문한거 받음");
                     ChangeState(ICharacterState.BehaviourState.OrderSuccess);
                     currentPatientTime = 0f;
+
+                    int giveGoldAmount = 0;
+                    for (int i = 0; i < orderBurger.Count; i++)
+                    {
+                        giveGoldAmount += GameDataManager.Instance.GetIngredientData(orderBurger[i]).GuestSellPrice;
+                    }
+
+                    if(isOrderStew)
+                    {
+                        giveGoldAmount += GameDataManager.Instance.GetFoodData(Utils.FoodType.Stew).GuestSellPrice;
+                    }
+
+                    UserDataManager.Instance.CurrentGoldAmount += giveGoldAmount;
+
                     break;
                 }
 

@@ -3,12 +3,14 @@
     "Name": "햄버거",
     "Type": 0,
     "YieldAmount": 1,
-    "CookTime": 0.0
+    "CookTime": 0.0,
+    "GuestSellPrice": 0
   },
   {
     "Name": "스튜",
     "Type": 1,
     "YieldAmount": 5,
-    "CookTime": 1.0
+    "CookTime": 1.0,
+    "GuestSellPrice": 50
   }
 ]

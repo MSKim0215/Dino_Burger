@@ -35,6 +35,11 @@ public static class Utils
         Player, NPC
     }   // 플레이어, NPC
 
+    public enum GoodsType
+    {
+        Gold
+    }   // 금화
+
     // 가게로 이동, 밖으로 이동(오른쪽), 밖으로 이동(왼쪽),
     // 픽업존 1 ~ 4,
     // 웨이팅존 1 ~ 8

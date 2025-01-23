@@ -17,5 +17,6 @@ namespace MSKim.Data
         public Utils.FoodType Type;
         public int YieldAmount;
         public float CookTime;
+        public int GuestSellPrice;
     }
 }

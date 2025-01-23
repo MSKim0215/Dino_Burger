@@ -18,7 +18,9 @@ MonoBehaviour:
     Type: 0
     YieldAmount: 1
     CookTime: 0
+    GuestSellPrice: 0
   - Name: "\uC2A4\uD29C"
     Type: 1
     YieldAmount: 5
     CookTime: 1
+    GuestSellPrice: 50
