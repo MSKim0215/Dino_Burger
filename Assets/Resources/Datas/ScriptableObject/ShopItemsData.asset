@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2da136fc3c7bc343a5b7d5be79054a9, type: 3}
+  m_Name: ShopItemsData
+  m_EditorClassIdentifier: 
+  Json: {fileID: 0}
+  ShopItemDataList:
+  - Name: "\uC7AC\uB8CC \uD310\uB9E4 \uAC00\uACA9 \uC99D\uAC00"
+    Index: 0
+    Price: 1000
+    BaseLevel: 1
+    MaximumLevel: 10
+    UpgradeAmount: 1
+  - Name: "\uC7AC\uB8CC \uC218\uC728 \uC99D\uAC00"
+    Index: 1
+    Price: 3000
+    BaseLevel: 1
+    MaximumLevel: 5
+    UpgradeAmount: 1
+  - Name: "\uCE7C\uC9C8 \uC18D\uB3C4 \uC99D\uAC00"
+    Index: 30
+    Price: 2000
+    BaseLevel: 1
+    MaximumLevel: 8
+    UpgradeAmount: 1.2
+  - Name: "\uC774\uB3D9 \uC18D\uB3C4 \uC99D\uAC00"
+    Index: 31
+    Price: 5000
+    BaseLevel: 1
+    MaximumLevel: 3
+    UpgradeAmount: 1.5
+  - Name: "\uBAA8\uB4E0 \uC74C\uC2DD \uC870\uB9AC \uC2DC\uAC04 \uAC10\uC18C"
+    Index: 32
+    Price: 3500
+    BaseLevel: 1
+    MaximumLevel: 8
+    UpgradeAmount: 0.5
+  - Name: "\uC190\uB2D8 \uC778\uB0B4\uC2DC\uAC04 \uC99D\uAC00"
+    Index: 60
+    Price: 2500
+    BaseLevel: 1
+    MaximumLevel: 15
+    UpgradeAmount: 5
