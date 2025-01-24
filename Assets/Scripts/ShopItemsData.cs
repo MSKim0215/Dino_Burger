@@ -14,9 +14,10 @@ namespace MSKim.Data
     public class ShopItemData
     {
         public string Name;
+        public Utils.ShopTabType Type;
         public int Index;
         public int Price;
-        public int BaseLevel;
+        public int BaseLevel = 1;
         public int MaximumLevel;
         public float UpgradeAmount;
     }

@@ -40,6 +40,11 @@ public static class Utils
         Gold
     }   // 금화
 
+    public enum ShopTabType
+    {
+        Ingredient, Player, Guest
+    }   // 상점 탭 타입
+
     // 가게로 이동, 밖으로 이동(오른쪽), 밖으로 이동(왼쪽),
     // 픽업존 1 ~ 4,
     // 웨이팅존 1 ~ 8

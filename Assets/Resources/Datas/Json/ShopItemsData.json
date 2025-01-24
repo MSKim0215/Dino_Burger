@@ -1,50 +1,110 @@
 [
   {
-    "Name": "재료 판매 가격 증가",
+    "Name": "양상추 판매 가격 증가",
+    "Type": 0,
     "Index": 0,
-    "Price": 1000,
+    "Price": 500,
     "BaseLevel": 1,
     "MaximumLevel": 10,
+    "UpgradeAmount": 2.0
+  },
+  {
+    "Name": "토마토 판매 가격 증가",
+    "Type": 0,
+    "Index": 1,
+    "Price": 500,
+    "BaseLevel": 1,
+    "MaximumLevel": 10,
+    "UpgradeAmount": 2.0
+  },
+  {
+    "Name": "양파 판매 가격 증가",
+    "Type": 0,
+    "Index": 2,
+    "Price": 500,
+    "BaseLevel": 1,
+    "MaximumLevel": 10,
+    "UpgradeAmount": 2.0
+  },
+  {
+    "Name": "치즈 판매 가격 증가",
+    "Type": 0,
+    "Index": 3,
+    "Price": 500,
+    "BaseLevel": 1,
+    "MaximumLevel": 10,
+    "UpgradeAmount": 2.0
+  },
+  {
+    "Name": "고기 판매 가격 증가",
+    "Type": 0,
+    "Index": 4,
+    "Price": 800,
+    "BaseLevel": 1,
+    "MaximumLevel": 10,
+    "UpgradeAmount": 5.0
+  },
+  {
+    "Name": "양상추 재료 수율 증가",
+    "Type": 0,
+    "Index": 5,
+    "Price": 1500,
+    "BaseLevel": 1,
+    "MaximumLevel": 5,
     "UpgradeAmount": 1.0
   },
   {
-    "Name": "재료 수율 증가",
-    "Index": 1,
-    "Price": 3000,
+    "Name": "토마토 재료 수율 증가",
+    "Type": 0,
+    "Index": 6,
+    "Price": 1500,
+    "BaseLevel": 1,
+    "MaximumLevel": 5,
+    "UpgradeAmount": 1.0
+  },
+  {
+    "Name": "양파 재료 수율 증가",
+    "Type": 0,
+    "Index": 7,
+    "Price": 1500,
+    "BaseLevel": 1,
+    "MaximumLevel": 5,
+    "UpgradeAmount": 1.0
+  },
+  {
+    "Name": "치즈 재료 수율 증가",
+    "Type": 0,
+    "Index": 8,
+    "Price": 1500,
     "BaseLevel": 1,
     "MaximumLevel": 5,
     "UpgradeAmount": 1.0
   },
   {
     "Name": "칼질 속도 증가",
-    "Index": 30,
+    "Type": 1,
+    "Index": 9,
     "Price": 2000,
     "BaseLevel": 1,
-    "MaximumLevel": 8,
-    "UpgradeAmount": 1.2
+    "MaximumLevel": 10,
+    "UpgradeAmount": 0.1
   },
   {
     "Name": "이동 속도 증가",
-    "Index": 31,
-    "Price": 5000,
+    "Type": 1,
+    "Index": 10,
+    "Price": 3000,
     "BaseLevel": 1,
-    "MaximumLevel": 3,
-    "UpgradeAmount": 1.5
+    "MaximumLevel": 5,
+    "UpgradeAmount": 0.1
   },
   {
-    "Name": "모든 음식 조리 시간 감소",
-    "Index": 32,
-    "Price": 3500,
+    "Name": "인내 시간 증가",
+    "Type": 2,
+    "Index": 11,
+    "Price": 3000,
     "BaseLevel": 1,
-    "MaximumLevel": 8,
-    "UpgradeAmount": 0.5
-  },
-  {
-    "Name": "손님 인내시간 증가",
-    "Index": 60,
-    "Price": 2500,
-    "BaseLevel": 1,
-    "MaximumLevel": 15,
+    "MaximumLevel": 10,
     "UpgradeAmount": 5.0
   }
 ]

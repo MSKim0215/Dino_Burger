@@ -12,41 +12,89 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2da136fc3c7bc343a5b7d5be79054a9, type: 3}
   m_Name: ShopItemsData
   m_EditorClassIdentifier: 
-  Json: {fileID: 0}
+  Json: {fileID: 4900000, guid: 4c50488d20e4cc344ba7d00b89476a38, type: 3}
   ShopItemDataList:
-  - Name: "\uC7AC\uB8CC \uD310\uB9E4 \uAC00\uACA9 \uC99D\uAC00"
+  - Name: "\uC591\uC0C1\uCD94 \uD310\uB9E4 \uAC00\uACA9 \uC99D\uAC00"
+    Type: 0
     Index: 0
-    Price: 1000
+    Price: 500
     BaseLevel: 1
     MaximumLevel: 10
-    UpgradeAmount: 1
-  - Name: "\uC7AC\uB8CC \uC218\uC728 \uC99D\uAC00"
+    UpgradeAmount: 2
+  - Name: "\uD1A0\uB9C8\uD1A0 \uD310\uB9E4 \uAC00\uACA9 \uC99D\uAC00"
+    Type: 0
     Index: 1
-    Price: 3000
+    Price: 500
+    BaseLevel: 1
+    MaximumLevel: 10
+    UpgradeAmount: 2
+  - Name: "\uC591\uD30C \uD310\uB9E4 \uAC00\uACA9 \uC99D\uAC00"
+    Type: 0
+    Index: 2
+    Price: 500
+    BaseLevel: 1
+    MaximumLevel: 10
+    UpgradeAmount: 2
+  - Name: "\uCE58\uC988 \uD310\uB9E4 \uAC00\uACA9 \uC99D\uAC00"
+    Type: 0
+    Index: 3
+    Price: 500
+    BaseLevel: 1
+    MaximumLevel: 10
+    UpgradeAmount: 2
+  - Name: "\uACE0\uAE30 \uD310\uB9E4 \uAC00\uACA9 \uC99D\uAC00"
+    Type: 0
+    Index: 4
+    Price: 800
+    BaseLevel: 1
+    MaximumLevel: 10
+    UpgradeAmount: 5
+  - Name: "\uC591\uC0C1\uCD94 \uC7AC\uB8CC \uC218\uC728 \uC99D\uAC00"
+    Type: 0
+    Index: 5
+    Price: 1500
+    BaseLevel: 1
+    MaximumLevel: 5
+    UpgradeAmount: 1
+  - Name: "\uD1A0\uB9C8\uD1A0 \uC7AC\uB8CC \uC218\uC728 \uC99D\uAC00"
+    Type: 0
+    Index: 6
+    Price: 1500
+    BaseLevel: 1
+    MaximumLevel: 5
+    UpgradeAmount: 1
+  - Name: "\uC591\uD30C \uC7AC\uB8CC \uC218\uC728 \uC99D\uAC00"
+    Type: 0
+    Index: 7
+    Price: 1500
+    BaseLevel: 1
+    MaximumLevel: 5
+    UpgradeAmount: 1
+  - Name: "\uCE58\uC988 \uC7AC\uB8CC \uC218\uC728 \uC99D\uAC00"
+    Type: 0
+    Index: 8
+    Price: 1500
     BaseLevel: 1
     MaximumLevel: 5
     UpgradeAmount: 1
   - Name: "\uCE7C\uC9C8 \uC18D\uB3C4 \uC99D\uAC00"
-    Index: 30
+    Type: 1
+    Index: 9
     Price: 2000
     BaseLevel: 1
-    MaximumLevel: 8
-    UpgradeAmount: 1.2
+    MaximumLevel: 10
+    UpgradeAmount: 0.1
   - Name: "\uC774\uB3D9 \uC18D\uB3C4 \uC99D\uAC00"
-    Index: 31
-    Price: 5000
+    Type: 1
+    Index: 10
+    Price: 3000
     BaseLevel: 1
-    MaximumLevel: 3
-    UpgradeAmount: 1.5
-  - Name: "\uBAA8\uB4E0 \uC74C\uC2DD \uC870\uB9AC \uC2DC\uAC04 \uAC10\uC18C"
-    Index: 32
-    Price: 3500
+    MaximumLevel: 5
+    UpgradeAmount: 0.1
+  - Name: "\uC778\uB0B4 \uC2DC\uAC04 \uC99D\uAC00"
+    Type: 2
+    Index: 11
+    Price: 3000
     BaseLevel: 1
-    MaximumLevel: 8
-    UpgradeAmount: 0.5
-  - Name: "\uC190\uB2D8 \uC778\uB0B4\uC2DC\uAC04 \uC99D\uAC00"
-    Index: 60
-    Price: 2500
-    BaseLevel: 1
-    MaximumLevel: 15
+    MaximumLevel: 10
     UpgradeAmount: 5
