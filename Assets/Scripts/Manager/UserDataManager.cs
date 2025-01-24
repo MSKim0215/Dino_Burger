@@ -7,7 +7,7 @@ namespace MSKim.Manager
     {
         private static UserDataManager instance;
 
-        private Dictionary<Utils.GoodsType, int> userData = new();
+        private Dictionary<Utils.CurrencyType, int> userData = new();
 
         [Header("InGame Data Info")]
         [SerializeField] private int currentGoldAmount = 0;
@@ -42,14 +42,14 @@ namespace MSKim.Manager
             DontDestroyOnLoad(gameObject);
         }
 
-        public void IncreaseAmount(Utils.GoodsType type, int addAmount)
+        public void IncreaseAmount(Utils.CurrencyType type, int addAmount)
         {
             if (!userData.ContainsKey(type)) return;
 
             userData[type] += addAmount;
         }
 
-        public void DecreaseAmount(Utils.GoodsType type, int subAmount)
+        public void DecreaseAmount(Utils.CurrencyType type, int subAmount)
         {
             if(!userData.ContainsKey(type)) return;
 

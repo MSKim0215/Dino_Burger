@@ -35,7 +35,7 @@ public static class Utils
         Player, NPC
     }   // 플레이어, NPC
 
-    public enum GoodsType
+    public enum CurrencyType
     {
         Gold
     }   // 금화
