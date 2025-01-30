@@ -67,4 +67,20 @@ public static class Utils
     public const float BOIL_STEW_COOK_TIME = 5f;            // 스튜 제작 시간
 
     public const int BURGER_TOPPING_COUNT_MAX = 5;      // 햄버거 토핑 최대 개수
+
+    public enum ShopItemIndex
+    {
+        SHOP_INCREDIENT_LETTUCE_SELL_INDEX,
+        SHOP_INCREDIENT_TOMATO_SELL_INDEX,
+        SHOP_INCREDIENT_ONION_SELL_INDEX,
+        SHOP_INCREDIENT_CHEESE_SELL_INDEX,
+        SHOP_INCREDIENT_MEAT_SELL_INDEX,
+        SHOP_INCREDIENT_LETTUCE_YIELD_INDEX,
+        SHOP_INCREDIENT_TOMATO_YIELD_INDEX,
+        SHOP_INCREDIENT_ONION_YIELD_INDEX,
+        SHOP_INCREDIENT_CHEESE_YIELD_INDEX,
+        SHOP_PLAYER_CUTTING_SPEED_INDEX,
+        SHOP_PLAYER_MOVE_SPEED_INDEX,
+        SHOP_GUEST_PATIENT_TIME_INDEX,
+    }   // 상점 아이템 인덱스
 }

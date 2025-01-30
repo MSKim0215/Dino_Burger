@@ -1,3 +1,4 @@
+using MSKim.Manager;
 using UnityEngine;
 
 namespace MSKim.UI
@@ -12,6 +13,26 @@ namespace MSKim.UI
         private void Start()
         {
             view.Initialize(this);
+            CreateItemBox();
+        }
+
+        private void CreateItemBox()
+        {
+            var currentItemDatas = GameDataManager.Instance.ShopItemDatas.FindAll(itemBox => itemBox.Type == currentTabType);
+            if (currentItemDatas == null) return;
+
+            for (int i = 0; i < currentItemDatas.Count; i++)
+            {
+                var itemBox = ObjectPoolManager.Instance.GetPoolObject("ShopItemBox");
+                itemBox.transform.SetParent(view.ShopItemBoxRoot);
+                itemBox.transform.localScale = Vector3.one;
+                itemBox.transform.localPosition = Vector3.zero;
+
+                if(itemBox.TryGetComponent<ShopItemBox>(out var shopItemBox))
+                {
+                    shopItemBox.Initialize(currentItemDatas[i]);
+                }
+            }
         }
 
         public void OnExitEvent()

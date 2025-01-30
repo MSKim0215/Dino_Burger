@@ -5,6 +5,7 @@ namespace MSKim.Manager
 {
     public class ShopManager : MonoBehaviour
     {
-        [SerializeField] private ShopItemData data;
+        [Header("Shop Item Data")]
+        [SerializeField] private ShopItemsData data;
     }
 }

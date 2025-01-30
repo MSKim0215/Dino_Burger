@@ -58,6 +58,8 @@ namespace MSKim.UI
 
         private ShopPopup controller;
 
+        public Transform ShopItemBoxRoot => shopItemBoxRoot;
+
         public void Initialize(ShopPopup controller)
         {
             this.controller = controller;

@@ -20,6 +20,9 @@ namespace MSKim.Manager
         [Header("Table Data")]
         [SerializeField] private Data.TablesData tableDatas;
 
+        [Header("Shop Item Data")]
+        [SerializeField] private Data.ShopItemsData shopItemsDatas;
+
         public static GameDataManager Instance
         {
             get
@@ -48,6 +51,10 @@ namespace MSKim.Manager
         public List<Data.TableData> TableDatas => tableDatas.TableDataList;
 
         public Data.TableData GetTableData(Utils.TableType type) => TableDatas.Find(table => table.Type == type);
+
+        public List<Data.ShopItemData> ShopItemDatas => shopItemsDatas.ShopItemDataList;
+
+        public Data.ShopItemData GetShopItemData(int index) => ShopItemDatas.Find(item => item.Index == index);
 
         private void Awake()
         {
