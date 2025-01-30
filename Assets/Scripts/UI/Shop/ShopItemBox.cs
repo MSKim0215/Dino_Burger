@@ -17,8 +17,8 @@ namespace MSKim.UI
         {
             this.data = data;
 
-            UserDataManager.Instance.OnChangeUpgrade -= HandleChangeUpgrade;
-            UserDataManager.Instance.OnChangeUpgrade += HandleChangeUpgrade;
+            Managers.UserData.OnChangeUpgrade -= HandleChangeUpgrade;
+            Managers.UserData.OnChangeUpgrade += HandleChangeUpgrade;
 
             view.Initialize(this);
         }
@@ -29,7 +29,7 @@ namespace MSKim.UI
 
             Debug.Log($"{name} 업그레이드 버튼 누름");
 
-            UserDataManager.Instance.Payment(Utils.CurrencyType.Gold, data);
+            Managers.UserData.Payment(Utils.CurrencyType.Gold, data);
         }
 
         private void HandleChangeUpgrade(Utils.ShopItemIndex type, int level)

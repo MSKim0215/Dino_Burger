@@ -13,8 +13,8 @@ namespace MSKim.UI
 
         private void Start()
         {
-            UserDataManager.Instance.OnChangeCurrency -= HandleChangeCurrency;
-            UserDataManager.Instance.OnChangeCurrency += HandleChangeCurrency;
+            Managers.UserData.OnChangeCurrency -= HandleChangeCurrency;
+            Managers.UserData.OnChangeCurrency += HandleChangeCurrency;
 
             view.Initialize(this);
             CreateItemBox(currentTabType);

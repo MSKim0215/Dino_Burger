@@ -391,7 +391,7 @@ namespace MSKim.NonPlayer
                         giveGoldAmount += GameDataManager.Instance.GetFoodData(Utils.FoodType.Stew).GuestSellPrice;
                     }
 
-                    UserDataManager.Instance.CurrentGoldAmount += giveGoldAmount;
+                    Managers.UserData.CurrentGoldAmount += giveGoldAmount;
 
                     break;
                 }

@@ -5,27 +5,17 @@ using UnityEngine.Events;
 
 namespace MSKim.Manager
 {
-    public class UserDataManager : MonoBehaviour
+    [Serializable]
+    public class UserDataManager : BaseManager
     {
-        private static UserDataManager instance;
-
+        [Header("InGame Data Info")]
+        [SerializeField] private int currentGoldAmount = 0;
+        
         private Dictionary<Utils.CurrencyType, int> userCurrencyData = new();
         private Dictionary<Utils.ShopItemIndex, int> userUpgradeData = new();
 
-        [Header("InGame Data Info")]
-        [SerializeField] private int currentGoldAmount = 0;
-
         public event Action<Utils.CurrencyType, int> OnChangeCurrency;
         public event Action<Utils.ShopItemIndex, int> OnChangeUpgrade;
-
-        public static UserDataManager Instance
-        {
-            get
-            {
-                if (instance == null) instance = new();
-                return instance;
-            }
-        }
 
         public int CurrentGoldAmount
         {
@@ -36,40 +26,28 @@ namespace MSKim.Manager
             }
         }
 
-        private void Awake()
+        public override void Initialize()
         {
-            if(instance != null)
-            {
-                Destroy(gameObject);
-                return;
-            }
+            base.Initialize();
 
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-
-            Initialize();
-        }
-
-        private void Initialize()
-        {
-            for(int i = 0; i < Enum.GetValues(typeof(Utils.CurrencyType)).Length; i++)
+            for (int i = 0; i < Enum.GetValues(typeof(Utils.CurrencyType)).Length; i++)
             {
                 if (userCurrencyData.ContainsKey((Utils.CurrencyType)i)) continue;
 
                 userCurrencyData.Add((Utils.CurrencyType)i, 0);
             }
 
-            for(int i = 0; i < Enum.GetValues(typeof(Utils.ShopItemIndex)).Length; i++)
+            for (int i = 0; i < Enum.GetValues(typeof(Utils.ShopItemIndex)).Length; i++)
             {
-                if(userUpgradeData.ContainsKey((Utils.ShopItemIndex)i)) continue;
+                if (userUpgradeData.ContainsKey((Utils.ShopItemIndex)i)) continue;
 
                 userUpgradeData.Add((Utils.ShopItemIndex)i, GameDataManager.Instance.GetShopItemData(i).BaseLevel);
             }
         }
 
-        private void Update()
+        public override void OnUpdate()
         {
-            if(Input.GetKeyDown(KeyCode.M))
+            if (Input.GetKeyDown(KeyCode.M))
             {
                 IncreaseAmount(Utils.CurrencyType.Gold, 100);
             }
