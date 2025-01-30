@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,6 +23,8 @@ namespace MSKim.Manager
             }
         }
 
+        public Dictionary<Utils.CurrencyType, int> UserCurrencyData => userCurrencyData;
+
         public int CurrentGoldAmount
         {
             get => currentGoldAmount;
@@ -41,13 +44,33 @@ namespace MSKim.Manager
 
             instance = this;
             DontDestroyOnLoad(gameObject);
+
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            for(int i = 0; i < Enum.GetValues(typeof(Utils.CurrencyType)).Length; i++)
+            {
+                if (userCurrencyData.ContainsKey((Utils.CurrencyType)i)) continue;
+
+                userCurrencyData.Add((Utils.CurrencyType)i, 0);
+            }
+
+            for(int i = 0; i < Enum.GetValues(typeof(Utils.ShopItemIndex)).Length; i++)
+            {
+                if(userUpgradeData.ContainsKey((Utils.ShopItemIndex)i)) continue;
+
+                userUpgradeData.Add((Utils.ShopItemIndex)i, GameDataManager.Instance.GetShopItemData(i).BaseLevel);
+            }
         }
 
         public void IncreaseAmount(Utils.CurrencyType type, int addAmount)
         {
-            if (!userCurrencyData.ContainsKey(type))
+            if(!userCurrencyData.ContainsKey(type))
             {
-                userCurrencyData.Add(type, 0);
+                Debug.LogWarning($"{type} 재화 데이터가 없습니다.");
+                return;
             }
 
             userCurrencyData[type] += addAmount;
@@ -55,14 +78,15 @@ namespace MSKim.Manager
 
         public void DecreaseAmount(Utils.CurrencyType type, int subAmount)
         {
-            if(!userCurrencyData.ContainsKey(type))
+            if (!userCurrencyData.ContainsKey(type))
             {
-                userCurrencyData.Add(type, 0);
+                Debug.LogWarning($"{type} 재화 데이터가 없습니다.");
+                return;
             }
 
             userCurrencyData[type] -= subAmount;
 
-            if (userCurrencyData[type] <= 0)
+            if (userCurrencyData[type] < 0)
             {
                 userCurrencyData[type] = 0;
             }
@@ -77,10 +101,7 @@ namespace MSKim.Manager
 
         public int GetUpgradeAmount(Utils.ShopItemIndex type)
         {
-            if (!userUpgradeData.ContainsKey(type))
-            {
-                userUpgradeData.Add(type, GameDataManager.Instance.GetShopItemData((int)type).BaseLevel);
-            }
+            if (!userUpgradeData.ContainsKey(type)) return -1;
 
             return userUpgradeData[type];
         }

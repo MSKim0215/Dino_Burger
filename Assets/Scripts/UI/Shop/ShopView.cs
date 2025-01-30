@@ -1,3 +1,4 @@
+using MSKim.Manager;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -64,7 +65,7 @@ namespace MSKim.UI
         {
             this.controller = controller;
 
-            currencyText.text = "0";
+            currencyText.text = string.Format("{0:#,0}", UserDataManager.Instance.UserCurrencyData[Utils.CurrencyType.Gold]);
 
             BindEvent();
         }
