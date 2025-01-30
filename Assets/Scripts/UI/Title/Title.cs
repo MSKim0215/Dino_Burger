@@ -1,5 +1,6 @@
 using MSKim.Manager;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MSKim.UI
 {
@@ -15,7 +16,7 @@ namespace MSKim.UI
 
         public void OnStartEvent()
         {
-            
+            SceneManager.LoadScene(1);
         }
 
         public void OnShopEvent()
