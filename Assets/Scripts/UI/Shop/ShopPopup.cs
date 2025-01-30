@@ -11,8 +11,13 @@ namespace MSKim.UI
 
         private Utils.ShopTabType currentTabType = Utils.ShopTabType.Ingredient;
 
+        public ShopView View => view;
+
         private void Start()
         {
+            UserDataManager.Instance.OnChangeCurrency -= HandleChangeCurrency;
+            UserDataManager.Instance.OnChangeCurrency += HandleChangeCurrency;
+
             view.Initialize(this);
             CreateItemBox(currentTabType);
         }
@@ -74,6 +79,11 @@ namespace MSKim.UI
             view.ChangeTabButton(currentTabType);
 
             CreateItemBox(currentTabType);
+        }
+
+        private void HandleChangeCurrency(Utils.CurrencyType currencyType, int amount)
+        {
+            view.SetCurrencyText(amount);
         }
     }
 }

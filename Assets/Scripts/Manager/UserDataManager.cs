@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace MSKim.Manager
 {
@@ -14,6 +15,9 @@ namespace MSKim.Manager
         [Header("InGame Data Info")]
         [SerializeField] private int currentGoldAmount = 0;
 
+        public event Action<Utils.CurrencyType, int> OnChangeCurrency;
+        public event Action<Utils.ShopItemIndex, int> OnChangeUpgrade;
+
         public static UserDataManager Instance
         {
             get
@@ -22,8 +26,6 @@ namespace MSKim.Manager
                 return instance;
             }
         }
-
-        public Dictionary<Utils.CurrencyType, int> UserCurrencyData => userCurrencyData;
 
         public int CurrentGoldAmount
         {
@@ -65,31 +67,76 @@ namespace MSKim.Manager
             }
         }
 
-        public void IncreaseAmount(Utils.CurrencyType type, int addAmount)
+        private void Update()
         {
-            if(!userCurrencyData.ContainsKey(type))
+            if(Input.GetKeyDown(KeyCode.M))
             {
-                Debug.LogWarning($"{type} 재화 데이터가 없습니다.");
-                return;
+                IncreaseAmount(Utils.CurrencyType.Gold, 100);
             }
-
-            userCurrencyData[type] += addAmount;
         }
 
-        public void DecreaseAmount(Utils.CurrencyType type, int subAmount)
+        public void Payment(Utils.CurrencyType currencyType, Data.ShopItemData paymentData)
         {
-            if (!userCurrencyData.ContainsKey(type))
+            Payment(currencyType, paymentData, OnPaymentSuccess, OnPaymentFailure);
+        }
+
+        private void Payment(Utils.CurrencyType currencyType, Data.ShopItemData paymentData, UnityAction<Utils.CurrencyType, Data.ShopItemData> success, UnityAction<string> failure)
+        {
+            if (!userCurrencyData.ContainsKey(currencyType))
             {
-                Debug.LogWarning($"{type} 재화 데이터가 없습니다.");
+                failure?.Invoke($"{currencyType} 재화 데이터가 없습니다.");
                 return;
             }
 
-            userCurrencyData[type] -= subAmount;
-
-            if (userCurrencyData[type] < 0)
+            if (userCurrencyData[currencyType] < paymentData.Price)
             {
-                userCurrencyData[type] = 0;
+                failure?.Invoke("재화가 부족합니다.");
+                return;
             }
+
+            success?.Invoke(currencyType, paymentData);
+        }
+
+        private void OnPaymentSuccess(Utils.CurrencyType currencyType, Data.ShopItemData paymentData)
+        {
+            DecreaseAmount(currencyType, paymentData.Price);
+            UpgradeAmount((Utils.ShopItemIndex)paymentData.Index);
+        }
+
+        private void OnPaymentFailure(string failureMessage)
+        {
+            Debug.LogWarning($"Payment Failure: {failureMessage}");
+        }
+
+        public void IncreaseAmount(Utils.CurrencyType currencyType, int addAmount)
+        {
+            if(!userCurrencyData.ContainsKey(currencyType))
+            {
+                Debug.LogWarning($"{currencyType} 재화 데이터가 없습니다.");
+                return;
+            }
+
+            userCurrencyData[currencyType] += addAmount;
+
+            OnChangeCurrency?.Invoke(currencyType, userCurrencyData[currencyType]);
+        }
+
+        public void DecreaseAmount(Utils.CurrencyType currencyType, int subAmount)
+        {
+            if (!userCurrencyData.ContainsKey(currencyType))
+            {
+                Debug.LogWarning($"{currencyType} 재화 데이터가 없습니다.");
+                return;
+            }
+
+            userCurrencyData[currencyType] -= subAmount;
+
+            if (userCurrencyData[currencyType] < 0)
+            {
+                userCurrencyData[currencyType] = 0;
+            }
+
+            OnChangeCurrency?.Invoke(currencyType, userCurrencyData[currencyType]);
         }
 
         public void UpgradeAmount(Utils.ShopItemIndex type)
@@ -97,6 +144,8 @@ namespace MSKim.Manager
             if(!userUpgradeData.ContainsKey(type)) return;
 
             userUpgradeData[type]++;
+
+            OnChangeUpgrade?.Invoke(type, userUpgradeData[type]);
         }
 
         public int GetUpgradeAmount(Utils.ShopItemIndex type)

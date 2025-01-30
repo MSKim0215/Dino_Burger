@@ -20,16 +20,27 @@ namespace MSKim.UI
         {
             this.controller = controller;
             SetData();
+            BindEvent();
         }
 
         private void SetData()
         {
             controller.name = controller.Data.Name;
             itemIcon.color = UnityEngine.Random.ColorHSV();
-            levelText.text = $"{UserDataManager.Instance.GetUpgradeAmount((Utils.ShopItemIndex)controller.Data.Index)} /" +
-                $" {controller.Data.MaximumLevel}";
+            SetLevelText(UserDataManager.Instance.GetUpgradeAmount((Utils.ShopItemIndex)controller.Data.Index));
             nameText.text = controller.Data.Name;
             priceText.text = string.Format("{0:#,0} 골드", controller.Data.Price);
+        }
+
+        public void SetLevelText(int currentLevel)
+        {
+            levelText.text = $"{currentLevel} / {controller.Data.MaximumLevel}";
+        }
+
+        private void BindEvent()
+        {
+            buyButton.onClick.RemoveAllListeners();
+            buyButton.onClick.AddListener(controller.OnUpgradeEvent);
         }
     }
 }

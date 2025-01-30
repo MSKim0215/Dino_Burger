@@ -1,3 +1,4 @@
+using MSKim.Manager;
 using UnityEngine;
 
 namespace MSKim.UI
@@ -16,7 +17,25 @@ namespace MSKim.UI
         {
             this.data = data;
 
+            UserDataManager.Instance.OnChangeUpgrade -= HandleChangeUpgrade;
+            UserDataManager.Instance.OnChangeUpgrade += HandleChangeUpgrade;
+
             view.Initialize(this);
+        }
+
+        public void OnUpgradeEvent()
+        {
+            if (data == null) return;
+
+            Debug.Log($"{name} 업그레이드 버튼 누름");
+
+            UserDataManager.Instance.Payment(Utils.CurrencyType.Gold, data);
+        }
+
+        private void HandleChangeUpgrade(Utils.ShopItemIndex type, int level)
+        {
+            if(data.Index != (int)type) return;
+            view.SetLevelText(level);
         }
     }
 }

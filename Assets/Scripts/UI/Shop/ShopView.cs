@@ -64,9 +64,6 @@ namespace MSKim.UI
         public void Initialize(ShopPopup controller)
         {
             this.controller = controller;
-
-            currencyText.text = string.Format("{0:#,0}", UserDataManager.Instance.UserCurrencyData[Utils.CurrencyType.Gold]);
-
             BindEvent();
         }
 
@@ -86,6 +83,11 @@ namespace MSKim.UI
             {
                 tabButton.ChangeColor(tabButton.Type == shopTabType);
             }
+        }
+
+        public void SetCurrencyText(int currencyAmount)
+        {
+            currencyText.text = string.Format("{0:#,0}", currencyAmount);
         }
     }
 }
