@@ -1110,6 +1110,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TitleUI
       objectReference: {fileID: 0}
+    - target: {fileID: 7402867279439080275, guid: 3fbe043595d3ec14cbbae25661d24c22, type: 3}
+      propertyPath: view.uiRoot
+      value: 
+      objectReference: {fileID: 1197785793}
     - target: {fileID: 8014234057826031130, guid: 3fbe043595d3ec14cbbae25661d24c22, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

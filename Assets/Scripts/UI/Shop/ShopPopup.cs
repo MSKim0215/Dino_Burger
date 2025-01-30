@@ -4,14 +4,12 @@ using UnityEngine;
 
 namespace MSKim.UI
 {
-    public class ShopPopup : MonoBehaviour
+    public class ShopPopup : PoolAble
     {
         [Header("UI Settings")]
         [SerializeField] private ShopView view;
 
         private Utils.ShopTabType currentTabType = Utils.ShopTabType.Ingredient;
-
-        public ShopView View => view;
 
         private void Start()
         {
@@ -68,7 +66,7 @@ namespace MSKim.UI
 
         public void OnExitEvent()
         {
-            Destroy(gameObject);
+            Release();
         }
 
         public void OnTabEvent(Utils.ShopTabType tagetTabType)
@@ -84,6 +82,12 @@ namespace MSKim.UI
         private void HandleChangeCurrency(Utils.CurrencyType currencyType, int amount)
         {
             view.SetCurrencyText(amount);
+        }
+
+        public override void Release()
+        {
+            OnTabEvent(Utils.ShopTabType.Ingredient);
+            base.Release();
         }
     }
 }
