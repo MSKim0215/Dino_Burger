@@ -11,6 +11,7 @@ namespace MSKim.Manager
         private class ObjectInfo
         {
             public string createObjectName;
+            public Utils.PoolType poolType;
             public GameObject createPrefab;
             public int createCount;
             public int maxCount;
@@ -21,6 +22,7 @@ namespace MSKim.Manager
         [Header("Pool Settings")]
         [SerializeField] private List<ObjectInfo> poolObjectList = new();
 
+        private Dictionary<Utils.PoolType, Transform> rootDict = new();
         private Dictionary<string, IObjectPool<GameObject>> poolObjectDict = new();
         private Dictionary<string, GameObject> createDict = new();
         private string createObjectName;
@@ -43,11 +45,20 @@ namespace MSKim.Manager
             }
 
             instance = this;
+            
             Initialize();
         }
 
         private void Initialize()
         {
+            if(rootDict.Count <= 0)
+            {
+                for(int i = 0; i < Enum.GetValues(typeof(Utils.PoolType)).Length; i++)
+                {
+                    rootDict.Add((Utils.PoolType)i, transform.GetChild(i));
+                }
+            }
+
             for(int i = 0; i < poolObjectList.Count; i++)
             {
                 var pool = new ObjectPool<GameObject>(CreatePoolObject, OnTakeFromPool, OnReturnToPool, OnDestroyPoolObject, true, poolObjectList[i].createCount, poolObjectList[i].maxCount);
@@ -65,6 +76,7 @@ namespace MSKim.Manager
                 {
                     createObjectName = poolObjectList[i].createObjectName;
                     var create = CreatePoolObject().GetComponent<PoolAble>();
+                    create.transform.SetParent(rootDict[poolObjectList[i].poolType]);
                     create.Pool.Release(create.gameObject);
                 }
             }
@@ -73,6 +85,7 @@ namespace MSKim.Manager
         private GameObject CreatePoolObject()
         {
             var createObj = Instantiate(createDict[createObjectName]);
+            createObj.name = createObjectName;
             createObj.GetComponent<PoolAble>().Pool = poolObjectDict[createObjectName];
             return createObj;
         }
@@ -85,6 +98,11 @@ namespace MSKim.Manager
         private void OnReturnToPool(GameObject poolObject)
         {
             poolObject.SetActive(false);
+
+            var target = poolObjectList.Find(targetInfo => targetInfo.createPrefab.name == poolObject.name);
+            if (target == null) return;
+
+            poolObject.transform.SetParent(rootDict[target.poolType]);
         }
 
         private void OnDestroyPoolObject(GameObject poolObject)

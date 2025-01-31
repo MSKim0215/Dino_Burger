@@ -11,8 +11,9 @@ namespace MSKim.Manager
         [SerializeField] private GameDataManager gameDataManager = new();
         [SerializeField] private GameManager gameManager = new();
         [SerializeField] private GuestManager guestManager = new();
+        [SerializeField] private ObjectPoolManager objectPoolManager = new();
 
-        private Utils.SceneType currentSceneType = Utils.SceneType.Title;
+        private Utils.SceneType currentSceneType = Utils.SceneType.None;
 
         public static Managers Instance
         {
@@ -30,6 +31,8 @@ namespace MSKim.Manager
         public static GameManager Game => Instance.gameManager;
 
         public static GuestManager Guest => Instance.guestManager;
+
+        public static ObjectPoolManager Pool => Instance.objectPoolManager;
 
         public void Initialize(Utils.SceneType nextSceneType)
         {

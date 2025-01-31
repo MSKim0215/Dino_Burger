@@ -47,8 +47,13 @@ public static class Utils
 
     public enum SceneType
     {
-        Title, MainGame
+        None, Title, MainGame
     }   // 타이틀, 메인게임
+
+    public enum PoolType
+    {
+        GameObject, UI
+    }   // 풀 타입
 
     // 가게로 이동, 밖으로 이동(오른쪽), 밖으로 이동(왼쪽),
     // 픽업존 1 ~ 4,

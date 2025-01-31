@@ -31,7 +31,7 @@ namespace MSKim.UI
 
         private void ReleaseItemBox()
         {
-            for (int i = 0; i < view.ShopItemBoxRoot.childCount; i++)
+            for (int i = view.ShopItemBoxRoot.childCount - 1; i >= 0; i--)
             {
                 var itemBox = view.ShopItemBoxRoot.GetChild(i).gameObject;
                 if (!itemBox.activeSelf) continue;
