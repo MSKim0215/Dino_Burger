@@ -102,8 +102,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6092840578929217798}
+  - component: {fileID: 2869957903971449166}
   m_Layer: 0
-  m_Name: WayPoints
+  m_Name: Waypoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,6 +129,92 @@ Transform:
   - {fileID: 8704868612187276411}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2869957903971449166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2706861233133821099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6d43279524c98441bc0844b7120fbcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointInfoList:
+  - Description: "\uAC00\uAC8C\uB85C \uC774\uB3D9"
+    type: 0
+    pointList:
+    - {fileID: 2702949707944368807}
+    - {fileID: 401571491904850195}
+  - Description: "\uC9C0\uB098\uCE68 (\uC624\uB978\uCABD)"
+    type: 1
+    pointList:
+    - {fileID: 6948480140334683271}
+  - Description: "\uC9C0\uB098\uCE68 (\uC67C\uCABD)"
+    type: 2
+    pointList:
+    - {fileID: 8978732585362955215}
+  - Description: "\uAC00\uAC8C\uC5D0\uC11C \uB098\uAC00\uAE30 (\uC624\uB978\uCABD)"
+    type: 15
+    pointList:
+    - {fileID: 401571491904850195}
+    - {fileID: 2702949707944368807}
+    - {fileID: 6948480140334683271}
+  - Description: "\uAC00\uAC8C\uC5D0\uC11C \uB098\uAC00\uAE30 (\uC67C\uCABD)"
+    type: 16
+    pointList:
+    - {fileID: 401571491904850195}
+    - {fileID: 2702949707944368807}
+    - {fileID: 8978732585362955215}
+  - Description: "\uD53D\uC5C5\uC874 1\uBC88"
+    type: 3
+    pointList:
+    - {fileID: 6946164194401816662}
+  - Description: "\uD53D\uC5C5\uC874 2\uBC88"
+    type: 4
+    pointList:
+    - {fileID: 1790137326850847238}
+  - Description: "\uD53D\uC5C5\uC874 3\uBC88"
+    type: 5
+    pointList:
+    - {fileID: 1822693421285416879}
+  - Description: "\uD53D\uC5C5\uC874 4\uBC88"
+    type: 6
+    pointList:
+    - {fileID: 66077819285664568}
+  - Description: "\uC6E8\uC774\uD305\uC874 1\uBC88"
+    type: 7
+    pointList:
+    - {fileID: 5449706949132329380}
+  - Description: "\uC6E8\uC774\uD305\uC874 2\uBC88"
+    type: 8
+    pointList:
+    - {fileID: 20496510120845147}
+  - Description: "\uC6E8\uC774\uD305\uC874 3\uBC88"
+    type: 9
+    pointList:
+    - {fileID: 7662172501588443869}
+  - Description: "\uC6E8\uC774\uD305\uC874 4\uBC88"
+    type: 10
+    pointList:
+    - {fileID: 5666968283619068482}
+  - Description: "\uC6E8\uC774\uD305\uC874 5\uBC88"
+    type: 11
+    pointList:
+    - {fileID: 1943159777504961411}
+  - Description: "\uC6E8\uC774\uD305\uC874 6\uBC88"
+    type: 12
+    pointList:
+    - {fileID: 9219902636667442783}
+  - Description: "\uC6E8\uC774\uD305\uC874 7\uBC88"
+    type: 13
+    pointList:
+    - {fileID: 841745765386577556}
+  - Description: "\uC6E8\uC774\uD305\uC874 8\uBC88"
+    type: 14
+    pointList:
+    - {fileID: 1421902409536070288}
 --- !u!1 &2717920294353013284
 GameObject:
   m_ObjectHideFlags: 0

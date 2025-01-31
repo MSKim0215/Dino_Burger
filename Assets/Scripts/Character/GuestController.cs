@@ -69,7 +69,6 @@ namespace MSKim.NonPlayer
         public void Initialize()
         {
             data = Managers.GameData.GetGuestData(Utils.CharacterType.NPC);
-            name = data.Name;
 
             holdPointZ = transform.position.z;
             CurrentWaypointType = Utils.WaypointType.MoveStore;

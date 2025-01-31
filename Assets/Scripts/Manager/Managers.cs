@@ -89,6 +89,7 @@ namespace MSKim.Manager
             }
             else if(currentSceneType == Utils.SceneType.MainGame)
             {
+                gameManager.OnUpdate();
                 guestManager.OnUpdate();
             }
         }

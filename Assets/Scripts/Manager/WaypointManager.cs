@@ -7,25 +7,21 @@ namespace MSKim.Manager
     [Serializable]
     public class WaypointManager : BaseManager 
     {
-        [Serializable]
-        private class WayPointInfo
-        {
-            public Utils.WaypointType type;
-            public List<Transform> pointList = new();
-        }
-
-        [Header("Guest Waypoint Settings")]
-        [SerializeField] private List<WayPointInfo> waypointInfoList = new();
-
         private readonly Dictionary<Utils.WaypointType, List<Transform>> waypointDict = new();
+        private Waypoints waypoints;
 
         public override void Initialize()
         {
             base.Initialize();
 
-            foreach (var waypoint in waypointInfoList)
+            if (waypoints != null) return;
+
+            if(GameObject.Find("Waypoints").TryGetComponent(out waypoints))
             {
-                waypointDict.Add(waypoint.type, waypoint.pointList);
+                foreach(var waypoint in waypoints.WaypointInfoList)
+                {
+                    waypointDict.Add(waypoint.type, waypoint.pointList);
+                }
             }
         }
 
