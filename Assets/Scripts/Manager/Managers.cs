@@ -7,7 +7,7 @@ namespace MSKim.Manager
         private static Managers instance;
 
         [Header("Manager List")]
-        [SerializeField] private UserDataManager userData = new();
+        [SerializeField] private UserDataManager userDataManager = new();
 
         private Utils.SceneType currentSceneType = Utils.SceneType.Title;
 
@@ -20,7 +20,15 @@ namespace MSKim.Manager
             }
         }
 
-        public static UserDataManager UserData => Instance.userData;
+        public static UserDataManager UserData => Instance.userDataManager;
+
+        public void Initialize()
+        {
+            if (currentSceneType == Utils.SceneType.Title)
+            {
+                userDataManager.Initialize();
+            }
+        }
 
         private void Start()
         {
@@ -43,11 +51,11 @@ namespace MSKim.Manager
             }
         }
 
-        public void Initialize()
+        private void Update()
         {
-            if(currentSceneType == Utils.SceneType.Title)
+            if (currentSceneType == Utils.SceneType.Title)
             {
-                userData.Initialize();
+                userDataManager.OnUpdate();
             }
         }
     }
