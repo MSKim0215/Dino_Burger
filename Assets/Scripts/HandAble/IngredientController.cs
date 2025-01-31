@@ -40,7 +40,7 @@ namespace MSKim.HandAble
 
         public void Initialize(Utils.CrateType ingredientType)
         {
-            data = GameDataManager.Instance.GetIngredientData(ingredientType);
+            data = Managers.GameData.GetIngredientData(ingredientType);
             name = data.Name;
             currentYieldAmount = data.YieldAmount;
 

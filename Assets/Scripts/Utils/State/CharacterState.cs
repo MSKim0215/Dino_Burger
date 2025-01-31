@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using MSKim.Manager;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -89,7 +90,7 @@ public class OrderState : ICharacterState
     {
         var orderIngredients = new List<Utils.CrateType>();
         var toppingCount = UnityEngine.Random.Range(minCount, maxCount);
-        var allowList = MSKim.Manager.GameManager.Instance.AllowIncredientList;
+        var allowList = Managers.Game.AllowIncredientList;
 
         for(int i = 0; i < toppingCount; i++)
         {

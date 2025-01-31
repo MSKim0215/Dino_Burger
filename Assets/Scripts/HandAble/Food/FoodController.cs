@@ -12,7 +12,7 @@ namespace MSKim.HandAble
 
         public virtual void Initialize(Utils.FoodType foodType)
         {
-            data = GameDataManager.Instance.GetFoodData(foodType);
+            data = Managers.GameData.GetFoodData(foodType);
             name = data.Name;
         }
     }

@@ -36,7 +36,7 @@ namespace MSKim.Player
 
         public void Initailize()
         {
-            data = GameDataManager.Instance.GetPlayerData(Utils.CharacterType.Player);
+            data = Managers.GameData.GetPlayerData(Utils.CharacterType.Player);
             name = data.Name;
 
             ChangeState(ICharacterState.BehaviourState.Waiting);

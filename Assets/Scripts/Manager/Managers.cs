@@ -8,6 +8,8 @@ namespace MSKim.Manager
 
         [Header("Manager List")]
         [SerializeField] private UserDataManager userDataManager = new();
+        [SerializeField] private GameDataManager gameDataManager = new();
+        [SerializeField] private GameManager gameManager = new();
 
         private Utils.SceneType currentSceneType = Utils.SceneType.Title;
 
@@ -22,11 +24,24 @@ namespace MSKim.Manager
 
         public static UserDataManager UserData => Instance.userDataManager;
 
-        public void Initialize()
+        public static GameDataManager GameData => Instance.gameDataManager;
+
+        public static GameManager Game => Instance.gameManager;
+
+        public void Initialize(Utils.SceneType nextSceneType)
         {
+            if (currentSceneType == nextSceneType) return;
+
+            currentSceneType = nextSceneType;
+
             if (currentSceneType == Utils.SceneType.Title)
             {
                 userDataManager.Initialize();
+                gameDataManager.Initialize();
+            }
+            else if(currentSceneType == Utils.SceneType.MainGame)
+            {
+                gameManager.Initialize();
             }
         }
 

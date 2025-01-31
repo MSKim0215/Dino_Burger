@@ -6,7 +6,7 @@ namespace MSKim.HandNotAble
     {
         protected override void Initialize()
         {
-            data = GameDataManager.Instance.GetTableData(Utils.TableType.Pickup);
+            data = Managers.GameData.GetTableData(Utils.TableType.Pickup);
             name = data.Name;
         }
     }

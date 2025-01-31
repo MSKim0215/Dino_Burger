@@ -2,11 +2,11 @@ using MSKim.Manager;
 
 namespace MSKim.Scene
 {
-    public class TitleScene : BaseScene
+    public class MainGameScene : BaseScene
     {
         protected override void Initialize()
         {
-            Managers.Instance.Initialize(Utils.SceneType.Title);
+            Managers.Instance.Initialize(Utils.SceneType.MainGame);
         }
     }
 }

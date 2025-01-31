@@ -22,7 +22,7 @@ namespace MSKim.HandNotAble
 
         protected override void Initialize()
         {
-            data = GameDataManager.Instance.GetTableData(Utils.TableType.Pot);
+            data = Managers.GameData.GetTableData(Utils.TableType.Pot);
             name = data.Name;
         }
 

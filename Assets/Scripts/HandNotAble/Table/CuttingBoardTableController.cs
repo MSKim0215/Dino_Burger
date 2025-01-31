@@ -7,7 +7,7 @@ namespace MSKim.HandNotAble
     {
         protected override void Initialize()
         {
-            data = GameDataManager.Instance.GetTableData(Utils.TableType.CuttingBoard);
+            data = Managers.GameData.GetTableData(Utils.TableType.CuttingBoard);
             name = data.Name;
         }
 

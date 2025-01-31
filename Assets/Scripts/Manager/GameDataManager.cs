@@ -1,12 +1,12 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace MSKim.Manager
 {
-    public class GameDataManager : MonoBehaviour
+    [Serializable]
+    public class GameDataManager : BaseManager
     {
-        private static GameDataManager instance;
-
         [Header("Ingredient Data")]
         [SerializeField] private Data.IngredientsData ingredientDatas;
 
@@ -22,15 +22,6 @@ namespace MSKim.Manager
 
         [Header("Shop Item Data")]
         [SerializeField] private Data.ShopItemsData shopItemsDatas;
-
-        public static GameDataManager Instance
-        {
-            get
-            {
-                if (instance == null) instance = new();
-                return instance;
-            }
-        }
 
         public List<Data.IngredientData> IngredientDatas => ingredientDatas.IngredientDataList;
 
@@ -56,16 +47,9 @@ namespace MSKim.Manager
 
         public Data.ShopItemData GetShopItemData(int index) => ShopItemDatas.Find(item => item.Index == index);
 
-        private void Awake()
+        public override void Initialize()
         {
-            if(instance != null)
-            {
-                Destroy(gameObject);
-                return;
-            }
-                
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+            base.Initialize();
         }
     }
 }

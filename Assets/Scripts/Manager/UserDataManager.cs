@@ -41,7 +41,7 @@ namespace MSKim.Manager
             {
                 if (userUpgradeData.ContainsKey((Utils.ShopItemIndex)i)) continue;
 
-                userUpgradeData.Add((Utils.ShopItemIndex)i, GameDataManager.Instance.GetShopItemData(i).BaseLevel);
+                userUpgradeData.Add((Utils.ShopItemIndex)i, Managers.GameData.GetShopItemData(i).BaseLevel);
             }
         }
 

@@ -3,16 +3,13 @@ using UnityEngine;
 
 namespace MSKim.Scene
 {
-    public class BaseScene : MonoBehaviour
+    public abstract class BaseScene : MonoBehaviour
     {
         private void Awake()
         {
             Initialize();
         }
 
-        protected virtual void Initialize()
-        {
-            Managers.Instance.Initialize();
-        }
+        protected abstract void Initialize();
     }
 }

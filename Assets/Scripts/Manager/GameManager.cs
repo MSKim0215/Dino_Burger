@@ -5,19 +5,9 @@ using UnityEngine;
 
 namespace MSKim.Manager
 {
-    public class GameManager : MonoBehaviour
+    [Serializable]
+    public class GameManager : BaseManager
     {
-        private static GameManager instance;
-
-        public static GameManager Instance
-        {
-            get
-            {
-                if (instance == null) instance = new();
-                return instance;
-            }
-        }
-
         [Header("Settings")]
         [SerializeField] private List<GameObject> waitChairList = new();
         [SerializeField] private List<GameObject> pickupTableList = new();
@@ -38,25 +28,28 @@ namespace MSKim.Manager
 
         public bool IsExistWaitingGuest => waitingZoneGuests.Count >= 1;
 
-        private void Awake()
+        public override void Initialize()
         {
-            if(instance != null)
+            base.Initialize();
+
+            if(waitChairList.Count <= 0)
             {
-                Destroy(gameObject);
-                return;
+                var waitSeatRoot = GameObject.Find("Chairs").transform;
+                for (int i = 0; i < waitSeatRoot.childCount; i++)
+                {
+                    waitChairList.Add(waitSeatRoot.GetChild(i).gameObject);
+                }
             }
 
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
+            if(pickupTableList.Count <= 0)
+            {
+                var pickupSeats = GameObject.FindGameObjectsWithTag("PickupTable");
+                for (int i = 0; i < pickupSeats.Length; i++)
+                {
+                    pickupTableList.Add(pickupSeats[i]);
+                }
+            }
 
-        private void Start()
-        {
-            Initialize();
-        }
-
-        private void Initialize()
-        {
             canWaitSeats = new bool[waitChairList.Count];
             canPickupSeats = new bool[pickupTableList.Count];
             
@@ -71,9 +64,9 @@ namespace MSKim.Manager
             }
         }
 
-        private void Update()
+        public override void OnUpdate()
         {
-            if(Input.GetKeyDown(KeyCode.Alpha1))
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 Time.timeScale = Time.timeScale == 1f ? 5f : 1f;
             }

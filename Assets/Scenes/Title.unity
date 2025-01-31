@@ -387,10 +387,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 518065958}
-  - component: {fileID: 518065961}
   - component: {fileID: 518065959}
   - component: {fileID: 518065960}
-  - component: {fileID: 518065962}
   - component: {fileID: 518065964}
   m_Layer: 0
   m_Name: '@Managers'
@@ -500,55 +498,6 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
---- !u!114 &518065961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 518065957}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ca03c8ca737f814a8221de23f4e0522, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waitChairList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  pickupTableList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  allowIncredientList: 0100000002000000040000000500000006000000
-  currentWaitNumber: 0
-  pickupZoneGuests: []
-  canPickupSeats: 
-  canWaitSeats: 
---- !u!114 &518065962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 518065957}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adb6aefbe833e5a4d9b5358f80191be1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ingredientDatas: {fileID: 11400000, guid: c2afd1cc819cc4b47810cff4fc0ea56f, type: 2}
-  foodDatas: {fileID: 11400000, guid: 41f63df3dcab36344960970c3549e835, type: 2}
-  playerDatas: {fileID: 11400000, guid: 1f4be02259412124cbf2e1eca0d241fa, type: 2}
-  guestDatas: {fileID: 11400000, guid: 83f344d2ec0184549a90f7c436438222, type: 2}
-  tableDatas: {fileID: 11400000, guid: 362e456d16aab1a45ae4811f03742f4d, type: 2}
-  shopItemsDatas: {fileID: 11400000, guid: 4ba142e4df0fc8b42b5c0740e36a41b8, type: 2}
 --- !u!114 &518065964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -561,6 +510,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8880fb4906057e43986ab0a9139b2b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  userDataManager:
+    currentGoldAmount: 0
+  gameDataManager:
+    ingredientDatas: {fileID: 11400000, guid: c2afd1cc819cc4b47810cff4fc0ea56f, type: 2}
+    foodDatas: {fileID: 11400000, guid: 41f63df3dcab36344960970c3549e835, type: 2}
+    playerDatas: {fileID: 11400000, guid: 1f4be02259412124cbf2e1eca0d241fa, type: 2}
+    guestDatas: {fileID: 11400000, guid: 83f344d2ec0184549a90f7c436438222, type: 2}
+    tableDatas: {fileID: 11400000, guid: 362e456d16aab1a45ae4811f03742f4d, type: 2}
+    shopItemsDatas: {fileID: 11400000, guid: 4ba142e4df0fc8b42b5c0740e36a41b8, type: 2}
+  gameManager:
+    waitChairList: []
+    pickupTableList: []
+    allowIncredientList: 0100000002000000040000000500000006000000
+    currentWaitNumber: 0
+    pickupZoneGuests: []
+    canPickupSeats: 
+    canWaitSeats: 
 --- !u!1 &543004060
 GameObject:
   m_ObjectHideFlags: 0

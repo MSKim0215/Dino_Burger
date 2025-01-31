@@ -8,7 +8,7 @@ namespace MSKim.HandNotAble
     {
         protected override void Initialize()
         {
-            data = GameDataManager.Instance.GetTableData(Utils.TableType.GasStove);
+            data = Managers.GameData.GetTableData(Utils.TableType.GasStove);
             name = data.Name;
         }
 

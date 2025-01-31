@@ -68,7 +68,7 @@ namespace MSKim.NonPlayer
 
         public void Initialize()
         {
-            data = GameDataManager.Instance.GetGuestData(Utils.CharacterType.NPC);
+            data = Managers.GameData.GetGuestData(Utils.CharacterType.NPC);
             name = data.Name;
 
             holdPointZ = transform.position.z;
@@ -242,7 +242,7 @@ namespace MSKim.NonPlayer
                     {
                         var rand = UnityEngine.Random.Range(0, 2);  // 0: store, 1: out
 
-                        if (!GameManager.Instance.CanMoveWaitingChair ||
+                        if (!Managers.Game.CanMoveWaitingChair ||
                             rand == 0)
                         {
                             CurrentWaypointType = UnityEngine.Random.Range(0, 2) == 0 ? Utils.WaypointType.Outside_R : Utils.WaypointType.Outside_L;
@@ -256,18 +256,18 @@ namespace MSKim.NonPlayer
                     {
                         checkDistance = 0.01f;
 
-                        if (GameManager.Instance.CanMovePickupTable)
+                        if (Managers.Game.CanMovePickupTable)
                         {
-                            if (!GameManager.Instance.IsExistWaitingGuest)
+                            if (!Managers.Game.IsExistWaitingGuest)
                             {
-                                GameManager.Instance.AddPickupZone(this);
+                                Managers.Game.AddPickupZone(this);
                                 return;
                             }
                         }
 
-                        if (GameManager.Instance.CanMoveWaitingChair)
+                        if (Managers.Game.CanMoveWaitingChair)
                         {
-                            GameManager.Instance.AddWaitingZone(this);
+                            Managers.Game.AddWaitingZone(this);
                             return;
                         }
                     }
@@ -316,9 +316,9 @@ namespace MSKim.NonPlayer
         private void UpdateWaiting()
         {
             if (WaitingNumber != 1) return;
-            if (!GameManager.Instance.CanMovePickupTable) return;
+            if (!Managers.Game.CanMovePickupTable) return;
 
-            GameManager.Instance.RemoveWaitingZone();
+            Managers.Game.RemoveWaitingZone();
             ChangeState(ICharacterState.BehaviourState.Move);
         }
 
@@ -383,12 +383,12 @@ namespace MSKim.NonPlayer
                     int giveGoldAmount = 0;
                     for (int i = 0; i < orderBurger.Count; i++)
                     {
-                        giveGoldAmount += GameDataManager.Instance.GetIngredientData(orderBurger[i]).GuestSellPrice;
+                        giveGoldAmount += Managers.GameData.GetIngredientData(orderBurger[i]).GuestSellPrice;
                     }
 
                     if(isOrderStew)
                     {
-                        giveGoldAmount += GameDataManager.Instance.GetFoodData(Utils.FoodType.Stew).GuestSellPrice;
+                        giveGoldAmount += Managers.GameData.GetFoodData(Utils.FoodType.Stew).GuestSellPrice;
                     }
 
                     Managers.UserData.CurrentGoldAmount += giveGoldAmount;
@@ -411,7 +411,7 @@ namespace MSKim.NonPlayer
 
             await UniTask.Delay(TimeSpan.FromSeconds(1f));
 
-            GameManager.Instance.RemovePickupZone(this);
+            Managers.Game.RemovePickupZone(this);
 
             if(isOrderSuccess)
             {

@@ -22,7 +22,7 @@ namespace MSKim.UI
 
         private void CreateItemBox(Utils.ShopTabType tabType)
         {
-            var currentItemDatas = GameDataManager.Instance.ShopItemDatas.FindAll(itemBox => itemBox.Type == tabType);
+            var currentItemDatas = Managers.GameData.ShopItemDatas.FindAll(itemBox => itemBox.Type == tabType);
             if (currentItemDatas == null) return;
 
             ReleaseItemBox();
