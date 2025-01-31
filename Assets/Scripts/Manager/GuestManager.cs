@@ -1,33 +1,47 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace MSKim.Manager
 {
-    public class GuestManager : MonoBehaviour
+    [Serializable]
+    public class GuestManager : BaseManager
     {
         [Header("Spawn Settings")]
         [SerializeField] private List<Transform> spawnPointList = new();
-        [SerializeField] private float currSpawnTime = 0f;
+        [SerializeField] private float currSpawnTime;
         [SerializeField] private float maxSpawnTime;
 
-        private void Awake()
+        public override void Initialize()
         {
-            maxSpawnTime = Random.Range(3, 6);
+            base.Initialize();
+
+            if(spawnPointList.Count <= 0)
+            {
+                var spawnPointRoot = GameObject.Find("GuestSpawnPoints").transform;
+                for (int i = 0; i < spawnPointRoot.childCount; i++)
+                {
+                    spawnPointList.Add(spawnPointRoot.GetChild(i));
+                }
+            }
+
+            maxSpawnTime = UnityEngine.Random.Range(3, 6);
+            currSpawnTime = maxSpawnTime;
         }
 
-        private void Update()
+        public override void OnUpdate()
         {
             currSpawnTime += Time.deltaTime;
 
-            if(currSpawnTime >= maxSpawnTime)
+            if (currSpawnTime >= maxSpawnTime)
             {
-                var spawnPoint = spawnPointList[Random.Range(0, spawnPointList.Count)];
+                var spawnPoint = spawnPointList[UnityEngine.Random.Range(0, spawnPointList.Count)];
                 var guest = ObjectPoolManager.Instance.GetPoolObject("Guest");
-                guest.transform.position = new(spawnPoint.position.x, spawnPoint.position.y, Random.Range(17, 20));
+                guest.transform.position = new(spawnPoint.position.x, spawnPoint.position.y, UnityEngine.Random.Range(17, 20));
                 guest.GetComponent<NonPlayer.GuestController>().Initialize();
 
                 currSpawnTime = 0f;
-                maxSpawnTime = Random.Range(3, 6);
+                maxSpawnTime = UnityEngine.Random.Range(3, 6);
             }
         }
     }
