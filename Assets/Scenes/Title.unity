@@ -418,7 +418,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 518065958}
-  - component: {fileID: 518065960}
   - component: {fileID: 518065964}
   m_Layer: 0
   m_Name: '@Managers'
@@ -443,75 +442,6 @@ Transform:
   - {fileID: 720381617}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &518065960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 518065957}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5bc97464753eaa40b15f46a7e76ab90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypointInfoList:
-  - type: 0
-    pointList:
-    - {fileID: 0}
-    - {fileID: 0}
-  - type: 1
-    pointList:
-    - {fileID: 0}
-  - type: 2
-    pointList:
-    - {fileID: 0}
-  - type: 3
-    pointList:
-    - {fileID: 0}
-  - type: 4
-    pointList:
-    - {fileID: 0}
-  - type: 5
-    pointList:
-    - {fileID: 0}
-  - type: 6
-    pointList:
-    - {fileID: 0}
-  - type: 7
-    pointList:
-    - {fileID: 0}
-  - type: 8
-    pointList:
-    - {fileID: 0}
-  - type: 9
-    pointList:
-    - {fileID: 0}
-  - type: 10
-    pointList:
-    - {fileID: 0}
-  - type: 11
-    pointList:
-    - {fileID: 0}
-  - type: 12
-    pointList:
-    - {fileID: 0}
-  - type: 13
-    pointList:
-    - {fileID: 0}
-  - type: 14
-    pointList:
-    - {fileID: 0}
-  - type: 15
-    pointList:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-  - type: 16
-    pointList:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
 --- !u!114 &518065964
 MonoBehaviour:
   m_ObjectHideFlags: 0

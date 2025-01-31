@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace MSKim.Manager
 {
-    public class WaypointManager : MonoBehaviour 
+    [Serializable]
+    public class WaypointManager : BaseManager 
     {
         [Serializable]
         private class WayPointInfo
@@ -13,39 +14,16 @@ namespace MSKim.Manager
             public List<Transform> pointList = new();
         }
 
-        private static WaypointManager instance;
-
-        public static WaypointManager Instance
-        {
-            get
-            {
-                if (instance == null) instance = new();
-                return instance;
-            }
-        }
-
         [Header("Guest Waypoint Settings")]
         [SerializeField] private List<WayPointInfo> waypointInfoList = new();
 
         private readonly Dictionary<Utils.WaypointType, List<Transform>> waypointDict = new();
 
-        private void Awake()
+        public override void Initialize()
         {
-            if(instance != null)
-            {
-                Destroy(gameObject);
-                return;
-            }
+            base.Initialize();
 
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-
-            Initailize();
-        }
-
-        private void Initailize()
-        {
-            foreach(var waypoint in waypointInfoList)
+            foreach (var waypoint in waypointInfoList)
             {
                 waypointDict.Add(waypoint.type, waypoint.pointList);
             }

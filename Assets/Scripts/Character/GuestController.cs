@@ -109,12 +109,12 @@ namespace MSKim.NonPlayer
 
         private bool IsAtLastWaypoint()
         {
-            return (currentPointIndex >= WaypointManager.Instance.GetCurrentWaypointMaxIndex(currentWaypointType));
+            return (currentPointIndex >= Managers.Waypoint.GetCurrentWaypointMaxIndex(currentWaypointType));
         }
 
         public override void MovePosition()
         {
-            var targetPoint = WaypointManager.Instance.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
+            var targetPoint = Managers.Waypoint.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
 
             if(ShouldHoldZPosition())
             {
@@ -144,7 +144,7 @@ namespace MSKim.NonPlayer
 
         public override void MoveRotation()
         {
-            var targetPoint = WaypointManager.Instance.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
+            var targetPoint = Managers.Waypoint.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
             
             if (currentWaypointType == Utils.WaypointType.Outside_L || currentWaypointType == Utils.WaypointType.Outside_R ||
                 (currentWaypointType == Utils.WaypointType.MoveStore && currentPointIndex == 0) ||
@@ -218,17 +218,17 @@ namespace MSKim.NonPlayer
 
         private void CheckDistance()
         {
-            var targetPoint = WaypointManager.Instance.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
+            var targetPoint = Managers.Waypoint.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
 
             if (IsMoveOutside())
             {   // 거리 -> 거리 퇴장
-                int maxIndex = WaypointManager.Instance.GetCurrentWaypointMaxIndex(currentWaypointType) - 1;
+                int maxIndex = Managers.Waypoint.GetCurrentWaypointMaxIndex(currentWaypointType) - 1;
                 currentDistance = Mathf.Abs(targetPoint.x - transform.position.x);
                 NextPointIndex(maxIndex <= currentPointIndex);
             }
             else if (IsMovePickupOutside())
             {   // 픽업 테이블 -> 거리 퇴장
-                int maxIndex = WaypointManager.Instance.GetCurrentWaypointMaxIndex(currentWaypointType) - 1;
+                int maxIndex = Managers.Waypoint.GetCurrentWaypointMaxIndex(currentWaypointType) - 1;
                 currentDistance = GetDistanceWithPointIndex(maxIndex, targetPoint);
                 NextPointIndex(maxIndex <= currentPointIndex);
             }
