@@ -34,6 +34,8 @@ namespace MSKim.Manager
 
         public static ObjectPoolManager Pool => Instance.objectPoolManager;
 
+        public static Utils.SceneType CurrentSceneType => Instance.currentSceneType;
+
         public void Initialize(Utils.SceneType nextSceneType)
         {
             if (currentSceneType == nextSceneType) return;

@@ -549,16 +549,19 @@ MonoBehaviour:
     poolObjectList:
     - createObjectName: Guest
       poolType: 0
+      useScene: 2
       createPrefab: {fileID: 7212671197239729570, guid: 9095ec65cb045894e9a7430fde4d3115, type: 3}
       createCount: 10
       maxCount: 25
     - createObjectName: ShopItemBox
       poolType: 1
+      useScene: 1
       createPrefab: {fileID: 2171801594059028071, guid: 80071267e4e4d994ab53cac914c723f3, type: 3}
       createCount: 10
       maxCount: 15
     - createObjectName: ShopPopupUI
       poolType: 1
+      useScene: 1
       createPrefab: {fileID: 5763627315479576569, guid: b2fe039d07b38634fbc946fcb6ccd441, type: 3}
       createCount: 1
       maxCount: 1

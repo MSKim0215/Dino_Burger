@@ -13,6 +13,7 @@ namespace MSKim.Manager
         {
             public string createObjectName;
             public Utils.PoolType poolType;
+            public Utils.SceneType useScene;
             public GameObject createPrefab;
             public int createCount;
             public int maxCount;
@@ -29,17 +30,31 @@ namespace MSKim.Manager
 
         public override void Initialize()
         {
-            if(rootDict.Count <= 0)
-            {
-                for(int i = 0; i < Enum.GetValues(typeof(Utils.PoolType)).Length; i++)
-                {
-                    rootDict.Add((Utils.PoolType)i, rootList[i]);
-                }
-            }
+            SetPoolRoot();
+            SetPoolObject();
+        }
 
-            for(int i = 0; i < poolObjectList.Count; i++)
+        private void SetPoolRoot()
+        {
+            if (rootDict.Count > 0) return;
+
+            for (int i = 0; i < rootList.Count; i++)
             {
-                var pool = new ObjectPool<GameObject>(CreatePoolObject, OnTakeFromPool, OnReturnToPool, OnDestroyPoolObject, true, poolObjectList[i].createCount, poolObjectList[i].maxCount);
+                rootDict.Add((Utils.PoolType)i, rootList[i]);
+            }
+        }
+
+        private void SetPoolObject()
+        {
+            ClearPoolObject();
+
+            for (int i = 0; i < poolObjectList.Count; i++)
+            {
+                if (Managers.CurrentSceneType != poolObjectList[i].useScene) continue;
+
+                var pool = new ObjectPool<GameObject>
+                    (CreatePoolObject, OnTakeFromPool, OnReturnToPool, OnDestroyPoolObject, true,
+                    poolObjectList[i].createCount, poolObjectList[i].maxCount);
 
                 if (createDict.ContainsKey(poolObjectList[i].createObjectName))
                 {
@@ -49,14 +64,32 @@ namespace MSKim.Manager
 
                 createDict.Add(poolObjectList[i].createObjectName, poolObjectList[i].createPrefab);
                 poolObjectDict.Add(poolObjectList[i].createObjectName, pool);
-                
-                for(int j = 0; j < poolObjectList[i].createCount; j++)
-                {
-                    createObjectName = poolObjectList[i].createObjectName;
-                    var create = CreatePoolObject().GetComponent<PoolAble>();
-                    create.transform.SetParent(rootDict[poolObjectList[i].poolType]);
-                    create.Pool.Release(create.gameObject);
-                }
+
+                CreatePoolObject(poolObjectList[i]);
+            }
+        }
+
+        private void ClearPoolObject()
+        {
+            if (poolObjectDict.Count <= 0) return;
+
+            foreach (var pool in poolObjectDict.Values)
+            {
+                pool.Clear();
+            }
+
+            createDict.Clear();
+            poolObjectDict.Clear();
+        }
+
+        private void CreatePoolObject(ObjectInfo objectInfo)
+        {
+            for (int j = 0; j < objectInfo.createCount; j++)
+            {
+                createObjectName = objectInfo.createObjectName;
+                var create = CreatePoolObject().GetComponent<PoolAble>();
+                create.transform.SetParent(rootDict[objectInfo.poolType]);
+                create.Pool.Release(create.gameObject);
             }
         }
 
