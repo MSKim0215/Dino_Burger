@@ -21,7 +21,7 @@ namespace MSKim.UI
 
         public void OnShopEvent()
         {
-            var shopPopup = ObjectPoolManager.Instance.GetPoolObject("ShopPopupUI");
+            var shopPopup = Managers.Pool.GetPoolObject("ShopPopupUI");
             if (shopPopup == null) return;
 
             shopPopup.transform.SetParent(view.UIRoot);

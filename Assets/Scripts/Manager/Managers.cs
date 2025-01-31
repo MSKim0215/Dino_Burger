@@ -40,6 +40,8 @@ namespace MSKim.Manager
 
             currentSceneType = nextSceneType;
 
+            objectPoolManager.Initialize();
+
             if (currentSceneType == Utils.SceneType.Title)
             {
                 userDataManager.Initialize();

@@ -281,12 +281,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 365165891}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1263924185}
+  m_Father: {fileID: 720381617}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &410087039
 GameObject:
@@ -439,7 +439,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 720381617}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &518065960
@@ -544,7 +545,26 @@ MonoBehaviour:
     spawnPointList: []
     currSpawnTime: 0
     maxSpawnTime: 0
-  objectPoolManager: {fileID: 0}
+  objectPoolManager:
+    poolObjectList:
+    - createObjectName: Guest
+      poolType: 0
+      createPrefab: {fileID: 7212671197239729570, guid: 9095ec65cb045894e9a7430fde4d3115, type: 3}
+      createCount: 10
+      maxCount: 25
+    - createObjectName: ShopItemBox
+      poolType: 1
+      createPrefab: {fileID: 2171801594059028071, guid: 80071267e4e4d994ab53cac914c723f3, type: 3}
+      createCount: 10
+      maxCount: 15
+    - createObjectName: ShopPopupUI
+      poolType: 1
+      createPrefab: {fileID: 5763627315479576569, guid: b2fe039d07b38634fbc946fcb6ccd441, type: 3}
+      createCount: 1
+      maxCount: 1
+    rootList:
+    - {fileID: 365165892}
+    - {fileID: 708651376}
 --- !u!1 &543004060
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,12 +717,45 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 708651375}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1263924185}
+  m_Father: {fileID: 720381617}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &720381616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 720381617}
+  m_Layer: 0
+  m_Name: Pools
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &720381617
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720381616}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 365165892}
+  - {fileID: 708651376}
+  m_Father: {fileID: 518065958}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &832575517
 GameObject:
@@ -855,73 +908,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &1263924184
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1263924185}
-  - component: {fileID: 1263924186}
-  m_Layer: 0
-  m_Name: ObjectPoolManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1263924185
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263924184}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 365165892}
-  - {fileID: 708651376}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1263924186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263924184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50323c3580ea6b64f8914079a8234e0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolObjectList:
-  - createObjectName: Guest
-    poolType: 0
-    createPrefab: {fileID: 7212671197239729570, guid: 9095ec65cb045894e9a7430fde4d3115, type: 3}
-    createCount: 10
-    maxCount: 30
-  - createObjectName: ShopItemBox
-    poolType: 1
-    createPrefab: {fileID: 2171801594059028071, guid: 80071267e4e4d994ab53cac914c723f3, type: 3}
-    createCount: 5
-    maxCount: 20
-  - createObjectName: ShopPopupUI
-    poolType: 1
-    createPrefab: {fileID: 5763627315479576569, guid: b2fe039d07b38634fbc946fcb6ccd441, type: 3}
-    createCount: 1
-    maxCount: 1
-  rootList:
-  - poolType: 0
-    root: {fileID: 365165892}
-  - poolType: 1
-    root: {fileID: 708651376}
 --- !u!1 &1268841121
 GameObject:
   m_ObjectHideFlags: 0
@@ -1212,7 +1198,6 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 518065958}
-  - {fileID: 1263924185}
   - {fileID: 1197785793}
   - {fileID: 1268841124}
   - {fileID: 1965513868}

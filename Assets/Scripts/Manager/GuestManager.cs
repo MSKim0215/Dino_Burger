@@ -36,7 +36,7 @@ namespace MSKim.Manager
             if (currSpawnTime >= maxSpawnTime)
             {
                 var spawnPoint = spawnPointList[UnityEngine.Random.Range(0, spawnPointList.Count)];
-                var guest = ObjectPoolManager.Instance.GetPoolObject("Guest");
+                var guest = Managers.Pool.GetPoolObject("Guest");
                 guest.transform.position = new(spawnPoint.position.x, spawnPoint.position.y, UnityEngine.Random.Range(17, 20));
                 guest.GetComponent<NonPlayer.GuestController>().Initialize();
 

@@ -5,7 +5,8 @@ using UnityEngine.Pool;
 
 namespace MSKim.Manager
 {
-    public class ObjectPoolManager : MonoBehaviour
+    [Serializable]
+    public class ObjectPoolManager : BaseManager
     {
         [Serializable]
         private class ObjectInfo
@@ -17,45 +18,22 @@ namespace MSKim.Manager
             public int maxCount;
         }
 
-        private static ObjectPoolManager instance;
-
         [Header("Pool Settings")]
         [SerializeField] private List<ObjectInfo> poolObjectList = new();
+        [SerializeField] private List<Transform> rootList = new();
 
         private Dictionary<Utils.PoolType, Transform> rootDict = new();
         private Dictionary<string, IObjectPool<GameObject>> poolObjectDict = new();
         private Dictionary<string, GameObject> createDict = new();
         private string createObjectName;
 
-        public static ObjectPoolManager Instance
-        {
-            get
-            {
-                if (instance == null) instance = new();
-                return instance;
-            }
-        }
-
-        private void Awake()
-        {
-            if(instance != null)
-            {
-                Destroy(gameObject);
-                return;
-            }
-
-            instance = this;
-            
-            Initialize();
-        }
-
-        private void Initialize()
+        public override void Initialize()
         {
             if(rootDict.Count <= 0)
             {
                 for(int i = 0; i < Enum.GetValues(typeof(Utils.PoolType)).Length; i++)
                 {
-                    rootDict.Add((Utils.PoolType)i, transform.GetChild(i));
+                    rootDict.Add((Utils.PoolType)i, rootList[i]);
                 }
             }
 
@@ -84,7 +62,7 @@ namespace MSKim.Manager
 
         private GameObject CreatePoolObject()
         {
-            var createObj = Instantiate(createDict[createObjectName]);
+            var createObj = UnityEngine.Object.Instantiate(createDict[createObjectName]);
             createObj.name = createObjectName;
             createObj.GetComponent<PoolAble>().Pool = poolObjectDict[createObjectName];
             return createObj;
@@ -107,7 +85,7 @@ namespace MSKim.Manager
 
         private void OnDestroyPoolObject(GameObject poolObject)
         {
-            Destroy(poolObject);
+            UnityEngine.Object.Destroy(poolObject);
         }
 
         public GameObject GetPoolObject(string objectName)

@@ -47,7 +47,7 @@ namespace MSKim.UI
         {
             for (int i = 0; i < dataList.Count; i++)
             {
-                var itemBox = ObjectPoolManager.Instance.GetPoolObject("ShopItemBox");
+                var itemBox = Managers.Pool.GetPoolObject("ShopItemBox");
                 if(itemBox.transform.parent != view.ShopItemBoxRoot)
                 {
                     itemBox.transform.SetParent(view.ShopItemBoxRoot);
