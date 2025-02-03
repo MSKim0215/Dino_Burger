@@ -12,6 +12,9 @@ namespace MSKim.NonPlayer
         [Header("Guest Data Info")]
         [SerializeField] private Data.GuestData data;
 
+        [Header("Guest View")]
+        [SerializeField] private UI.GuestView view;
+
         [Header("Waypoint Settings")]
         [SerializeField] private Utils.WaypointType currentWaypointType;
         [SerializeField] private int currentPointIndex = 0;
@@ -36,6 +39,8 @@ namespace MSKim.NonPlayer
 
         public Data.GuestData Data => data;
 
+        public UI.GuestView View => view;
+
         private int LayerHandAble { get => 1 << LayerMask.NameToLayer("HandAble"); }
         private int LayerHandNotAble { get => 1 << LayerMask.NameToLayer("HandNotAble"); }
 
@@ -53,6 +58,8 @@ namespace MSKim.NonPlayer
 
         protected override void SettingState()
         {
+            state = new(this);
+
             stateDict = new()
             {
                 { ICharacterState.BehaviourState.Move, new MoveState() },

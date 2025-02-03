@@ -8,6 +8,9 @@ namespace MSKim.Player
         [Header("Player Data Info")]
         [SerializeField] private Data.CharacterData data;
 
+        [Header("Guest View")]
+        [SerializeField] private CharacterView view;
+
         [Header("My Hand")]
         [SerializeField] private Hand hand;
 
@@ -19,8 +22,12 @@ namespace MSKim.Player
         private int LayerHandAble { get => 1 << LayerMask.NameToLayer("HandAble"); }
         private int LayerHandNotAble { get => 1 << LayerMask.NameToLayer("HandNotAble"); }
 
+        public CharacterView View => view;
+
         protected override void SettingState()
         {
+            state = new(this);
+
             stateDict = new()
             {
                 { ICharacterState.BehaviourState.Move, new MoveState() },

@@ -1,5 +1,7 @@
 using Cysharp.Threading.Tasks;
 using MSKim.Manager;
+using MSKim.NonPlayer;
+using MSKim.Player;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,14 +12,21 @@ public interface ICharacterState
         Move, Waiting, Order, OrderSuccess, OrderFailure, MoveSuccess, MoveFailure, InterAction, None
     }
 
-    public void Convert(CharacterController controller);
+    public void Convert(PlayerController controller);
+
+    public void Convert(GuestController controller);
 
     public BehaviourState Get();
 }
 
 public class MoveState : ICharacterState
 {
-    public void Convert(CharacterController controller)
+    public void Convert(PlayerController controller)
+    {
+        controller.View.PlayAnimation(Get());
+    }
+
+    public void Convert(GuestController controller)
     {
         controller.View.PlayAnimation(Get());
     }
@@ -30,18 +39,13 @@ public class MoveState : ICharacterState
 
 public class WaitingState : ICharacterState
 {
-    public async void Convert(CharacterController controller)
+    public void Convert(PlayerController controller)
     {
-        var player = controller as MSKim.Player.PlayerController;
-        if(player != null)
-        {
-            controller.View.PlayAnimation(Get());
-            return;
-        }
+        controller.View.PlayAnimation(Get());
+    }
 
-        var guest = controller as MSKim.NonPlayer.GuestController;
-        if (guest == null) return;
-
+    public async void Convert(GuestController controller)
+    {
         var targetRotation = Quaternion.Euler(new(0, 180, 0));
         while (controller != null &&
             Quaternion.Angle(controller.transform.rotation, targetRotation) > 0.1f)
@@ -65,16 +69,18 @@ public class WaitingState : ICharacterState
 
 public class OrderState : ICharacterState
 {
-    public async void Convert(CharacterController controller)
+    public void Convert(PlayerController controller)
     {
-        var guest = controller as MSKim.NonPlayer.GuestController;
-        if (guest == null) return;
+        return;
+    }
 
+    public async void Convert(GuestController controller)
+    {
         var targetRotation = Quaternion.Euler(new(0, 180, 0));
         while (controller != null &&
             Quaternion.Angle(controller.transform.rotation, targetRotation) > 0.1f)
         {
-            controller.transform.rotation = 
+            controller.transform.rotation =
                 Quaternion.Slerp(controller.transform.rotation, targetRotation, 15f * Time.deltaTime);
 
             await UniTask.Yield();
@@ -82,7 +88,7 @@ public class OrderState : ICharacterState
 
         if (controller == null) return;
 
-        guest.Order(GetOrderBurger(guest.Data.MinimumToppingCount, guest.Data.MaximumToppingCount), IsOrderStew());
+        controller.Order(GetOrderBurger(controller.Data.MinimumToppingCount, controller.Data.MaximumToppingCount), IsOrderStew());
         controller.View.PlayAnimation(Get());
     }
 
@@ -111,7 +117,12 @@ public class OrderState : ICharacterState
 
 public class OrderSuccessState : ICharacterState
 {
-    public void Convert(CharacterController controller)
+    public void Convert(PlayerController controller)
+    {
+        controller.View.PlayAnimation(Get());
+    }
+
+    public void Convert(GuestController controller)
     {
         controller.View.PlayAnimation(Get());
     }
@@ -124,7 +135,12 @@ public class OrderSuccessState : ICharacterState
 
 public class OrderFailureState : ICharacterState
 {
-    public void Convert(CharacterController controller)
+    public void Convert(PlayerController controller)
+    {
+        controller.View.PlayAnimation(Get());
+    }
+
+    public void Convert(GuestController controller)
     {
         controller.View.PlayAnimation(Get());
     }
@@ -137,7 +153,12 @@ public class OrderFailureState : ICharacterState
 
 public class MoveSuccessState : ICharacterState
 {
-    public void Convert(CharacterController controller)
+    public void Convert(PlayerController controller)
+    {
+        controller.View.PlayAnimation(Get());
+    }
+
+    public void Convert(GuestController controller)
     {
         controller.View.PlayAnimation(Get());
     }
@@ -150,7 +171,12 @@ public class MoveSuccessState : ICharacterState
 
 public class MoveFailureState : ICharacterState
 {
-    public void Convert(CharacterController controller)
+    public void Convert(PlayerController controller)
+    {
+        controller.View.PlayAnimation(Get());
+    }
+
+    public void Convert(GuestController controller)
     {
         controller.View.PlayAnimation(Get());
     }
@@ -163,7 +189,12 @@ public class MoveFailureState : ICharacterState
 
 public class InterActionState : ICharacterState
 {
-    public void Convert(CharacterController controller)
+    public void Convert(PlayerController controller)
+    {
+        controller.View.PlayAnimation(Get());
+    }
+
+    public void Convert(GuestController controller)
     {
         controller.View.PlayAnimation(Get());
     }
@@ -176,7 +207,13 @@ public class InterActionState : ICharacterState
 
 public class NoneState : ICharacterState
 {
-    public void Convert(CharacterController controller) { }
+    public void Convert(PlayerController controller)
+    {
+    }
+
+    public void Convert(GuestController controller)
+    {
+    }
 
     public ICharacterState.BehaviourState Get()
     {
@@ -200,6 +237,14 @@ public class StateController
         if (nextState == CurrentState) return;
 
         CurrentState = nextState;
-        CurrentState.Convert(characterController);
+
+        if (characterController is GuestController)
+        {
+            CurrentState.Convert(characterController as GuestController);
+        }
+        else if(characterController is PlayerController)
+        {
+            CurrentState.Convert(characterController as PlayerController);
+        }
     }
 }

@@ -14,18 +14,15 @@ public abstract class CharacterController : PoolAble, ICharacterMove
     protected StateController state;
     protected Dictionary<ICharacterState.BehaviourState, ICharacterState> stateDict = new();
 
-    [Header("Character View")]
-    [SerializeField] protected CharacterView view;
-
-    public CharacterView View => view;
-
     private void Awake()
     {
-        state = new(this);
         SettingState();
     }
-    
-    protected abstract void SettingState();
+
+    protected virtual void SettingState()
+    {
+        state = new(this);
+    }
 
     public virtual Vector3 GetVelocity() => Vector3.zero;
 
