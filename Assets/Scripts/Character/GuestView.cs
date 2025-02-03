@@ -1,11 +1,59 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MSKim.NonPlayer.UI
 {
     [Serializable]
     public class GuestView : CharacterView
     {
+        [Serializable]
+        private class BaseCanvas
+        {
+            [SerializeField] protected GameObject canvas;
 
+            public void SetActiveCanvas(bool isActive) => canvas.SetActive(isActive);
+        }
+
+        [Serializable]
+        private class WaitingCanvas : BaseCanvas
+        {
+            [SerializeField] private Text numberText;
+        }
+
+        [Serializable]
+        private class OrderCanvas : BaseCanvas
+        {
+            [SerializeField] private Text numberText;
+            [SerializeField] private Slider timer;
+        }
+
+        [Header("Canvas Settings")]
+        [SerializeField] private WaitingCanvas waiting = null;
+        [SerializeField] private OrderCanvas order = null;
+
+        private GuestController controller = null;
+
+        public void Initialize(GuestController controller)
+        {
+            this.controller = controller;
+        }
+
+        public void StartWait()
+        {
+            waiting.SetActiveCanvas(true);
+        }
+
+        public void StartOrder()
+        {
+            waiting.SetActiveCanvas(false);
+            order.SetActiveCanvas(true);
+        }
+
+        public void Release()
+        {
+            waiting.SetActiveCanvas(false);
+            order.SetActiveCanvas(false);
+        }
     }
 }

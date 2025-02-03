@@ -76,6 +76,7 @@ namespace MSKim.NonPlayer
         public void Initialize()
         {
             data = Managers.GameData.GetGuestData(Utils.CharacterType.NPC);
+            view.Initialize(this);
 
             holdPointZ = transform.position.z;
             CurrentWaypointType = Utils.WaypointType.MoveStore;
@@ -459,6 +460,8 @@ namespace MSKim.NonPlayer
             isOrderSuccess = false;
             isGetBurger = false;
             isGetStew = false;
+
+            view.Release();
             base.Release();
         }
     }

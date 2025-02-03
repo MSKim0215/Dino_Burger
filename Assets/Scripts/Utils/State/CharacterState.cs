@@ -28,6 +28,7 @@ public class MoveState : ICharacterState
 
     public void Convert(GuestController controller)
     {
+        controller.View.Release();
         controller.View.PlayAnimation(Get());
     }
 
@@ -58,6 +59,7 @@ public class WaitingState : ICharacterState
 
         if (controller == null) return;
 
+        controller.View.StartWait();
         controller.View.PlayAnimation(Get());
     }
 
@@ -89,6 +91,7 @@ public class OrderState : ICharacterState
         if (controller == null) return;
 
         controller.Order(GetOrderBurger(controller.Data.MinimumToppingCount, controller.Data.MaximumToppingCount), IsOrderStew());
+        controller.View.StartOrder();
         controller.View.PlayAnimation(Get());
     }
 
@@ -160,6 +163,7 @@ public class MoveSuccessState : ICharacterState
 
     public void Convert(GuestController controller)
     {
+        controller.View.Release();
         controller.View.PlayAnimation(Get());
     }
 
@@ -178,6 +182,7 @@ public class MoveFailureState : ICharacterState
 
     public void Convert(GuestController controller)
     {
+        controller.View.Release();
         controller.View.PlayAnimation(Get());
     }
 
