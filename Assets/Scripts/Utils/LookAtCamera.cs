@@ -1,4 +1,9 @@
-public interface ILookAtCamera
+using UnityEngine;
+
+public class LookAtCamera : MonoBehaviour
 {
-    public void LookAt();
+    private void Start()
+    {
+        transform.forward = Camera.main.transform.forward;
+    }
 }
