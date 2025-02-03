@@ -76,6 +76,7 @@ namespace MSKim.Manager
         {
             guest.CurrentWaypointType = GetRandomPickupZoneType();
             pickupZoneGuests.Add(guest);
+            guest.OrderTableNumber = int.Parse(guest.CurrentWaypointType.ToString()[^1..]);
         }
 
         private Utils.WaypointType GetRandomPickupZoneType()

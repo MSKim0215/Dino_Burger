@@ -37,6 +37,12 @@ namespace MSKim.NonPlayer
         private Ray handRay;
         private float holdPointZ;
 
+        private int waitingNumber;
+        private int orderTableNumber;
+
+        public event Action<int> OnChangeWaitingNumber;
+        public event Action<int> OnChangeOrderTableNumber;
+
         public Data.GuestData Data => data;
 
         public UI.GuestView View => view;
@@ -44,7 +50,25 @@ namespace MSKim.NonPlayer
         private int LayerHandAble { get => 1 << LayerMask.NameToLayer("HandAble"); }
         private int LayerHandNotAble { get => 1 << LayerMask.NameToLayer("HandNotAble"); }
 
-        public int WaitingNumber { get; set; }
+        public int WaitingNumber
+        {
+            get => waitingNumber;
+            set
+            {
+                waitingNumber = value;
+                OnChangeWaitingNumber?.Invoke(waitingNumber);
+            }
+        }
+
+        public int OrderTableNumber
+        {
+            get => orderTableNumber;
+            set
+            {
+                orderTableNumber = value;
+                OnChangeOrderTableNumber?.Invoke(orderTableNumber);
+            }
+        }
 
         public Utils.WaypointType CurrentWaypointType
         {

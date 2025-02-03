@@ -19,6 +19,8 @@ namespace MSKim.NonPlayer.UI
         private class WaitingCanvas : BaseCanvas
         {
             [SerializeField] private Text numberText;
+
+            public void SetNumber(int number) => numberText.text = number.ToString();
         }
 
         [Serializable]
@@ -26,6 +28,8 @@ namespace MSKim.NonPlayer.UI
         {
             [SerializeField] private Text numberText;
             [SerializeField] private Slider timer;
+
+            public void SetNumber(int number) => numberText.text = number.ToString();
         }
 
         [Header("Canvas Settings")]
@@ -37,6 +41,17 @@ namespace MSKim.NonPlayer.UI
         public void Initialize(GuestController controller)
         {
             this.controller = controller;
+
+            BindEvent();
+        }
+
+        private void BindEvent()
+        {
+            this.controller.OnChangeWaitingNumber -= waiting.SetNumber;
+            this.controller.OnChangeWaitingNumber += waiting.SetNumber;
+
+            this.controller.OnChangeOrderTableNumber -= order.SetNumber;
+            this.controller.OnChangeOrderTableNumber += order.SetNumber;
         }
 
         public void StartWait()
