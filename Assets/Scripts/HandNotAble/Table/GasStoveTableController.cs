@@ -4,12 +4,17 @@ using UnityEngine;
 
 namespace MSKim.HandNotAble
 {
-    public class GasStoveTableController : TableController
+    public class GasStoveTableController : TableControllerUseUI
     {
+        [Header("Table View")]
+        [SerializeField] private UI.TableView view;
+
         protected override void Initialize()
         {
             data = Managers.GameData.GetTableData(Utils.TableType.GasStove);
             name = data.Name;
+
+            view.Initialize(this);
         }
 
         public override void Take(GameObject takeObject)

@@ -6,7 +6,7 @@ namespace MSKim.HandNotAble
     public class CuttingBoardTableController : TableControllerUseUI
     {
         [Header("Table View")]
-        [SerializeField] private UI.CuttingBoardTableView view;
+        [SerializeField] private UI.TableView view;
 
         protected override void Initialize()
         {

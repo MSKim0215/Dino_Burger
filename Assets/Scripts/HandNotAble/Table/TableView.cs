@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace MSKim.HandNotAble.UI
 {
     [Serializable]
-    public abstract class TableView
+    public class TableView
     {
         [Serializable]
         public class CanvasGroup
@@ -35,8 +35,17 @@ namespace MSKim.HandNotAble.UI
             public void SetSliderValue(float value) => slider.value = value;
         }
 
-        [SerializeField] protected GaugeCanvas gaugeCanvas = null;
+        private TableControllerUseUI controller;
 
-        public abstract void Initialize<T>(T controller) where T : TableController;
+        [SerializeField] private GaugeCanvas gaugeCanvas = null;
+
+        public void Initialize<T>(T controller) where T : TableControllerUseUI
+        {
+            this.controller = controller as T;
+            if (this.controller == null) return;
+
+            this.controller.OnSetUpActiveEvent(gaugeCanvas.SetActiveRoot);
+            this.controller.OnSetUpValueEvent(gaugeCanvas.SetSliderValue);
+        }
     }
 }
