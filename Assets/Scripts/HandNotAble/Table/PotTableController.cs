@@ -5,8 +5,11 @@ using UnityEngine;
 
 namespace MSKim.HandNotAble
 {
-    public class PotTableController : TableController
+    public class PotTableController : TableControllerUseUI
     {
+        [Header("Table View")]
+        [SerializeField] private UI.TableView view;
+
         [Header("Other Objects")]
         [SerializeField] private GameObject stewObject;
 
@@ -24,6 +27,8 @@ namespace MSKim.HandNotAble
         {
             data = Managers.GameData.GetTableData(Utils.TableType.Pot);
             name = data.Name;
+
+            view.Initialize(this);
         }
 
         public override void Take(GameObject takeObject)
@@ -51,13 +56,17 @@ namespace MSKim.HandNotAble
 
             while(true)
             {
+                bool isTimeOver = currentCookTime >= Utils.BOIL_STEW_COOK_TIME;
+                OnTriggerOriginActiveEvent(!isTimeOver);
+
                 currentCookTime += Time.deltaTime;
+                OnTriggerValueEvent(currentCookTime / Utils.BOIL_STEW_COOK_TIME);
 
                 await UniTask.Yield();
 
-                if(currentCookTime >= Utils.BOIL_STEW_COOK_TIME)
+                if(isTimeOver)
                 {
-                    Debug.Log("Stew가 완성되었습니다.");
+                    currentCookTime = 0f;
 
                     var stew = Instantiate(stewFoodPrefab);
                     stew.SetActive(false);
@@ -72,6 +81,7 @@ namespace MSKim.HandNotAble
             if (hand.HandUpObject == null) return base.Give();
 
             stewObject.SetActive(false);
+            currentIngredientList.Clear();
             hand.HandUpObject.SetActive(true);
             return base.Give();
         }

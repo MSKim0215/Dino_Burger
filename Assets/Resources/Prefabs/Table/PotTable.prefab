@@ -311,6 +311,13 @@ MonoBehaviour:
   hand:
     handRoot: {fileID: 1210485514269066760}
     handUpObject: {fileID: 0}
+  view:
+    gaugeCanvas:
+      canvas: {fileID: 6163467961917278081}
+      slider: {fileID: 8784113407727726136}
+      fill: {fileID: 6977282909116168209}
+      originColor: {r: 0.40392157, g: 0.76862746, b: 0.2901961, a: 1}
+      changeColor: {r: 0.9764706, g: 0.29803923, b: 0.29803923, a: 1}
   stewObject: {fileID: 5889672131192540811}
   stewFoodPrefab: {fileID: 6018837424437621513, guid: 266d043f7ba48de4bbd1fe761e4d9af8, type: 3}
   stewIngredientList: 020000000400000005000000
