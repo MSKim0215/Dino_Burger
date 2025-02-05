@@ -211,7 +211,8 @@ namespace MSKim.Player
                         canTake = ingredient.IngredientState == Utils.IngredientState.CutOver &&
                                 (ingredient.IngredientType == Utils.CrateType.Lettuce ||
                                 ingredient.IngredientType == Utils.CrateType.Onion ||
-                                ingredient.IngredientType == Utils.CrateType.Tomato);
+                                ingredient.IngredientType == Utils.CrateType.Tomato) &&
+                                !(table as HandNotAble.PotTableController).IsContainIngredient(ingredient.IngredientType);
                         break;
 
                     case Utils.TableType.GasStove:

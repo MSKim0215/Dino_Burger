@@ -57,11 +57,11 @@ namespace MSKim.HandNotAble.UI
             }
         }
 
-        private TableControllerUseUI controller;
+        protected TableControllerUseUI controller;
 
-        [SerializeField] private GaugeCanvas gaugeCanvas = null;
+        [SerializeField] protected GaugeCanvas gaugeCanvas = null;
 
-        public void Initialize<T>(T controller) where T : TableControllerUseUI
+        public virtual void Initialize<T>(T controller) where T : TableControllerUseUI
         {
             this.controller = controller as T;
             if (this.controller == null) return;

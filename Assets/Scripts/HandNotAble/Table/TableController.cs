@@ -8,6 +8,7 @@ namespace MSKim.HandNotAble
         private event Action<bool> OnOriginActiveEvent;
         private event Action<bool> OnChangeActiveEvent;
         private event Action<float> OnValueEvent;
+        private event Action OnTakeIngredientEvent;
 
         public void OnSetUpOriginActiveEvent(Action<bool> OnOriginActiveEvent)
         {
@@ -27,11 +28,19 @@ namespace MSKim.HandNotAble
             this.OnValueEvent += OnValueEvent;
         }
 
+        public void OnSetUpTakeIngredientEvent(Action OnTakeIngredientEvent)
+        {
+            this.OnTakeIngredientEvent -= OnTakeIngredientEvent;
+            this.OnTakeIngredientEvent += OnTakeIngredientEvent;
+        }
+
         public void OnTriggerOriginActiveEvent(bool isActive) => OnOriginActiveEvent?.Invoke(isActive);
 
         public void OnTriggerChangeActiveEvent(bool isActive) => OnChangeActiveEvent?.Invoke(isActive);
 
         public void OnTriggerValueEvent(float value) => OnValueEvent?.Invoke(value);
+
+        public void OnTriggerTakeIngredientEvent() => OnTakeIngredientEvent?.Invoke();
     }
 
     public class TableController : MonoBehaviour, IInterAction

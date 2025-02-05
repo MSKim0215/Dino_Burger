@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using MSKim.Manager;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace MSKim.HandNotAble
@@ -8,7 +9,7 @@ namespace MSKim.HandNotAble
     public class PotTableController : TableControllerUseUI
     {
         [Header("Table View")]
-        [SerializeField] private UI.TableView view;
+        [SerializeField] private UI.PotTableView view;
 
         [Header("Other Objects")]
         [SerializeField] private GameObject stewObject;
@@ -22,6 +23,8 @@ namespace MSKim.HandNotAble
 
         [Header("Stew Cooking Time")]
         [SerializeField] private float currentCookTime = 0f;
+
+        public bool IsContainIngredient(Utils.CrateType type) => currentIngredientList.Contains(type);
 
         protected override void Initialize()
         {
@@ -40,9 +43,10 @@ namespace MSKim.HandNotAble
             if(takeObject.TryGetComponent<HandAble.IngredientController>(out var ingredient))
             {
                 if (!stewIngredientList.Contains(ingredient.IngredientType)) return;
-                if (currentIngredientList.Contains(ingredient.IngredientType)) return;
+                if (IsContainIngredient(ingredient.IngredientType)) return;
 
                 currentIngredientList.Add(ingredient.IngredientType);
+                OnTriggerTakeIngredientEvent();
 
                 Destroy(base.Give());
 
