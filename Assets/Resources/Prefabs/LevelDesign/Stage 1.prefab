@@ -2167,6 +2167,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: GasStoveTable
       objectReference: {fileID: 0}
+    - target: {fileID: 4000445999170504765, guid: f63cec2a75c0c25429785a691439892d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283684198647290393, guid: f63cec2a75c0c25429785a691439892d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283684198647290393, guid: f63cec2a75c0c25429785a691439892d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4633,6 +4645,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PotTable
       objectReference: {fileID: 0}
+    - target: {fileID: 6326512515794813371, guid: ed557f0c16184734b82252e72da2d929, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101807890893308846, guid: ed557f0c16184734b82252e72da2d929, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101807890893308846, guid: ed557f0c16184734b82252e72da2d929, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5631,6 +5655,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PotTable
       objectReference: {fileID: 0}
+    - target: {fileID: 6326512515794813371, guid: ed557f0c16184734b82252e72da2d929, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101807890893308846, guid: ed557f0c16184734b82252e72da2d929, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101807890893308846, guid: ed557f0c16184734b82252e72da2d929, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5820,6 +5856,18 @@ PrefabInstance:
     - target: {fileID: 3497027497340784652, guid: ed557f0c16184734b82252e72da2d929, type: 3}
       propertyPath: m_Name
       value: PotTable
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326512515794813371, guid: ed557f0c16184734b82252e72da2d929, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101807890893308846, guid: ed557f0c16184734b82252e72da2d929, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101807890893308846, guid: ed557f0c16184734b82252e72da2d929, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14525,6 +14573,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: GasStoveTable
       objectReference: {fileID: 0}
+    - target: {fileID: 4000445999170504765, guid: f63cec2a75c0c25429785a691439892d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283684198647290393, guid: f63cec2a75c0c25429785a691439892d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283684198647290393, guid: f63cec2a75c0c25429785a691439892d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14858,6 +14918,18 @@ PrefabInstance:
     - target: {fileID: 3497027497340784652, guid: f63cec2a75c0c25429785a691439892d, type: 3}
       propertyPath: m_Name
       value: GasStoveTable
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000445999170504765, guid: f63cec2a75c0c25429785a691439892d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283684198647290393, guid: f63cec2a75c0c25429785a691439892d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283684198647290393, guid: f63cec2a75c0c25429785a691439892d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
