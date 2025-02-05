@@ -2,6 +2,8 @@ namespace MSKim.HandAble
 {
     public class MeatIngredientController : IngredientController
     {
+        public bool IsGrillOver { get; set; } = false;
+
         public override float CurrentCookTime
         {
             get => currentCookTime;
@@ -9,17 +11,23 @@ namespace MSKim.HandAble
             {
                 currentCookTime = value;
 
-                if(currentCookTime >= Utils.GRILL_OVERCOOKED_TIME)
+                if(IsGrillOver)
                 {
-                    ChangeCookStateObject(Utils.CookState.OverCook);
-                }
-                else if(currentCookTime >= data.CookTime)
-                {
-                    ChangeCookStateObject(Utils.CookState.Cook);
+                    if(currentCookTime >= Utils.GRILL_OVERCOOKED_TIME - data.CookTime)
+                    {
+                        ChangeCookStateObject(Utils.CookState.OverCook);
+                    }
                 }
                 else
                 {
-                    ChangeCookStateObject(Utils.CookState.UnCook);
+                    if (currentCookTime >= data.CookTime)
+                    {
+                        ChangeCookStateObject(Utils.CookState.Cook);
+                    }
+                    else
+                    {
+                        ChangeCookStateObject(Utils.CookState.UnCook);
+                    }
                 }
             }
         }

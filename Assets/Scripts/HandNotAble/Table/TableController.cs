@@ -5,13 +5,20 @@ namespace MSKim.HandNotAble
 {
     public class TableControllerUseUI : TableController
     {
-        private event Action<bool> OnActiveEvent;
+        private event Action<bool> OnOriginActiveEvent;
+        private event Action<bool> OnChangeActiveEvent;
         private event Action<float> OnValueEvent;
 
-        public void OnSetUpActiveEvent(Action<bool> OnActiveEvent)
+        public void OnSetUpOriginActiveEvent(Action<bool> OnOriginActiveEvent)
         {
-            this.OnActiveEvent -= OnActiveEvent;
-            this.OnActiveEvent += OnActiveEvent;
+            this.OnOriginActiveEvent -= OnOriginActiveEvent;
+            this.OnOriginActiveEvent += OnOriginActiveEvent;
+        }
+
+        public void OnSetUpChangeActiveEvent(Action<bool> OnChangeActiveEvent)
+        {
+            this.OnChangeActiveEvent -= OnChangeActiveEvent;
+            this.OnChangeActiveEvent += OnChangeActiveEvent;
         }
 
         public void OnSetUpValueEvent(Action<float> OnValueEvent)
@@ -20,7 +27,9 @@ namespace MSKim.HandNotAble
             this.OnValueEvent += OnValueEvent;
         }
 
-        public void OnTriggerActiveEvent(bool isActive) => OnActiveEvent?.Invoke(isActive);
+        public void OnTriggerOriginActiveEvent(bool isActive) => OnOriginActiveEvent?.Invoke(isActive);
+
+        public void OnTriggerChangeActiveEvent(bool isActive) => OnChangeActiveEvent?.Invoke(isActive);
 
         public void OnTriggerValueEvent(float value) => OnValueEvent?.Invoke(value);
     }

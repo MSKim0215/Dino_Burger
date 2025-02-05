@@ -12,7 +12,7 @@ namespace MSKim.HandNotAble.UI
         {
             [SerializeField] protected Canvas canvas = null;
 
-            public virtual void SetActiveRoot(bool isActive)
+            protected virtual void SetActiveRoot(bool isActive)
             {
                 if (canvas.gameObject.activeSelf == isActive) return;
 
@@ -24,15 +24,37 @@ namespace MSKim.HandNotAble.UI
         public class GaugeCanvas : CanvasGroup
         {
             [SerializeField] private Slider slider = null;
+            [SerializeField] private Image fill = null;
+            [SerializeField] private Color originColor = Color.white;
+            [SerializeField] private Color changeColor = Color.white;
 
-            public override void SetActiveRoot(bool isActive)
+            protected override void SetActiveRoot(bool isActive)
             {
                 base.SetActiveRoot(isActive);
 
                 SetSliderValue(0f);
             }
 
+            public void SetOriginActiveRoot(bool isActive)
+            {
+                SetActiveRoot(isActive);
+                SetSliderColor(originColor);
+            }
+
+            public void SetChangeActiveRoot(bool isActive)
+            {
+                SetActiveRoot(isActive);
+                SetSliderColor(changeColor);
+            }
+
             public void SetSliderValue(float value) => slider.value = value;
+
+            private void SetSliderColor(Color color)
+            {
+                if(fill.color == color) return;
+
+                fill.color = color;
+            }
         }
 
         private TableControllerUseUI controller;
@@ -44,7 +66,8 @@ namespace MSKim.HandNotAble.UI
             this.controller = controller as T;
             if (this.controller == null) return;
 
-            this.controller.OnSetUpActiveEvent(gaugeCanvas.SetActiveRoot);
+            this.controller.OnSetUpOriginActiveEvent(gaugeCanvas.SetOriginActiveRoot);
+            this.controller.OnSetUpChangeActiveEvent(gaugeCanvas.SetChangeActiveRoot);
             this.controller.OnSetUpValueEvent(gaugeCanvas.SetSliderValue);
         }
     }

@@ -404,6 +404,9 @@ MonoBehaviour:
     gaugeCanvas:
       canvas: {fileID: 1408808169159640610}
       slider: {fileID: 2438005614422808009}
+      fill: {fileID: 8196569095562796953}
+      originColor: {r: 0.40392157, g: 0.76862746, b: 0.2901961, a: 1}
+      changeColor: {r: 0.9764706, g: 0.29803923, b: 0.29803923, a: 1}
 --- !u!1 &5083681465139226230
 GameObject:
   m_ObjectHideFlags: 0

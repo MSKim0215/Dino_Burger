@@ -26,7 +26,7 @@ namespace MSKim.HandNotAble
             bool isAlreadyStart = ingredient.CurrentCookTime > 0f;
             if (!isAlreadyStart) return;
 
-            OnTriggerActiveEvent(isAlreadyStart);
+            OnTriggerOriginActiveEvent(isAlreadyStart);
             OnTriggerValueEvent(ingredient.CurrentCookTime / ingredient.MaximumCookTime);
         }
 
@@ -36,7 +36,7 @@ namespace MSKim.HandNotAble
             if (ingredient == null) return base.Give();
             if (ingredient.IngredientState != Utils.IngredientState.CutOver)
             {
-                OnTriggerActiveEvent(false);
+                OnTriggerOriginActiveEvent(false);
                 return base.Give();
             }
             if (ingredient.YieldAmount <= 1) return base.Give();
@@ -52,7 +52,7 @@ namespace MSKim.HandNotAble
             if (ingredient == null || hand.HandUpObject == null) return;
 
             bool isTimeOver = ingredient.CurrentCookTime >= ingredient.MaximumCookTime;
-            OnTriggerActiveEvent(!isTimeOver);
+            OnTriggerOriginActiveEvent(!isTimeOver);
 
             if (isTimeOver)
             {
