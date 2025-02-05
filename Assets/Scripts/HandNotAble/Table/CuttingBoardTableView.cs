@@ -5,15 +5,17 @@ namespace MSKim.HandNotAble.UI
     [Serializable]
     public class CuttingBoardTableView : TableView
     {
-        public override void Initialize(TableController controller)
-        {
-            if (controller is not CuttingBoardTableController) return;
+        private CuttingBoardTableController controller;
 
-            var cutting = controller as CuttingBoardTableController;
-            cutting.OnActiveEvent -= gaugeCanvas.SetActiveRoot;
-            cutting.OnActiveEvent += gaugeCanvas.SetActiveRoot;
-            cutting.OnValueEvent -= gaugeCanvas.SetSliderValue;
-            cutting.OnValueEvent += gaugeCanvas.SetSliderValue;
+        public override void Initialize<T>(T controller)
+        {
+            this.controller = controller as CuttingBoardTableController;
+            if (this.controller == null) return;
+
+            this.controller.OnActiveEvent -= gaugeCanvas.SetActiveRoot;
+            this.controller.OnActiveEvent += gaugeCanvas.SetActiveRoot;
+            this.controller.OnValueEvent -= gaugeCanvas.SetSliderValue;
+            this.controller.OnValueEvent += gaugeCanvas.SetSliderValue;
         }
     }
 }
