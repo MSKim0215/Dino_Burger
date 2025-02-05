@@ -12,10 +12,8 @@ namespace MSKim.HandNotAble.UI
             this.controller = controller as CuttingBoardTableController;
             if (this.controller == null) return;
 
-            this.controller.OnActiveEvent -= gaugeCanvas.SetActiveRoot;
-            this.controller.OnActiveEvent += gaugeCanvas.SetActiveRoot;
-            this.controller.OnValueEvent -= gaugeCanvas.SetSliderValue;
-            this.controller.OnValueEvent += gaugeCanvas.SetSliderValue;
+            this.controller.OnSetUpActiveEvent(gaugeCanvas.SetActiveRoot);
+            this.controller.OnSetUpValueEvent(gaugeCanvas.SetSliderValue);
         }
     }
 }

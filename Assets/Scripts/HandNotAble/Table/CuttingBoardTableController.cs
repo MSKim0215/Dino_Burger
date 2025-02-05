@@ -1,16 +1,12 @@
 using MSKim.Manager;
-using System;
 using UnityEngine;
 
 namespace MSKim.HandNotAble
 {
-    public class CuttingBoardTableController : TableController
+    public class CuttingBoardTableController : TableControllerUseUI
     {
         [Header("Table View")]
         [SerializeField] private UI.CuttingBoardTableView view;
-
-        public event Action<bool> OnActiveEvent;
-        public event Action<float> OnValueEvent;
 
         protected override void Initialize()
         {
@@ -30,8 +26,8 @@ namespace MSKim.HandNotAble
             bool isAlreadyStart = ingredient.CurrentCookTime > 0f;
             if (!isAlreadyStart) return;
 
-            OnActiveEvent?.Invoke(isAlreadyStart);
-            OnValueEvent?.Invoke(ingredient.CurrentCookTime / ingredient.MaximumCookTime);
+            OnTriggerActiveEvent(isAlreadyStart);
+            OnTriggerValueEvent(ingredient.CurrentCookTime / ingredient.MaximumCookTime);
         }
 
         public override GameObject Give()
@@ -40,7 +36,7 @@ namespace MSKim.HandNotAble
             if (ingredient == null) return base.Give();
             if (ingredient.IngredientState != Utils.IngredientState.CutOver)
             {
-                OnActiveEvent?.Invoke(false);
+                OnTriggerActiveEvent(false);
                 return base.Give();
             }
             if (ingredient.YieldAmount <= 1) return base.Give();
@@ -56,7 +52,7 @@ namespace MSKim.HandNotAble
             if (ingredient == null || hand.HandUpObject == null) return;
 
             bool isTimeOver = ingredient.CurrentCookTime >= ingredient.MaximumCookTime;
-            OnActiveEvent?.Invoke(!isTimeOver);
+            OnTriggerActiveEvent(!isTimeOver);
 
             if (isTimeOver)
             {
@@ -66,7 +62,7 @@ namespace MSKim.HandNotAble
 
             ingredient.CurrentCookTime += Time.deltaTime;
             ingredient.SetIngredientState(Utils.IngredientState.Cutting);
-            OnValueEvent?.Invoke(ingredient.CurrentCookTime / ingredient.MaximumCookTime);
+            OnTriggerValueEvent(ingredient.CurrentCookTime / ingredient.MaximumCookTime);
         }
     }
 }

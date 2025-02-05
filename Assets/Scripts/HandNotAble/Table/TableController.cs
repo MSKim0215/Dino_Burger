@@ -1,7 +1,30 @@
+using System;
 using UnityEngine;
 
 namespace MSKim.HandNotAble
 {
+    public class TableControllerUseUI : TableController
+    {
+        private event Action<bool> OnActiveEvent;
+        private event Action<float> OnValueEvent;
+
+        public void OnSetUpActiveEvent(Action<bool> OnActiveEvent)
+        {
+            this.OnActiveEvent -= OnActiveEvent;
+            this.OnActiveEvent += OnActiveEvent;
+        }
+
+        public void OnSetUpValueEvent(Action<float> OnValueEvent)
+        {
+            this.OnValueEvent -= OnValueEvent;
+            this.OnValueEvent += OnValueEvent;
+        }
+
+        public void OnTriggerActiveEvent(bool isActive) => OnActiveEvent?.Invoke(isActive);
+
+        public void OnTriggerValueEvent(float value) => OnValueEvent?.Invoke(value);
+    }
+
     public class TableController : MonoBehaviour, IInterAction
     {
         [Header("Table Data Info")]
