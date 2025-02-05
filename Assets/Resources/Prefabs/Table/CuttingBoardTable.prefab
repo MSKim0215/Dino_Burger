@@ -279,6 +279,7 @@ MonoBehaviour:
       fill: {fileID: 3372824230623863120}
       originColor: {r: 0.40330288, g: 0.76729554, b: 0.29195824, a: 1}
       changeColor: {r: 0.9748427, g: 0.29735753, b: 0.29735753, a: 1}
+  knifeObj: {fileID: 3858996342237045353}
 --- !u!1 &2008377079384612519
 GameObject:
   m_ObjectHideFlags: 0

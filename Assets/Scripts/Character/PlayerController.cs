@@ -13,6 +13,7 @@ namespace MSKim.Player
 
         [Header("My Hand")]
         [SerializeField] private Hand hand;
+        [SerializeField] private GameObject knife;
 
         private float xAxis;
         private float zAxis;
@@ -23,6 +24,8 @@ namespace MSKim.Player
         private int LayerHandNotAble { get => 1 << LayerMask.NameToLayer("HandNotAble"); }
 
         public CharacterView View => view;
+
+        public GameObject Knife => knife;
 
         protected override void SettingState()
         {
@@ -289,8 +292,35 @@ namespace MSKim.Player
                             {
                                 case Utils.TableType.CuttingBoard:
                                     {
+                                        if ((table as HandNotAble.CuttingBoardTableController).IsCutOver) break;
+
                                         ChangeState(ICharacterState.BehaviourState.InterAction);
                                         (table as HandNotAble.CuttingBoardTableController).Cutting();
+                                    }
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if(Input.GetMouseButtonUp(1))
+            {
+                handRay = new Ray(new Vector3(transform.position.x, 0.2f, transform.position.z), transform.forward);
+                Debug.DrawLine(handRay.origin, handRay.origin + handRay.direction * data.HandLength, Color.red);
+
+                if (Physics.Raycast(handRay, out handHit, data.HandLength, LayerHandNotAble))
+                {
+                    var hitObj = handHit.collider.gameObject;
+                    if (hitObj != null)
+                    {
+                        if (hitObj.TryGetComponent<HandNotAble.TableController>(out var table))
+                        {
+                            switch (table.TableType)
+                            {
+                                case Utils.TableType.CuttingBoard:
+                                    {
+                                        (table as HandNotAble.CuttingBoardTableController).SetActiveKnife(true);
                                     }
                                     break;
                             }

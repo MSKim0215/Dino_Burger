@@ -8,6 +8,11 @@ namespace MSKim.HandNotAble
         [Header("Table View")]
         [SerializeField] private UI.TableView view;
 
+        [Header("Objects")]
+        [SerializeField] private GameObject knifeObj = null;
+
+        public void SetActiveKnife(bool isActive) => knifeObj.SetActive(isActive);
+
         protected override void Initialize()
         {
             data = Managers.GameData.GetTableData(Utils.TableType.CuttingBoard);
@@ -46,10 +51,14 @@ namespace MSKim.HandNotAble
             return Instantiate(hand.HandUpObject);
         }
 
+        public bool IsCutOver => hand.GetHandUpComponent<HandAble.IngredientController>().IngredientState == Utils.IngredientState.CutOver;
+
         public void Cutting()
         {
             var ingredient = hand.GetHandUpComponent<HandAble.IngredientController>();
             if (ingredient == null || hand.HandUpObject == null) return;
+
+            if (knifeObj.activeSelf) SetActiveKnife(false);
 
             bool isTimeOver = ingredient.CurrentCookTime >= ingredient.MaximumCookTime;
             OnTriggerOriginActiveEvent(!isTimeOver);
@@ -57,6 +66,7 @@ namespace MSKim.HandNotAble
             if (isTimeOver)
             {
                 ingredient.SetIngredientState(Utils.IngredientState.CutOver);
+                SetActiveKnife(true);
                 return;
             }
 
