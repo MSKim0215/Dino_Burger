@@ -33,7 +33,7 @@ RectTransform:
   m_Father: {fileID: 2251464751770897686}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -272,6 +272,10 @@ MonoBehaviour:
   hand:
     handRoot: {fileID: 3412437507828357799}
     handUpObject: {fileID: 0}
+  view:
+    gaugeCanvas:
+      canvas: {fileID: 1296671161596191712}
+      slider: {fileID: 5022816445107219014}
 --- !u!1 &2008377079384612519
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,7 +358,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2553755825786360535}
   m_FillRect: {fileID: 5183586633877331906}
   m_HandleRect: {fileID: 3920772105126016360}
-  m_Direction: 1
+  m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
@@ -506,7 +510,7 @@ RectTransform:
   m_Father: {fileID: 3160675121646222732}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
