@@ -16,8 +16,8 @@ namespace MSKim.UI
             Managers.UserData.OnChangeCurrency -= HandleChangeCurrency;
             Managers.UserData.OnChangeCurrency += HandleChangeCurrency;
 
-            //view.Initialize(this);
-            //CreateItemBox(currentTabType);
+            view.Initialize(this);
+            CreateItemBox(currentTabType);
         }
 
         private void CreateItemBox(Utils.ShopTabType tabType)
@@ -31,8 +31,7 @@ namespace MSKim.UI
 
         private void ReleaseItemBox()
         {
-            var root = view.GetCurrentTabRoot(currentTabType);
-
+            var root = view.ItemBoxRoot;
             for (int i = root.childCount - 1; i >= 0; i--)
             {
                 var itemBox = root.GetChild(i).gameObject;
@@ -50,7 +49,7 @@ namespace MSKim.UI
             for (int i = 0; i < dataList.Count; i++)
             {
                 var itemBox = Managers.Pool.GetPoolObject("ShopItemBox");
-                var root = view.GetCurrentTabRoot(currentTabType);
+                var root = view.ItemBoxRoot;
                 if (itemBox.transform.parent != root)
                 {
                     itemBox.transform.SetParent(root);

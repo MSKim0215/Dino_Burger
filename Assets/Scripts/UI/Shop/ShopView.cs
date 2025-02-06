@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using MSKim.Manager;
 using System;
 using System.Collections.Generic;
@@ -28,12 +29,11 @@ namespace MSKim.UI
         [Serializable]
         private class TabButton : CommonButton
         {
+            [SerializeField] private TextMeshProUGUI text = null;
             [SerializeField] private Utils.ShopTabType type = Utils.ShopTabType.Ingredient;
-            [SerializeField] private Transform itemBoxRoot = null;
-
+            
             public Utils.ShopTabType Type => type;
 
-            public Transform ItemBoxRoot => itemBoxRoot;
 
             public void OnClickEvent(UnityAction<Utils.ShopTabType> action)
             {
@@ -43,24 +43,29 @@ namespace MSKim.UI
                 });
             }
 
-            public void ChangeColor(bool isActive)
+            public void ChangeColor(Color buttonColor, Color textColor)
             {
-                if(isActive)
-                {
-                    button.image.color = Color.yellow;
-                }
-                else
-                {
-                    button.image.color = Color.white;
-                }
+                button.image.color = buttonColor;
+                text.color = textColor;
             }
         }
 
         [SerializeField] private CommonButton exitButton;
         [SerializeField] private List<TabButton> tabButtonList = new();
         [SerializeField] private TextMeshProUGUI currencyText;
+        [SerializeField] private Transform itemBoxRoot = null;
+        [SerializeField] private ScrollRect scrollRect = null;
+        [SerializeField] private TextMeshProUGUI titleBarText;
+
+        [Header("Tab Button Color Settings")]
+        [SerializeField] private Color activeButtonColor;
+        [SerializeField] private Color unactiveButtonColor;
+        [SerializeField] private Color activeTextColor;
+        [SerializeField] private Color unactiveTextColor;
 
         private ShopPopup controller;
+
+        public Transform ItemBoxRoot => itemBoxRoot;
 
         public void Initialize(ShopPopup controller)
         {
@@ -78,22 +83,30 @@ namespace MSKim.UI
             }
         }
 
-        public void ChangeTabButton(Utils.ShopTabType shopTabType)
+        public async void ChangeTabButton(Utils.ShopTabType shopTabType)
         {
             foreach(var tabButton in tabButtonList)
             {
-                tabButton.ChangeColor(tabButton.Type == shopTabType);
+                if(tabButton.Type == shopTabType)
+                {
+                    titleBarText.text = shopTabType.ToString().ToUpper();
+                    tabButton.ChangeColor(activeButtonColor, activeTextColor);
+
+                    await UniTask.NextFrame(PlayerLoopTiming.PostLateUpdate);
+
+                    scrollRect.verticalNormalizedPosition = 1f;
+                    LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect.content);
+                }
+                else
+                {
+                    tabButton.ChangeColor(unactiveButtonColor, unactiveTextColor);
+                }
             }
         }
 
         public void SetCurrencyText(int currencyAmount)
         {
             currencyText.text = string.Format("{0:#,0}", currencyAmount);
-        }
-
-        public Transform GetCurrentTabRoot(Utils.ShopTabType tabType)
-        {
-            return tabButtonList.Find(tab => tab.Type == tabType).ItemBoxRoot;
         }
     }
 }
