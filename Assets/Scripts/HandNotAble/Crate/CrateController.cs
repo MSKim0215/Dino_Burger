@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace MSKim.HandNotAble
 {
-    public class CrateController : MonoBehaviour, IInterAction
+    public class CrateController : MonoBehaviour, IBaseInterAction
     {
         [Header("Crate Type")]
         [SerializeField] private Utils.CrateType crateType;

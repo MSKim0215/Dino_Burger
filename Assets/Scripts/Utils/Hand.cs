@@ -50,6 +50,12 @@ public class Hand
         GetHandUp();
     }
 
+    public void GetHandUpHoldRotate(GameObject target)
+    {
+        SetHandUpObject(target);
+        GetHandUpHoldRotate();
+    }
+
     public void SetHandUpObject(GameObject target)
     {
         if (target == null) return;
@@ -63,5 +69,12 @@ public class Hand
 
         handUpObject.transform.SetParent(handRoot);
         handUpObject.transform.localPosition = Vector3.zero;
+    }
+
+    public void GetHandUpHoldRotate()
+    {
+        GetHandUp();
+
+        HandUpObject.transform.localRotation = Quaternion.Euler(Vector3.zero);
     }
 }

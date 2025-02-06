@@ -43,7 +43,7 @@ namespace MSKim.HandNotAble
         public void OnTriggerTakeIngredientEvent() => OnTakeIngredientEvent?.Invoke();
     }
 
-    public class TableController : MonoBehaviour, IInterAction
+    public class TableController : MonoBehaviour, IBaseInterAction
     {
         [Header("Table Data Info")]
         [SerializeField] protected Data.TableData data;

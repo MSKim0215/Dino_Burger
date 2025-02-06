@@ -23,7 +23,7 @@ public class MoveState : ICharacterState
 {
     public void Convert(PlayerController controller)
     {
-        controller.Knife.SetActive(false);
+        //controller.Knife.SetActive(false);
         controller.View.PlayAnimation(Get());
     }
 
@@ -43,7 +43,7 @@ public class WaitingState : ICharacterState
 {
     public void Convert(PlayerController controller)
     {
-        controller.Knife.SetActive(false);
+        //controller.Knife.SetActive(false);
         controller.View.PlayAnimation(Get());
     }
 
@@ -198,7 +198,7 @@ public class InterActionState : ICharacterState
 {
     public void Convert(PlayerController controller)
     {
-        controller.Knife.SetActive(true);
+        //controller.Knife.SetActive(true);
 
         controller.View.PlayAnimation(Get());
     }

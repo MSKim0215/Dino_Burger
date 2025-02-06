@@ -175,7 +175,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4523364545600846035}
+  - {fileID: 7380720801007092186}
   - {fileID: 7494679469902209275}
   - {fileID: 4912539302922790476}
   m_Father: {fileID: 0}
@@ -279,7 +279,9 @@ MonoBehaviour:
       fill: {fileID: 3372824230623863120}
       originColor: {r: 0.40330288, g: 0.76729554, b: 0.29195824, a: 1}
       changeColor: {r: 0.9748427, g: 0.29735753, b: 0.29735753, a: 1}
-  knifeObj: {fileID: 3858996342237045353}
+  toolHand:
+    handRoot: {fileID: 7380720801007092186}
+    handUpObject: {fileID: 3858996342237045353}
 --- !u!1 &2008377079384612519
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,6 +447,38 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &2684465327098658274
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7380720801007092186}
+  m_Layer: 0
+  m_Name: ToolHand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &7380720801007092186
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2684465327098658274}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.65, y: 1.15, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4523364545600846035}
+  m_Father: {fileID: 5061242929775746109}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &2967644569597718333
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,11 +602,11 @@ GameObject:
   - component: {fileID: 678323374504376182}
   - component: {fileID: 3354360155515749308}
   m_Layer: 0
-  m_Name: knife
+  m_Name: Knife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4523364545600846035
 Transform:
@@ -582,13 +616,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3858996342237045353}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.61, y: 1.2, z: 0.4}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5061242929775746109}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_Father: {fileID: 7380720801007092186}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &678323374504376182
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -3,15 +3,13 @@ using UnityEngine;
 
 namespace MSKim.HandNotAble
 {
-    public class CuttingBoardTableController : TableControllerUseUI
+    public class CuttingBoardTableController : TableControllerUseUI, IToolInterAction
     {
         [Header("Table View")]
         [SerializeField] private UI.TableView view;
 
-        [Header("Objects")]
-        [SerializeField] private GameObject knifeObj = null;
-
-        public void SetActiveKnife(bool isActive) => knifeObj.SetActive(isActive);
+        [Header("Tool Hand")]
+        [SerializeField] private Hand toolHand = null;
 
         protected override void Initialize()
         {
@@ -35,6 +33,11 @@ namespace MSKim.HandNotAble
             OnTriggerValueEvent(ingredient.CurrentCookTime / ingredient.MaximumCookTime);
         }
 
+        public void TakeTool(GameObject takeObject)
+        {
+            toolHand.GetHandUpHoldRotate(takeObject);
+        }
+
         public override GameObject Give()
         {
             var ingredient = hand.GetHandUpComponent<HandAble.IngredientController>();
@@ -51,14 +54,25 @@ namespace MSKim.HandNotAble
             return Instantiate(hand.HandUpObject);
         }
 
+        public GameObject GiveTool()
+        {
+            var tool = toolHand.HandUpObject;
+            if(tool != null)
+            {
+                toolHand.ClearHand();
+            }
+
+            return tool;
+        }
+
         public bool IsCutOver => hand.GetHandUpComponent<HandAble.IngredientController>().IngredientState == Utils.IngredientState.CutOver;
 
-        public void Cutting()
+        public void Cutting(Player.PlayerController player)
         {
             var ingredient = hand.GetHandUpComponent<HandAble.IngredientController>();
             if (ingredient == null || hand.HandUpObject == null) return;
 
-            if (knifeObj.activeSelf) SetActiveKnife(false);
+            //if (knifeObj.activeSelf) SetActiveKnife(false);
 
             bool isTimeOver = ingredient.CurrentCookTime >= ingredient.MaximumCookTime;
             OnTriggerOriginActiveEvent(!isTimeOver);
@@ -66,7 +80,7 @@ namespace MSKim.HandNotAble
             if (isTimeOver)
             {
                 ingredient.SetIngredientState(Utils.IngredientState.CutOver);
-                SetActiveKnife(true);
+                //SetActiveKnife(true);
                 return;
             }
 
