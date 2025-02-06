@@ -486,7 +486,7 @@ MonoBehaviour:
     - createObjectName: ShopItemBox
       poolType: 1
       useScene: 1
-      createPrefab: {fileID: 2171801594059028071, guid: 80071267e4e4d994ab53cac914c723f3, type: 3}
+      createPrefab: {fileID: 7609535907082428466, guid: c41a97ad8577f3f4499065a7a651ea3d, type: 3}
       createCount: 10
       maxCount: 15
     - createObjectName: ShopPopupUI

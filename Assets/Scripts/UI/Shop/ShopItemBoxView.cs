@@ -1,5 +1,6 @@
 using MSKim.Manager;
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,9 +12,9 @@ namespace MSKim.UI
         private ShopItemBox controller;
 
         [SerializeField] private Image itemIcon = null;
-        [SerializeField] private Text levelText = null;
-        [SerializeField] private Text nameText = null;
-        [SerializeField] private Text priceText = null;
+        [SerializeField] private TextMeshProUGUI levelText = null;
+        [SerializeField] private TextMeshProUGUI nameText = null;
+        [SerializeField] private TextMeshProUGUI priceText = null;
         [SerializeField] private Button buyButton = null;
 
         public void Initialize(ShopItemBox controller)
@@ -28,7 +29,7 @@ namespace MSKim.UI
             itemIcon.color = UnityEngine.Random.ColorHSV();
             SetLevelText(Managers.UserData.GetUpgradeAmount((Utils.ShopItemIndex)controller.Data.Index));
             nameText.text = controller.Data.Name;
-            priceText.text = string.Format("{0:#,0} 골드", controller.Data.Price);
+            priceText.text = string.Format("{0:#,0} Coins", controller.Data.Price);
         }
 
         public void SetLevelText(int currentLevel)

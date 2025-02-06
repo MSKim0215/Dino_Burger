@@ -1,6 +1,7 @@
 using MSKim.Manager;
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -28,8 +29,11 @@ namespace MSKim.UI
         private class TabButton : CommonButton
         {
             [SerializeField] private Utils.ShopTabType type = Utils.ShopTabType.Ingredient;
+            [SerializeField] private Transform itemBoxRoot = null;
 
             public Utils.ShopTabType Type => type;
+
+            public Transform ItemBoxRoot => itemBoxRoot;
 
             public void OnClickEvent(UnityAction<Utils.ShopTabType> action)
             {
@@ -54,12 +58,9 @@ namespace MSKim.UI
 
         [SerializeField] private CommonButton exitButton;
         [SerializeField] private List<TabButton> tabButtonList = new();
-        [SerializeField] private Transform shopItemBoxRoot;
-        [SerializeField] private Text currencyText;
+        [SerializeField] private TextMeshProUGUI currencyText;
 
         private ShopPopup controller;
-
-        public Transform ShopItemBoxRoot => shopItemBoxRoot;
 
         public void Initialize(ShopPopup controller)
         {
@@ -88,6 +89,11 @@ namespace MSKim.UI
         public void SetCurrencyText(int currencyAmount)
         {
             currencyText.text = string.Format("{0:#,0}", currencyAmount);
+        }
+
+        public Transform GetCurrentTabRoot(Utils.ShopTabType tabType)
+        {
+            return tabButtonList.Find(tab => tab.Type == tabType).ItemBoxRoot;
         }
     }
 }
