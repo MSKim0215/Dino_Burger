@@ -1,5 +1,6 @@
 using MSKim.Manager;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace MSKim.Player
 {
@@ -14,6 +15,8 @@ namespace MSKim.Player
         [Header("My Hand")]
         [SerializeField] private Hand hand;
         [SerializeField] private Hand toolHand;
+
+        private HandNotAble.CuttingBoardTableController prevCuttingTable;
 
         private float xAxis;
         private float zAxis;
@@ -274,6 +277,16 @@ namespace MSKim.Player
 
         private void InterAction()
         {
+            if(state.CurrentState.Get() == ICharacterState.BehaviourState.Move)
+            {
+                if (toolHand.HandUpObject == null) return;
+
+                prevCuttingTable.TakeTool(toolHand.HandUpObject);
+                toolHand.ClearHand();
+                prevCuttingTable = null;
+                return;
+            }
+
             if(Input.GetMouseButton(1))
             {
                 handRay = new Ray(new Vector3(transform.position.x, 0.2f, transform.position.z), transform.forward);
@@ -286,6 +299,7 @@ namespace MSKim.Player
                     {
                         if(hitObj.TryGetComponent<HandNotAble.CuttingBoardTableController>(out var table))
                         {
+                            prevCuttingTable = table;
                             toolHand.GetHandUpHoldRotate(table.GiveTool());
                             ChangeState(ICharacterState.BehaviourState.InterAction);
                             table.Cutting(this);
@@ -306,7 +320,9 @@ namespace MSKim.Player
                     {
                         if (hitObj.TryGetComponent<HandNotAble.CuttingBoardTableController>(out var table))
                         {
+                            prevCuttingTable = table;
                             table.TakeTool(toolHand.HandUpObject);
+                            ChangeState(ICharacterState.BehaviourState.Waiting);
                             toolHand.ClearHand();
                         }
                     }
