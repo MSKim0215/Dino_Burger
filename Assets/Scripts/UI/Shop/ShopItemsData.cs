@@ -14,6 +14,7 @@ namespace MSKim.Data
     public class ShopItemData
     {
         public string Name;
+        public Sprite Sprite;
         public Utils.ShopTabType Type;
         public int Index;
         public int Price;

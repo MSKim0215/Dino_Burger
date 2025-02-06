@@ -29,7 +29,7 @@ namespace MSKim.UI
             itemIcon.color = UnityEngine.Random.ColorHSV();
             SetLevelText(Managers.UserData.GetUpgradeAmount((Utils.ShopItemIndex)controller.Data.Index));
             nameText.text = controller.Data.Name;
-            priceText.text = string.Format("{0:#,0} Coins", controller.Data.Price);
+            priceText.text = string.Format("{0:#,0}", controller.Data.Price);
         }
 
         public void SetLevelText(int currentLevel)
