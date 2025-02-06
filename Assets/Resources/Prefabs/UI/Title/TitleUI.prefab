@@ -651,9 +651,9 @@ MonoBehaviour:
     startButton:
       button: {fileID: 7641625384478784239}
     shopButton:
-      button: {fileID: 0}
+      button: {fileID: 2847807791830602537}
     exitButton:
-      button: {fileID: 0}
+      button: {fileID: 5117828959150049804}
 --- !u!1 &6517623817276937890
 GameObject:
   m_ObjectHideFlags: 0

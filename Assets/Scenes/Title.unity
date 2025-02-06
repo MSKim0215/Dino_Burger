@@ -816,7 +816,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -1077,6 +1077,22 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4072526214629761572, guid: 3fbe043595d3ec14cbbae25661d24c22, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4072526214629761572, guid: 3fbe043595d3ec14cbbae25661d24c22, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4072526214629761572, guid: 3fbe043595d3ec14cbbae25661d24c22, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4072526214629761572, guid: 3fbe043595d3ec14cbbae25661d24c22, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4938260040566099763, guid: 3fbe043595d3ec14cbbae25661d24c22, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1096,6 +1112,22 @@ PrefabInstance:
     - target: {fileID: 5214656710581505896, guid: 3fbe043595d3ec14cbbae25661d24c22, type: 3}
       propertyPath: m_Name
       value: TitleUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657019643615361458, guid: 3fbe043595d3ec14cbbae25661d24c22, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657019643615361458, guid: 3fbe043595d3ec14cbbae25661d24c22, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657019643615361458, guid: 3fbe043595d3ec14cbbae25661d24c22, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657019643615361458, guid: 3fbe043595d3ec14cbbae25661d24c22, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7402867279439080275, guid: 3fbe043595d3ec14cbbae25661d24c22, type: 3}
       propertyPath: view.uiRoot
