@@ -11,6 +11,8 @@ namespace MSKim.HandNotAble
         [Header("Tool Hand")]
         [SerializeField] private Hand toolHand = null;
 
+        public bool IsCutOver => hand.GetHandUpComponent<HandAble.IngredientController>().IngredientState == Utils.IngredientState.CutOver;
+
         protected override void Initialize()
         {
             data = Managers.GameData.GetTableData(Utils.TableType.CuttingBoard);
@@ -26,7 +28,7 @@ namespace MSKim.HandNotAble
             var ingredient = hand.GetHandUpComponent<HandAble.IngredientController>();
             if (ingredient == null || hand.HandUpObject == null) return;
 
-            bool isAlreadyStart = ingredient.CurrentCookTime > 0f;
+            bool isAlreadyStart = ingredient.CurrentCookTime > 0f && ingredient.CurrentCookTime < ingredient.MaximumCookTime;
             if (!isAlreadyStart) return;
 
             OnTriggerOriginActiveEvent(isAlreadyStart);
@@ -65,14 +67,10 @@ namespace MSKim.HandNotAble
             return tool;
         }
 
-        public bool IsCutOver => hand.GetHandUpComponent<HandAble.IngredientController>().IngredientState == Utils.IngredientState.CutOver;
-
         public void Cutting(Player.PlayerController player)
         {
             var ingredient = hand.GetHandUpComponent<HandAble.IngredientController>();
             if (ingredient == null || hand.HandUpObject == null) return;
-
-            //if (knifeObj.activeSelf) SetActiveKnife(false);
 
             bool isTimeOver = ingredient.CurrentCookTime >= ingredient.MaximumCookTime;
             OnTriggerOriginActiveEvent(!isTimeOver);
@@ -80,7 +78,6 @@ namespace MSKim.HandNotAble
             if (isTimeOver)
             {
                 ingredient.SetIngredientState(Utils.IngredientState.CutOver);
-                //SetActiveKnife(true);
                 return;
             }
 

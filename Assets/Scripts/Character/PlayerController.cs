@@ -207,8 +207,8 @@ namespace MSKim.Player
 
                 switch (table.TableType)
                 {
-                    case Utils.TableType.CuttingBoard: 
-                        canTake = ingredient.IngredientType != Utils.CrateType.Meat; 
+                    case Utils.TableType.CuttingBoard:
+                        canTake = ingredient.IngredientType != Utils.CrateType.Meat;
                         break;
 
                     case Utils.TableType.Pot:
@@ -299,6 +299,17 @@ namespace MSKim.Player
                     {
                         if(hitObj.TryGetComponent<HandNotAble.CuttingBoardTableController>(out var table))
                         {
+                            if (table.IsHandEmpty) return;
+                            if (table.IsCutOver)
+                            {
+                                if (toolHand.HandUpObject == null) return;
+
+                                prevCuttingTable.TakeTool(toolHand.HandUpObject);
+                                toolHand.ClearHand();
+                                prevCuttingTable = null;
+                                return;
+                            }
+
                             prevCuttingTable = table;
                             toolHand.GetHandUpHoldRotate(table.GiveTool());
                             ChangeState(ICharacterState.BehaviourState.InterAction);
