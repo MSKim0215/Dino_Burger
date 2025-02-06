@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace MSKim.Data
@@ -8,18 +9,25 @@ namespace MSKim.Data
     public class ShopItemsData : BaseGameData
     {
         public List<ShopItemData> ShopItemDataList = new();
+        public List<ShopItemIconData> ShopItemIconDataList = new();
     }
 
     [Serializable]
     public class ShopItemData
     {
         public string Name;
-        public Sprite Sprite;
         public Utils.ShopTabType Type;
         public int Index;
         public int Price;
         public int BaseLevel = 1;
         public int MaximumLevel;
         public float UpgradeAmount;
+    }
+
+    [Serializable]
+    public class ShopItemIconData
+    {
+        public int Index;
+        public Sprite Icon;
     }
 }

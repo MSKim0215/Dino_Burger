@@ -47,6 +47,10 @@ namespace MSKim.Manager
 
         public Data.ShopItemData GetShopItemData(int index) => ShopItemDatas.Find(item => item.Index == index);
 
+        public List<Data.ShopItemIconData> ShopItemIconDatas => shopItemsDatas.ShopItemIconDataList;
+
+        public Data.ShopItemIconData GetShopItemIcon(int index) => ShopItemIconDatas.Find(item => item.Index == index);
+
         public override void Initialize()
         {
             base.Initialize();
