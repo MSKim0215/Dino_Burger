@@ -8,6 +8,7 @@ namespace MSKim.Data
     public class IngredientsData : BaseGameData
     {
         public List<IngredientData> IngredientDataList = new();
+        public List<IngredientIconData> IngredientIconDataList = new();
     }
 
     [Serializable]
@@ -19,5 +20,12 @@ namespace MSKim.Data
         public float CookTime;
         public int ShopBuyPrice;
         public int GuestSellPrice;
+    }
+
+    [Serializable]
+    public class IngredientIconData
+    {
+        public Utils.CrateType Type;
+        public Sprite Icon;
     }
 }
