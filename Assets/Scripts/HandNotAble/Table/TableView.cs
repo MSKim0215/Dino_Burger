@@ -14,6 +14,7 @@ namespace MSKim.HandNotAble.UI
 
             protected virtual void SetActiveRoot(bool isActive)
             {
+                if (canvas == null) return;
                 if (canvas.gameObject.activeSelf == isActive) return;
 
                 canvas.gameObject.SetActive(isActive);
