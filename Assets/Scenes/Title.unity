@@ -495,6 +495,12 @@ MonoBehaviour:
       createPrefab: {fileID: 5763627315479576569, guid: b2fe039d07b38634fbc946fcb6ccd441, type: 3}
       createCount: 1
       maxCount: 1
+    - createObjectName: Menu_Group
+      poolType: 1
+      useScene: 2
+      createPrefab: {fileID: 8107395411382579665, guid: 15771beeeb457d8428983dc8af87cbae, type: 3}
+      createCount: 5
+      maxCount: 5
     rootList:
     - {fileID: 365165892}
     - {fileID: 708651376}

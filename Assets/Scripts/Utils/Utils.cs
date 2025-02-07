@@ -7,8 +7,8 @@ public static class Utils
 
     public enum CrateType
     {
-        Bun, Cheese, Lettuce, Mushroom, Onion, Tomato, Meat, None
-    }   // 빵, 치즈, 양상추, 버섯, 양파, 토마토, 고기
+        Bun, Cheese, Lettuce, Onion, Tomato, Meat, None
+    }   // 빵, 치즈, 양상추, 양파, 토마토, 고기
 
     public enum CookState
     {
@@ -67,16 +67,8 @@ public static class Utils
         Pickup_Outside_R, Pickup_Outside_L,
     }   
 
-    public const float GRILL_COOK_TIME = 5f;            // 고기 굽기 완성 시간
     public const float GRILL_OVERCOOKED_TIME = 8f;      // 고기 굽기 실패 시간
-    public const float CUTTING_CHEESE_COOK_TIME = 2f;       // 치즈 손질 시간
-    public const float CUTTING_LETTUCE_COOK_TIME = 3.5f;    // 양상추 손질 시간
-    public const float CUTTING_MUSHROOM_COOK_TIME = 3f;     // 버섯 손질 시간
-    public const float CUTTING_ONION_COOK_TIME = 2.5f;      // 양파 손질 시간
-    public const float CUTTING_TOMATO_COOK_TIME = 3f;       // 토마토 손질 시간
     public const float BOIL_STEW_COOK_TIME = 5f;            // 스튜 제작 시간
-
-    public const int BURGER_TOPPING_COUNT_MAX = 5;      // 햄버거 토핑 최대 개수
 
     public enum ShopItemIndex
     {
