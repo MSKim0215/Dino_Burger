@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +19,7 @@ namespace MSKim.NonPlayer.UI
         [Serializable]
         private class WaitingCanvas : BaseCanvas
         {
-            [SerializeField] private Text numberText;
+            [SerializeField] private TextMeshProUGUI numberText;
 
             public void SetNumber(int number) => numberText.text = number.ToString();
         }
@@ -26,10 +27,12 @@ namespace MSKim.NonPlayer.UI
         [Serializable]
         private class OrderCanvas : BaseCanvas
         {
-            [SerializeField] private Text numberText;
+            [SerializeField] private TextMeshProUGUI numberText;
             [SerializeField] private Slider timer;
 
             public void SetNumber(int number) => numberText.text = number.ToString();
+
+            public void SetSliderValue(float value) => timer.value = value;
         }
 
         [Header("Canvas Settings")]
@@ -52,6 +55,9 @@ namespace MSKim.NonPlayer.UI
 
             this.controller.OnChangeOrderTableNumber -= order.SetNumber;
             this.controller.OnChangeOrderTableNumber += order.SetNumber;
+
+            this.controller.OnDelayOrderEvent -= order.SetSliderValue;
+            this.controller.OnDelayOrderEvent += order.SetSliderValue;
         }
 
         public void StartWait()

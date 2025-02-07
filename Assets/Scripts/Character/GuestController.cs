@@ -42,6 +42,7 @@ namespace MSKim.NonPlayer
 
         public event Action<int> OnChangeWaitingNumber;
         public event Action<int> OnChangeOrderTableNumber;
+        public event Action<float> OnDelayOrderEvent;
 
         public Data.GuestData Data => data;
 
@@ -428,6 +429,7 @@ namespace MSKim.NonPlayer
                 }
 
                 currentPatientTime += Time.deltaTime;
+                OnDelayOrderEvent?.Invoke(currentPatientTime / data.Patience);
 
                 await UniTask.Yield();
 
