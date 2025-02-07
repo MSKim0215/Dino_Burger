@@ -1,3 +1,4 @@
+using MSKim.Manager;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,12 +14,20 @@ namespace MSKim.HandNotAble.UI
         {
             [SerializeField] private List<InputBox> inputBoxList = new();
 
-            public void Input()
+            public void Input(Utils.CrateType ingredientType)
             {
                 var inputBox = inputBoxList.Find(box => !box.IsInput);
                 if (inputBox == null) return;
 
-                inputBox.Input();
+                inputBox.Input(ingredientType);
+            }
+
+            public void Output()
+            {
+                for(int i = 0; i < inputBoxList.Count; i++)
+                {
+                    inputBoxList[i].Output();
+                }
             }
         }
 
@@ -26,19 +35,23 @@ namespace MSKim.HandNotAble.UI
         public class InputBox
         {
             [SerializeField] private GameObject box = null;
+            [SerializeField] private GameObject frame = null;
             [SerializeField] private Image icon = null;
 
             public bool IsInput { get; private set; } = false;
 
-            public void Input()
+            public void Input(Utils.CrateType ingredientType)
             {
                 IsInput = true;
-                SetActiveIcon(true);
+                frame.SetActive(IsInput);
+                icon.sprite = Managers.GameData.GetIngredientIconData(ingredientType).Icon;
             }
 
-            public void SetActiveIcon(bool isAcitve) => icon.gameObject.SetActive(isAcitve);
-
-            public void SetIcon(Sprite iconSprite) => icon.sprite = iconSprite;
+            public void Output()
+            {
+                IsInput = false;
+                frame.SetActive(IsInput);
+            }
         }
 
         [SerializeField] private SpeechCanvas speechCanvas = null;
@@ -47,7 +60,8 @@ namespace MSKim.HandNotAble.UI
         {
             base.Initialize(controller);
 
-            this.controller.OnSetUpTakeIngredientEvent(speechCanvas.Input);
+            this.controller.OnSetupInputIngredientEvent(speechCanvas.Input);
+            this.controller.OnSetupOutputIngredientEvent(speechCanvas.Output);
         }
     }
 }

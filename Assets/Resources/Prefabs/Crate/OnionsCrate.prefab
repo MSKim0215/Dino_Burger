@@ -121,6 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 146cc6b367b37644e9fbfe1436aa48b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crateType: 4
+  crateType: 3
   ingredientPrefab: {fileID: 2964269686258788833, guid: 9c343fbf0925ede42be1fef7bc502722, type: 3}
   ingredientRoot: {fileID: 0}

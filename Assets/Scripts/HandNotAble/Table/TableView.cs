@@ -66,9 +66,9 @@ namespace MSKim.HandNotAble.UI
             this.controller = controller as T;
             if (this.controller == null) return;
 
-            this.controller.OnSetUpOriginActiveEvent(gaugeCanvas.SetOriginActiveRoot);
-            this.controller.OnSetUpChangeActiveEvent(gaugeCanvas.SetChangeActiveRoot);
-            this.controller.OnSetUpValueEvent(gaugeCanvas.SetSliderValue);
+            this.controller.OnSetupOriginActiveEvent(gaugeCanvas.SetOriginActiveRoot);
+            this.controller.OnSetupChangeActiveEvent(gaugeCanvas.SetChangeActiveRoot);
+            this.controller.OnSetupValueEvent(gaugeCanvas.SetSliderValue);
         }
     }
 }

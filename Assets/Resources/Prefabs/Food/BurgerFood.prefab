@@ -68,9 +68,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dced8f88fc25244abd6bb64c830c526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data:
+    Name: 
+    Type: 0
+    YieldAmount: 0
+    CookTime: 0
+    GuestSellPrice: 0
   bottom: {fileID: 1757034821704562218}
   top: {fileID: 1695449763001374271}
-  allowIngredientList: 0100000002000000040000000500000006000000
+  allowIngredientList: 0100000002000000030000000400000005000000
   ingredientList: []
 --- !u!1001 &19957451521854139
 PrefabInstance:

@@ -46,7 +46,7 @@ namespace MSKim.HandNotAble
                 if (IsContainIngredient(ingredient.IngredientType)) return;
 
                 currentIngredientList.Add(ingredient.IngredientType);
-                OnTriggerTakeIngredientEvent();
+                OnTriggerInputIngredientEvent(ingredient.IngredientType);
 
                 Destroy(base.Give());
 
@@ -84,6 +84,7 @@ namespace MSKim.HandNotAble
         {
             if (hand.HandUpObject == null) return base.Give();
 
+            OnTriggerOutputIngredientEvent();
             stewObject.SetActive(false);
             currentIngredientList.Clear();
             hand.HandUpObject.SetActive(true);

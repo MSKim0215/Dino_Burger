@@ -8,30 +8,37 @@ namespace MSKim.HandNotAble
         private event Action<bool> OnOriginActiveEvent;
         private event Action<bool> OnChangeActiveEvent;
         private event Action<float> OnValueEvent;
-        private event Action OnTakeIngredientEvent;
+        private event Action<Utils.CrateType> OnInputIngredientEvent;
+        private event Action OnOutputIngredientEvent;
 
-        public void OnSetUpOriginActiveEvent(Action<bool> OnOriginActiveEvent)
+        public void OnSetupOriginActiveEvent(Action<bool> OnOriginActiveEvent)
         {
             this.OnOriginActiveEvent -= OnOriginActiveEvent;
             this.OnOriginActiveEvent += OnOriginActiveEvent;
         }
 
-        public void OnSetUpChangeActiveEvent(Action<bool> OnChangeActiveEvent)
+        public void OnSetupChangeActiveEvent(Action<bool> OnChangeActiveEvent)
         {
             this.OnChangeActiveEvent -= OnChangeActiveEvent;
             this.OnChangeActiveEvent += OnChangeActiveEvent;
         }
 
-        public void OnSetUpValueEvent(Action<float> OnValueEvent)
+        public void OnSetupValueEvent(Action<float> OnValueEvent)
         {
             this.OnValueEvent -= OnValueEvent;
             this.OnValueEvent += OnValueEvent;
         }
 
-        public void OnSetUpTakeIngredientEvent(Action OnTakeIngredientEvent)
+        public void OnSetupInputIngredientEvent(Action<Utils.CrateType> OnTakeIngredientEvent)
         {
-            this.OnTakeIngredientEvent -= OnTakeIngredientEvent;
-            this.OnTakeIngredientEvent += OnTakeIngredientEvent;
+            this.OnInputIngredientEvent -= OnTakeIngredientEvent;
+            this.OnInputIngredientEvent += OnTakeIngredientEvent;
+        }
+
+        public void OnSetupOutputIngredientEvent(Action OnOutputIngredientEvent)
+        {
+            this.OnOutputIngredientEvent -= OnOutputIngredientEvent;
+            this.OnOutputIngredientEvent += OnOutputIngredientEvent;
         }
 
         public void OnTriggerOriginActiveEvent(bool isActive) => OnOriginActiveEvent?.Invoke(isActive);
@@ -40,7 +47,9 @@ namespace MSKim.HandNotAble
 
         public void OnTriggerValueEvent(float value) => OnValueEvent?.Invoke(value);
 
-        public void OnTriggerTakeIngredientEvent() => OnTakeIngredientEvent?.Invoke();
+        public void OnTriggerInputIngredientEvent(Utils.CrateType type) => OnInputIngredientEvent?.Invoke(type);
+
+        public void OnTriggerOutputIngredientEvent() => OnOutputIngredientEvent?.Invoke();
     }
 
     public class TableController : MonoBehaviour, IBaseInterAction
