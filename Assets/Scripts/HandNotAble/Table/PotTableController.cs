@@ -75,6 +75,9 @@ namespace MSKim.HandNotAble
                     var stew = Instantiate(stewFoodPrefab);
                     stew.SetActive(false);
                     hand.SetHandUpObject(stew);
+
+                    OnTriggerValueCompleteEvent();
+
                     break;
                 }
             }

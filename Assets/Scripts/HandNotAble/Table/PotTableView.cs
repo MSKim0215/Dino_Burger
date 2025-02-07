@@ -10,6 +10,20 @@ namespace MSKim.HandNotAble.UI
     public class PotTableView : TableView
     {
         [Serializable]
+        public class CompleteCanvas : CanvasGroup
+        {
+            public void Active()
+            {
+                SetActiveRoot(true);
+            }
+
+            public void UnActive()
+            {
+                SetActiveRoot(false);
+            }
+        }
+
+        [Serializable]
         public class SpeechCanvas : CanvasGroup
         {
             [SerializeField] private List<InputBox> inputBoxList = new();
@@ -55,6 +69,7 @@ namespace MSKim.HandNotAble.UI
         }
 
         [SerializeField] private SpeechCanvas speechCanvas = null;
+        [SerializeField] private CompleteCanvas completeCanvas = null;
 
         public override void Initialize<T>(T controller)
         {
@@ -62,6 +77,9 @@ namespace MSKim.HandNotAble.UI
 
             this.controller.OnSetupInputIngredientEvent(speechCanvas.Input);
             this.controller.OnSetupOutputIngredientEvent(speechCanvas.Output);
+
+            this.controller.OnSetupValueCompleteEvent(completeCanvas.Active);
+            this.controller.OnSetupOutputIngredientEvent(completeCanvas.UnActive);
         }
     }
 }

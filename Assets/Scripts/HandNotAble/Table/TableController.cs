@@ -10,6 +10,7 @@ namespace MSKim.HandNotAble
         private event Action<float> OnValueEvent;
         private event Action<Utils.CrateType> OnInputIngredientEvent;
         private event Action OnOutputIngredientEvent;
+        private event Action OnValueCompleteEvent;
 
         public void OnSetupOriginActiveEvent(Action<bool> OnOriginActiveEvent)
         {
@@ -41,6 +42,12 @@ namespace MSKim.HandNotAble
             this.OnOutputIngredientEvent += OnOutputIngredientEvent;
         }
 
+        public void OnSetupValueCompleteEvent(Action OnValueCompleteEvent)
+        {
+            this.OnValueCompleteEvent -= OnValueCompleteEvent;
+            this.OnValueCompleteEvent += OnValueCompleteEvent;
+        }
+
         public void OnTriggerOriginActiveEvent(bool isActive) => OnOriginActiveEvent?.Invoke(isActive);
 
         public void OnTriggerChangeActiveEvent(bool isActive) => OnChangeActiveEvent?.Invoke(isActive);
@@ -50,6 +57,8 @@ namespace MSKim.HandNotAble
         public void OnTriggerInputIngredientEvent(Utils.CrateType type) => OnInputIngredientEvent?.Invoke(type);
 
         public void OnTriggerOutputIngredientEvent() => OnOutputIngredientEvent?.Invoke();
+
+        public void OnTriggerValueCompleteEvent() => OnValueCompleteEvent?.Invoke();
     }
 
     public class TableController : MonoBehaviour, IBaseInterAction
