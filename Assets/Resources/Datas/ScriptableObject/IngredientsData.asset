@@ -33,19 +33,19 @@ MonoBehaviour:
     ShopBuyPrice: 0
     GuestSellPrice: 12
   - Name: "\uC591\uD30C"
-    Type: 4
+    Type: 3
     YieldAmount: 4
     CookTime: 2.5
     ShopBuyPrice: 0
     GuestSellPrice: 11
   - Name: "\uD1A0\uB9C8\uD1A0"
-    Type: 5
+    Type: 4
     YieldAmount: 4
     CookTime: 3
     ShopBuyPrice: 0
     GuestSellPrice: 11
   - Name: "\uACE0\uAE30 \uD328\uD2F0"
-    Type: 6
+    Type: 5
     YieldAmount: 1
     CookTime: 5
     ShopBuyPrice: 0
@@ -57,9 +57,9 @@ MonoBehaviour:
     Icon: {fileID: 21300000, guid: 927ebbaad3a3fb4479dcaf203f062ac5, type: 3}
   - Type: 2
     Icon: {fileID: 21300000, guid: d77976d1ce75c734eb81fdd47cbeacf7, type: 3}
-  - Type: 4
+  - Type: 3
     Icon: {fileID: 21300000, guid: d8ff9de0be4ef10409abe7c38167c4e9, type: 3}
-  - Type: 5
+  - Type: 4
     Icon: {fileID: 21300000, guid: 3824cf03a1ca7c144aff6f07dfee2a60, type: 3}
-  - Type: 6
+  - Type: 5
     Icon: {fileID: 21300000, guid: e63dece1f91ce61479dfdb8e7d30344d, type: 3}

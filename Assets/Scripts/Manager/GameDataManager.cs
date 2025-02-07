@@ -27,6 +27,10 @@ namespace MSKim.Manager
 
         public Data.IngredientData GetIngredientData(Utils.CrateType type) => IngredientDatas.Find(ingredient => ingredient.Type == type);
 
+        public List<Data.IngredientIconData> IngredientIconDatas => ingredientDatas.IngredientIconDataList;
+
+        public Data.IngredientIconData GetIngredientIconData(Utils.CrateType type) => IngredientIconDatas.Find(ingredient => ingredient.Type == type);
+
         public List<Data.FoodData> FoodDatas => foodDatas.FoodDataList;
 
         public Data.FoodData GetFoodData(Utils.FoodType type) => FoodDatas.Find(food => food.Type == type);
