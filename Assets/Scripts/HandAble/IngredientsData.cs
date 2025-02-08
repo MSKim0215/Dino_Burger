@@ -26,6 +26,7 @@ namespace MSKim.Data
     public class IngredientIconData
     {
         public Utils.CrateType Type;
-        public Sprite Icon;
+        public Sprite UnCookIcon;
+        public Sprite CookIcon;
     }
 }

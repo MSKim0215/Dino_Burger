@@ -52,14 +52,20 @@ MonoBehaviour:
     GuestSellPrice: 20
   IngredientIconDataList:
   - Type: 0
-    Icon: {fileID: 21300000, guid: 3e82199e4c6e1b249b07902a9c1065e4, type: 3}
+    UnCookIcon: {fileID: 21300000, guid: 3e82199e4c6e1b249b07902a9c1065e4, type: 3}
+    CookIcon: {fileID: 21300000, guid: 3e82199e4c6e1b249b07902a9c1065e4, type: 3}
   - Type: 1
-    Icon: {fileID: 21300000, guid: 927ebbaad3a3fb4479dcaf203f062ac5, type: 3}
+    UnCookIcon: {fileID: 21300000, guid: 927ebbaad3a3fb4479dcaf203f062ac5, type: 3}
+    CookIcon: {fileID: 21300000, guid: 18d7a8ad1103b7f4bbb90b42a3866217, type: 3}
   - Type: 2
-    Icon: {fileID: 21300000, guid: d77976d1ce75c734eb81fdd47cbeacf7, type: 3}
+    UnCookIcon: {fileID: 21300000, guid: d77976d1ce75c734eb81fdd47cbeacf7, type: 3}
+    CookIcon: {fileID: 21300000, guid: a84ec173f2e19a442bf050bbbbaa1b21, type: 3}
   - Type: 3
-    Icon: {fileID: 21300000, guid: d8ff9de0be4ef10409abe7c38167c4e9, type: 3}
+    UnCookIcon: {fileID: 21300000, guid: d8ff9de0be4ef10409abe7c38167c4e9, type: 3}
+    CookIcon: {fileID: 21300000, guid: 0ce13f2eaf3a3594cb4e9ea16cdcd44c, type: 3}
   - Type: 4
-    Icon: {fileID: 21300000, guid: 3824cf03a1ca7c144aff6f07dfee2a60, type: 3}
+    UnCookIcon: {fileID: 21300000, guid: 3824cf03a1ca7c144aff6f07dfee2a60, type: 3}
+    CookIcon: {fileID: 21300000, guid: 004add4cd7f9f384e9ee26b6c31a56de, type: 3}
   - Type: 5
-    Icon: {fileID: 21300000, guid: e63dece1f91ce61479dfdb8e7d30344d, type: 3}
+    UnCookIcon: {fileID: 21300000, guid: e63dece1f91ce61479dfdb8e7d30344d, type: 3}
+    CookIcon: {fileID: 21300000, guid: c6380703916f15843a01aa298340e7fe, type: 3}

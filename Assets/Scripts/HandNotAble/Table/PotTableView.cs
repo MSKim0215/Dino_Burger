@@ -58,7 +58,7 @@ namespace MSKim.HandNotAble.UI
             {
                 IsInput = true;
                 frame.SetActive(IsInput);
-                icon.sprite = Managers.GameData.GetIngredientIconData(ingredientType).Icon;
+                icon.sprite = Managers.GameData.GetIngredientIconData(ingredientType).UnCookIcon;
             }
 
             public void Output()

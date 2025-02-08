@@ -24,7 +24,7 @@ namespace MSKim.HandAble.UI
             public void Initialize(Utils.CrateType type)
             {
                 this.type = type;
-                icon.sprite = Managers.GameData.GetIngredientIconData(this.type).Icon;
+                icon.sprite = Managers.GameData.GetIngredientIconData(this.type).CookIcon;
                 AddCount();
                 box.SetActive(true);
             }
