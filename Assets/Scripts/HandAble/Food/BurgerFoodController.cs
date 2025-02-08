@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,6 +7,9 @@ namespace MSKim.HandAble
 {
     public class BurgerFoodController : FoodController
     {
+        [Header("Burger View")]
+        [SerializeField] private UI.BurgerView view;
+
         [Header("Other Object")]
         [SerializeField] private Renderer bottom;
         [SerializeField] private Renderer top;
@@ -18,6 +22,8 @@ namespace MSKim.HandAble
 
         private Dictionary<Utils.CrateType, float> correctionHeightDict = new();
         private float currentHeight = 0f;
+
+        public event Action<IngredientController> OnStackIngredientEvent;
 
         public float CurrentHeight
         {
@@ -32,6 +38,8 @@ namespace MSKim.HandAble
         public override void Initialize(Utils.FoodType foodType)
         {
             base.Initialize(foodType);
+
+            view.Initialize(this);
 
             currentHeight = bottom.bounds.size.y;
 
@@ -52,6 +60,7 @@ namespace MSKim.HandAble
                 ingredientObject.transform.localPosition = Vector3.zero;
                 ingredient.HitBox.enabled = false;
                 ingredientList.Add(ingredient);
+                OnStackIngredientEvent?.Invoke(ingredient);
 
                 if (ingredient.IngredientType == Utils.CrateType.Cheese)
                 {
