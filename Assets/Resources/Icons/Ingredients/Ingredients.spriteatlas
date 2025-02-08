@@ -51,30 +51,50 @@ SpriteAtlas:
     - {fileID: 2800000, guid: e63dece1f91ce61479dfdb8e7d30344d, type: 3}
     - {fileID: 2800000, guid: d8ff9de0be4ef10409abe7c38167c4e9, type: 3}
     - {fileID: 2800000, guid: 3824cf03a1ca7c144aff6f07dfee2a60, type: 3}
+    - {fileID: 2800000, guid: cb173821555300840ae3351f709ce991, type: 3}
+    - {fileID: 2800000, guid: c8cee35b66b60ce418d302533a90efc6, type: 3}
+    - {fileID: 2800000, guid: 38f602d87f7e1cd4885d9f94ed3c2dc8, type: 3}
+    - {fileID: 2800000, guid: 3f8d2db329deb544aace193c9859d3b8, type: 3}
+    - {fileID: 2800000, guid: fd45347ac89d290498863d6704c84912, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
     packedSpriteRenderDataKeys:
     - d8ff9de0be4ef10409abe7c38167c4e9: 21300000
+    - cb173821555300840ae3351f709ce991: 21300000
     - d77976d1ce75c734eb81fdd47cbeacf7: 21300000
     - e63dece1f91ce61479dfdb8e7d30344d: 21300000
     - 3824cf03a1ca7c144aff6f07dfee2a60: 21300000
+    - 3f8d2db329deb544aace193c9859d3b8: 21300000
+    - 38f602d87f7e1cd4885d9f94ed3c2dc8: 21300000
+    - fd45347ac89d290498863d6704c84912: 21300000
     - 927ebbaad3a3fb4479dcaf203f062ac5: 21300000
+    - c8cee35b66b60ce418d302533a90efc6: 21300000
     - 3e82199e4c6e1b249b07902a9c1065e4: 21300000
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: d8ff9de0be4ef10409abe7c38167c4e9, type: 3}
+  - {fileID: 21300000, guid: cb173821555300840ae3351f709ce991, type: 3}
   - {fileID: 21300000, guid: d77976d1ce75c734eb81fdd47cbeacf7, type: 3}
   - {fileID: 21300000, guid: e63dece1f91ce61479dfdb8e7d30344d, type: 3}
   - {fileID: 21300000, guid: 3824cf03a1ca7c144aff6f07dfee2a60, type: 3}
+  - {fileID: 21300000, guid: 3f8d2db329deb544aace193c9859d3b8, type: 3}
+  - {fileID: 21300000, guid: 38f602d87f7e1cd4885d9f94ed3c2dc8, type: 3}
+  - {fileID: 21300000, guid: fd45347ac89d290498863d6704c84912, type: 3}
   - {fileID: 21300000, guid: 927ebbaad3a3fb4479dcaf203f062ac5, type: 3}
+  - {fileID: 21300000, guid: c8cee35b66b60ce418d302533a90efc6, type: 3}
   - {fileID: 21300000, guid: 3e82199e4c6e1b249b07902a9c1065e4, type: 3}
   m_PackedSpriteNamesToIndex:
   - Ingredient_Onion
+  - Ingredient_Cheese
   - Ingredient_Lettuce
   - Ingredient_Meat
   - Ingredient_Tomato
+  - Ingredient_Onion
+  - Ingredient_Meat
+  - Ingredient_Tomato
   - Ingredient_Cheese
+  - Ingredient_Lettuce
   - Ingredient_Bun
   m_RenderDataMap: {}
   m_Tag: Ingredients
