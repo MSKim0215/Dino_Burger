@@ -39,6 +39,7 @@ namespace MSKim.NonPlayer
 
         private int waitingNumber;
         private int orderTableNumber;
+        private MSKim.UI.OrderTicket orderTicket;
 
         public event Action<int> OnChangeWaitingNumber;
         public event Action<int> OnChangeOrderTableNumber;
@@ -50,6 +51,10 @@ namespace MSKim.NonPlayer
 
         private int LayerHandAble { get => 1 << LayerMask.NameToLayer("HandAble"); }
         private int LayerHandNotAble { get => 1 << LayerMask.NameToLayer("HandNotAble"); }
+
+        public bool IsOrderStew => isOrderStew;
+
+        public List<Utils.CrateType> OrderBurger => orderBurger;
 
         public int WaitingNumber
         {
@@ -398,17 +403,14 @@ namespace MSKim.NonPlayer
 
             FindPickupTable();
 
-            if(!IsFindPickupTable())
-            {
-                Debug.LogWarning("픽업테이블 못찾음");
-                return;
-            }
-            
+            if(!IsFindPickupTable()) return;
+
+            CreateOrderTicket();
+
             while (true)
             {
                 if(isOrderSuccess)
                 {
-                    Debug.Log("주문한거 받음");
                     ChangeState(ICharacterState.BehaviourState.OrderSuccess);
                     currentPatientTime = 0f;
 
@@ -425,6 +427,12 @@ namespace MSKim.NonPlayer
 
                     Managers.UserData.CurrentGoldAmount += giveGoldAmount;
 
+                    if (orderTicket != null)
+                    {
+                        orderTicket.Release();
+                        orderTicket = null;
+                    }
+
                     break;
                 }
 
@@ -435,9 +443,15 @@ namespace MSKim.NonPlayer
 
                 if(currentPatientTime >= data.Patience)
                 {
-                    Debug.Log("주문한거 못받음");
                     ChangeState(ICharacterState.BehaviourState.OrderFailure);
                     currentPatientTime = 0f;
+
+                    if (orderTicket != null)
+                    {
+                        orderTicket.Release();
+                        orderTicket = null;
+                    }
+
                     break;
                 }
             }
@@ -453,6 +467,25 @@ namespace MSKim.NonPlayer
             else
             {
                 ChangeState(ICharacterState.BehaviourState.MoveFailure);
+            }
+        }
+
+        private void CreateOrderTicket()
+        {
+            var createTicket = Managers.Pool.GetPoolObject("OrderTicket");
+            var root = GameObject.Find("OrderTickets").transform;
+
+            if (createTicket.transform.parent != root)
+            {
+                createTicket.transform.SetParent(root);
+                createTicket.transform.localScale = Vector3.one;
+                createTicket.transform.localPosition = Vector3.zero;
+            }
+
+            if (createTicket.TryGetComponent<MSKim.UI.OrderTicket>(out var orderTicket))
+            {
+                this.orderTicket = orderTicket;
+                this.orderTicket.Initialize(this);
             }
         }
 

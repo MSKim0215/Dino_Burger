@@ -466,7 +466,7 @@ MonoBehaviour:
   gameManager:
     waitChairList: []
     pickupTableList: []
-    allowIncredientList: 0100000002000000040000000500000006000000
+    allowIncredientList: 0100000002000000030000000400000005000000
     currentWaitNumber: 0
     pickupZoneGuests: []
     canPickupSeats: 
@@ -501,6 +501,24 @@ MonoBehaviour:
       createPrefab: {fileID: 8107395411382579665, guid: 15771beeeb457d8428983dc8af87cbae, type: 3}
       createCount: 5
       maxCount: 5
+    - createObjectName: Frame_Ingredient
+      poolType: 1
+      useScene: 2
+      createPrefab: {fileID: 3413705242890271973, guid: 2761397563d35cc4ca57b2f200521e77, type: 3}
+      createCount: 5
+      maxCount: 20
+    - createObjectName: Group_Ingredient
+      poolType: 1
+      useScene: 2
+      createPrefab: {fileID: 4610819349108773127, guid: c90562dc391f27a49b5c6724f8678ae8, type: 3}
+      createCount: 5
+      maxCount: 10
+    - createObjectName: OrderTicket
+      poolType: 1
+      useScene: 2
+      createPrefab: {fileID: 8370721204884615314, guid: 564e3829d6089304994c66de39e7c222, type: 3}
+      createCount: 4
+      maxCount: 4
     rootList:
     - {fileID: 365165892}
     - {fileID: 708651376}
