@@ -21,6 +21,6 @@ namespace MSKim.UI
             ingredientIcon.sprite = Managers.GameData.GetIngredientIconData(this.controller.IngredientType).CookIcon;
         }
 
-        public void SetCountText(int value) => countText.text = $"x{value}";
+        public void SetCountText(int value) => countText.text = value.ToString();
     }
 }
