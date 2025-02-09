@@ -16,6 +16,7 @@ namespace MSKim.Manager
 
         public event Action<Utils.CurrencyType, int> OnChangeCurrency;
         public event Action<Utils.ShopItemIndex, int> OnChangeUpgrade;
+        public event Action<int> OnChangeInGameCurrency;
 
         public int CurrentGoldAmount
         {
@@ -23,6 +24,7 @@ namespace MSKim.Manager
             set
             {
                 currentGoldAmount = value;
+                OnChangeInGameCurrency?.Invoke(CurrentGoldAmount);
             }
         }
 

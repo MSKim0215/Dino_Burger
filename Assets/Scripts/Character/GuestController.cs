@@ -388,6 +388,7 @@ namespace MSKim.NonPlayer
         {
             if (!isOrderStew) return;
             if (isGetStew) return;
+            if (myPickupTable.HandUpObject == null) return;
 
             if (myPickupTable.HandUpObject.TryGetComponent<HandAble.StewFoodController>(out var stew))
             {
