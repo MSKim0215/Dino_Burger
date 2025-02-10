@@ -20,7 +20,10 @@ namespace MSKim.Manager
             {
                 foreach(var waypoint in waypoints.WaypointInfoList)
                 {
-                    waypointDict.Add(waypoint.type, waypoint.pointList);
+                    if (!waypointDict.ContainsKey(waypoint.type))
+                    {
+                        waypointDict.Add(waypoint.type, waypoint.pointList);
+                    }
                 }
             }
         }
