@@ -14,84 +14,84 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Json: {fileID: 4900000, guid: 4c50488d20e4cc344ba7d00b89476a38, type: 3}
   ShopItemDataList:
-  - Name: "\uC591\uC0C1\uCD94 \uD310\uB9E4 \uAC00\uACA9 \uC99D\uAC00"
+  - Name: "\uC591\uC0C1\uCD94 \uD310\uB9E4\uAC00\uACA9 \uC99D\uAC00"
     Type: 0
     Index: 0
     Price: 500
     BaseLevel: 1
     MaximumLevel: 10
     UpgradeAmount: 2
-  - Name: "\uD1A0\uB9C8\uD1A0 \uD310\uB9E4 \uAC00\uACA9 \uC99D\uAC00"
+  - Name: "\uD1A0\uB9C8\uD1A0 \uD310\uB9E4\uAC00\uACA9 \uC99D\uAC00"
     Type: 0
     Index: 1
     Price: 500
     BaseLevel: 1
     MaximumLevel: 10
     UpgradeAmount: 2
-  - Name: "\uC591\uD30C \uD310\uB9E4 \uAC00\uACA9 \uC99D\uAC00"
+  - Name: "\uC591\uD30C \uD310\uB9E4\uAC00\uACA9 \uC99D\uAC00"
     Type: 0
     Index: 2
     Price: 500
     BaseLevel: 1
     MaximumLevel: 10
     UpgradeAmount: 2
-  - Name: "\uCE58\uC988 \uD310\uB9E4 \uAC00\uACA9 \uC99D\uAC00"
+  - Name: "\uCE58\uC988 \uD310\uB9E4\uAC00\uACA9 \uC99D\uAC00"
     Type: 0
     Index: 3
     Price: 500
     BaseLevel: 1
     MaximumLevel: 10
     UpgradeAmount: 2
-  - Name: "\uACE0\uAE30 \uD310\uB9E4 \uAC00\uACA9 \uC99D\uAC00"
+  - Name: "\uACE0\uAE30 \uD310\uB9E4\uAC00\uACA9 \uC99D\uAC00"
     Type: 0
     Index: 4
     Price: 800
     BaseLevel: 1
     MaximumLevel: 10
     UpgradeAmount: 5
-  - Name: "\uC591\uC0C1\uCD94 \uC7AC\uB8CC \uC218\uC728 \uC99D\uAC00"
+  - Name: "\uC591\uC0C1\uCD94 \uC218\uC728 \uC99D\uAC00"
     Type: 0
     Index: 5
     Price: 1500
     BaseLevel: 1
     MaximumLevel: 5
     UpgradeAmount: 1
-  - Name: "\uD1A0\uB9C8\uD1A0 \uC7AC\uB8CC \uC218\uC728 \uC99D\uAC00"
+  - Name: "\uD1A0\uB9C8\uD1A0 \uC218\uC728 \uC99D\uAC00"
     Type: 0
     Index: 6
     Price: 1500
     BaseLevel: 1
     MaximumLevel: 5
     UpgradeAmount: 1
-  - Name: "\uC591\uD30C \uC7AC\uB8CC \uC218\uC728 \uC99D\uAC00"
+  - Name: "\uC591\uD30C \uC218\uC728 \uC99D\uAC00"
     Type: 0
     Index: 7
     Price: 1500
     BaseLevel: 1
     MaximumLevel: 5
     UpgradeAmount: 1
-  - Name: "\uCE58\uC988 \uC7AC\uB8CC \uC218\uC728 \uC99D\uAC00"
+  - Name: "\uCE58\uC988 \uC218\uC728 \uC99D\uAC00"
     Type: 0
     Index: 8
     Price: 1500
     BaseLevel: 1
     MaximumLevel: 5
     UpgradeAmount: 1
-  - Name: "\uCE7C\uC9C8 \uC18D\uB3C4 \uC99D\uAC00"
+  - Name: "\uCE7C\uC9C8\uC18D\uB3C4 \uC99D\uAC00"
     Type: 1
     Index: 9
     Price: 2000
     BaseLevel: 1
     MaximumLevel: 10
     UpgradeAmount: 0.1
-  - Name: "\uC774\uB3D9 \uC18D\uB3C4 \uC99D\uAC00"
+  - Name: "\uC774\uB3D9\uC18D\uB3C4 \uC99D\uAC00"
     Type: 1
     Index: 10
     Price: 3000
     BaseLevel: 1
     MaximumLevel: 5
     UpgradeAmount: 0.1
-  - Name: "\uC778\uB0B4 \uC2DC\uAC04 \uC99D\uAC00"
+  - Name: "\uC778\uB0B4\uC2DC\uAC04 \uC99D\uAC00"
     Type: 2
     Index: 11
     Price: 3000
@@ -99,39 +99,39 @@ MonoBehaviour:
     MaximumLevel: 10
     UpgradeAmount: 5
   ShopItemIconDataList:
-  - Name: "\uC591\uC0C1\uCD94 \uD310\uB9E4 \uAC00\uACA9 \uC99D\uAC00"
+  - Name: "\uC591\uC0C1\uCD94 \uD310\uB9E4\uAC00\uACA9 \uC99D\uAC00"
     Index: 0
-    Icon: {fileID: 21300000, guid: 753eb3e1222a19442aec2dbfc56faed3, type: 3}
-  - Name: "\uD1A0\uB9C8\uD1A0 \uD310\uB9E4 \uAC00\uACA9 \uC99D\uAC00"
+    Icon: {fileID: 21300000, guid: 92e931dce69dc804b81597ce13f519cb, type: 3}
+  - Name: "\uD1A0\uB9C8\uD1A0 \uD310\uB9E4\uAC00\uACA9 \uC99D\uAC00"
     Index: 1
-    Icon: {fileID: 21300000, guid: 335504d3a199c1c479c3ebb977131d6c, type: 3}
-  - Name: "\uC591\uD30C \uD310\uB9E4 \uAC00\uACA9 \uC99D\uAC00"
+    Icon: {fileID: 21300000, guid: 1f58445a19eef5e4889b32216df726fc, type: 3}
+  - Name: "\uC591\uD30C \uD310\uB9E4\uAC00\uACA9 \uC99D\uAC00"
     Index: 2
-    Icon: {fileID: 21300000, guid: a48ebb95113e6ee46b86425645876f40, type: 3}
-  - Name: "\uCE58\uC988 \uD310\uB9E4 \uAC00\uACA9 \uC99D\uAC00"
+    Icon: {fileID: 21300000, guid: 4f5aef3d7b393ee4a88dda597fb6a899, type: 3}
+  - Name: "\uCE58\uC988 \uD310\uB9E4\uAC00\uACA9 \uC99D\uAC00"
     Index: 3
     Icon: {fileID: 21300000, guid: e26c644aec76dbf48a3555f68fe7ab2b, type: 3}
-  - Name: "\uACE0\uAE30 \uD310\uB9E4 \uAC00\uACA9 \uC99D\uAC00"
+  - Name: "\uACE0\uAE30 \uD310\uB9E4\uAC00\uACA9 \uC99D\uAC00"
     Index: 4
-    Icon: {fileID: 21300000, guid: 192cc1802ed91f54e8813f8e04b2c3c5, type: 3}
+    Icon: {fileID: 21300000, guid: 4c4373da4226a6548b7a53c440e34002, type: 3}
   - Name: "\uC591\uC0C1\uCD94 \uC218\uC728 \uC99D\uAC00"
     Index: 5
-    Icon: {fileID: 21300000, guid: b71524fc816015c4c93f34ec59c6af87, type: 3}
+    Icon: {fileID: 21300000, guid: cdc3ca62510e23d4c9e82b9fcc7034b7, type: 3}
   - Name: "\uD1A0\uB9C8\uD1A0 \uC218\uC728 \uC99D\uAC00"
     Index: 6
-    Icon: {fileID: 21300000, guid: 6226cdb6eef806e42a51c09916324b68, type: 3}
-  - Name: "\uC591\uD30C \uC7AC\uB8CC \uC218\uC728 \uC99D\uAC00"
+    Icon: {fileID: 21300000, guid: 94ea10376a1523c4bbdea2a7f43d39eb, type: 3}
+  - Name: "\uC591\uD30C \uC218\uC728 \uC99D\uAC00"
     Index: 7
-    Icon: {fileID: 21300000, guid: d49d8ef8f7193c543b7d3b893c75a889, type: 3}
-  - Name: "\uCE58\uC988 \uC7AC\uB8CC \uC218\uC728\uC99D\uAC00"
+    Icon: {fileID: 21300000, guid: 8a00fdfe1da0dd24ca7c7db4ee13b028, type: 3}
+  - Name: "\uCE58\uC988 \uC218\uC728\uC99D\uAC00"
     Index: 8
-    Icon: {fileID: 21300000, guid: b590dee5d8717e24bb646d752083b1ce, type: 3}
+    Icon: {fileID: 21300000, guid: fc8462e8066e06b43a5d9e4bf8d3e7a7, type: 3}
   - Name: "\uCE7C\uC9C8\uC18D\uB3C4 \uC99D\uAC00"
     Index: 9
-    Icon: {fileID: 21300000, guid: 48d3a06bd884149ad8e6ccc5a59d3815, type: 3}
+    Icon: {fileID: 21300000, guid: ea4aaa3573359a7448263aede94b353b, type: 3}
   - Name: "\uC774\uB3D9\uC18D\uB3C4 \uC99D\uAC00"
     Index: 10
-    Icon: {fileID: 21300000, guid: 48d3a06bd884149ad8e6ccc5a59d3815, type: 3}
+    Icon: {fileID: 21300000, guid: 7a50a918d4a9f394897528ec22ed8db8, type: 3}
   - Name: "\uC778\uB0B4\uC2DC\uAC04 \uC99D\uAC00"
     Index: 11
-    Icon: {fileID: 21300000, guid: 48d3a06bd884149ad8e6ccc5a59d3815, type: 3}
+    Icon: {fileID: 21300000, guid: 95301b243145d1d469244264039fa371, type: 3}
