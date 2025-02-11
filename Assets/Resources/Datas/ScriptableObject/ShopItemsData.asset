@@ -99,27 +99,39 @@ MonoBehaviour:
     MaximumLevel: 10
     UpgradeAmount: 5
   ShopItemIconDataList:
-  - Index: 0
+  - Name: "\uC591\uC0C1\uCD94 \uD310\uB9E4 \uAC00\uACA9 \uC99D\uAC00"
+    Index: 0
+    Icon: {fileID: 21300000, guid: 753eb3e1222a19442aec2dbfc56faed3, type: 3}
+  - Name: "\uD1A0\uB9C8\uD1A0 \uD310\uB9E4 \uAC00\uACA9 \uC99D\uAC00"
+    Index: 1
+    Icon: {fileID: 21300000, guid: 335504d3a199c1c479c3ebb977131d6c, type: 3}
+  - Name: "\uC591\uD30C \uD310\uB9E4 \uAC00\uACA9 \uC99D\uAC00"
+    Index: 2
+    Icon: {fileID: 21300000, guid: a48ebb95113e6ee46b86425645876f40, type: 3}
+  - Name: "\uCE58\uC988 \uD310\uB9E4 \uAC00\uACA9 \uC99D\uAC00"
+    Index: 3
+    Icon: {fileID: 21300000, guid: e26c644aec76dbf48a3555f68fe7ab2b, type: 3}
+  - Name: "\uACE0\uAE30 \uD310\uB9E4 \uAC00\uACA9 \uC99D\uAC00"
+    Index: 4
+    Icon: {fileID: 21300000, guid: 192cc1802ed91f54e8813f8e04b2c3c5, type: 3}
+  - Name: "\uC591\uC0C1\uCD94 \uC218\uC728 \uC99D\uAC00"
+    Index: 5
+    Icon: {fileID: 21300000, guid: b71524fc816015c4c93f34ec59c6af87, type: 3}
+  - Name: "\uD1A0\uB9C8\uD1A0 \uC218\uC728 \uC99D\uAC00"
+    Index: 6
+    Icon: {fileID: 21300000, guid: 6226cdb6eef806e42a51c09916324b68, type: 3}
+  - Name: "\uC591\uD30C \uC7AC\uB8CC \uC218\uC728 \uC99D\uAC00"
+    Index: 7
+    Icon: {fileID: 21300000, guid: d49d8ef8f7193c543b7d3b893c75a889, type: 3}
+  - Name: "\uCE58\uC988 \uC7AC\uB8CC \uC218\uC728\uC99D\uAC00"
+    Index: 8
+    Icon: {fileID: 21300000, guid: b590dee5d8717e24bb646d752083b1ce, type: 3}
+  - Name: "\uCE7C\uC9C8\uC18D\uB3C4 \uC99D\uAC00"
+    Index: 9
     Icon: {fileID: 21300000, guid: 48d3a06bd884149ad8e6ccc5a59d3815, type: 3}
-  - Index: 1
+  - Name: "\uC774\uB3D9\uC18D\uB3C4 \uC99D\uAC00"
+    Index: 10
     Icon: {fileID: 21300000, guid: 48d3a06bd884149ad8e6ccc5a59d3815, type: 3}
-  - Index: 2
-    Icon: {fileID: 21300000, guid: 48d3a06bd884149ad8e6ccc5a59d3815, type: 3}
-  - Index: 3
-    Icon: {fileID: 21300000, guid: 48d3a06bd884149ad8e6ccc5a59d3815, type: 3}
-  - Index: 4
-    Icon: {fileID: 21300000, guid: 48d3a06bd884149ad8e6ccc5a59d3815, type: 3}
-  - Index: 5
-    Icon: {fileID: 21300000, guid: 48d3a06bd884149ad8e6ccc5a59d3815, type: 3}
-  - Index: 6
-    Icon: {fileID: 21300000, guid: 48d3a06bd884149ad8e6ccc5a59d3815, type: 3}
-  - Index: 7
-    Icon: {fileID: 21300000, guid: 48d3a06bd884149ad8e6ccc5a59d3815, type: 3}
-  - Index: 8
-    Icon: {fileID: 21300000, guid: 48d3a06bd884149ad8e6ccc5a59d3815, type: 3}
-  - Index: 9
-    Icon: {fileID: 21300000, guid: 48d3a06bd884149ad8e6ccc5a59d3815, type: 3}
-  - Index: 10
-    Icon: {fileID: 21300000, guid: 48d3a06bd884149ad8e6ccc5a59d3815, type: 3}
-  - Index: 11
+  - Name: "\uC778\uB0B4\uC2DC\uAC04 \uC99D\uAC00"
+    Index: 11
     Icon: {fileID: 21300000, guid: 48d3a06bd884149ad8e6ccc5a59d3815, type: 3}

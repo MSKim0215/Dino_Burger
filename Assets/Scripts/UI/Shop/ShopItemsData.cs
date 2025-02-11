@@ -27,6 +27,7 @@ namespace MSKim.Data
     [Serializable]
     public class ShopItemIconData
     {
+        public string Name;
         public int Index;
         public Sprite Icon;
     }

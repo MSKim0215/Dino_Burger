@@ -475,6 +475,7 @@ MonoBehaviour:
     spawnPointList: []
     currSpawnTime: 0
     maxSpawnTime: 0
+    guestList: []
   objectPoolManager:
     poolObjectList:
     - createObjectName: Guest
