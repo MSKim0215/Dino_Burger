@@ -12,9 +12,16 @@ namespace MSKim.Manager
         [SerializeField] private float currSpawnTime;
         [SerializeField] private float maxSpawnTime;
 
+        public List<NonPlayer.GuestController> guestList = new();
+
         public override void Initialize()
         {
             base.Initialize();
+
+            if(spawnPointList.Count > 0)
+            {
+                spawnPointList.Clear();
+            }
 
             if(spawnPointList.Count <= 0)
             {
@@ -38,7 +45,12 @@ namespace MSKim.Manager
                 var spawnPoint = spawnPointList[UnityEngine.Random.Range(0, spawnPointList.Count)];
                 var guest = Managers.Pool.GetPoolObject("Guest");
                 guest.transform.position = new(spawnPoint.position.x, spawnPoint.position.y, UnityEngine.Random.Range(17, 20));
-                guest.GetComponent<NonPlayer.GuestController>().Initialize();
+
+                if(guest.TryGetComponent<NonPlayer.GuestController>(out var controller))
+                {
+                    controller.Initialize();
+                    guestList.Add(controller);
+                }
 
                 currSpawnTime = 0f;
                 maxSpawnTime = UnityEngine.Random.Range(3, 6);

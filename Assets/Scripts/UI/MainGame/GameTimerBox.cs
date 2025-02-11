@@ -44,7 +44,15 @@ namespace MSKim.UI
                 {
                     for(int i = Managers.Guest.guestList.Count - 1; i >= 0 ; i--)
                     {
-                        Managers.Guest.guestList[i].Release();
+                        var guest = Managers.Guest.guestList[i];
+                        if(guest == null)
+                        {
+                            Managers.Guest.guestList.Remove(guest);
+                        }
+                        else
+                        {
+                            Managers.Guest.guestList[i]?.Release();
+                        }
                     }
 
                     currentTime = 0f;

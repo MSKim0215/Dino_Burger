@@ -32,6 +32,9 @@ namespace MSKim.Manager
         {
             base.Initialize();
 
+            waitChairList.Clear();
+            waitingZoneGuests.Clear();
+
             if(waitChairList.Count <= 0)
             {
                 var waitSeatRoot = GameObject.Find("Chairs").transform;
@@ -40,6 +43,9 @@ namespace MSKim.Manager
                     waitChairList.Add(waitSeatRoot.GetChild(i).gameObject);
                 }
             }
+
+            pickupTableList.Clear();
+            pickupZoneGuests.Clear();
 
             if(pickupTableList.Count <= 0)
             {

@@ -16,14 +16,16 @@ namespace MSKim.Manager
 
             if (waypoints != null) return;
 
+            if (waypointDict.Count > 0)
+            {
+                waypointDict.Clear();
+            }
+
             if(GameObject.Find("Waypoints").TryGetComponent(out waypoints))
             {
                 foreach(var waypoint in waypoints.WaypointInfoList)
                 {
-                    if (!waypointDict.ContainsKey(waypoint.type))
-                    {
-                        waypointDict.Add(waypoint.type, waypoint.pointList);
-                    }
+                    waypointDict.Add(waypoint.type, waypoint.pointList);
                 }
             }
         }

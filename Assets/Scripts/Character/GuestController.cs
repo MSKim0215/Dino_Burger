@@ -110,6 +110,7 @@ namespace MSKim.NonPlayer
 
             holdPointZ = transform.position.z;
             CurrentWaypointType = Utils.WaypointType.MoveStore;
+            currentPatientTime = 0f;
 
             ChangeState(ICharacterState.BehaviourState.Move);
         }
@@ -397,6 +398,8 @@ namespace MSKim.NonPlayer
             }
         }
 
+        private bool isRelease = false;
+
         public async void Order(List<Utils.CrateType> orderBurger, bool isOrderStew)
         {
             this.orderBurger = orderBurger;
@@ -408,7 +411,7 @@ namespace MSKim.NonPlayer
 
             CreateOrderTicket();
 
-            while (true)
+            while (!isRelease)
             {
                 if(isOrderSuccess)
                 {
@@ -456,6 +459,8 @@ namespace MSKim.NonPlayer
                     break;
                 }
             }
+
+            if (isRelease) return;
 
             await UniTask.Delay(TimeSpan.FromSeconds(1f));
 
@@ -514,12 +519,22 @@ namespace MSKim.NonPlayer
 
         public override void Release()
         {
+            if (Managers.Guest.guestList.Count > 0)
+            {
+                if(Managers.Guest.guestList.Contains(this))
+                {
+                    Managers.Guest.guestList.Remove(this);
+                }
+            }
+
             ChangeState(ICharacterState.BehaviourState.None);
 
             currentPointIndex = 0;
             isOrderSuccess = false;
             isGetBurger = false;
             isGetStew = false;
+
+            isRelease = true;
 
             view.Release();
             base.Release();
