@@ -1,6 +1,6 @@
 [
   {
-    "Name": "양상추 판매가격 증가",
+    "Name": "Lettuce price up",
     "Type": 0,
     "Index": 0,
     "Price": 500,
@@ -9,7 +9,7 @@
     "UpgradeAmount": 2.0
   },
   {
-    "Name": "토마토 판매가격 증가",
+    "Name": "Tomato price up",
     "Type": 0,
     "Index": 1,
     "Price": 500,
@@ -18,7 +18,7 @@
     "UpgradeAmount": 2.0
   },
   {
-    "Name": "양파 판매가격 증가",
+    "Name": "Onion price up",
     "Type": 0,
     "Index": 2,
     "Price": 500,
@@ -27,7 +27,7 @@
     "UpgradeAmount": 2.0
   },
   {
-    "Name": "치즈 판매가격 증가",
+    "Name": "Cheese price up",
     "Type": 0,
     "Index": 3,
     "Price": 500,
@@ -36,7 +36,7 @@
     "UpgradeAmount": 2.0
   },
   {
-    "Name": "고기 판매가격 증가",
+    "Name": "Patty price up",
     "Type": 0,
     "Index": 4,
     "Price": 800,
@@ -45,7 +45,7 @@
     "UpgradeAmount": 5.0
   },
   {
-    "Name": "양상추 수율 증가",
+    "Name": "Lettuce yield up",
     "Type": 0,
     "Index": 5,
     "Price": 1500,
@@ -54,7 +54,7 @@
     "UpgradeAmount": 1.0
   },
   {
-    "Name": "토마토 수율 증가",
+    "Name": "Tomato yield up",
     "Type": 0,
     "Index": 6,
     "Price": 1500,
@@ -63,7 +63,7 @@
     "UpgradeAmount": 1.0
   },
   {
-    "Name": "양파 수율 증가",
+    "Name": "Onion yield up",
     "Type": 0,
     "Index": 7,
     "Price": 1500,
@@ -72,7 +72,7 @@
     "UpgradeAmount": 1.0
   },
   {
-    "Name": "치즈 수율 증가",
+    "Name": "Cheese yield up",
     "Type": 0,
     "Index": 8,
     "Price": 1500,
@@ -81,7 +81,7 @@
     "UpgradeAmount": 1.0
   },
   {
-    "Name": "칼질속도 증가",
+    "Name": "Cutting speed up",
     "Type": 1,
     "Index": 9,
     "Price": 2000,
@@ -90,7 +90,7 @@
     "UpgradeAmount": 0.1
   },
   {
-    "Name": "이동속도 증가",
+    "Name": "Movement speed up",
     "Type": 1,
     "Index": 10,
     "Price": 3000,
@@ -99,7 +99,7 @@
     "UpgradeAmount": 0.1
   },
   {
-    "Name": "인내시간 증가",
+    "Name": "Patience time up",
     "Type": 2,
     "Index": 11,
     "Price": 3000,

@@ -14,84 +14,84 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Json: {fileID: 4900000, guid: 4c50488d20e4cc344ba7d00b89476a38, type: 3}
   ShopItemDataList:
-  - Name: "\uC591\uC0C1\uCD94 \uD310\uB9E4\uAC00\uACA9 \uC99D\uAC00"
+  - Name: Lettuce price up
     Type: 0
     Index: 0
     Price: 500
     BaseLevel: 1
     MaximumLevel: 10
     UpgradeAmount: 2
-  - Name: "\uD1A0\uB9C8\uD1A0 \uD310\uB9E4\uAC00\uACA9 \uC99D\uAC00"
+  - Name: Tomato price up
     Type: 0
     Index: 1
     Price: 500
     BaseLevel: 1
     MaximumLevel: 10
     UpgradeAmount: 2
-  - Name: "\uC591\uD30C \uD310\uB9E4\uAC00\uACA9 \uC99D\uAC00"
+  - Name: Onion price up
     Type: 0
     Index: 2
     Price: 500
     BaseLevel: 1
     MaximumLevel: 10
     UpgradeAmount: 2
-  - Name: "\uCE58\uC988 \uD310\uB9E4\uAC00\uACA9 \uC99D\uAC00"
+  - Name: Cheese price up
     Type: 0
     Index: 3
     Price: 500
     BaseLevel: 1
     MaximumLevel: 10
     UpgradeAmount: 2
-  - Name: "\uACE0\uAE30 \uD310\uB9E4\uAC00\uACA9 \uC99D\uAC00"
+  - Name: Patty price up
     Type: 0
     Index: 4
     Price: 800
     BaseLevel: 1
     MaximumLevel: 10
     UpgradeAmount: 5
-  - Name: "\uC591\uC0C1\uCD94 \uC218\uC728 \uC99D\uAC00"
+  - Name: Lettuce yield up
     Type: 0
     Index: 5
     Price: 1500
     BaseLevel: 1
     MaximumLevel: 5
     UpgradeAmount: 1
-  - Name: "\uD1A0\uB9C8\uD1A0 \uC218\uC728 \uC99D\uAC00"
+  - Name: Tomato yield up
     Type: 0
     Index: 6
     Price: 1500
     BaseLevel: 1
     MaximumLevel: 5
     UpgradeAmount: 1
-  - Name: "\uC591\uD30C \uC218\uC728 \uC99D\uAC00"
+  - Name: Onion yield up
     Type: 0
     Index: 7
     Price: 1500
     BaseLevel: 1
     MaximumLevel: 5
     UpgradeAmount: 1
-  - Name: "\uCE58\uC988 \uC218\uC728 \uC99D\uAC00"
+  - Name: Cheese yield up
     Type: 0
     Index: 8
     Price: 1500
     BaseLevel: 1
     MaximumLevel: 5
     UpgradeAmount: 1
-  - Name: "\uCE7C\uC9C8\uC18D\uB3C4 \uC99D\uAC00"
+  - Name: Cutting speed up
     Type: 1
     Index: 9
     Price: 2000
     BaseLevel: 1
     MaximumLevel: 10
     UpgradeAmount: 0.1
-  - Name: "\uC774\uB3D9\uC18D\uB3C4 \uC99D\uAC00"
+  - Name: Movement speed up
     Type: 1
     Index: 10
     Price: 3000
     BaseLevel: 1
     MaximumLevel: 5
     UpgradeAmount: 0.1
-  - Name: "\uC778\uB0B4\uC2DC\uAC04 \uC99D\uAC00"
+  - Name: Patience time up
     Type: 2
     Index: 11
     Price: 3000

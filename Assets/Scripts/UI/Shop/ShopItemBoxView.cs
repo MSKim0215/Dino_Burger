@@ -26,7 +26,6 @@ namespace MSKim.UI
 
         private void SetData()
         {
-            itemIcon.color = UnityEngine.Random.ColorHSV();
             itemIcon.sprite = Managers.GameData.GetShopItemIcon(controller.Data.Index).Icon;
             SetLevelText(Managers.UserData.GetUpgradeAmount((Utils.ShopItemIndex)controller.Data.Index));
             nameText.text = controller.Data.Name;
