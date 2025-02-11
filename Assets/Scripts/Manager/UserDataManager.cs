@@ -128,6 +128,13 @@ namespace MSKim.Manager
             OnChangeUpgrade?.Invoke(type, userUpgradeData[type]);
         }
 
+        public int GetCurrencyAmount(Utils.CurrencyType currencyType)
+        {
+            if (!userCurrencyData.ContainsKey(currencyType)) return -1;
+
+            return userCurrencyData[currencyType];
+        }
+
         public int GetUpgradeAmount(Utils.ShopItemIndex type)
         {
             if (!userUpgradeData.ContainsKey(type)) return -1;

@@ -40,7 +40,7 @@ namespace MSKim.UI
         private void BindEvent()
         {
             buyButton.onClick.RemoveAllListeners();
-            buyButton.onClick.AddListener(controller.OnUpgradeEvent);
+            buyButton.onClick.AddListener(controller.OnUpgrade);
         }
     }
 }

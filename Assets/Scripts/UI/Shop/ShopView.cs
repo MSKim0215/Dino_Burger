@@ -70,6 +70,9 @@ namespace MSKim.UI
         public void Initialize(ShopPopup controller)
         {
             this.controller = controller;
+
+            SetCurrencyText(Managers.UserData.GetCurrencyAmount(Utils.CurrencyType.Gold));
+
             BindEvent();
         }
 

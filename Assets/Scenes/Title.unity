@@ -520,6 +520,12 @@ MonoBehaviour:
       createPrefab: {fileID: 8370721204884615314, guid: 564e3829d6089304994c66de39e7c222, type: 3}
       createCount: 4
       maxCount: 4
+    - createObjectName: PurchasePopupUI
+      poolType: 1
+      useScene: 1
+      createPrefab: {fileID: 984687030737150351, guid: 5fd50893f22a36844ac1c5df64819a36, type: 3}
+      createCount: 1
+      maxCount: 1
     rootList:
     - {fileID: 365165892}
     - {fileID: 708651376}

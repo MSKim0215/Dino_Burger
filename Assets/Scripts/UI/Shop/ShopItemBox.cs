@@ -23,13 +23,21 @@ namespace MSKim.UI
             view.Initialize(this);
         }
 
-        public void OnUpgradeEvent()
+        public void OnUpgrade()
         {
             if (data == null) return;
 
-            Debug.Log($"{name} 업그레이드 버튼 누름");
+            var purchasePopup = Managers.Pool.GetPoolObject("PurchasePopupUI");
+            if (purchasePopup == null) return;
 
-            Managers.UserData.Payment(Utils.CurrencyType.Gold, data);
+            purchasePopup.transform.SetParent(GameObject.Find("TitleCanvas").transform);
+            purchasePopup.transform.localScale = Vector3.one;
+            purchasePopup.transform.localPosition = Vector3.zero;
+
+            if (purchasePopup.TryGetComponent<PurchasePopup>(out var controller))
+            {
+                controller.Initailize(data);
+            }
         }
 
         private void HandleChangeUpgrade(Utils.ShopItemIndex type, int level)
