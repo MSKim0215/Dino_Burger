@@ -1,16 +1,15 @@
 using UnityEngine;
 
-public class SettlementPopup : MonoBehaviour
+namespace MSKim.UI
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class SettlementPopup : PoolAble
     {
-        
-    }
+        [Header("Settlement View")]
+        [SerializeField] private SettlementPopupView view;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void Initialize()
+        {
+            view.Initialize(this);
+        }
     }
 }
