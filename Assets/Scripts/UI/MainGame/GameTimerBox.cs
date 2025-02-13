@@ -1,9 +1,7 @@
 using Cysharp.Threading.Tasks;
 using MSKim.Manager;
 using System;
-using System.Threading;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace MSKim.UI
 {
@@ -56,7 +54,17 @@ namespace MSKim.UI
                     }
 
                     currentTime = 0f;
-                    SceneManager.LoadScene(0);
+
+                    var settlement = Managers.Pool.GetPoolObject("SettlementPopupUI");
+                    settlement.transform.SetParent(GameObject.Find("MainGameCanvas").transform);
+                    settlement.transform.localScale = Vector3.one;
+                    settlement.transform.localPosition = Vector3.zero;
+
+                    if(settlement.TryGetComponent<SettlementPopup>(out var popup))
+                    {
+                        popup.Initialize();
+                    }
+
                     break;
                 }
             }

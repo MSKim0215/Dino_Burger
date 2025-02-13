@@ -28,6 +28,9 @@ namespace MSKim.Manager
 
         public bool IsExistWaitingGuest => waitingZoneGuests.Count >= 1;
 
+        public int TotalOrderCount { get; set; } = 0;   // 총 주문 횟수
+        public int SuccessOrderCount { get; set; } = 0; // 성공 주문 횟수
+
         public override void Initialize()
         {
             base.Initialize();

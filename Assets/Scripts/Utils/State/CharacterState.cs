@@ -23,7 +23,6 @@ public class MoveState : ICharacterState
 {
     public void Convert(PlayerController controller)
     {
-        //controller.Knife.SetActive(false);
         controller.View.PlayAnimation(Get());
     }
 
@@ -43,7 +42,6 @@ public class WaitingState : ICharacterState
 {
     public void Convert(PlayerController controller)
     {
-        //controller.Knife.SetActive(false);
         controller.View.PlayAnimation(Get());
     }
 
@@ -95,6 +93,8 @@ public class OrderState : ICharacterState
         controller.Order(GetOrderBurger(controller.Data.MinimumToppingCount, controller.Data.MaximumToppingCount), IsOrderStew());
         controller.View.StartOrder();
         controller.View.PlayAnimation(Get());
+
+        Managers.Game.TotalOrderCount++;
     }
 
     private List<Utils.CrateType> GetOrderBurger(int minCount, int maxCount)
@@ -130,6 +130,8 @@ public class OrderSuccessState : ICharacterState
     public void Convert(GuestController controller)
     {
         controller.View.PlayAnimation(Get());
+
+        Managers.Game.SuccessOrderCount++;
     }
 
     public ICharacterState.BehaviourState Get()

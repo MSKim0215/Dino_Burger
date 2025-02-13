@@ -51,7 +51,7 @@ ParticleSystem:
   looping: 1
   prewarm: 0
   playOnAwake: 1
-  useUnscaledTime: 0
+  useUnscaledTime: 1
   autoRandomSeed: 1
   startDelay:
     serializedVersion: 2
@@ -6574,13 +6574,6 @@ MonoBehaviour:
     visitText: {fileID: 4568955795818337394}
     valueText: {fileID: 4568955794698043634}
     claimButton: {fileID: 1911912300508944305}
-    particle:
-      particle: {fileID: 4944259576170370804}
-      sprites:
-      - {fileID: 21300000, guid: b06ed476c348d4ddfa7d59c611260f05, type: 3}
-      - {fileID: 21300000, guid: eb59e5044aa11461784d995437c3847a, type: 3}
-      - {fileID: 21300000, guid: e0a9b4e860df34ad4a8a8e6b2c3b5b66, type: 3}
-      - {fileID: 21300000, guid: c1f2df9e82c034eb0a03837c6fdd7720, type: 3}
 --- !u!1 &4568955796177345163
 GameObject:
   m_ObjectHideFlags: 0

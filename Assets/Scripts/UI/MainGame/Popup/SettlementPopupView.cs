@@ -1,3 +1,4 @@
+using MSKim.Manager;
 using System;
 using TMPro;
 using UnityEngine;
@@ -19,6 +20,14 @@ namespace MSKim.UI
         public void Initialize(SettlementPopup controller)
         {
             this.controller = controller;
+
+            var percent = (float)Managers.Game.SuccessOrderCount / Managers.Game.TotalOrderCount;
+            percentSlider.value = percent;
+            percentText.text = string.Format("{0:P1}", percent);
+            visitText.text = $"{Managers.Game.SuccessOrderCount} <#9aa5d1>/ {Managers.Game.TotalOrderCount}";
+            valueText.text = string.Format("{0:#,0}", Managers.UserData.CurrentGoldAmount);
+
+            claimButton.onClick.AddListener(this.controller.OnClaim);
         }
     }
 }
