@@ -18,84 +18,84 @@ MonoBehaviour:
     Type: 0
     Index: 0
     Price: 500
-    BaseLevel: 1
+    BaseLevel: 0
     MaximumLevel: 10
     UpgradeAmount: 2
   - Name: Tomato price up
     Type: 0
     Index: 1
     Price: 500
-    BaseLevel: 1
+    BaseLevel: 0
     MaximumLevel: 10
     UpgradeAmount: 2
   - Name: Onion price up
     Type: 0
     Index: 2
     Price: 500
-    BaseLevel: 1
+    BaseLevel: 0
     MaximumLevel: 10
     UpgradeAmount: 2
   - Name: Cheese price up
     Type: 0
     Index: 3
     Price: 500
-    BaseLevel: 1
+    BaseLevel: 0
     MaximumLevel: 10
     UpgradeAmount: 2
   - Name: Patty price up
     Type: 0
     Index: 4
     Price: 800
-    BaseLevel: 1
+    BaseLevel: 0
     MaximumLevel: 10
     UpgradeAmount: 5
   - Name: Lettuce yield up
     Type: 0
     Index: 5
     Price: 1500
-    BaseLevel: 1
+    BaseLevel: 0
     MaximumLevel: 5
     UpgradeAmount: 1
   - Name: Tomato yield up
     Type: 0
     Index: 6
     Price: 1500
-    BaseLevel: 1
+    BaseLevel: 0
     MaximumLevel: 5
     UpgradeAmount: 1
   - Name: Onion yield up
     Type: 0
     Index: 7
     Price: 1500
-    BaseLevel: 1
+    BaseLevel: 0
     MaximumLevel: 5
     UpgradeAmount: 1
   - Name: Cheese yield up
     Type: 0
     Index: 8
     Price: 1500
-    BaseLevel: 1
+    BaseLevel: 0
     MaximumLevel: 5
     UpgradeAmount: 1
   - Name: Cutting speed up
     Type: 1
     Index: 9
     Price: 2000
-    BaseLevel: 1
+    BaseLevel: 0
     MaximumLevel: 10
     UpgradeAmount: 0.1
   - Name: Movement speed up
     Type: 1
     Index: 10
     Price: 3000
-    BaseLevel: 1
+    BaseLevel: 0
     MaximumLevel: 5
     UpgradeAmount: 0.1
   - Name: Patience time up
     Type: 2
     Index: 11
     Price: 3000
-    BaseLevel: 1
+    BaseLevel: 0
     MaximumLevel: 10
     UpgradeAmount: 5
   ShopItemIconDataList:
