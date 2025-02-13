@@ -22,34 +22,34 @@ MonoBehaviour:
     GuestSellPrice: 0
   - Name: "\uCE58\uC988"
     Type: 1
-    YieldAmount: 3
+    YieldAmount: 1
     CookTime: 2
     ShopBuyPrice: 0
-    GuestSellPrice: 10
+    GuestSellPrice: 6
   - Name: "\uC591\uC0C1\uCD94"
     Type: 2
-    YieldAmount: 5
+    YieldAmount: 2
     CookTime: 3.5
     ShopBuyPrice: 0
-    GuestSellPrice: 12
+    GuestSellPrice: 5
   - Name: "\uC591\uD30C"
     Type: 3
-    YieldAmount: 4
+    YieldAmount: 1
     CookTime: 2.5
     ShopBuyPrice: 0
-    GuestSellPrice: 11
+    GuestSellPrice: 3
   - Name: "\uD1A0\uB9C8\uD1A0"
     Type: 4
-    YieldAmount: 4
+    YieldAmount: 2
     CookTime: 3
     ShopBuyPrice: 0
-    GuestSellPrice: 11
+    GuestSellPrice: 3
   - Name: "\uACE0\uAE30 \uD328\uD2F0"
     Type: 5
     YieldAmount: 1
     CookTime: 5
     ShopBuyPrice: 0
-    GuestSellPrice: 20
+    GuestSellPrice: 12
   IngredientIconDataList:
   - Type: 0
     UnCookIcon: {fileID: 21300000, guid: 3e82199e4c6e1b249b07902a9c1065e4, type: 3}
