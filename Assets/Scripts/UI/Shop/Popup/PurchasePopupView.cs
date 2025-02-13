@@ -21,6 +21,7 @@ namespace MSKim.UI
         [SerializeField] private TextMeshProUGUI afterText = null;
         [SerializeField] private TextMeshProUGUI currencyText = null;
         [SerializeField] private TextMeshProUGUI levelText = null;
+        [SerializeField] private GameObject nextGroup = null;
 
         public void Initialize(PurchasePopup controller)
         {
@@ -32,18 +33,29 @@ namespace MSKim.UI
 
         public void SetData()
         {
-            var currentLevel = Managers.UserData.GetUpgradeAmount((Utils.ShopItemIndex)this.controller.TargetData.Index);
-            var nextLevel = currentLevel + 1;
-
-            itemIcon.sprite = Managers.GameData.GetShopItemIcon(this.controller.TargetData.Index).Icon;
-            infoText.text = this.controller.TargetData.Name;
-            beforeText.text = (this.controller.TargetData.UpgradeAmount * currentLevel).ToString();
-            afterText.text = (this.controller.TargetData.UpgradeAmount * nextLevel).ToString();
-            priceText.text = string.Format("{0:#,0}", this.controller.TargetData.Price);
             SetCurrencyText(Managers.UserData.GetCurrencyAmount(Utils.CurrencyType.Gold));
-            levelText.text = $"Lv.{currentLevel} / {this.controller.TargetData.MaximumLevel}";
 
-            purchaseButton.interactable = Managers.UserData.GetCurrencyAmount(Utils.CurrencyType.Gold) >= controller.TargetData.Price;
+            var currentLevel = Managers.UserData.GetUpgradeAmount((Utils.ShopItemIndex)controller.TargetData.Index);
+
+            itemIcon.sprite = Managers.GameData.GetShopItemIcon(controller.TargetData.Index).Icon;
+            levelText.text = $"Lv.{currentLevel} / {controller.TargetData.MaximumLevel}";
+            infoText.text = controller.TargetData.Name;
+            beforeText.text = (controller.TargetData.UpgradeAmount * currentLevel).ToString();
+            nextGroup.SetActive(currentLevel < controller.TargetData.MaximumLevel);
+
+            bool isMaxLevel = currentLevel >= controller.TargetData.MaximumLevel;
+            if (!isMaxLevel)
+            {
+                var nextLevel = currentLevel + 1;
+                afterText.text = (controller.TargetData.UpgradeAmount * nextLevel).ToString();
+            }
+
+            priceText.text = isMaxLevel ? "MAX" : string.Format("{0:#,0}", this.controller.TargetData.Price);
+
+            bool isActiveButton = 
+                (Managers.UserData.GetCurrencyAmount(Utils.CurrencyType.Gold) >= controller.TargetData.Price) &&
+                (currentLevel < controller.TargetData.MaximumLevel);
+            purchaseButton.interactable = isActiveButton;
         }
 
         private void BindEvent()
