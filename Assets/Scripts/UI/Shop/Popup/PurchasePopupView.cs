@@ -35,7 +35,7 @@ namespace MSKim.UI
         {
             SetCurrencyText(Managers.UserData.GetCurrencyAmount(Utils.CurrencyType.Gold));
 
-            var currentLevel = Managers.UserData.GetUpgradeAmount((Utils.ShopItemIndex)controller.TargetData.Index);
+            var currentLevel = Managers.UserData.GetUpgradeLevel((Utils.ShopItemIndex)controller.TargetData.Index);
 
             itemIcon.sprite = Managers.GameData.GetShopItemIcon(controller.TargetData.Index).Icon;
             levelText.text = $"Lv.{currentLevel} / {controller.TargetData.MaximumLevel}";

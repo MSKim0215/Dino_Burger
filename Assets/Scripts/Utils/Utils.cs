@@ -84,5 +84,6 @@ public static class Utils
         SHOP_PLAYER_CUTTING_SPEED_INDEX,
         SHOP_PLAYER_MOVE_SPEED_INDEX,
         SHOP_GUEST_PATIENT_TIME_INDEX,
+        None
     }   // 상점 아이템 인덱스
 }

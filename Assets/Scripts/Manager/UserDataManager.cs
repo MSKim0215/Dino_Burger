@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem.XR;
 
 [Serializable]
 public class PlayerData
@@ -21,7 +20,7 @@ public class PlayerData
             UserCurrencyData.Add((Utils.CurrencyType)i, 0);
         }
 
-        for (int i = 0; i < Enum.GetValues(typeof(Utils.ShopItemIndex)).Length; i++)
+        for (int i = 0; i < Enum.GetValues(typeof(Utils.ShopItemIndex)).Length - 1; i++)
         {
             if (UserUpgradeData.ContainsKey((Utils.ShopItemIndex)i)) continue;
 
@@ -166,7 +165,7 @@ namespace MSKim.Manager
         private void OnPaymentSuccess(Utils.CurrencyType currencyType, Data.ShopItemData paymentData)
         {
             DecreaseAmount(currencyType, paymentData.Price);
-            UpgradeAmount((Utils.ShopItemIndex)paymentData.Index);
+            UpgradeLevel((Utils.ShopItemIndex)paymentData.Index);
         }
 
         private void OnPaymentFailure(string failureMessage)
@@ -207,7 +206,7 @@ namespace MSKim.Manager
             SaveData();
         }
 
-        public void UpgradeAmount(Utils.ShopItemIndex type)
+        public void UpgradeLevel(Utils.ShopItemIndex type)
         {
             if(!playerData.UserUpgradeData.ContainsKey(type)) return;
 
@@ -219,29 +218,23 @@ namespace MSKim.Manager
 
         public int GetCurrencyAmount(Utils.CurrencyType currencyType)
         {
-            if (!playerData.UserCurrencyData.ContainsKey(currencyType)) return -1;
+            if (!playerData.UserCurrencyData.ContainsKey(currencyType)) return 0;
 
             return playerData.UserCurrencyData[currencyType];
         }
 
-        public int GetUpgradeAmount(Utils.ShopItemIndex type)
+        public int GetUpgradeLevel(Utils.ShopItemIndex type)
         {
-            if (!playerData.UserUpgradeData.ContainsKey(type)) return -1;
+            if (!playerData.UserUpgradeData.ContainsKey(type)) return 0;
 
             return playerData.UserUpgradeData[type];
         }
 
-        public int GetUpgradeAmount(Utils.CrateType type)
+        public float GetUpgradeAmount(Utils.ShopItemIndex type)
         {
-            switch(type)
-            {
-                case Utils.CrateType.Cheese: GetUpgradeAmount(Utils.ShopItemIndex.SHOP_INCREDIENT_CHEESE_SELL_INDEX); break;
-                case Utils.CrateType.Lettuce: GetUpgradeAmount(Utils.ShopItemIndex.SHOP_INCREDIENT_LETTUCE_SELL_INDEX); break;
-                case Utils.CrateType.Meat: GetUpgradeAmount(Utils.ShopItemIndex.SHOP_INCREDIENT_MEAT_SELL_INDEX); break;
-                case Utils.CrateType.Onion: GetUpgradeAmount(Utils.ShopItemIndex.SHOP_INCREDIENT_ONION_SELL_INDEX); break;
-                case Utils.CrateType.Tomato: GetUpgradeAmount(Utils.ShopItemIndex.SHOP_INCREDIENT_TOMATO_SELL_INDEX); break;
-            }
-            return 0;
+            if (type == Utils.ShopItemIndex.None) return 0f;
+
+            return GetUpgradeLevel(type) * Managers.GameData.GetShopItemData((int)type).UpgradeAmount;
         }
     }
 }

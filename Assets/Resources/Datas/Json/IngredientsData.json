@@ -5,7 +5,9 @@
     "YieldAmount": 1,
     "CookTime": 0.0,
     "ShopBuyPrice": 0,
-    "GuestSellPrice": 0
+    "GuestSellPrice": 0,
+    "ItemYield": 12,
+    "ItemPrice": 12
   },
   {
     "Name": "치즈",
@@ -13,7 +15,9 @@
     "YieldAmount": 1,
     "CookTime": 2.0,
     "ShopBuyPrice": 0,
-    "GuestSellPrice": 6
+    "GuestSellPrice": 6,
+    "ItemYield": 8,
+    "ItemPrice": 3
   },
   {
     "Name": "양상추",
@@ -21,7 +25,9 @@
     "YieldAmount": 2,
     "CookTime": 3.5,
     "ShopBuyPrice": 0,
-    "GuestSellPrice": 5
+    "GuestSellPrice": 5,
+    "ItemYield": 5,
+    "ItemPrice": 0
   },
   {
     "Name": "양파",
@@ -29,7 +35,9 @@
     "YieldAmount": 1,
     "CookTime": 2.5,
     "ShopBuyPrice": 0,
-    "GuestSellPrice": 3
+    "GuestSellPrice": 3,
+    "ItemYield": 7,
+    "ItemPrice": 2
   },
   {
     "Name": "토마토",
@@ -37,7 +45,9 @@
     "YieldAmount": 2,
     "CookTime": 3.0,
     "ShopBuyPrice": 0,
-    "GuestSellPrice": 3
+    "GuestSellPrice": 3,
+    "ItemYield": 6,
+    "ItemPrice": 1
   },
   {
     "Name": "고기 패티",
@@ -45,6 +55,8 @@
     "YieldAmount": 1,
     "CookTime": 5.0,
     "ShopBuyPrice": 0,
-    "GuestSellPrice": 12
+    "GuestSellPrice": 12,
+    "ItemYield": 12,
+    "ItemPrice": 4
   }
 ]

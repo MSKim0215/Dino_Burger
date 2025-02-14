@@ -14,7 +14,7 @@ namespace MSKim.UI
 
         public event Action<float> OnTimerEvent;
 
-        private const float MAXIMUM_TIME = 30;
+        private const float MAXIMUM_TIME = 210;
 
         private void Start()
         {

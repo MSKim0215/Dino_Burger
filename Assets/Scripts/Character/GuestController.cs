@@ -411,7 +411,7 @@ namespace MSKim.NonPlayer
 
             CreateOrderTicket();
 
-            var patienceMax = data.Patience + Managers.UserData.GetUpgradeAmount(Utils.ShopItemIndex.SHOP_GUEST_PATIENT_TIME_INDEX) * Managers.GameData.GetShopItemData((int)Utils.ShopItemIndex.SHOP_GUEST_PATIENT_TIME_INDEX).UpgradeAmount;
+            var patienceMax = data.Patience + Managers.UserData.GetUpgradeAmount(Utils.ShopItemIndex.SHOP_GUEST_PATIENT_TIME_INDEX);
 
             while (!isRelease)
             {
@@ -423,8 +423,8 @@ namespace MSKim.NonPlayer
                     int giveGoldAmount = 0;
                     for (int i = 0; i < orderBurger.Count; i++)
                     {
-                        giveGoldAmount += (Managers.GameData.GetIngredientData(orderBurger[i]).GuestSellPrice +
-                            Managers.UserData.GetUpgradeAmount(orderBurger[i]));
+                        giveGoldAmount += (int)(Managers.GameData.GetIngredientData(orderBurger[i]).GuestSellPrice +
+                            Managers.UserData.GetUpgradeAmount(Managers.GameData.GetIngredientData(orderBurger[i]).ItemPrice));
                     }
 
                     if(isOrderStew)

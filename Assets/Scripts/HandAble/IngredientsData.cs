@@ -20,6 +20,8 @@ namespace MSKim.Data
         public float CookTime;
         public int ShopBuyPrice;
         public int GuestSellPrice;
+        public Utils.ShopItemIndex ItemYield;
+        public Utils.ShopItemIndex ItemPrice;
     }
 
     [Serializable]

@@ -42,7 +42,7 @@ namespace MSKim.HandAble
         {
             data = Managers.GameData.GetIngredientData(ingredientType);
             name = data.Name;
-            currentYieldAmount = data.YieldAmount;
+            currentYieldAmount = (int)(data.YieldAmount + Managers.UserData.GetUpgradeAmount(data.ItemYield));
 
             InitializeCookState();
         }

@@ -27,7 +27,7 @@ namespace MSKim.UI
         private void SetData()
         {
             itemIcon.sprite = Managers.GameData.GetShopItemIcon(controller.Data.Index).Icon;
-            SetLevelText(Managers.UserData.GetUpgradeAmount((Utils.ShopItemIndex)controller.Data.Index));
+            SetLevelText(Managers.UserData.GetUpgradeLevel((Utils.ShopItemIndex)controller.Data.Index));
             nameText.text = controller.Data.Name;
             priceText.text = string.Format("{0:#,0}", controller.Data.Price);
         }
