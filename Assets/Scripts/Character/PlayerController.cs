@@ -88,8 +88,28 @@ namespace MSKim.Player
 
         private void Update()
         {
+            Look();
             Pick();
             InterAction();
+        }
+
+        private void Look()
+        {
+            handRay = new Ray(new Vector3(transform.position.x, 0.1f, transform.position.z), transform.forward);
+            Debug.DrawLine(handRay.origin, handRay.origin + handRay.direction * data.HandLength, Color.red);
+
+            if (Physics.Raycast(handRay, out handHit, data.HandLength, LayerHandNotAble))
+            {
+                var hitObj = handHit.collider.gameObject;
+                if (hitObj != null)
+                {
+                    if (hitObj.TryGetComponent<HandNotAble.CrateController>(out var crate))
+                    {
+                        crate.ActiveOutline();
+                    }
+                }
+                return;
+            }
         }
 
         private void Pick()

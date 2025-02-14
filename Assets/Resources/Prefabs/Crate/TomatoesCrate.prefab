@@ -51,7 +51,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2573474045682272058}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -124,3 +124,6 @@ MonoBehaviour:
   crateType: 4
   ingredientPrefab: {fileID: 7944510258430666475, guid: c9a90d27f47960e41bf3d161da96c3a3, type: 3}
   ingredientRoot: {fileID: 0}
+  outline: {fileID: 2100000, guid: 9c95be91f3c149d4e9b3df404e1c46b6, type: 2}
+  renderers: {fileID: 6816219615463910560}
+  matList: []
