@@ -411,6 +411,8 @@ namespace MSKim.NonPlayer
 
             CreateOrderTicket();
 
+            var patienceMax = data.Patience + Managers.UserData.GetUpgradeAmount(Utils.ShopItemIndex.SHOP_GUEST_PATIENT_TIME_INDEX) * Managers.GameData.GetShopItemData((int)Utils.ShopItemIndex.SHOP_GUEST_PATIENT_TIME_INDEX).UpgradeAmount;
+
             while (!isRelease)
             {
                 if(isOrderSuccess)
@@ -442,11 +444,11 @@ namespace MSKim.NonPlayer
                 }
 
                 currentPatientTime += Time.deltaTime;
-                OnDelayOrderEvent?.Invoke(currentPatientTime / data.Patience);
+                OnDelayOrderEvent?.Invoke(currentPatientTime / patienceMax);
 
                 await UniTask.Yield();
 
-                if(currentPatientTime >= data.Patience)
+                if(currentPatientTime >= patienceMax)
                 {
                     ChangeState(ICharacterState.BehaviourState.OrderFailure);
                     currentPatientTime = 0f;
