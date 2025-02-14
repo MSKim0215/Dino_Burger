@@ -77,7 +77,8 @@ namespace MSKim.Player
 
         public override void MovePosition()
         {
-            transform.position += GetVelocity() * data.MoveSpeed * Time.deltaTime;
+            transform.position += 
+                (data.MoveSpeed + Managers.UserData.GetUpgradeAmount(Utils.ShopItemIndex.SHOP_PLAYER_MOVE_SPEED_INDEX)) * Time.deltaTime * GetVelocity();
         }
 
         public override void MoveRotation()

@@ -81,7 +81,7 @@ namespace MSKim.HandNotAble
                 return;
             }
 
-            ingredient.CurrentCookTime += Time.deltaTime;
+            ingredient.CurrentCookTime += Time.deltaTime * (1 + Managers.UserData.GetUpgradeAmount(Utils.ShopItemIndex.SHOP_PLAYER_CUTTING_SPEED_INDEX));
             ingredient.SetIngredientState(Utils.IngredientState.Cutting);
             OnTriggerValueEvent(ingredient.CurrentCookTime / ingredient.MaximumCookTime);
         }
