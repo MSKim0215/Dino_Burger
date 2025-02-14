@@ -124,6 +124,6 @@ MonoBehaviour:
   crateType: 0
   ingredientPrefab: {fileID: 7027789523447751974, guid: 1eddec99902dc5c46a12d8d6c2e7312d, type: 3}
   ingredientRoot: {fileID: 0}
-  outline: {fileID: 2100000, guid: 9c95be91f3c149d4e9b3df404e1c46b6, type: 2}
+  outline: {fileID: 2100000, guid: 594e06d41ee27a542a19f7355c9257b4, type: 2}
   renderers: {fileID: 7720284335504082998}
   matList: []
