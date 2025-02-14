@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem.XR;
 
 [Serializable]
 public class PlayerData
@@ -99,7 +100,6 @@ namespace MSKim.Manager
             playerData.Initialize();
 
             path = Application.persistentDataPath + fileName;
-            Debug.Log($"data path: {path}");
 
             LoadData();
         }
@@ -229,6 +229,19 @@ namespace MSKim.Manager
             if (!playerData.UserUpgradeData.ContainsKey(type)) return -1;
 
             return playerData.UserUpgradeData[type];
+        }
+
+        public int GetUpgradeAmount(Utils.CrateType type)
+        {
+            switch(type)
+            {
+                case Utils.CrateType.Cheese: GetUpgradeAmount(Utils.ShopItemIndex.SHOP_INCREDIENT_CHEESE_SELL_INDEX); break;
+                case Utils.CrateType.Lettuce: GetUpgradeAmount(Utils.ShopItemIndex.SHOP_INCREDIENT_LETTUCE_SELL_INDEX); break;
+                case Utils.CrateType.Meat: GetUpgradeAmount(Utils.ShopItemIndex.SHOP_INCREDIENT_MEAT_SELL_INDEX); break;
+                case Utils.CrateType.Onion: GetUpgradeAmount(Utils.ShopItemIndex.SHOP_INCREDIENT_ONION_SELL_INDEX); break;
+                case Utils.CrateType.Tomato: GetUpgradeAmount(Utils.ShopItemIndex.SHOP_INCREDIENT_TOMATO_SELL_INDEX); break;
+            }
+            return 0;
         }
     }
 }

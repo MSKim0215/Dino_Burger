@@ -19,7 +19,10 @@ namespace MSKim.UI
             this.controller = controller;
 
             SetMenuIcon(Managers.GameData.GetIngredientIconData(this.controller.CurrentMenuType).UnCookIcon);
-            SetPriceText(Managers.GameData.GetIngredientData(this.controller.CurrentMenuType).GuestSellPrice);
+
+            var price = Managers.GameData.GetIngredientData(this.controller.CurrentMenuType).GuestSellPrice +
+                Managers.UserData.GetUpgradeAmount(this.controller.CurrentMenuType);
+            SetPriceText(price);
         }
 
         private void SetMenuIcon(Sprite icon)

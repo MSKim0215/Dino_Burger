@@ -421,7 +421,8 @@ namespace MSKim.NonPlayer
                     int giveGoldAmount = 0;
                     for (int i = 0; i < orderBurger.Count; i++)
                     {
-                        giveGoldAmount += Managers.GameData.GetIngredientData(orderBurger[i]).GuestSellPrice;
+                        giveGoldAmount += (Managers.GameData.GetIngredientData(orderBurger[i]).GuestSellPrice +
+                            Managers.UserData.GetUpgradeAmount(orderBurger[i]));
                     }
 
                     if(isOrderStew)
