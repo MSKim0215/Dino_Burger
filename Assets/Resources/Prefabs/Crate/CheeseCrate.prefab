@@ -124,6 +124,10 @@ MonoBehaviour:
   crateType: 1
   ingredientPrefab: {fileID: 2664499353556718506, guid: ffa5bea6e9bb2d8478cb9271a084a1ef, type: 3}
   ingredientRoot: {fileID: 0}
-  outline: {fileID: 2100000, guid: 594e06d41ee27a542a19f7355c9257b4, type: 2}
+  highLight: {fileID: 2100000, guid: 594e06d41ee27a542a19f7355c9257b4, type: 2}
   renderers: {fileID: 5871214428193643561}
-  matList: []
+  baseMats:
+  - {fileID: 2100000, guid: a6e931ed93711a141a0c7e37e0e3cb76, type: 2}
+  highMats:
+  - {fileID: 2100000, guid: a6e931ed93711a141a0c7e37e0e3cb76, type: 2}
+  - {fileID: 2100000, guid: 594e06d41ee27a542a19f7355c9257b4, type: 2}

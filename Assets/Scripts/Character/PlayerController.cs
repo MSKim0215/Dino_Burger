@@ -1,6 +1,6 @@
 using MSKim.Manager;
+using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 namespace MSKim.Player
 {
@@ -17,6 +17,12 @@ namespace MSKim.Player
         [SerializeField] private Hand toolHand;
 
         private HandNotAble.CuttingBoardTableController prevCuttingTable;
+
+        private float viewAngle = 60f;
+        private float viewDistance = 1.5f;
+        private GameObject mostDetectedObject;
+        private GameObject lastDetectedObject;
+        private Dictionary<GameObject, int> detectedObjectDict = new();
 
         private float xAxis;
         private float zAxis;
@@ -95,20 +101,97 @@ namespace MSKim.Player
 
         private void Look()
         {
-            handRay = new Ray(new Vector3(transform.position.x, 0.1f, transform.position.z), transform.forward);
-            Debug.DrawLine(handRay.origin, handRay.origin + handRay.direction * data.HandLength, Color.red);
+            mostDetectedObject = GetDetectHandAbleObject();
 
-            if (Physics.Raycast(handRay, out handHit, data.HandLength, LayerHandNotAble))
+            // 가장 많이 감지된 오브젝트가 변경되었는지 확인
+            if (mostDetectedObject != lastDetectedObject)
             {
-                var hitObj = handHit.collider.gameObject;
-                if (hitObj != null)
+                if(lastDetectedObject != null)
                 {
-                    if (hitObj.TryGetComponent<HandNotAble.CrateController>(out var crate))
+                    if (lastDetectedObject.TryGetComponent<HandNotAble.CrateController>(out var crate))
                     {
-                        crate.ActiveOutline();
+                        crate.IsActiveHightlight = false;
                     }
                 }
-                return;
+
+                lastDetectedObject = mostDetectedObject; // 현재 감지된 오브젝트를 이전 오브젝트로 업데이트
+            }
+        }
+
+        private GameObject GetDetectHandAbleObject()
+        {
+            detectedObjectDict.Clear();
+
+            for (float angle = -viewAngle / 2; angle < viewAngle / 2; angle += 5f)
+            {
+                Vector3 direction = Quaternion.Euler(0, angle, 0) * transform.forward;
+                RaycastHit hit;
+
+                if (Physics.Raycast(transform.position, direction, out hit, viewDistance, LayerHandNotAble))
+                {
+                    var hitObj = hit.collider.gameObject;
+
+                    // 감지된 오브젝트 카운트 증가
+                    if (detectedObjectDict.ContainsKey(hitObj))
+                    {
+                        detectedObjectDict[hitObj]++;
+                    }
+                    else
+                    {
+                        detectedObjectDict.Add(hitObj, 1);
+                    }
+                }
+            }
+
+            // 감지된 오브젝트가 없으면 null 반환
+            if (detectedObjectDict.Count <= 0) return null;
+
+            GameObject mostDetected = null;
+            int maxCount = 0;
+
+            // 가장 많이 감지된 오브젝트 찾기
+            foreach (var item in detectedObjectDict)
+            {
+                if (item.Value > maxCount)
+                {
+                    maxCount = item.Value;
+                    mostDetected = item.Key;
+                }
+            }
+
+            // 하이라이트 상태 업데이트
+            foreach (var item in detectedObjectDict)
+            {
+                if (item.Key.TryGetComponent<HandNotAble.CrateController>(out var crate))
+                {
+                    crate.IsActiveHightlight = item.Key == mostDetected;
+                }
+            }
+
+            return mostDetected;
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (mostDetectedObject == null) return;
+
+            Gizmos.color = Color.red;
+            Vector3 forward = transform.forward;
+
+            // 각도에 따른 레이 그리기
+            for (float angle = -viewAngle / 2; angle < viewAngle / 2; angle += 5f)
+            {
+                Vector3 direction = Quaternion.Euler(0, angle, 0) * forward;
+                RaycastHit hit;
+
+                // 가장 많이 감지된 오브젝트와 연결된 레이만 그리기
+                if (Physics.Raycast(transform.position, direction, out hit, viewDistance, LayerHandNotAble))
+                {
+                    if (hit.collider.gameObject == mostDetectedObject)
+                    {
+                        Gizmos.DrawLine(transform.position, hit.point);
+                    }
+                }
             }
         }
 

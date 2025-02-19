@@ -12,14 +12,28 @@ namespace MSKim.HandNotAble
         [SerializeField] private HandAble.IngredientController ingredientPrefab;
         [SerializeField] private Transform ingredientRoot;
 
-        [Header("Outline Settings")]
-        [SerializeField] private Material outline;
+        [Header("Hightlight Settings")]
+        [SerializeField] private Material highLight;
         [SerializeField] private Renderer renderers;
-        [SerializeField] private List<Material> matList = new();
+        [SerializeField] private Material[] baseMats;
+        [SerializeField] private Material[] highMats;
 
-        private bool isActiveOutline = false;
+        private bool isActiveHighlight = false;
+
+        public bool IsActiveHightlight
+        {
+            get => isActiveHighlight;
+            set
+            {
+                if (isActiveHighlight == value) return;
+
+                isActiveHighlight = value;
+                SetActiveHighlight();
+            }
+        }
 
         public Utils.CrateType CrateType => crateType;
+
 
         public void Take(GameObject takeObject) => Destroy(takeObject);
 
@@ -30,28 +44,16 @@ namespace MSKim.HandNotAble
             return ingredient.gameObject;
         }
 
-        public void ActiveOutline()
+        private void SetActiveHighlight()
         {
-            if (isActiveOutline) return;
-
-            isActiveOutline = true;
-            matList.Clear();
-            matList.AddRange(renderers.materials);
-            matList.Add(outline);
-
-            renderers.materials = matList.ToArray();
-        }
-
-        public void UnActiveOutline()
-        {
-            if (!isActiveOutline) return;
-
-            isActiveOutline = false;
-            matList.Clear();
-            matList.AddRange(renderers.materials);
-            matList.Remove(outline);
-
-            renderers.materials = matList.ToArray();
+            if (isActiveHighlight)
+            {
+                renderers.materials = highMats;
+            }
+            else
+            {
+                renderers.materials = baseMats;
+            }
         }
     }
 }
