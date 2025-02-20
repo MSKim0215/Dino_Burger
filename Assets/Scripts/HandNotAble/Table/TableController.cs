@@ -61,7 +61,7 @@ namespace MSKim.HandNotAble
         public void OnTriggerValueCompleteEvent() => OnValueCompleteEvent?.Invoke();
     }
 
-    public class TableController : MonoBehaviour, IBaseInterAction
+    public class TableController : InterActionMonoBehaviour
     {
         [Header("Table Data Info")]
         [SerializeField] protected Data.TableData data;
@@ -88,12 +88,12 @@ namespace MSKim.HandNotAble
 
         protected virtual void Initialize() { }
 
-        public virtual void Take(GameObject takeObject)
+        public override void Take(GameObject takeObject)
         {
             hand.GetHandUp(takeObject);
         }
 
-        public virtual GameObject Give()
+        public override GameObject Give()
         {
             GameObject tableObject = hand.HandUpObject;
 

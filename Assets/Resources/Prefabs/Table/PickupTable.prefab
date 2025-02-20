@@ -18,7 +18,7 @@ GameObject:
   m_TagString: PickupTable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &8584384032113547585
 Transform:
@@ -122,6 +122,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feab5d484d45eda4a95d1b99f65ba18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  renderers:
+  - {fileID: 1611738452462840782}
+  baseMats:
+  - {fileID: 2100000, guid: a6e931ed93711a141a0c7e37e0e3cb76, type: 2}
+  highMats:
+  - {fileID: 2100000, guid: a6e931ed93711a141a0c7e37e0e3cb76, type: 2}
+  - {fileID: 2100000, guid: 594e06d41ee27a542a19f7355c9257b4, type: 2}
   data:
     Name: 
     Type: 0
@@ -142,7 +149,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &503048305694670089
 Transform:

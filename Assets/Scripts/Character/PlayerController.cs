@@ -1,6 +1,7 @@
 using MSKim.Manager;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 namespace MSKim.Player
 {
@@ -108,9 +109,9 @@ namespace MSKim.Player
             {
                 if(lastDetectedObject != null)
                 {
-                    if (lastDetectedObject.TryGetComponent<HandNotAble.CrateController>(out var crate))
+                    if (lastDetectedObject.TryGetComponent<InterActionMonoBehaviour>(out var interactionObj))
                     {
-                        crate.IsActiveHightlight = false;
+                        interactionObj.IsActiveHightlight = false;
                     }
                 }
 
@@ -162,9 +163,9 @@ namespace MSKim.Player
             // 하이라이트 상태 업데이트
             foreach (var item in detectedObjectDict)
             {
-                if (item.Key.TryGetComponent<HandNotAble.CrateController>(out var crate))
+                if (item.Key.TryGetComponent<InterActionMonoBehaviour>(out var interactionObj))
                 {
-                    crate.IsActiveHightlight = item.Key == mostDetected;
+                    interactionObj.IsActiveHightlight = item.Key == mostDetected;
                 }
             }
 
