@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.54, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2555035695875082778}
@@ -69,14 +69,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1258258a78aebc439a637bcba70c7f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientType: 1
+  data:
+    Name: 
+    Type: 0
+    YieldAmount: 0
+    CookTime: 0
+    ShopBuyPrice: 0
+    GuestSellPrice: 0
+    ItemYield: 0
+    ItemPrice: 0
   ingredientState: 0
   ingredientStateObjects:
   - {fileID: 2899930862351257760}
   - {fileID: 4909299698062775951}
   - {fileID: 3694237532447138981}
   currentCookTime: 0
-  maximumCookTime: 0
   ingredientRenderer: {fileID: 2901563933741729136}
   hitbox: {fileID: 5113191199447852626}
 --- !u!1001 &2666120056759299569
@@ -127,6 +134,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5190baedd8294b54f89cf0e5f4bc8041, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5190baedd8294b54f89cf0e5f4bc8041, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9c95be91f3c149d4e9b3df404e1c46b6, type: 2}
     - target: {fileID: 919132149155446097, guid: 5190baedd8294b54f89cf0e5f4bc8041, type: 3}
       propertyPath: m_Name
       value: UnCook
@@ -202,6 +217,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 26aa7f138be87dc498d34dd3824e7f33, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 26aa7f138be87dc498d34dd3824e7f33, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9c95be91f3c149d4e9b3df404e1c46b6, type: 2}
     - target: {fileID: 919132149155446097, guid: 26aa7f138be87dc498d34dd3824e7f33, type: 3}
       propertyPath: m_Name
       value: OverCook
@@ -278,6 +301,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 1f7a22fb9a2b9ff4bb3caadea6ebef78, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 1f7a22fb9a2b9ff4bb3caadea6ebef78, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9c95be91f3c149d4e9b3df404e1c46b6, type: 2}
     - target: {fileID: 919132149155446097, guid: 1f7a22fb9a2b9ff4bb3caadea6ebef78, type: 3}
       propertyPath: m_Name
       value: Cook
