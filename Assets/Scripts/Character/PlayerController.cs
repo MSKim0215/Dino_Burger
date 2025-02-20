@@ -1,7 +1,6 @@
 using MSKim.Manager;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 namespace MSKim.Player
 {
@@ -128,7 +127,7 @@ namespace MSKim.Player
                 Vector3 direction = Quaternion.Euler(0, angle, 0) * transform.forward;
                 RaycastHit hit;
 
-                if (Physics.Raycast(transform.position, direction, out hit, viewDistance, LayerHandNotAble))
+                if (Physics.Raycast(new Vector3(transform.position.x, 0.1f, transform.position.z), direction, out hit, data.HandLength, LayerHandNotAble + LayerHandAble))
                 {
                     var hitObj = hit.collider.gameObject;
 
@@ -172,37 +171,10 @@ namespace MSKim.Player
             return mostDetected;
         }
 
-        private void OnDrawGizmos()
-        {
-            if (mostDetectedObject == null) return;
-
-            Gizmos.color = Color.red;
-            Vector3 forward = transform.forward;
-
-            // 각도에 따른 레이 그리기
-            for (float angle = -viewAngle / 2; angle < viewAngle / 2; angle += 5f)
-            {
-                Vector3 direction = Quaternion.Euler(0, angle, 0) * forward;
-                RaycastHit hit;
-
-                // 가장 많이 감지된 오브젝트와 연결된 레이만 그리기
-                if (Physics.Raycast(transform.position, direction, out hit, viewDistance, LayerHandNotAble))
-                {
-                    if (hit.collider.gameObject == mostDetectedObject)
-                    {
-                        Gizmos.DrawLine(transform.position, hit.point);
-                    }
-                }
-            }
-        }
-
         private void Pick()
         {
             if (Input.GetMouseButtonDown(0))
             {
-                handRay = new Ray(new Vector3(transform.position.x, 0.1f, transform.position.z), transform.forward);
-                Debug.DrawLine(handRay.origin, handRay.origin + handRay.direction * data.HandLength, Color.red);
-
                 if (hand.HandUpObject != null)
                 {
                     PickDown();
@@ -215,27 +187,23 @@ namespace MSKim.Player
 
         private void PickDown()
         {
-            if (Physics.Raycast(handRay, out handHit, data.HandLength, LayerHandNotAble))
+            if (mostDetectedObject == null)
             {
-                var hitObj = handHit.collider.gameObject;
-                if(hitObj != null)
-                {
-                    if(hitObj.TryGetComponent<HandNotAble.TableController>(out var table))
-                    {
-                        TableInteraction(table);
-                        return;
-                    }
-
-                    if(hitObj.TryGetComponent<HandNotAble.CrateController>(out var crate))
-                    {
-                        CrateInteraction(crate);
-                        return;
-                    }
-                }
+                hand.GetHandDown(null, new Vector3(hand.HandUpObject.transform.position.x, 0f, hand.HandUpObject.transform.position.z));
                 return;
             }
 
-            hand.GetHandDown(null, new Vector3(hand.HandUpObject.transform.position.x, 0f, hand.HandUpObject.transform.position.z));
+            if(mostDetectedObject.TryGetComponent<HandNotAble.TableController>(out var table))
+            {
+                TableInteraction(table);
+                return;
+            }
+
+            if (mostDetectedObject.TryGetComponent<HandNotAble.CrateController>(out var crate))
+            {
+                CrateInteraction(crate);
+                return;
+            }
         }
 
         private void TableInteraction(HandNotAble.TableController table)
@@ -353,31 +321,21 @@ namespace MSKim.Player
 
         private void PickUp()
         {
-            if (Physics.Raycast(handRay, out handHit, data.HandLength, LayerHandAble + LayerHandNotAble))
+            if (mostDetectedObject == null) return;
+
+            if(mostDetectedObject.TryGetComponent<HandNotAble.TableController>(out var table))
             {
-                var hitObj = handHit.collider.gameObject;
-                if (hitObj != null)
-                {
-                    if(hitObj.layer == LayerMask.NameToLayer("HandNotAble"))
-                    {
-                        if(hitObj.TryGetComponent<HandNotAble.TableController>(out var table))
-                        {
-                            hand.GetHandUp(table.Give());
-                            return;
-                        }
-                        
-                        if(hitObj.TryGetComponent<HandNotAble.CrateController>(out var crate))
-                        {
-                            hand.GetHandUp(crate.Give());
-                            return;
-                        }
-
-                        return;
-                    }
-
-                    hand.GetHandUp(hitObj);
-                }
+                hand.GetHandUp(table.Give());
+                return;
             }
+
+            if(mostDetectedObject.TryGetComponent<HandNotAble.CrateController>(out var crate))
+            {
+                hand.GetHandUp(crate.Give());
+                return;
+            }
+
+            hand.GetHandUp(mostDetectedObject);
         }
 
         private void InterAction()
@@ -441,6 +399,30 @@ namespace MSKim.Player
                             ChangeState(ICharacterState.BehaviourState.Waiting);
                             toolHand.ClearHand();
                         }
+                    }
+                }
+            }
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (mostDetectedObject == null) return;
+
+            Gizmos.color = Color.red;
+            Vector3 forward = transform.forward;
+
+            // 각도에 따른 레이 그리기
+            for (float angle = -viewAngle / 2; angle < viewAngle / 2; angle += 5f)
+            {
+                Vector3 direction = Quaternion.Euler(0, angle, 0) * forward;
+                RaycastHit hit;
+
+                // 가장 많이 감지된 오브젝트와 연결된 레이만 그리기
+                if (Physics.Raycast(new Vector3(transform.position.x, 0.1f, transform.position.z), direction, out hit, data.HandLength, LayerHandNotAble + LayerHandAble))
+                {
+                    if (hit.collider.gameObject == mostDetectedObject)
+                    {
+                        Gizmos.DrawLine(transform.position, hit.point);
                     }
                 }
             }
