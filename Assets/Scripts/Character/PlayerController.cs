@@ -352,54 +352,38 @@ namespace MSKim.Player
 
             if(Input.GetMouseButton(1))
             {
-                handRay = new Ray(new Vector3(transform.position.x, 0.2f, transform.position.z), transform.forward);
-                Debug.DrawLine(handRay.origin, handRay.origin + handRay.direction * data.HandLength, Color.red);
+                if (mostDetectedObject == null) return;
 
-                if(Physics.Raycast(handRay, out handHit, data.HandLength, LayerHandNotAble))
+                if(mostDetectedObject.TryGetComponent<HandNotAble.CuttingBoardTableController>(out var table))
                 {
-                    var hitObj = handHit.collider.gameObject;
-                    if(hitObj != null)
+                    if (table.IsHandEmpty) return;
+                    if (table.IsCutOver)
                     {
-                        if(hitObj.TryGetComponent<HandNotAble.CuttingBoardTableController>(out var table))
-                        {
-                            if (table.IsHandEmpty) return;
-                            if (table.IsCutOver)
-                            {
-                                if (toolHand.HandUpObject == null) return;
+                        if (toolHand.HandUpObject == null) return;
 
-                                prevCuttingTable.TakeTool(toolHand.HandUpObject);
-                                toolHand.ClearHand();
-                                prevCuttingTable = null;
-                                return;
-                            }
-
-                            prevCuttingTable = table;
-                            toolHand.GetHandUpHoldRotate(table.GiveTool());
-                            ChangeState(ICharacterState.BehaviourState.InterAction);
-                            table.Cutting(this);
-                        }
+                        prevCuttingTable.TakeTool(toolHand.HandUpObject);
+                        toolHand.ClearHand();
+                        prevCuttingTable = null;
+                        return;
                     }
+
+                    prevCuttingTable = table;
+                    toolHand.GetHandUpHoldRotate(table.GiveTool());
+                    ChangeState(ICharacterState.BehaviourState.InterAction);
+                    table.Cutting(this);
                 }
             }
 
             if (Input.GetMouseButtonUp(1))
             {
-                handRay = new Ray(new Vector3(transform.position.x, 0.2f, transform.position.z), transform.forward);
-                Debug.DrawLine(handRay.origin, handRay.origin + handRay.direction * data.HandLength, Color.red);
+                if (mostDetectedObject == null) return;
 
-                if (Physics.Raycast(handRay, out handHit, data.HandLength, LayerHandNotAble))
+                if (mostDetectedObject.TryGetComponent<HandNotAble.CuttingBoardTableController>(out var table))
                 {
-                    var hitObj = handHit.collider.gameObject;
-                    if (hitObj != null)
-                    {
-                        if (hitObj.TryGetComponent<HandNotAble.CuttingBoardTableController>(out var table))
-                        {
-                            prevCuttingTable = table;
-                            table.TakeTool(toolHand.HandUpObject);
-                            ChangeState(ICharacterState.BehaviourState.Waiting);
-                            toolHand.ClearHand();
-                        }
-                    }
+                    prevCuttingTable = table;
+                    table.TakeTool(toolHand.HandUpObject);
+                    ChangeState(ICharacterState.BehaviourState.Waiting);
+                    toolHand.ClearHand();
                 }
             }
         }
