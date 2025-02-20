@@ -44,6 +44,8 @@ namespace MSKim.NonPlayer
         public event Action<int> OnChangeWaitingNumber;
         public event Action<int> OnChangeOrderTableNumber;
         public event Action<float> OnDelayOrderEvent;
+        public event Action<bool> OnOrderBurgerCheckEvent;
+        public event Action<bool> OnOrderStewCheckEvent;
 
         public Data.GuestData Data => data;
 
@@ -113,6 +115,8 @@ namespace MSKim.NonPlayer
             currentPatientTime = 0f;
 
             ChangeState(ICharacterState.BehaviourState.Move);
+
+            isRelease = false;
         }
 
         private void SetGuestModel()
@@ -349,6 +353,7 @@ namespace MSKim.NonPlayer
             if (state.CurrentState.Get() != ICharacterState.BehaviourState.Order) return;
 
             CheckOrderFood();
+            PatientTimer();
         }
 
         private void UpdateWaiting()
@@ -380,6 +385,7 @@ namespace MSKim.NonPlayer
                 if (Enumerable.SequenceEqual(burger.GetCurrentIncredients().OrderBy(e => e), orderBurger.OrderBy(e => e)))
                 {
                     isGetBurger = true;
+                    OnOrderBurgerCheckEvent?.Invoke(isGetBurger);
                     Destroy(myPickupTable.Give());
                 }
             }
@@ -394,13 +400,83 @@ namespace MSKim.NonPlayer
             if (myPickupTable.HandUpObject.TryGetComponent<HandAble.StewFoodController>(out var stew))
             {
                 isGetStew = true;
+                OnOrderStewCheckEvent?.Invoke(isGetStew);
                 Destroy(myPickupTable.Give());
             }
         }
 
         private bool isRelease = false;
 
-        public async void Order(List<Utils.CrateType> orderBurger, bool isOrderStew)
+        private void PatientTimer()
+        {
+            if (isRelease) return;
+
+            if (isOrderSuccess)
+            {
+                ChangeState(ICharacterState.BehaviourState.OrderSuccess);
+                currentPatientTime = 0f;
+
+                int giveGoldAmount = 0;
+                for (int i = 0; i < orderBurger.Count; i++)
+                {
+                    giveGoldAmount += (int)(Managers.GameData.GetIngredientData(orderBurger[i]).GuestSellPrice +
+                        Managers.UserData.GetUpgradeAmount(Managers.GameData.GetIngredientData(orderBurger[i]).ItemPrice));
+                }
+
+                if (isOrderStew)
+                {
+                    giveGoldAmount += Managers.GameData.GetFoodData(Utils.FoodType.Stew).GuestSellPrice;
+                }
+
+                Managers.UserData.CurrentGoldAmount += giveGoldAmount;
+
+                if (orderTicket != null)
+                {
+                    orderTicket.Release();
+                    orderTicket = null;
+                }
+
+                Out();
+                return;
+            }
+
+            currentPatientTime += Time.deltaTime;
+            OnDelayOrderEvent?.Invoke(currentPatientTime / data.Patience + Managers.UserData.GetUpgradeAmount(Utils.ShopItemIndex.SHOP_GUEST_PATIENT_TIME_INDEX));
+
+            if (currentPatientTime >= data.Patience + Managers.UserData.GetUpgradeAmount(Utils.ShopItemIndex.SHOP_GUEST_PATIENT_TIME_INDEX))
+            {
+                ChangeState(ICharacterState.BehaviourState.OrderFailure);
+                currentPatientTime = 0f;
+
+                if (orderTicket != null)
+                {
+                    orderTicket.Release();
+                    orderTicket = null;
+                }
+
+                Out();
+            }
+        }
+
+        private async void Out()
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(1f));
+
+            if (isRelease) return;
+
+            Managers.Game.RemovePickupZone(this);
+
+            if (isOrderSuccess)
+            {
+                ChangeState(ICharacterState.BehaviourState.MoveSuccess);
+            }
+            else
+            {
+                ChangeState(ICharacterState.BehaviourState.MoveFailure);
+            }
+        }
+
+        public void Order(List<Utils.CrateType> orderBurger, bool isOrderStew)
         {
             this.orderBurger = orderBurger;
             this.isOrderStew = isOrderStew;
@@ -410,73 +486,6 @@ namespace MSKim.NonPlayer
             if(!IsFindPickupTable()) return;
 
             CreateOrderTicket();
-
-            var patienceMax = data.Patience + Managers.UserData.GetUpgradeAmount(Utils.ShopItemIndex.SHOP_GUEST_PATIENT_TIME_INDEX);
-
-            while (!isRelease)
-            {
-                if(isOrderSuccess)
-                {
-                    ChangeState(ICharacterState.BehaviourState.OrderSuccess);
-                    currentPatientTime = 0f;
-
-                    int giveGoldAmount = 0;
-                    for (int i = 0; i < orderBurger.Count; i++)
-                    {
-                        giveGoldAmount += (int)(Managers.GameData.GetIngredientData(orderBurger[i]).GuestSellPrice +
-                            Managers.UserData.GetUpgradeAmount(Managers.GameData.GetIngredientData(orderBurger[i]).ItemPrice));
-                    }
-
-                    if(isOrderStew)
-                    {
-                        giveGoldAmount += Managers.GameData.GetFoodData(Utils.FoodType.Stew).GuestSellPrice;
-                    }
-
-                    Managers.UserData.CurrentGoldAmount += giveGoldAmount;
-
-                    if (orderTicket != null)
-                    {
-                        orderTicket.Release();
-                        orderTicket = null;
-                    }
-
-                    break;
-                }
-
-                currentPatientTime += Time.deltaTime;
-                OnDelayOrderEvent?.Invoke(currentPatientTime / patienceMax);
-
-                await UniTask.Yield();
-
-                if(currentPatientTime >= patienceMax)
-                {
-                    ChangeState(ICharacterState.BehaviourState.OrderFailure);
-                    currentPatientTime = 0f;
-
-                    if (orderTicket != null)
-                    {
-                        orderTicket.Release();
-                        orderTicket = null;
-                    }
-
-                    break;
-                }
-            }
-
-            if (isRelease) return;
-
-            await UniTask.Delay(TimeSpan.FromSeconds(1f));
-
-            Managers.Game.RemovePickupZone(this);
-
-            if(isOrderSuccess)
-            {
-                ChangeState(ICharacterState.BehaviourState.MoveSuccess);
-            }
-            else
-            {
-                ChangeState(ICharacterState.BehaviourState.MoveFailure);
-            }
         }
 
         private void CreateOrderTicket()

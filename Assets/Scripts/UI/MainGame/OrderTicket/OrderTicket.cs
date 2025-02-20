@@ -23,6 +23,12 @@ namespace MSKim.UI
             orderTarget.OnDelayOrderEvent -= view.SetTimer;
             orderTarget.OnDelayOrderEvent += view.SetTimer;
 
+            orderTarget.OnOrderBurgerCheckEvent -= view.SetBurgerComplete;
+            orderTarget.OnOrderBurgerCheckEvent += view.SetBurgerComplete;
+
+            orderTarget.OnOrderStewCheckEvent -= view.SetStewComplete;
+            orderTarget.OnOrderStewCheckEvent += view.SetStewComplete;
+
             CreateGroup(orderTarget.OrderBurger);
 
             view.Initialize(this);
@@ -48,6 +54,15 @@ namespace MSKim.UI
             }
         }
 
+        public void ReleaseGroupList(Utils.FoodType type)
+        {
+            if (groupList.Count <= 0) return;
+
+            var removeTarget = groupList[(int)type];
+            groupList.Remove(removeTarget);
+            removeTarget.Release();
+        }
+
         public override void Release()
         {
             for(int i = 0; i < groupList.Count; i++)
@@ -55,6 +70,9 @@ namespace MSKim.UI
                 groupList[i].Release();
             }
             groupList.Clear();
+
+            view.SetStewComplete(false);
+            view.SetBurgerComplete(false);
 
             base.Release();
         }
