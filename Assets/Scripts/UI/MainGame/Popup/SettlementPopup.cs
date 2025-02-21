@@ -18,9 +18,9 @@ namespace MSKim.UI
 
         public void OnClaim()
         {
-            Managers.UserData.IncreaseAmount(Utils.CurrencyType.Gold, Managers.UserData.CurrentGoldAmount);
+            Managers.UserData.IncreaseAmount(Utils.CurrencyType.Gold, Managers.Game.CurrentCoinAmount);
 
-            Managers.UserData.CurrentGoldAmount = 0;
+            Managers.Game.CurrentCoinAmount = 0;
             Managers.Game.SuccessOrderCount = 0;
             Managers.Game.TotalOrderCount = 0;
 

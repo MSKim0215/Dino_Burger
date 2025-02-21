@@ -17,8 +17,8 @@ namespace MSKim.UI
         {
             this.data = data;
 
-            Managers.UserData.OnChangeUpgrade -= HandleChangeUpgrade;
-            Managers.UserData.OnChangeUpgrade += HandleChangeUpgrade;
+            Managers.UserData.OnChangeUpgradeDataEvent -= HandleChangeUpgrade;
+            Managers.UserData.OnChangeUpgradeDataEvent += HandleChangeUpgrade;
 
             view.Initialize(this);
         }

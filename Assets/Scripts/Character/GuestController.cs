@@ -428,7 +428,7 @@ namespace MSKim.NonPlayer
                     giveGoldAmount += Managers.GameData.GetFoodData(Utils.FoodType.Stew).GuestSellPrice;
                 }
 
-                Managers.UserData.CurrentGoldAmount += giveGoldAmount;
+                Managers.Game.CurrentCoinAmount += giveGoldAmount;
 
                 if (orderTicket != null)
                 {

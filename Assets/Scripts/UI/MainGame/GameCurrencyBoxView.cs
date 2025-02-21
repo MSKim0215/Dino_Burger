@@ -16,9 +16,9 @@ namespace MSKim.UI
         {
             this.controller = controller;
 
-            Managers.UserData.OnChangeInGameCurrency -= SetCurrencyText;
-            Managers.UserData.OnChangeInGameCurrency += SetCurrencyText;
-            Managers.UserData.CurrentGoldAmount = 0;
+            Managers.Game.OnChangeCurrencyEvent -= SetCurrencyText;
+            Managers.Game.OnChangeCurrencyEvent += SetCurrencyText;
+            Managers.Game.CurrentCoinAmount = 0;
         }
 
         private void SetCurrencyText(int currencyAmount) => currencyText.text = string.Format("{0:#,0}", currencyAmount);

@@ -17,8 +17,8 @@ namespace MSKim.UI
 
             view.Initialize(this);
 
-            Managers.UserData.OnChangeCurrency -= HandleChangeCurrency;
-            Managers.UserData.OnChangeCurrency += HandleChangeCurrency;
+            Managers.UserData.OnChangeCurrencyDataEvent -= HandleChangeCurrency;
+            Managers.UserData.OnChangeCurrencyDataEvent += HandleChangeCurrency;
         }
 
         public void OnExit()

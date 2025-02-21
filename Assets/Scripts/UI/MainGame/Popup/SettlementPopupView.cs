@@ -25,7 +25,7 @@ namespace MSKim.UI
             percentSlider.value = percent;
             percentText.text = string.Format("{0:P1}", percent);
             visitText.text = $"{Managers.Game.SuccessOrderCount} <#9aa5d1>/ {Managers.Game.TotalOrderCount}";
-            valueText.text = string.Format("{0:#,0}", Managers.UserData.CurrentGoldAmount);
+            valueText.text = string.Format("{0:#,0}", Managers.Game.CurrentCoinAmount);
 
             claimButton.onClick.AddListener(this.controller.OnClaim);
         }

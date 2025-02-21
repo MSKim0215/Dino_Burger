@@ -8,6 +8,8 @@ namespace MSKim.Manager
     [Serializable]
     public class GameManager : BaseManager
     {
+        private int currentCoinAmount = 0;          // 인게임 재화
+
         [Header("Settings")]
         [SerializeField] private List<GameObject> waitChairList = new();
         [SerializeField] private List<GameObject> pickupTableList = new();
@@ -19,6 +21,18 @@ namespace MSKim.Manager
         [SerializeField] private Queue<NonPlayer.GuestController> waitingZoneGuests = new();
         [SerializeField] private bool[] canPickupSeats;
         [SerializeField] private bool[] canWaitSeats;
+
+        public event Action<int> OnChangeCurrencyEvent;    // 인게임 재화 수치 변경 이벤트
+
+        public int CurrentCoinAmount
+        {
+            get => currentCoinAmount;
+            set
+            {
+                currentCoinAmount = value;
+                OnChangeCurrencyEvent?.Invoke(currentCoinAmount);
+            }
+        }
 
         public List<Utils.CrateType> AllowIncredientList { get => allowIncredientList; }
 

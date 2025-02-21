@@ -7,24 +7,10 @@ namespace MSKim.Manager
     [Serializable]
     public class UserDataManager : BaseManager
     {
-        [Header("InGame Data Info")]
-        [SerializeField] private int currentGoldAmount = 0;
-
         private PlayerData playerData = new();      // 사용자 데이터
 
-        public event Action<Utils.CurrencyType, int> OnChangeCurrency;
-        public event Action<Utils.ShopItemIndex, int> OnChangeUpgrade;
-        public event Action<int> OnChangeInGameCurrency;
-
-        public int CurrentGoldAmount
-        {
-            get => currentGoldAmount;
-            set
-            {
-                currentGoldAmount = value;
-                OnChangeInGameCurrency?.Invoke(CurrentGoldAmount);
-            }
-        }
+        public event Action<Utils.CurrencyType, int> OnChangeCurrencyDataEvent;     // 재화 수치 변경 이벤트
+        public event Action<Utils.ShopItemIndex, int> OnChangeUpgradeDataEvent;     // 강화 수치 변경 이벤트
 
         public override void Initialize()
         {
@@ -85,8 +71,7 @@ namespace MSKim.Manager
 
             playerData.UserCurrencyData[currencyType] += addAmount;
 
-            OnChangeCurrency?.Invoke(currencyType, playerData.UserCurrencyData[currencyType]);
-            Managers.File.Save(playerData);
+            SaveCurrencyData(currencyType);
         }
 
         public void DecreaseAmount(Utils.CurrencyType currencyType, int subAmount)
@@ -97,45 +82,46 @@ namespace MSKim.Manager
                 return;
             }
 
-            playerData.UserCurrencyData[currencyType] -= subAmount;
+            playerData.UserCurrencyData[currencyType] = Mathf.Max(0, playerData.UserCurrencyData[currencyType] - subAmount);
 
-            if (playerData.UserCurrencyData[currencyType] < 0)
-            {
-                playerData.UserCurrencyData[currencyType] = 0;
-            }
+            SaveCurrencyData(currencyType);
+        }
 
-            OnChangeCurrency?.Invoke(currencyType, playerData.UserCurrencyData[currencyType]);
+        private void SaveCurrencyData(Utils.CurrencyType currencyType)
+        {
+            OnChangeCurrencyDataEvent?.Invoke(currencyType, playerData.UserCurrencyData[currencyType]);
             Managers.File.Save(playerData);
         }
 
-        public void UpgradeLevel(Utils.ShopItemIndex type)
+        public void UpgradeLevel(Utils.ShopItemIndex itemType)
         {
-            if(!playerData.UserUpgradeData.ContainsKey(type)) return;
+            if(!playerData.UserUpgradeData.ContainsKey(itemType)) return;
 
-            playerData.UserUpgradeData[type]++;
+            playerData.UserUpgradeData[itemType]++;          
+            SaveUpgradeData(itemType);
+        }
 
-            OnChangeUpgrade?.Invoke(type, playerData.UserUpgradeData[type]);
+        private void SaveUpgradeData(Utils.ShopItemIndex itemType)
+        {
+            OnChangeUpgradeDataEvent?.Invoke(itemType, playerData.UserUpgradeData[itemType]);
             Managers.File.Save(playerData);
         }
 
         public int GetCurrencyAmount(Utils.CurrencyType currencyType)
         {
             if (!playerData.UserCurrencyData.ContainsKey(currencyType)) return 0;
-
             return playerData.UserCurrencyData[currencyType];
         }
 
         public int GetUpgradeLevel(Utils.ShopItemIndex type)
         {
             if (!playerData.UserUpgradeData.ContainsKey(type)) return 0;
-
             return playerData.UserUpgradeData[type];
         }
 
         public float GetUpgradeAmount(Utils.ShopItemIndex type)
         {
             if (type == Utils.ShopItemIndex.None) return 0f;
-
             return GetUpgradeLevel(type) * Managers.GameData.GetShopItemData((int)type).UpgradeAmount;
         }
     }
