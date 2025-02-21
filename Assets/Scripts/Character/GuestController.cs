@@ -531,13 +531,7 @@ namespace MSKim.NonPlayer
 
         public override void Release()
         {
-            if (Managers.Guest.guestList.Count > 0)
-            {
-                if(Managers.Guest.guestList.Contains(this))
-                {
-                    Managers.Guest.guestList.Remove(this);
-                }
-            }
+            Managers.Guest.RemoveActiveGuest(this);
 
             ChangeState(ICharacterState.BehaviourState.None);
 

@@ -40,18 +40,7 @@ namespace MSKim.UI
 
                 if(currentTime <= 0f)
                 {
-                    for(int i = Managers.Guest.guestList.Count - 1; i >= 0 ; i--)
-                    {
-                        var guest = Managers.Guest.guestList[i];
-                        if(guest == null)
-                        {
-                            Managers.Guest.guestList.Remove(guest);
-                        }
-                        else
-                        {
-                            Managers.Guest.guestList[i]?.Release();
-                        }
-                    }
+                    Managers.Guest.Clear();
 
                     currentTime = 0f;
 
