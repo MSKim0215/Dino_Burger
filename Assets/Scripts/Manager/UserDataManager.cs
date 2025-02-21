@@ -1,69 +1,6 @@
-using MSKim.Manager;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
-
-[Serializable]
-public class PlayerData
-{
-    public SaveDataForDict<Utils.CurrencyType, int> UserCurrencyData = new();
-    public SaveDataForDict<Utils.ShopItemIndex, int> UserUpgradeData = new();
-
-    public void Initialize()
-    {
-        for (int i = 0; i < Enum.GetValues(typeof(Utils.CurrencyType)).Length; i++)
-        {
-            if (UserCurrencyData.ContainsKey((Utils.CurrencyType)i)) continue;
-
-            UserCurrencyData.Add((Utils.CurrencyType)i, 0);
-        }
-
-        for (int i = 0; i < Enum.GetValues(typeof(Utils.ShopItemIndex)).Length - 1; i++)
-        {
-            if (UserUpgradeData.ContainsKey((Utils.ShopItemIndex)i)) continue;
-
-            UserUpgradeData.Add((Utils.ShopItemIndex)i, Managers.GameData.GetShopItemData(i).BaseLevel);
-        }
-    }
-}
-
-[Serializable]
-public class SaveDataPair<TKey, TValue>
-{
-    public TKey Key;
-    public TValue Value;
-}
-
-[Serializable]
-public class SaveDataForDict<TKey, TValue>
-{
-    public List<SaveDataPair<TKey, TValue>> Data = new();
-
-    public void Add(TKey key, TValue value)
-    {
-        Data.Add(new SaveDataPair<TKey, TValue> { Key = key, Value = value });
-    }
-
-    public bool ContainsKey(TKey key)
-    {
-        return Data.Exists(pair => EqualityComparer<TKey>.Default.Equals(pair.Key, key));
-    }
-
-    public TValue this[TKey key]
-    {
-        get => Data.Find(pair => EqualityComparer<TKey>.Default.Equals(pair.Key, key)).Value;
-        set
-        {
-            var pair = Data.Find(p => EqualityComparer<TKey>.Default.Equals(p.Key, key));
-            if (pair != null)
-            {
-                pair.Value = value;
-            }
-        }
-    }
-}
 
 namespace MSKim.Manager
 {
@@ -73,10 +10,7 @@ namespace MSKim.Manager
         [Header("InGame Data Info")]
         [SerializeField] private int currentGoldAmount = 0;
 
-        private PlayerData playerData = new();
-        private string path;
-        private string fileName = "/save";
-        private string keyWord = "sjahfiwpncvp!#$%*%! !#$";
+        private PlayerData playerData = new();      // 사용자 데이터
 
         public event Action<Utils.CurrencyType, int> OnChangeCurrency;
         public event Action<Utils.ShopItemIndex, int> OnChangeUpgrade;
@@ -97,47 +31,15 @@ namespace MSKim.Manager
             base.Initialize();
 
             playerData.Initialize();
-
-            path = Application.persistentDataPath + fileName;
-
-            LoadData();
+            playerData = Managers.File.Load();
         }
 
         public override void OnUpdate()
         {
-            if (Input.GetKeyDown(KeyCode.M))
+            if(Input.GetKeyDown(KeyCode.M))
             {
-                IncreaseAmount(Utils.CurrencyType.Gold, 100);
+                IncreaseAmount(Utils.CurrencyType.Gold, 10000);
             }
-        }
-
-        public void SaveData()
-        {
-            var data = JsonUtility.ToJson(playerData);
-            File.WriteAllText(path, EncryptAndDecrypt(data));
-        }
-
-        public void LoadData()
-        {
-            if(!File.Exists(path))
-            {
-                SaveData();
-            }
-
-            var data = File.ReadAllText(path);
-            playerData = JsonUtility.FromJson<PlayerData>(EncryptAndDecrypt(data));
-        }
-
-        private string EncryptAndDecrypt(string data)
-        {
-            var result = string.Empty;
-
-            for(int i = 0; i < data.Length; i++)
-            {
-                result += (char)(data[i] ^ keyWord[i % keyWord.Length]);
-            }
-
-            return result;
         }
 
         public void Payment(Utils.CurrencyType currencyType, Data.ShopItemData paymentData)
@@ -184,7 +86,7 @@ namespace MSKim.Manager
             playerData.UserCurrencyData[currencyType] += addAmount;
 
             OnChangeCurrency?.Invoke(currencyType, playerData.UserCurrencyData[currencyType]);
-            SaveData();
+            Managers.File.Save(playerData);
         }
 
         public void DecreaseAmount(Utils.CurrencyType currencyType, int subAmount)
@@ -203,7 +105,7 @@ namespace MSKim.Manager
             }
 
             OnChangeCurrency?.Invoke(currencyType, playerData.UserCurrencyData[currencyType]);
-            SaveData();
+            Managers.File.Save(playerData);
         }
 
         public void UpgradeLevel(Utils.ShopItemIndex type)
@@ -213,7 +115,7 @@ namespace MSKim.Manager
             playerData.UserUpgradeData[type]++;
 
             OnChangeUpgrade?.Invoke(type, playerData.UserUpgradeData[type]);
-            SaveData();
+            Managers.File.Save(playerData);
         }
 
         public int GetCurrencyAmount(Utils.CurrencyType currencyType)
