@@ -23,9 +23,9 @@ namespace MSKim.Manager
         [SerializeField] private List<ObjectInfo> poolObjectList = new();
         [SerializeField] private List<Transform> rootList = new();
 
-        private Dictionary<Utils.PoolType, Transform> rootDict = new();
-        private Dictionary<string, IObjectPool<GameObject>> poolObjectDict = new();
-        private Dictionary<string, GameObject> createDict = new();
+        private readonly Dictionary<Utils.PoolType, Transform> rootDict = new();
+        private readonly Dictionary<string, IObjectPool<GameObject>> poolObjectDict = new();
+        private readonly Dictionary<string, GameObject> createDict = new();
         private string createObjectName;
 
         public override void Initialize()
