@@ -40,7 +40,7 @@ namespace MSKim.UI
 
                 if(currentTime <= 0f)
                 {
-                    Managers.Guest.Clear();
+                    Managers.Game.Guest.Clear();
 
                     currentTime = 0f;
 

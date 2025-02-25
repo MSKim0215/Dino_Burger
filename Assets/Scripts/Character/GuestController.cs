@@ -300,16 +300,16 @@ namespace MSKim.NonPlayer
 
                         if (Managers.Game.CanMovePickupTable)
                         {
-                            if (!Managers.Game.IsExistWaitingGuest)
+                            if (!Managers.Game.Guest.IsExistWaitingGuest)
                             {
-                                Managers.Game.AddPickupZone(this);
+                                Managers.Game.Guest.AddPickupZone(this);
                                 return;
                             }
                         }
 
                         if (Managers.Game.CanMoveWaitingChair)
                         {
-                            Managers.Game.AddWaitingZone(this);
+                            Managers.Game.Guest.AddWaitingZone(this);
                             return;
                         }
                     }
@@ -361,7 +361,7 @@ namespace MSKim.NonPlayer
             if (WaitingNumber != 1) return;
             if (!Managers.Game.CanMovePickupTable) return;
 
-            Managers.Game.RemoveWaitingZone();
+            Managers.Game.Guest.RemoveWaitingZone();
             ChangeState(ICharacterState.BehaviourState.Move);
         }
 
@@ -464,7 +464,7 @@ namespace MSKim.NonPlayer
 
             if (isRelease) return;
 
-            Managers.Game.RemovePickupZone(this);
+            Managers.Game.Guest.RemovePickupZone(this);
 
             if (isOrderSuccess)
             {
@@ -531,7 +531,7 @@ namespace MSKim.NonPlayer
 
         public override void Release()
         {
-            Managers.Guest.RemoveActiveGuest(this);
+            Managers.Game.Guest.RemoveActiveGuest(this);
 
             ChangeState(ICharacterState.BehaviourState.None);
 

@@ -10,7 +10,6 @@ namespace MSKim.Manager
         [SerializeField] private UserDataManager userDataManager = new();
         [SerializeField] private GameDataManager gameDataManager = new();
         [SerializeField] private GameManager gameManager = new();
-        [SerializeField] private GuestManager guestManager = new();
         [SerializeField] private ObjectPoolManager objectPoolManager = new();
         [SerializeField] private WaypointManager waypointManager = new();
 
@@ -33,7 +32,6 @@ namespace MSKim.Manager
 
         public static GameManager Game => Instance.gameManager;
 
-        public static GuestManager Guest => Instance.guestManager;
 
         public static ObjectPoolManager Pool => Instance.objectPoolManager;
 
@@ -61,7 +59,6 @@ namespace MSKim.Manager
             {
                 gameManager.Initialize();
                 waypointManager.Initialize();
-                guestManager.Initialize();
             }
         }
 
@@ -95,7 +92,6 @@ namespace MSKim.Manager
             else if(currentSceneType == Utils.SceneType.MainGame)
             {
                 gameManager.OnUpdate();
-                guestManager.OnUpdate();
             }
         }
     }
