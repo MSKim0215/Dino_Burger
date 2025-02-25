@@ -110,8 +110,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0000005, y: 2.5, z: 2.2727787}
-  m_Center: {x: 1.6184979e-16, y: 1.25, z: 0.13638914}
+  m_Size: {x: 2.0000005, y: 2.5, z: 2}
+  m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!114 &-1404213050057657330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,8 +134,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: a6e931ed93711a141a0c7e37e0e3cb76, type: 2}
   - {fileID: 2100000, guid: 594e06d41ee27a542a19f7355c9257b4, type: 2}
   crateType: 5
-  ingredientPrefab: {fileID: 1079676082098462272, guid: 93ffbb9fef63b754a8daea8eaafb1cef, type: 3}
-  ingredientRoot: {fileID: 0}
 --- !u!1 &3998344862236866336
 GameObject:
   m_ObjectHideFlags: 0

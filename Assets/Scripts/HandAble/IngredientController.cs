@@ -4,7 +4,7 @@ using MSKim.Manager;
 
 namespace MSKim.HandAble
 {
-    public class IngredientController : MonoBehaviour
+    public class IngredientController : PoolAble
     {
         [Header("Ingredient Data Info")]
         [SerializeField] protected Data.IngredientData data;
@@ -41,7 +41,6 @@ namespace MSKim.HandAble
         public void Initialize(Utils.CrateType ingredientType)
         {
             data = Managers.GameData.GetIngredientData(ingredientType);
-            name = data.Name;
             currentYieldAmount = (int)(data.YieldAmount + Managers.UserData.GetUpgradeAmount(data.ItemYield));
 
             InitializeCookState();

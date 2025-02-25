@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5113191199447852626}
   - component: {fileID: 7944510258430666475}
   m_Layer: 8
-  m_Name: TomatoIngredient
+  m_Name: Ingredient_Tomato
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

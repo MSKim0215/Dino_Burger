@@ -462,20 +462,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 1f4be02259412124cbf2e1eca0d241fa, type: 2}
     - {fileID: 11400000, guid: 4ba142e4df0fc8b42b5c0740e36a41b8, type: 2}
     - {fileID: 11400000, guid: 362e456d16aab1a45ae4811f03742f4d, type: 2}
-    ingredientDatas: {fileID: 11400000, guid: c2afd1cc819cc4b47810cff4fc0ea56f, type: 2}
-    foodDatas: {fileID: 11400000, guid: 41f63df3dcab36344960970c3549e835, type: 2}
-    playerDatas: {fileID: 11400000, guid: 1f4be02259412124cbf2e1eca0d241fa, type: 2}
-    guestDatas: {fileID: 11400000, guid: 83f344d2ec0184549a90f7c436438222, type: 2}
-    tableDatas: {fileID: 11400000, guid: 362e456d16aab1a45ae4811f03742f4d, type: 2}
-    shopItemsDatas: {fileID: 11400000, guid: 4ba142e4df0fc8b42b5c0740e36a41b8, type: 2}
   gameManager:
-    waitChairList: []
-    pickupTableList: []
     allowIncredientList: 0100000002000000030000000400000005000000
-    currentWaitNumber: 0
-    pickupZoneGuests: []
-    canPickupSeats: 
-    canWaitSeats: 
   objectPoolManager:
     poolObjectList:
     - createObjectName: Guest
@@ -532,6 +520,42 @@ MonoBehaviour:
       createPrefab: {fileID: 4568955795923157891, guid: 91d59f95fdcea91488d740ace8cfdfd0, type: 3}
       createCount: 1
       maxCount: 1
+    - createObjectName: Ingredient_Bun
+      poolType: 0
+      useScene: 2
+      createPrefab: {fileID: 8544778946697118956, guid: 1eddec99902dc5c46a12d8d6c2e7312d, type: 3}
+      createCount: 5
+      maxCount: 30
+    - createObjectName: Ingredient_Cheese
+      poolType: 0
+      useScene: 2
+      createPrefab: {fileID: 8544778946697118956, guid: ffa5bea6e9bb2d8478cb9271a084a1ef, type: 3}
+      createCount: 5
+      maxCount: 30
+    - createObjectName: Ingredient_Lettuce
+      poolType: 0
+      useScene: 2
+      createPrefab: {fileID: 8544778946697118956, guid: 9ec17534f327321489ae50852d0aba22, type: 3}
+      createCount: 5
+      maxCount: 30
+    - createObjectName: Ingredient_Meat
+      poolType: 0
+      useScene: 2
+      createPrefab: {fileID: 8544778946697118956, guid: 93ffbb9fef63b754a8daea8eaafb1cef, type: 3}
+      createCount: 5
+      maxCount: 30
+    - createObjectName: Ingredient_Onion
+      poolType: 0
+      useScene: 2
+      createPrefab: {fileID: 8544778946697118956, guid: 9c343fbf0925ede42be1fef7bc502722, type: 3}
+      createCount: 5
+      maxCount: 30
+    - createObjectName: Ingredient_Tomato
+      poolType: 0
+      useScene: 2
+      createPrefab: {fileID: 8544778946697118956, guid: c9a90d27f47960e41bf3d161da96c3a3, type: 3}
+      createCount: 5
+      maxCount: 30
     rootList:
     - {fileID: 365165892}
     - {fileID: 708651376}

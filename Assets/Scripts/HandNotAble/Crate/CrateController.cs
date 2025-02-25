@@ -1,3 +1,6 @@
+using MSKim.Manager;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MSKim.HandNotAble
@@ -7,19 +10,37 @@ namespace MSKim.HandNotAble
         [Header("Crate Type")]
         [SerializeField] private Utils.CrateType crateType;
 
-        [Header("Pool Settings")]
-        [SerializeField] private HandAble.IngredientController ingredientPrefab;
-        [SerializeField] private Transform ingredientRoot;
+        private Dictionary<Utils.CrateType, string> cratePrefabNameDict = new();
 
         public Utils.CrateType CrateType => crateType;
 
-        public override void Take(GameObject takeObject) => Object.Destroy(takeObject);
+        private void Start()
+        {
+            for (int i = 0; i < Enum.GetValues(typeof(Utils.CrateType)).Length - 1; i++)
+            {
+                var type = (Utils.CrateType)i;
+                cratePrefabNameDict.Add(type, $"Ingredient_{type}");
+            }
+        }
+
+        public override void Take(GameObject takeObject)
+        {
+            if(takeObject.TryGetComponent<HandAble.IngredientController>(out var ingredient))
+            {
+                ingredient.Release();
+            }
+        }
 
         public override GameObject Give()
         {
-            var ingredient = Object.Instantiate(ingredientPrefab);
-            ingredient.Initialize(crateType);
-            return ingredient.gameObject;
+            var createObj = Managers.Pool.GetPoolObject(cratePrefabNameDict[crateType]);
+
+            if (createObj.TryGetComponent<HandAble.IngredientController>(out var ingredient))
+            {
+                ingredient.Initialize(crateType);
+            }
+
+            return createObj;
         }
     }
 }

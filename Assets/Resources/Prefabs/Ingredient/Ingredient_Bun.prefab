@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5113191199447852626}
   - component: {fileID: 7027789523447751974}
   m_Layer: 8
-  m_Name: BunIngredient
+  m_Name: Ingredient_Bun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
