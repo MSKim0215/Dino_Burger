@@ -454,9 +454,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8880fb4906057e43986ab0a9139b2b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  userDataManager:
-    currentGoldAmount: 0
   gameDataManager:
+    gameDataList:
+    - {fileID: 11400000, guid: 41f63df3dcab36344960970c3549e835, type: 2}
+    - {fileID: 11400000, guid: 83f344d2ec0184549a90f7c436438222, type: 2}
+    - {fileID: 11400000, guid: c2afd1cc819cc4b47810cff4fc0ea56f, type: 2}
+    - {fileID: 11400000, guid: 1f4be02259412124cbf2e1eca0d241fa, type: 2}
+    - {fileID: 11400000, guid: 4ba142e4df0fc8b42b5c0740e36a41b8, type: 2}
+    - {fileID: 11400000, guid: 362e456d16aab1a45ae4811f03742f4d, type: 2}
     ingredientDatas: {fileID: 11400000, guid: c2afd1cc819cc4b47810cff4fc0ea56f, type: 2}
     foodDatas: {fileID: 11400000, guid: 41f63df3dcab36344960970c3549e835, type: 2}
     playerDatas: {fileID: 11400000, guid: 1f4be02259412124cbf2e1eca0d241fa, type: 2}
@@ -471,11 +476,6 @@ MonoBehaviour:
     pickupZoneGuests: []
     canPickupSeats: 
     canWaitSeats: 
-  guestManager:
-    spawnPointList: []
-    currSpawnTime: 0
-    maxSpawnTime: 0
-    guestList: []
   objectPoolManager:
     poolObjectList:
     - createObjectName: Guest

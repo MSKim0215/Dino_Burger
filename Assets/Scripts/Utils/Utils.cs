@@ -86,4 +86,9 @@ public static class Utils
         SHOP_GUEST_PATIENT_TIME_INDEX,
         None
     }   // 상점 아이템 인덱스
+
+    public enum GameDataIndex
+    {
+        IngredientsData, FoodsData, PlayersData, GuestsData, TablesData, ShopItemsData
+    }   // 게임 데이터 인덱스
 }

@@ -53,9 +53,9 @@ namespace MSKim.Manager
 
             if (currentSceneType == Utils.SceneType.Title)
             {
+                gameDataManager.Initialize();
                 fileManager.Initialize();
                 userDataManager.Initialize();
-                gameDataManager.Initialize();
             }
             else if(currentSceneType == Utils.SceneType.MainGame)
             {
