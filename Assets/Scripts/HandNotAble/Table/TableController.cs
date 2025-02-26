@@ -79,8 +79,6 @@ namespace MSKim.HandNotAble
 
         public bool IsHandUpObjectBurger() => hand.GetHandUpComponent<HandAble.BurgerFoodController>() != null;
 
-        public bool IsHandUpObjectStew() => hand.GetHandUpComponent<HandAble.StewFoodController>() != null;
-
         private void Start()
         {
             Initialize();

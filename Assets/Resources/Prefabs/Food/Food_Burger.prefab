@@ -756,7 +756,7 @@ GameObject:
   - component: {fileID: 3502303646257216498}
   - component: {fileID: 7507328935687779529}
   m_Layer: 8
-  m_Name: BurgerFood
+  m_Name: Food_Burger
   m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

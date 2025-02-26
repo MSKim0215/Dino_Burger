@@ -24,7 +24,7 @@ namespace MSKim.HandAble
 
         private int currentYieldAmount;
 
-        public virtual int YieldAmount { get => currentYieldAmount; set => currentYieldAmount = value; }
+        public int YieldAmount { get => currentYieldAmount; set => currentYieldAmount = value; }
 
         public virtual float CurrentCookTime
         {

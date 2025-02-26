@@ -397,8 +397,10 @@ namespace MSKim.NonPlayer
             if (isGetStew) return;
             if (myPickupTable.HandUpObject == null) return;
 
-            if (myPickupTable.HandUpObject.TryGetComponent<HandAble.StewFoodController>(out var stew))
+            if (myPickupTable.HandUpObject.TryGetComponent<HandAble.FoodController>(out var stew))
             {
+                if (stew.FoodType != Utils.FoodType.Stew) return;
+
                 isGetStew = true;
                 OnOrderStewCheckEvent?.Invoke(isGetStew);
                 Destroy(myPickupTable.Give());

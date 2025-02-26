@@ -556,6 +556,18 @@ MonoBehaviour:
       createPrefab: {fileID: 8544778946697118956, guid: c9a90d27f47960e41bf3d161da96c3a3, type: 3}
       createCount: 5
       maxCount: 30
+    - createObjectName: Food_Burger
+      poolType: 0
+      useScene: 2
+      createPrefab: {fileID: 6353252814487272585, guid: cbe7f07eb2d60ea48a493c50b8133ccc, type: 3}
+      createCount: 5
+      maxCount: 30
+    - createObjectName: Food_Stew
+      poolType: 0
+      useScene: 2
+      createPrefab: {fileID: 6018837424437621513, guid: 266d043f7ba48de4bbd1fe761e4d9af8, type: 3}
+      createCount: 5
+      maxCount: 30
     rootList:
     - {fileID: 365165892}
     - {fileID: 708651376}
