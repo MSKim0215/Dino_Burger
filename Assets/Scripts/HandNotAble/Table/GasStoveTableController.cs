@@ -1,4 +1,3 @@
-using Cysharp.Threading.Tasks;
 using MSKim.Manager;
 using UnityEngine;
 
@@ -9,11 +8,10 @@ namespace MSKim.HandNotAble
         [Header("Table View")]
         [SerializeField] private UI.TableView view;
 
+        private bool isGrill = false;
+
         protected override void Initialize()
         {
-            data = Managers.GameData.GetTableData(Utils.TableType.GasStove);
-            name = data.Name;
-
             view.Initialize(this);
         }
 
@@ -21,7 +19,7 @@ namespace MSKim.HandNotAble
         {
             base.Take(takeObject);
 
-            Grill();
+            isGrill = true;
         }
 
         public override GameObject Give()
@@ -30,50 +28,54 @@ namespace MSKim.HandNotAble
             return base.Give();
         }
 
-        private async void Grill()
+        private void Update()
         {
+            if (!isGrill) return;
+
+            Grill();
+        }
+
+        private void Grill()
+        {
+            if (hand.HandUpObject == null) return;
+
             var ingredient = hand.GetHandUpComponent<HandAble.MeatIngredientController>();
+            if (ingredient == null) return;
 
-            while (ingredient != null && hand.HandUpObject != null)
-            {
-                ingredient.CurrentCookTime += Time.deltaTime;
+            ingredient.CurrentCookTime += Time.deltaTime;
 
-                float maximum = !ingredient.IsGrillOver ?
-                    ingredient.CurrentCookTime / ingredient.MaximumCookTime :
-                    ingredient.CurrentCookTime / (Utils.GRILL_OVERCOOKED_TIME - ingredient.MaximumCookTime);
-                OnTriggerValueEvent(maximum);
+            float maximum = !ingredient.IsGrillOver ?
+                ingredient.CurrentCookTime / ingredient.MaximumCookTime :
+                ingredient.CurrentCookTime / (Utils.GRILL_OVERCOOKED_TIME - ingredient.MaximumCookTime);
+            OnTriggerValueEvent(maximum);
 
-                await UniTask.Yield();
+            bool isTimeOver = !ingredient.IsGrillOver ?
+                ingredient.CurrentCookTime >= ingredient.MaximumCookTime :
+                ingredient.CurrentCookTime >= (Utils.GRILL_OVERCOOKED_TIME - ingredient.MaximumCookTime);
 
-                bool isTimeOver = !ingredient.IsGrillOver ?
-                    ingredient.CurrentCookTime >= ingredient.MaximumCookTime :
-                    ingredient.CurrentCookTime >= (Utils.GRILL_OVERCOOKED_TIME - ingredient.MaximumCookTime);
+            if (hand.HandUpObject == null) return;
 
-                if (hand.HandUpObject == null) break;
-
-                if (ingredient.IsGrillOver)
-                {   // 오버쿡 체크 시작
-                    OnTriggerChangeActiveEvent(!isTimeOver);
-                }
-                else
-                {   // 일반쿡 체크 시작
-                    OnTriggerOriginActiveEvent(true);
-                }
-
-                if (isTimeOver)
-                {
-                    if (ingredient.IsGrillOver) break;
-
-                    ingredient.IsGrillOver = true;
-                    ingredient.CurrentCookTime = 0f;
-
-                    OnTriggerOriginActiveEvent(!ingredient.IsGrillOver);
-                    OnTriggerChangeActiveEvent(ingredient.IsGrillOver);
-                }
-
-                ingredient.SetIngredientState(isTimeOver ? 
-                    Utils.IngredientState.GrillOver : Utils.IngredientState.Grilling);
+            if (ingredient.IsGrillOver)
+            {   // 오버쿡 체크 시작
+                OnTriggerChangeActiveEvent(!isTimeOver);
             }
+            else
+            {   // 일반쿡 체크 시작
+                OnTriggerOriginActiveEvent(true);
+            }
+
+            if (isTimeOver)
+            {
+                if (ingredient.IsGrillOver) return;
+
+                ingredient.IsGrillOver = true;
+                ingredient.CurrentCookTime = 0f;
+
+                OnTriggerOriginActiveEvent(!ingredient.IsGrillOver);
+                OnTriggerChangeActiveEvent(ingredient.IsGrillOver);
+            }
+
+            ingredient.SetIngredientState(isTimeOver ? Utils.IngredientState.GrillOver : Utils.IngredientState.Grilling);
         }
     }
 }

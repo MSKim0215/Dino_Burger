@@ -42,10 +42,6 @@ namespace MSKim.Manager
             GetDataList<Data.GuestData, Data.GuestsData>
                 (Utils.GameDataIndex.GuestsData, data => data?.GuestDataList);
 
-        private List<Data.TableData> TableDatas =>
-            GetDataList<Data.TableData, Data.TablesData>
-                (Utils.GameDataIndex.TablesData, data => data?.TableDataList);
-
         public List<Data.ShopItemData> ShopItemDatas =>
             GetDataList<Data.ShopItemData, Data.ShopItemsData>
                 (Utils.GameDataIndex.ShopItemsData, data => data?.ShopItemDataList);
@@ -63,8 +59,6 @@ namespace MSKim.Manager
         public Data.CharacterData GetPlayerData(Utils.CharacterType type) => PlayerDatas.Find(player => player.Type == type);
 
         public Data.GuestData GetGuestData(Utils.CharacterType type) => GuestDatas.Find(guest => guest.Type == type);
-
-        public Data.TableData GetTableData(Utils.TableType type) => TableDatas.Find(table => table.Type == type);
 
         public Data.ShopItemData GetShopItemData(int index) => ShopItemDatas.Find(item => item.Index == index);
 

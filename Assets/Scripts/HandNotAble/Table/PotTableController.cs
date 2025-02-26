@@ -28,9 +28,6 @@ namespace MSKim.HandNotAble
 
         protected override void Initialize()
         {
-            data = Managers.GameData.GetTableData(Utils.TableType.Pot);
-            name = data.Name;
-
             view.Initialize(this);
         }
 

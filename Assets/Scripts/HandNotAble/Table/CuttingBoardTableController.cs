@@ -15,9 +15,6 @@ namespace MSKim.HandNotAble
 
         protected override void Initialize()
         {
-            data = Managers.GameData.GetTableData(Utils.TableType.CuttingBoard);
-            name = data.Name;
-
             view.Initialize(this);
         }
 
@@ -67,7 +64,7 @@ namespace MSKim.HandNotAble
             return tool;
         }
 
-        public void Cutting(Player.PlayerController player)
+        public void Cutting()
         {
             var ingredient = hand.GetHandUpComponent<HandAble.IngredientController>();
             if (ingredient == null || hand.HandUpObject == null) return;

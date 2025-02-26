@@ -370,7 +370,7 @@ namespace MSKim.Player
                     prevCuttingTable = table;
                     toolHand.GetHandUpHoldRotate(table.GiveTool());
                     ChangeState(ICharacterState.BehaviourState.InterAction);
-                    table.Cutting(this);
+                    table.Cutting();
                 }
             }
 

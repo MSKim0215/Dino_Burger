@@ -163,9 +163,7 @@ MonoBehaviour:
   highMats:
   - {fileID: 2100000, guid: 9b519de37e5024c42a6d0e9986b50201, type: 2}
   - {fileID: 2100000, guid: 594e06d41ee27a542a19f7355c9257b4, type: 2}
-  data:
-    Name: 
-    Type: 0
+  tableType: 6
   hand:
     handRoot: {fileID: 6658763288992046198}
     handUpObject: {fileID: 0}

@@ -461,7 +461,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: c2afd1cc819cc4b47810cff4fc0ea56f, type: 2}
     - {fileID: 11400000, guid: 1f4be02259412124cbf2e1eca0d241fa, type: 2}
     - {fileID: 11400000, guid: 4ba142e4df0fc8b42b5c0740e36a41b8, type: 2}
-    - {fileID: 11400000, guid: 362e456d16aab1a45ae4811f03742f4d, type: 2}
   gameManager:
     allowIncredientList: 0100000002000000030000000400000005000000
   objectPoolManager:

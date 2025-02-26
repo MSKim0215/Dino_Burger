@@ -63,13 +63,13 @@ namespace MSKim.HandNotAble
 
     public class TableController : InterActionMonoBehaviour
     {
-        [Header("Table Data Info")]
-        [SerializeField] protected Data.TableData data;
+        [Header("Table Type")]
+        [SerializeField] private Utils.TableType tableType;
 
         [Header("My Hand")]
         [SerializeField] protected Hand hand;
 
-        public Utils.TableType TableType => data.Type;
+        public Utils.TableType TableType => tableType;
 
         public GameObject HandUpObject => hand.HandUpObject;
 
