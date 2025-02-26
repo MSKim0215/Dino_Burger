@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 3204269202066680083}
   - component: {fileID: 4318641904445008809}
   - component: {fileID: 2305565349626816320}
-  - component: {fileID: 4268277593192786481}
+  - component: {fileID: 8298953644060356363}
   m_Layer: 7
   m_Name: BasicTable
   m_TagString: Untagged
@@ -139,9 +139,9 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 1, z: 2.041903}
-  m_Center: {x: 0, y: 0.49999997, z: 0.02095151}
---- !u!114 &4268277593192786481
+  m_Size: {x: 2, y: 1, z: 2}
+  m_Center: {x: 0, y: 0.49999997, z: 0}
+--- !u!114 &8298953644060356363
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9184180202795444182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec7b6821d8d61264a86f9ac73fe6e3ad, type: 3}
+  m_Script: {fileID: 11500000, guid: 1309bc8b35fa67b44a9e88f1194b7ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   renderers:

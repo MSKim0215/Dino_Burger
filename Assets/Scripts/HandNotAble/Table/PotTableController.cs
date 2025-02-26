@@ -14,15 +14,14 @@ namespace MSKim.HandNotAble
         [Header("Other Objects")]
         [SerializeField] private GameObject stewObject;
 
-        [Header("Pool Settings")]
-        [SerializeField] private GameObject stewFoodPrefab;
-
         [Header("Stew Settings")]
         [SerializeField] private List<Utils.CrateType> stewIngredientList = new();
         [SerializeField] private List<Utils.CrateType> currentIngredientList = new();
 
         [Header("Stew Cooking Time")]
         [SerializeField] private float currentCookTime = 0f;
+
+        private bool isBoil = false;
 
         public bool IsContainIngredient(Utils.CrateType type) => currentIngredientList.Contains(type);
 
@@ -47,48 +46,68 @@ namespace MSKim.HandNotAble
 
                 Destroy(base.Give());
 
-                Boil();
+                isBoil = true;
             }
         }
 
-        private async void Boil()
+        private void Update()
+        {
+            if (!isBoil) return;
+
+            Boil();
+        }
+
+        private void Boil()
         {
             if (currentIngredientList.Count < stewIngredientList.Count) return;
 
-            while(true)
+            bool isTimeOver = currentCookTime >= Utils.BOIL_STEW_COOK_TIME;
+            OnTriggerOriginActiveEvent(!isTimeOver);
+
+            currentCookTime += Time.deltaTime;
+            OnTriggerValueEvent(currentCookTime / Utils.BOIL_STEW_COOK_TIME);
+
+            if (isTimeOver)
             {
-                bool isTimeOver = currentCookTime >= Utils.BOIL_STEW_COOK_TIME;
-                OnTriggerOriginActiveEvent(!isTimeOver);
+                currentCookTime = 0f;
 
-                currentCookTime += Time.deltaTime;
-                OnTriggerValueEvent(currentCookTime / Utils.BOIL_STEW_COOK_TIME);
-
-                await UniTask.Yield();
-
-                if(isTimeOver)
+                var createObj = Managers.Pool.GetPoolObject("Food_Stew");
+                if (createObj.TryGetComponent<HandAble.FoodController>(out var stew))
                 {
-                    currentCookTime = 0f;
-
-                    var stew = Instantiate(stewFoodPrefab);
-                    stew.SetActive(false);
-                    hand.SetHandUpObject(stew);
-
-                    OnTriggerValueCompleteEvent();
-
-                    break;
+                    stew.Initialize(Utils.FoodType.Stew);
                 }
+
+                createObj.SetActive(false);
+                hand.SetHandUpObject(createObj);
+
+                OnTriggerValueCompleteEvent();
+
+                isBoil = false;
             }
         }
-
+            
         public override GameObject Give()
         {
-            if (hand.HandUpObject == null) return base.Give();
+            var stew = hand.GetHandUpComponent<HandAble.FoodController>();
+            if (stew == null) return base.Give();
+            if (stew.YieldAmount <= 1)
+            {
+                OnTriggerOutputIngredientEvent();
+                stewObject.SetActive(false);
+                currentIngredientList.Clear();
+                hand.HandUpObject.SetActive(true);
+                return base.Give();
+            }
 
-            OnTriggerOutputIngredientEvent();
-            stewObject.SetActive(false);
-            currentIngredientList.Clear();
-            hand.HandUpObject.SetActive(true);
-            return base.Give();
+            var createObj = Managers.Pool.GetPoolObject("Food_Stew");
+            if (createObj.TryGetComponent<HandAble.FoodController>(out var controller))
+            {
+                controller.Initialize(stew.FoodType);
+            }
+
+            stew.YieldAmount--;
+
+            return createObj;
         }
     }
 }

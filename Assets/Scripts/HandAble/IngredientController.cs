@@ -15,14 +15,13 @@ namespace MSKim.HandAble
 
         [Header("Cooking Time")]
         [SerializeField] protected float currentCookTime;
+        [SerializeField] private int currentYieldAmount;
 
         [Header("Other Component")]
         [SerializeField] private Renderer ingredientRenderer;
         [SerializeField] private Collider hitbox;
 
-        private Dictionary<Utils.CookState, GameObject> ingredientCookStateDict = new();
-
-        private int currentYieldAmount;
+        private Dictionary<Utils.CookState, GameObject> ingredientCookStateDict = new(); 
 
         public int YieldAmount { get => currentYieldAmount; set => currentYieldAmount = value; }
 
@@ -100,6 +99,13 @@ namespace MSKim.HandAble
         {
             if (targetState == ingredientState) return;
             ingredientState = targetState;
+        }
+
+        public void Copy(IngredientController copyTarget)
+        {
+            Initialize(copyTarget.IngredientType);
+            CurrentCookTime = copyTarget.CurrentCookTime;
+            ingredientState = copyTarget.IngredientState;
         }
     }
 }

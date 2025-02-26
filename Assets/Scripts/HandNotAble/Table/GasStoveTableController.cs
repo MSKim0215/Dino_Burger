@@ -24,6 +24,7 @@ namespace MSKim.HandNotAble
 
         public override GameObject Give()
         {
+            isGrill = false;
             OnTriggerOriginActiveEvent(false);
             return base.Give();
         }

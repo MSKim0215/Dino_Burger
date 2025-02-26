@@ -31,7 +31,10 @@ namespace MSKim.HandNotAble.UI
 
             protected override void SetActiveRoot(bool isActive)
             {
-                base.SetActiveRoot(isActive);
+                if (canvas == null) return;
+                if (canvas.gameObject.activeSelf == isActive) return;
+
+                canvas.gameObject.SetActive(isActive);
 
                 SetSliderValue(0f);
             }
@@ -48,7 +51,10 @@ namespace MSKim.HandNotAble.UI
                 SetSliderColor(changeColor);
             }
 
-            public void SetSliderValue(float value) => slider.value = value;
+            public void SetSliderValue(float value)
+            {
+                slider.value = value;
+            }
 
             private void SetSliderColor(Color color)
             {

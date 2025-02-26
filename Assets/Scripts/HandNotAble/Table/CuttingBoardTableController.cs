@@ -1,4 +1,6 @@
 using MSKim.Manager;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MSKim.HandNotAble
@@ -11,10 +13,18 @@ namespace MSKim.HandNotAble
         [Header("Tool Hand")]
         [SerializeField] private Hand toolHand = null;
 
+        private Dictionary<Utils.CrateType, string> cratePrefabNameDict = new();
+
         public bool IsCutOver => hand.GetHandUpComponent<HandAble.IngredientController>().IngredientState == Utils.IngredientState.CutOver;
 
         protected override void Initialize()
         {
+            for (int i = 0; i < Enum.GetValues(typeof(Utils.CrateType)).Length - 1; i++)
+            {
+                var type = (Utils.CrateType)i;
+                cratePrefabNameDict.Add(type, $"Ingredient_{type}");
+            }
+
             view.Initialize(this);
         }
 
@@ -46,11 +56,18 @@ namespace MSKim.HandNotAble
                 OnTriggerOriginActiveEvent(false);
                 return base.Give();
             }
+
             if (ingredient.YieldAmount <= 1) return base.Give();
+
+            var createObj = Managers.Pool.GetPoolObject(cratePrefabNameDict[ingredient.IngredientType]);
+            if (createObj.TryGetComponent<HandAble.IngredientController>(out var controller))
+            {
+                controller.Copy(ingredient);
+            }
 
             ingredient.YieldAmount--;
 
-            return Instantiate(hand.HandUpObject);
+            return createObj;
         }
 
         public GameObject GiveTool()

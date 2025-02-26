@@ -30,7 +30,7 @@ MonoBehaviour:
     GuestSellPrice: 6
     ItemYield: 8
     ItemPrice: 3
-  - Name: "\uC591\uC0C1\uCD94"
+  - Name: "\uC591\uBC30\uCD94"
     Type: 2
     YieldAmount: 2
     CookTime: 3.5
