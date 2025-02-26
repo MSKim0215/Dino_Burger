@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Food
   - PickupTable
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - HandNotAble
   - HandAble
   - Player
-  - 
+  - Wall
   - 
   - 
   - 

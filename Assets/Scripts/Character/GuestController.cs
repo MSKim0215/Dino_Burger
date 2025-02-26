@@ -51,7 +51,6 @@ namespace MSKim.NonPlayer
 
         public UI.GuestView View => view;
 
-        private int LayerHandAble { get => 1 << LayerMask.NameToLayer("HandAble"); }
         private int LayerHandNotAble { get => 1 << LayerMask.NameToLayer("HandNotAble"); }
 
         public bool IsOrderStew => isOrderStew;

@@ -14,6 +14,9 @@ public abstract class CharacterController : PoolAble, ICharacterMove
     protected StateController state;
     protected Dictionary<ICharacterState.BehaviourState, ICharacterState> stateDict = new();
 
+    [Header("Component")]
+    [SerializeField] protected Rigidbody rigid;
+
     private void Awake()
     {
         SettingState();

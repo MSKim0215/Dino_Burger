@@ -18,8 +18,8 @@ namespace MSKim.Player
 
         private HandNotAble.CuttingBoardTableController prevCuttingTable;
 
-        private float viewAngle = 60f;
-        private float viewDistance = 1.5f;
+        private float viewAngle = 5f;
+        private float currentVelocity;
         private GameObject mostDetectedObject;
         private GameObject lastDetectedObject;
         private Dictionary<GameObject, int> detectedObjectDict = new();
@@ -27,8 +27,7 @@ namespace MSKim.Player
         private float xAxis;
         private float zAxis;
         
-        private RaycastHit handHit;
-        private Ray handRay;
+        private int LayerWall { get => 1 << LayerMask.NameToLayer("Wall"); }
         private int LayerHandAble { get => 1 << LayerMask.NameToLayer("HandAble"); }
         private int LayerHandNotAble { get => 1 << LayerMask.NameToLayer("HandNotAble"); }
 
@@ -69,6 +68,13 @@ namespace MSKim.Player
             xAxis = Input.GetAxis("Horizontal");
             zAxis = Input.GetAxis("Vertical");
 
+            if(CheckHitWall())
+            {
+                MoveRotation();
+                ChangeState(ICharacterState.BehaviourState.Waiting);
+                return;
+            }
+
             if (xAxis == 0f && zAxis == 0f)
             {
                 ChangeState(ICharacterState.BehaviourState.Waiting);
@@ -79,17 +85,33 @@ namespace MSKim.Player
             base.Move();
         }
 
-        public override Vector3 GetVelocity() => new(xAxis, 0f, zAxis);
+        private bool CheckHitWall()
+        {
+            if (mostDetectedObject == null) return false;
+            if (mostDetectedObject.CompareTag("Wall")) return true;
+            if (mostDetectedObject.TryGetComponent<HandNotAble.TableController>(out var table)) return true;
+            if (mostDetectedObject.TryGetComponent<HandNotAble.CrateController>(out var crate)) return true;
+            return false;
+        }
+
+        public override Vector3 GetVelocity() => new Vector3(xAxis, 0f, zAxis);
 
         public override void MovePosition()
         {
-            transform.position += 
-                (data.MoveSpeed + Managers.UserData.GetUpgradeAmount(Utils.ShopItemIndex.SHOP_PLAYER_MOVE_SPEED_INDEX)) * Time.deltaTime * GetVelocity();
+            rigid.MovePosition(transform.position + GetVelocity() * (data.MoveSpeed + Managers.UserData.GetUpgradeAmount(Utils.ShopItemIndex.SHOP_PLAYER_MOVE_SPEED_INDEX)) * Time.deltaTime);
         }
 
         public override void MoveRotation()
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(GetVelocity()), data.RotateSpeed * Time.deltaTime);
+            var movement = GetVelocity();
+
+            if(movement.magnitude >= 0.1f)
+            {
+                float angle = Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg;
+                float smooth = Mathf.SmoothDampAngle(transform.eulerAngles.y, angle, ref currentVelocity, 0.1f);
+
+                transform.rotation = Quaternion.Euler(0, smooth, 0);
+            }
         }
 
         private void Update()
@@ -127,7 +149,7 @@ namespace MSKim.Player
                 Vector3 direction = Quaternion.Euler(0, angle, 0) * transform.forward;
                 RaycastHit hit;
 
-                if (Physics.Raycast(new Vector3(transform.position.x, 0.1f, transform.position.z), direction, out hit, data.HandLength, LayerHandNotAble + LayerHandAble))
+                if (Physics.Raycast(new Vector3(transform.position.x, 0.1f, transform.position.z), direction, out hit, data.HandLength, LayerHandNotAble + LayerHandAble + LayerWall))
                 {
                     var hitObj = hit.collider.gameObject;
 
@@ -402,7 +424,7 @@ namespace MSKim.Player
                 RaycastHit hit;
 
                 // 가장 많이 감지된 오브젝트와 연결된 레이만 그리기
-                if (Physics.Raycast(new Vector3(transform.position.x, 0.1f, transform.position.z), direction, out hit, data.HandLength, LayerHandNotAble + LayerHandAble))
+                if (Physics.Raycast(new Vector3(transform.position.x, 0.1f, transform.position.z), direction, out hit, data.HandLength, LayerHandNotAble + LayerHandAble + LayerWall))
                 {
                     if (hit.collider.gameObject == mostDetectedObject)
                     {
