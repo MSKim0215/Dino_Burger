@@ -50,7 +50,11 @@ namespace MSKim.HandAble
         {
             for(int i = 0; i < ingredientStateObjects.Length; i++)
             {
-                ingredientCookStateDict.Add((Utils.CookState)i, ingredientStateObjects[i]);
+                var cookState = (Utils.CookState)i;
+                if(!ingredientCookStateDict.ContainsKey(cookState))
+                {
+                    ingredientCookStateDict.Add((Utils.CookState)i, ingredientStateObjects[i]);
+                }
             }
 
             CurrentCookTime = 0f;
