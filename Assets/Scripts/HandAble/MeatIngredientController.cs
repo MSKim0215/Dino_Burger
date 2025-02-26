@@ -11,23 +11,28 @@ namespace MSKim.HandAble
             {
                 currentCookTime = value;
 
-                if(IsGrillOver)
+                CheckStoveTime();
+            }
+        }
+
+        private void CheckStoveTime()
+        {
+            if (IsGrillOver)
+            {
+                if (currentCookTime >= Utils.GRILL_OVERCOOKED_TIME - data.CookTime)
                 {
-                    if(currentCookTime >= Utils.GRILL_OVERCOOKED_TIME - data.CookTime)
-                    {
-                        ChangeCookStateObject(Utils.CookState.OverCook);
-                    }
+                    ChangeCookStateObject(Utils.CookState.OverCook);
+                }
+            }
+            else
+            {
+                if (currentCookTime >= data.CookTime)
+                {
+                    ChangeCookStateObject(Utils.CookState.Cook);
                 }
                 else
                 {
-                    if (currentCookTime >= data.CookTime)
-                    {
-                        ChangeCookStateObject(Utils.CookState.Cook);
-                    }
-                    else
-                    {
-                        ChangeCookStateObject(Utils.CookState.UnCook);
-                    }
+                    ChangeCookStateObject(Utils.CookState.UnCook);
                 }
             }
         }

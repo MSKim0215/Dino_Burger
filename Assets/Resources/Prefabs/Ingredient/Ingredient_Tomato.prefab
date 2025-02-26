@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2009923164616684966}
   - component: {fileID: 5113191199447852626}
-  - component: {fileID: 7944510258430666475}
+  - component: {fileID: 1860157323352536815}
   m_Layer: 8
   m_Name: Ingredient_Tomato
   m_TagString: Untagged
@@ -32,6 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5291281356190366313}
+  - {fileID: 955395540801820819}
   - {fileID: 3709485643962800711}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -56,7 +57,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.75, y: 0.70000005, z: 0.75}
   m_Center: {x: 0, y: 0.35, z: 0}
---- !u!114 &7944510258430666475
+--- !u!114 &1860157323352536815
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,7 +66,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8544778946697118956}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3851e83d0ac21f34fac17b5390074dd6, type: 3}
+  m_Script: {fileID: 11500000, guid: 53b275135af16424fb1b00485f329f7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   data:
@@ -80,10 +81,86 @@ MonoBehaviour:
   ingredientState: 0
   ingredientStateObjects:
   - {fileID: 4766419153532739795}
+  - {fileID: 435142181444665897}
   - {fileID: 4049137552129523965}
   currentCookTime: 0
   ingredientRenderer: {fileID: 2535967866823352616}
   hitbox: {fileID: 5113191199447852626}
+--- !u!1001 &777018630180274040
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2009923164616684966}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: e26b87c1e0d880042ae0b98e2956c8dc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e26b87c1e0d880042ae0b98e2956c8dc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e26b87c1e0d880042ae0b98e2956c8dc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e26b87c1e0d880042ae0b98e2956c8dc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e26b87c1e0d880042ae0b98e2956c8dc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e26b87c1e0d880042ae0b98e2956c8dc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e26b87c1e0d880042ae0b98e2956c8dc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e26b87c1e0d880042ae0b98e2956c8dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e26b87c1e0d880042ae0b98e2956c8dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e26b87c1e0d880042ae0b98e2956c8dc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e26b87c1e0d880042ae0b98e2956c8dc, type: 3}
+      propertyPath: m_Name
+      value: Cook
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e26b87c1e0d880042ae0b98e2956c8dc, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e26b87c1e0d880042ae0b98e2956c8dc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e26b87c1e0d880042ae0b98e2956c8dc, type: 3}
+--- !u!1 &435142181444665897 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e26b87c1e0d880042ae0b98e2956c8dc, type: 3}
+  m_PrefabInstance: {fileID: 777018630180274040}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &955395540801820819 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e26b87c1e0d880042ae0b98e2956c8dc, type: 3}
+  m_PrefabInstance: {fileID: 777018630180274040}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3814554344987901356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -134,7 +211,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c02536131aca5274ca54c06c20a77c37, type: 3}
       propertyPath: m_Name
-      value: Cook
+      value: OverCook
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c02536131aca5274ca54c06c20a77c37, type: 3}
       propertyPath: m_IsActive

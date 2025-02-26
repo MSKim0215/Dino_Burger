@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2009923164616684966}
   - component: {fileID: 5113191199447852626}
-  - component: {fileID: 2964269686258788833}
+  - component: {fileID: 4333548911545795344}
   m_Layer: 8
   m_Name: Ingredient_Onion
   m_TagString: Untagged
@@ -57,7 +57,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.75, y: 0.86, z: 0.75}
   m_Center: {x: 0, y: 0.42, z: 0}
---- !u!114 &2964269686258788833
+--- !u!114 &4333548911545795344
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8544778946697118956}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ab4c1f9124cf974f86cc778a71bdca6, type: 3}
+  m_Script: {fileID: 11500000, guid: 53b275135af16424fb1b00485f329f7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   data:

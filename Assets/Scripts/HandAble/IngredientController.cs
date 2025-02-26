@@ -26,7 +26,34 @@ namespace MSKim.HandAble
 
         public virtual int YieldAmount { get => currentYieldAmount; set => currentYieldAmount = value; }
 
-        public virtual float CurrentCookTime { get => currentCookTime; set => currentCookTime = value; }
+        public virtual float CurrentCookTime
+        {
+            get => currentCookTime;
+            set
+            {
+                currentCookTime = value;
+
+                if (IngredientType == Utils.CrateType.Bun || IngredientType == Utils.CrateType.None) return;
+
+                CheckCuttingTime();
+            }
+        }
+
+        private void CheckCuttingTime()
+        {
+            if(currentCookTime >= data.CookTime)
+            {
+                ChangeCookStateObject(Utils.CookState.OverCook);
+            }
+            else if (currentCookTime > 0 && currentCookTime < data.CookTime)
+            {
+                ChangeCookStateObject(Utils.CookState.Cook);
+            }
+            else
+            {
+                ChangeCookStateObject(Utils.CookState.UnCook);
+            }
+        }
 
         public float MaximumCookTime => data.CookTime;
 
