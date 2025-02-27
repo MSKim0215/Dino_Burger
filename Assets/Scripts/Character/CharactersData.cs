@@ -18,5 +18,6 @@ namespace MSKim.Data
         public float MoveSpeed;
         public float RotateSpeed;
         public float HandLength;
+        public float ViewAngle;
     }
 }

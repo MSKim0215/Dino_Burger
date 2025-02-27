@@ -2,8 +2,9 @@
   {
     "Name": "플레이어1",
     "Type": 0,
-    "MoveSpeed": 12.0,
-    "RotateSpeed": 15.0,
-    "HandLength": 1.0
+    "MoveSpeed": 8.0,
+    "RotateSpeed": 12.0,
+    "HandLength": 1.0,
+    "ViewAngle": 5.0
   }
 ]

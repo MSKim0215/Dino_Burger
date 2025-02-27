@@ -1,5 +1,6 @@
 using MSKim.Manager;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace MSKim.Player
@@ -18,7 +19,6 @@ namespace MSKim.Player
 
         private HandNotAble.CuttingBoardTableController prevCuttingTable;
 
-        private float viewAngle = 5f;
         private float currentVelocity;
         private GameObject mostDetectedObject;
         private GameObject lastDetectedObject;
@@ -94,11 +94,11 @@ namespace MSKim.Player
             return false;
         }
 
-        public override Vector3 GetVelocity() => new Vector3(xAxis, 0f, zAxis);
+        public override Vector3 GetVelocity() => new(xAxis, 0f, zAxis);
 
         public override void MovePosition()
         {
-            rigid.MovePosition(transform.position + GetVelocity() * (data.MoveSpeed + Managers.UserData.GetUpgradeAmount(Utils.ShopItemIndex.SHOP_PLAYER_MOVE_SPEED_INDEX)) * Time.deltaTime);
+            rigid.MovePosition(transform.position + (data.MoveSpeed + Managers.UserData.GetUpgradeAmount(Utils.ShopItemIndex.SHOP_PLAYER_MOVE_SPEED_INDEX)) * Time.deltaTime * GetVelocity());
         }
 
         public override void MoveRotation()
@@ -143,43 +143,26 @@ namespace MSKim.Player
         private GameObject GetDetectHandAbleObject()
         {
             detectedObjectDict.Clear();
+            Vector3 origin = new(transform.position.x, 0.1f, transform.position.z);
+            float halfViewAngle = data.ViewAngle / 2;
 
-            for (float angle = -viewAngle / 2; angle < viewAngle / 2; angle += 5f)
+            for (float angle = -halfViewAngle; angle < halfViewAngle; angle += 5f)
             {
                 Vector3 direction = Quaternion.Euler(0, angle, 0) * transform.forward;
-                RaycastHit hit;
 
-                if (Physics.Raycast(new Vector3(transform.position.x, 0.1f, transform.position.z), direction, out hit, data.HandLength, LayerHandNotAble + LayerHandAble + LayerWall))
+                if (Physics.Raycast(origin, direction, out RaycastHit hit, data.HandLength, LayerHandNotAble + LayerHandAble + LayerWall))
                 {
-                    var hitObj = hit.collider.gameObject;
+                    GameObject hitObj = hit.collider.gameObject;
 
                     // 감지된 오브젝트 카운트 증가
-                    if (detectedObjectDict.ContainsKey(hitObj))
-                    {
-                        detectedObjectDict[hitObj]++;
-                    }
-                    else
-                    {
-                        detectedObjectDict.Add(hitObj, 1);
-                    }
+                    detectedObjectDict[hitObj] = detectedObjectDict.ContainsKey(hitObj) ? detectedObjectDict[hitObj] + 1 : 1;
                 }
             }
 
             // 감지된 오브젝트가 없으면 null 반환
             if (detectedObjectDict.Count <= 0) return null;
 
-            GameObject mostDetected = null;
-            int maxCount = 0;
-
-            // 가장 많이 감지된 오브젝트 찾기
-            foreach (var item in detectedObjectDict)
-            {
-                if (item.Value > maxCount)
-                {
-                    maxCount = item.Value;
-                    mostDetected = item.Key;
-                }
-            }
+            GameObject mostDetected = detectedObjectDict.Aggregate((l, r) => l.Value > r.Value ? l : r).Key;
 
             // 하이라이트 상태 업데이트
             foreach (var item in detectedObjectDict)
@@ -364,49 +347,65 @@ namespace MSKim.Player
         {
             if(state.CurrentState.Get() == ICharacterState.BehaviourState.Move)
             {
-                if (toolHand.HandUpObject == null) return;
-
-                prevCuttingTable.TakeTool(toolHand.HandUpObject);
-                toolHand.ClearHand();
-                prevCuttingTable = null;
+                HandleMoveState();
                 return;
             }
 
             if(Input.GetMouseButton(1))
             {
-                if (mostDetectedObject == null) return;
-
-                if(mostDetectedObject.TryGetComponent<HandNotAble.CuttingBoardTableController>(out var table))
-                {
-                    if (table.IsHandEmpty) return;
-                    if (table.IsCutOver)
-                    {
-                        if (toolHand.HandUpObject == null) return;
-
-                        prevCuttingTable.TakeTool(toolHand.HandUpObject);
-                        toolHand.ClearHand();
-                        prevCuttingTable = null;
-                        return;
-                    }
-
-                    prevCuttingTable = table;
-                    toolHand.GetHandUpHoldRotate(table.GiveTool());
-                    ChangeState(ICharacterState.BehaviourState.InterAction);
-                    table.Cutting();
-                }
+                HandleRightMouseButtonHold();
             }
 
             if (Input.GetMouseButtonUp(1))
             {
-                if (mostDetectedObject == null) return;
+                HandleRightMouseButtonRelease();
+            }
+        }
 
-                if (mostDetectedObject.TryGetComponent<HandNotAble.CuttingBoardTableController>(out var table))
+        private void HandleMoveState()
+        {
+            if (toolHand.HandUpObject == null) return;
+
+            prevCuttingTable.TakeTool(toolHand.HandUpObject);
+            toolHand.ClearHand();
+            prevCuttingTable = null;
+        }
+
+        private void HandleRightMouseButtonHold()
+        {
+            if (mostDetectedObject == null) return;
+
+            if (mostDetectedObject.TryGetComponent<HandNotAble.CuttingBoardTableController>(out var table))
+            {
+                if (table.IsHandEmpty) return;
+
+                if (table.IsCutOver)
                 {
-                    prevCuttingTable = table;
-                    table.TakeTool(toolHand.HandUpObject);
-                    ChangeState(ICharacterState.BehaviourState.Waiting);
+                    if (toolHand.HandUpObject == null) return;
+
+                    prevCuttingTable.TakeTool(toolHand.HandUpObject);
                     toolHand.ClearHand();
+                    prevCuttingTable = null;
+                    return;
                 }
+
+                prevCuttingTable = table;
+                toolHand.GetHandUpHoldRotate(table.GiveTool());
+                ChangeState(ICharacterState.BehaviourState.InterAction);
+                table.Cutting();
+            }
+        }
+
+        private void HandleRightMouseButtonRelease()
+        {
+            if (mostDetectedObject == null) return;
+
+            if (mostDetectedObject.TryGetComponent<HandNotAble.CuttingBoardTableController>(out var table))
+            {
+                prevCuttingTable = table;
+                table.TakeTool(toolHand.HandUpObject);
+                ChangeState(ICharacterState.BehaviourState.Waiting);
+                toolHand.ClearHand();
             }
         }
 
@@ -415,21 +414,18 @@ namespace MSKim.Player
             if (mostDetectedObject == null) return;
 
             Gizmos.color = Color.red;
-            Vector3 forward = transform.forward;
+            Vector3 origin = new(transform.position.x, 0.1f, transform.position.z);
+            float halfViewAngle = data.ViewAngle / 2;
 
             // 각도에 따른 레이 그리기
-            for (float angle = -viewAngle / 2; angle < viewAngle / 2; angle += 5f)
+            for (float angle = -halfViewAngle; angle < halfViewAngle; angle += 5f)
             {
-                Vector3 direction = Quaternion.Euler(0, angle, 0) * forward;
-                RaycastHit hit;
+                Vector3 direction = Quaternion.Euler(0, angle, 0) * transform.forward;
 
-                // 가장 많이 감지된 오브젝트와 연결된 레이만 그리기
-                if (Physics.Raycast(new Vector3(transform.position.x, 0.1f, transform.position.z), direction, out hit, data.HandLength, LayerHandNotAble + LayerHandAble + LayerWall))
+                if(Physics.Raycast(origin, direction, out RaycastHit hit, data.HandLength, LayerHandAble + LayerHandNotAble) && 
+                    hit.collider.gameObject == mostDetectedObject)
                 {
-                    if (hit.collider.gameObject == mostDetectedObject)
-                    {
-                        Gizmos.DrawLine(transform.position, hit.point);
-                    }
+                    Gizmos.DrawLine(transform.position, hit.point);
                 }
             }
         }
