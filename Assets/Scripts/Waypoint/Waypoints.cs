@@ -5,15 +5,31 @@ using UnityEngine;
 public class Waypoints : MonoBehaviour
 {
     [Serializable]
-    public class WayPointInfo
+    public class BaseWaypointInfo
     {
         public string Description;
-        public Utils.WaypointType type;
         public List<Transform> pointList = new();
     }
 
-    [Header("Guest Waypoint Settings")]
-    [SerializeField] private List<WayPointInfo> waypointInfoList = new();
+    [Serializable]
+    public class GuestWaypointInfo : BaseWaypointInfo
+    {
+        public Utils.WaypointType type;
+    }
 
-    public List<WayPointInfo> WaypointInfoList => waypointInfoList;
+    [Serializable]
+    public class CarWaypointInfo : BaseWaypointInfo
+    {
+        public Utils.CarWaypointType type;
+    }
+
+    [Header("Guest Waypoint Settings")]
+    [SerializeField] private List<GuestWaypointInfo> waypointInfoList = new();
+
+    [Header("Car Waypoint Settings")]
+    [SerializeField] private List<CarWaypointInfo> carWaypoints = new();
+
+    public List<GuestWaypointInfo> GuestWaypoints => waypointInfoList;
+
+    public List<CarWaypointInfo> CarWaypoints => carWaypoints;
 }

@@ -41,6 +41,7 @@ namespace MSKim.UI
                 if(currentTime <= 0f)
                 {
                     Managers.Game.Guest.Clear();
+                    Managers.Game.Car.Clear();
 
                     currentTime = 0f;
 

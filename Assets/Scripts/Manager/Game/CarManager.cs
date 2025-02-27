@@ -11,8 +11,8 @@ namespace MSKim.Manager
         [Header("Mesh List")]
         [SerializeField] private List<Mesh> meshList = new();
 
-        private const int SPAWN_MIN_TIME = 3;
-        private const int SPAWN_MAX_TIME = 6;
+        private const int SPAWN_MIN_TIME = 2;
+        private const int SPAWN_MAX_TIME = 4;
 
         public Dictionary<Utils.CarType, Mesh> MeshDict { get; private set; } = new();
 
@@ -90,11 +90,15 @@ namespace MSKim.Manager
 
             if (spawnObject.TryGetComponent<NonPlayer.CarController>(out var car))
             {
-                car.transform.position = spawnPoint.GetRandomPoint().position;
+                // 0: R생성, 1: L생성
+                var randomPointIndex = spawnPoint.GetRandomIndex();
+                car.transform.position = spawnPoint.GetPoint(randomPointIndex).position;
+                car.transform.rotation = Quaternion.Euler(0, (randomPointIndex == 0 ? -90 : 90), 0);
+
                 activeObjectList.Add(spawnObject);
 
                 var randType = UnityEngine.Random.Range(0, Enum.GetValues(typeof(Utils.CarType)).Length);
-                car.Initialize((Utils.CarType)randType);
+                car.Initialize((Utils.CarType)randType, (Utils.CarWaypointType)randomPointIndex);
             }
 
             maxSpawnTime = GetSpawnTime();

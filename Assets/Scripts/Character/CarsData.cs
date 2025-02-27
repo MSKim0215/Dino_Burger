@@ -14,5 +14,6 @@ namespace MSKim.Data
     public class CarData : CharacterData
     {
         public Utils.CarType CarType;
+        public float BreakForce;
     }
 }

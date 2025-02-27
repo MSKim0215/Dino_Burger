@@ -72,6 +72,11 @@ public static class Utils
         Pickup_Outside_R, Pickup_Outside_L,
     }   
 
+    public enum CarWaypointType
+    {
+        Outside_L, Outside_R,
+    }
+
     public const float GRILL_OVERCOOKED_TIME = 8f;      // 고기 굽기 실패 시간
     public const float BOIL_STEW_COOK_TIME = 5f;            // 스튜 제작 시간
 

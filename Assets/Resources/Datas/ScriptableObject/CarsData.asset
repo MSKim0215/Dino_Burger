@@ -16,36 +16,41 @@ MonoBehaviour:
   CarDataList:
   - Name: "\uD574\uCE58\uBC31"
     Type: 1
-    MoveSpeed: 8
+    MoveSpeed: 500
     RotateSpeed: 0
-    HandLength: 1.5
-    ViewAngle: 5
+    HandLength: 8
+    ViewAngle: 0
     CarType: 0
+    BreakForce: 300
   - Name: "\uACBD\uCC30\uCC28"
     Type: 1
-    MoveSpeed: 12
+    MoveSpeed: 850
     RotateSpeed: 0
-    HandLength: 1.5
-    ViewAngle: 5
+    HandLength: 7
+    ViewAngle: 0
     CarType: 1
+    BreakForce: 500
   - Name: "\uC138\uB2E8"
     Type: 1
-    MoveSpeed: 10
+    MoveSpeed: 800
     RotateSpeed: 0
-    HandLength: 1.5
-    ViewAngle: 5
+    HandLength: 9
+    ViewAngle: 0
     CarType: 2
+    BreakForce: 400
   - Name: "\uC2A4\uD14C\uC774\uC158 \uC6E8\uAC74"
     Type: 1
-    MoveSpeed: 7
+    MoveSpeed: 680
     RotateSpeed: 0
-    HandLength: 1.5
-    ViewAngle: 5
+    HandLength: 10
+    ViewAngle: 0
     CarType: 3
+    BreakForce: 350
   - Name: "\uD0DD\uC2DC"
     Type: 1
-    MoveSpeed: 9
+    MoveSpeed: 700
     RotateSpeed: 0
-    HandLength: 1.5
-    ViewAngle: 5
+    HandLength: 6
+    ViewAngle: 0
     CarType: 4
+    BreakForce: 250

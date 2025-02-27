@@ -1,47 +1,52 @@
 [
   {
     "CarType": 0,
+    "BreakForce": 300.0,
     "Name": "해치백",
     "Type": 1,
-    "MoveSpeed": 8.0,
+    "MoveSpeed": 500.0,
     "RotateSpeed": 0.0,
-    "HandLength": 1.5,
-    "ViewAngle": 5.0
+    "HandLength": 8.0,
+    "ViewAngle": 0.0
   },
   {
     "CarType": 1,
+    "BreakForce": 500.0,
     "Name": "경찰차",
     "Type": 1,
-    "MoveSpeed": 12.0,
+    "MoveSpeed": 850.0,
     "RotateSpeed": 0.0,
-    "HandLength": 1.5,
-    "ViewAngle": 5.0
+    "HandLength": 7.0,
+    "ViewAngle": 0.0
   },
   {
     "CarType": 2,
+    "BreakForce": 400.0,
     "Name": "세단",
     "Type": 1,
-    "MoveSpeed": 10.0,
+    "MoveSpeed": 800.0,
     "RotateSpeed": 0.0,
-    "HandLength": 1.5,
-    "ViewAngle": 5.0
+    "HandLength": 9.0,
+    "ViewAngle": 0.0
   },
   {
     "CarType": 3,
+    "BreakForce": 350.0,
     "Name": "스테이션 웨건",
     "Type": 1,
-    "MoveSpeed": 7.0,
+    "MoveSpeed": 680.0,
     "RotateSpeed": 0.0,
-    "HandLength": 1.5,
-    "ViewAngle": 5.0
+    "HandLength": 10.0,
+    "ViewAngle": 0.0
   },
   {
     "CarType": 4,
+    "BreakForce": 250.0,
     "Name": "택시",
     "Type": 1,
-    "MoveSpeed": 9.0,
+    "MoveSpeed": 700.0,
     "RotateSpeed": 0.0,
-    "HandLength": 1.5,
-    "ViewAngle": 5.0
+    "HandLength": 6.0,
+    "ViewAngle": 0.0
   }
 ]

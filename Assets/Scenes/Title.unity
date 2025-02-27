@@ -578,7 +578,7 @@ MonoBehaviour:
     - createObjectName: Car
       poolType: 0
       useScene: 2
-      createPrefab: {fileID: 2979518863750162915, guid: c408f4d33f096214688d3198d1dd3455, type: 3}
+      createPrefab: {fileID: 5011149463025470885, guid: c408f4d33f096214688d3198d1dd3455, type: 3}
       createCount: 10
       maxCount: 25
     rootList:
