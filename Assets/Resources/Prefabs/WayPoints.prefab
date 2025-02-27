@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 6092840578929217798}
   - component: {fileID: 2869957903971449166}
   m_Layer: 0
-  m_Name: Waypoints
+  m_Name: WayPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -597,7 +597,7 @@ Transform:
   m_GameObject: {fileID: 7098750967718743327}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15, y: 0, z: 16}
+  m_LocalPosition: {x: -45, y: 0, z: 16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -628,7 +628,7 @@ Transform:
   m_GameObject: {fileID: 7444197577148977578}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15, y: 0, z: 16}
+  m_LocalPosition: {x: 45, y: 0, z: 16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

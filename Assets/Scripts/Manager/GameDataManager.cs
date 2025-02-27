@@ -50,6 +50,10 @@ namespace MSKim.Manager
             GetDataList<Data.ShopItemIconData, Data.ShopItemsData>
                 (Utils.GameDataIndex.ShopItemsData, data => data?.ShopItemIconDataList);
 
+        private List<Data.CarData> CarDatas =>
+            GetDataList<Data.CarData, Data.CarsData>
+                (Utils.GameDataIndex.CarsData, data => data?.CarDataList);
+
         public Data.IngredientData GetIngredientData(Utils.CrateType type) => IngredientDatas.Find(ingredient => ingredient.Type == type);
 
         public Data.IngredientIconData GetIngredientIconData(Utils.CrateType type) => IngredientIconDatas.Find(ingredient => ingredient.Type == type);
@@ -63,6 +67,8 @@ namespace MSKim.Manager
         public Data.ShopItemData GetShopItemData(int index) => ShopItemDatas.Find(item => item.Index == index);
 
         public Data.ShopItemIconData GetShopItemIcon(int index) => ShopItemIconDatas.Find(item => item.Index == index);
+
+        public Data.CarData GetCarData(Utils.CarType type) => CarDatas.Find(car => car.CarType == type);
 
         public override void Initialize()
         {

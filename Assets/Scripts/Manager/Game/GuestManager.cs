@@ -6,23 +6,8 @@ using UnityEngine;
 namespace MSKim.Manager
 {
     [Serializable]
-    public class GuestManager : BaseManager
+    public class GuestManager : Spawner
     {
-        private class SpawnPointInfo
-        {
-            private List<Transform> points = new();
-
-            public bool IsEmptyPoint() => points.Count <= 0;
-
-            public void Clear() => points.Clear();
-
-            public void AddPoint(Transform point) => points.Add(point);
-
-            public Transform GetRandomPoint() => points[UnityEngine.Random.Range(0, points.Count)];
-        }
-
-        private SpawnPointInfo spawnPoint = new();
-        private List<NonPlayer.GuestController> activeGuestList = new();
         private List<NonPlayer.GuestController> pickupZoneGuestList = new();
         private Queue<NonPlayer.GuestController> waitingZoneGuestQueue = new();
 
@@ -31,14 +16,12 @@ namespace MSKim.Manager
 
         private int pickupCount;
         private int waitCount;
-        private float currSpawnTime;
-        private float maxSpawnTime;
 
         private const int SPAWN_MIN_TIME = 3;
-        private const int SPAWN_MAX_TIME = 6;
+        private const int SPAWN_MAX_TIME = 7;
 
         private const int SPAWN_MIN_POSITION = 17;
-        private const int SPAWN_MAX_POSITION = 20;
+        private const int SPAWN_MAX_POSITION = 22;
 
         public int CurrentPickupGuestCount => pickupZoneGuestList.Count;
 
@@ -50,17 +33,13 @@ namespace MSKim.Manager
         {
             base.Initialize();
 
-            maxSpawnTime = GetSpawnTime();
-            currSpawnTime = maxSpawnTime;
-
             this.pickupCount = pickupCount;
             this.waitCount = waitCount;
 
-            SetSpawnPoint();
             SetSeat();
         }
 
-        private void SetSpawnPoint()
+        protected override void SetSpawnPoint()
         {
             if (!spawnPoint.IsEmptyPoint())
             {
@@ -91,17 +70,7 @@ namespace MSKim.Manager
             }
         }
 
-        public override void OnUpdate()
-        {
-            currSpawnTime += Time.deltaTime;
-
-            if (currSpawnTime >= maxSpawnTime)
-            {
-                Spawn();
-            }
-        }
-
-        private void Spawn()
+        protected override void Spawn()
         {
             var spawnObject = Managers.Pool.GetPoolObject("Guest");
 
@@ -109,7 +78,7 @@ namespace MSKim.Manager
             {
                 guest.transform.position = GetSpawnPosition();
                 guest.Initialize();
-                activeGuestList.Add(guest);
+                activeObjectList.Add(spawnObject);
             }
 
             maxSpawnTime = GetSpawnTime();
@@ -122,34 +91,37 @@ namespace MSKim.Manager
             return new(spawnPoint.position.x, spawnPoint.position.y, UnityEngine.Random.Range(SPAWN_MIN_POSITION, SPAWN_MAX_POSITION));
         }
 
-        private int GetSpawnTime()
+        protected override int GetSpawnTime()
         {
             return UnityEngine.Random.Range(SPAWN_MIN_TIME, SPAWN_MAX_TIME);
         }
 
-        public void Clear()
+        public override void Clear()
         {
-            for (int i = activeGuestList.Count - 1; i >= 0; i--)
+            for (int i = activeObjectList.Count - 1; i >= 0; i--)
             {
-                var guest = activeGuestList[i];
+                var obj = activeObjectList[i];
 
-                if (guest == null)
+                if (obj == null)
                 {
-                    RemoveActiveGuest(guest);
+                    Remove(obj);
                 }
                 else
                 {
-                    guest?.Release();
+                    if (obj.TryGetComponent<NonPlayer.GuestController>(out var guest))
+                    {
+                        guest?.Release();
+                    }
                 }
             }
         }
 
-        public void RemoveActiveGuest(NonPlayer.GuestController removeTarget)
+        public override void Remove(GameObject removeTarget)
         {
-            if (activeGuestList.Count <= 0) return;
-            if (!activeGuestList.Contains(removeTarget)) return;
+            if (activeObjectList.Count <= 0) return;
+            if (!activeObjectList.Contains(removeTarget)) return;
 
-            activeGuestList.Remove(removeTarget);
+            activeObjectList.Remove(removeTarget);
         }
 
         public void AddPickupZone(NonPlayer.GuestController guest)

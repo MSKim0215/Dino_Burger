@@ -32,6 +32,7 @@ namespace MSKim.Manager
 
         public ZoneManager Zone { get; private set; } = new();
         public GuestManager Guest { get; private set; } = new();
+        public CarManager Car { get; private set; } = new();
 
         public int TotalOrderCount { get; set; } = 0;   // 총 주문 횟수
         public int SuccessOrderCount { get; set; } = 0; // 성공 주문 횟수
@@ -42,11 +43,13 @@ namespace MSKim.Manager
 
             Zone.Initialize();
             Guest.Initialize(Zone.GetPickupTableCount(), Zone.GetWaitChairCount());
+            Car.Initialize();
         }
 
         public override void OnUpdate()
         {
             Guest?.OnUpdate();
+            Car?.OnUpdate();
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {

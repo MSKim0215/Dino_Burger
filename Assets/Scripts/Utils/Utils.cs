@@ -5,6 +5,11 @@ public static class Utils
         Basic, CuttingBoard, Pot, GasStove, Packaging, Pickup, TrashCan
     }   // 일반, 도마, 냄비, 가스레인지, 포장, 픽업, 쓰레기통
 
+    public enum CarType
+    {
+        Hatchback, Police, Sedan, Stationwagon, Taxi
+    }
+
     public enum CrateType
     {
         Bun, Cheese, Lettuce, Onion, Tomato, Meat, None
@@ -89,6 +94,6 @@ public static class Utils
 
     public enum GameDataIndex
     {
-        IngredientsData, FoodsData, PlayersData, GuestsData, TablesData, ShopItemsData
+        IngredientsData, FoodsData, PlayersData, GuestsData, TablesData, ShopItemsData, CarsData
     }   // 게임 데이터 인덱스
 }

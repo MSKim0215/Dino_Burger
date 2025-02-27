@@ -532,7 +532,7 @@ namespace MSKim.NonPlayer
 
         public override void Release()
         {
-            Managers.Game.Guest.RemoveActiveGuest(this);
+            Managers.Game.Guest.Remove(gameObject);
 
             ChangeState(ICharacterState.BehaviourState.None);
 
