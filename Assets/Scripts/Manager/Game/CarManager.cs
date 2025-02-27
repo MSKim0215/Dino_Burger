@@ -1,12 +1,43 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace MSKim.Manager
 {
+    [Serializable]
     public class CarManager : Spawner
     {
+        [Header("Mesh List")]
+        [SerializeField] private List<Mesh> meshList = new();
+
         private const int SPAWN_MIN_TIME = 3;
         private const int SPAWN_MAX_TIME = 6;
+
+        public Dictionary<Utils.CarType, Mesh> MeshDict { get; private set; } = new();
+
+        public override void Initialize()
+        {
+            base.Initialize();
+
+            if(MeshDict.Count <= 0)
+            {
+                foreach (Utils.CarType carType in Enum.GetValues(typeof(Utils.CarType)))
+                {
+                    string meshName = "car_" + carType.ToString().ToLower();
+                    var meshFilter = meshList.FirstOrDefault(mf => mf.name == meshName);
+
+                    if (meshFilter != null)
+                    {
+                        MeshDict.Add(carType, meshFilter);
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"{meshName} MeshFilter를 찾을 수 없습니다.");
+                    }
+                }
+            }
+        }
 
         public override void Clear()
         {

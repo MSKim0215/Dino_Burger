@@ -7,6 +7,9 @@ namespace MSKim.Manager
     [Serializable]
     public class GameManager : BaseManager
     {
+        [Header("Game Manager List")]
+        [SerializeField] private CarManager carManager = new();
+
         private int currentCoinAmount = 0;          // 인게임 재화
 
         [Header("Settings")]
@@ -32,7 +35,7 @@ namespace MSKim.Manager
 
         public ZoneManager Zone { get; private set; } = new();
         public GuestManager Guest { get; private set; } = new();
-        public CarManager Car { get; private set; } = new();
+        public CarManager Car => carManager;
 
         public int TotalOrderCount { get; set; } = 0;   // 총 주문 횟수
         public int SuccessOrderCount { get; set; } = 0; // 성공 주문 횟수

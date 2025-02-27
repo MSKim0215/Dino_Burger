@@ -463,6 +463,13 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 4ba142e4df0fc8b42b5c0740e36a41b8, type: 2}
     - {fileID: 11400000, guid: ac4bbb8b99ad3da4e94ececf4d111d93, type: 2}
   gameManager:
+    carManager:
+      meshList:
+      - {fileID: 6424811001468162581, guid: fe68e4776dbc2f046a3d52eec020eb08, type: 3}
+      - {fileID: -8998900221243770700, guid: 0a0d52b7f5b7fc54ab54eee670d2201e, type: 3}
+      - {fileID: 5996507713573885615, guid: 25bc2d34280d56149b5e2828e9969ef8, type: 3}
+      - {fileID: 2529852330503185278, guid: 0765c634baa041d41a282e3d33d47345, type: 3}
+      - {fileID: 8750179691983508878, guid: c1af80ace574cc347b016eb359657312, type: 3}
     allowIncredientList: 0100000002000000030000000400000005000000
   objectPoolManager:
     poolObjectList:
@@ -568,6 +575,12 @@ MonoBehaviour:
       createPrefab: {fileID: 6018837424437621513, guid: 266d043f7ba48de4bbd1fe761e4d9af8, type: 3}
       createCount: 5
       maxCount: 30
+    - createObjectName: Car
+      poolType: 0
+      useScene: 2
+      createPrefab: {fileID: 2979518863750162915, guid: c408f4d33f096214688d3198d1dd3455, type: 3}
+      createCount: 10
+      maxCount: 25
     rootList:
     - {fileID: 365165892}
     - {fileID: 708651376}

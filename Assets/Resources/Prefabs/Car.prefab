@@ -198,6 +198,13 @@ MonoBehaviour:
     HandLength: 0
     ViewAngle: 0
     CarType: 0
+  skinMeshList:
+  - {fileID: -5754084199372789682, guid: fe68e4776dbc2f046a3d52eec020eb08, type: 3}
+  - {fileID: -5754084199372789682, guid: 0a0d52b7f5b7fc54ab54eee670d2201e, type: 3}
+  - {fileID: -5754084199372789682, guid: 25bc2d34280d56149b5e2828e9969ef8, type: 3}
+  - {fileID: -5754084199372789682, guid: 0765c634baa041d41a282e3d33d47345, type: 3}
+  - {fileID: -5754084199372789682, guid: c1af80ace574cc347b016eb359657312, type: 3}
+  skinMeshFilter: {fileID: 94324604646937089}
 --- !u!1 &4300977701968287066
 GameObject:
   m_ObjectHideFlags: 0
