@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 3885e35b2d95e9746bd051bcb8f121e0
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282686
+  packageName: KayKit - City Builder Bits (for Unity)
+  packageVersion: 1.0.0
+  assetPath: Assets/KayKit/Packs/Bits/KayKit - City Builder Bits (for Unity)/Prefabs/park_road_tsplit.prefab
+  uploadId: 678574

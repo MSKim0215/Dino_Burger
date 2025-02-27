@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d93a390b6bdec954c917c98f508e96c2
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282686
+  packageName: KayKit - City Builder Bits (for Unity)
+  packageVersion: 1.0.0
+  assetPath: Assets/KayKit/Packs/Bits/KayKit - City Builder Bits (for Unity)/Prefabs/trafficlight_A.prefab
+  uploadId: 678574

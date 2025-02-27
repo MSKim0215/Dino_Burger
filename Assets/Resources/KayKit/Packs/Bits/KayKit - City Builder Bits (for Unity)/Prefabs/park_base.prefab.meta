@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b2f9803906193394eae4af9bdb884b1b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282686
+  packageName: KayKit - City Builder Bits (for Unity)
+  packageVersion: 1.0.0
+  assetPath: Assets/KayKit/Packs/Bits/KayKit - City Builder Bits (for Unity)/Prefabs/park_base.prefab
+  uploadId: 678574

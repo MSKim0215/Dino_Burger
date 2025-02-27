@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d3b0ac0ac5036d742a0d65ab68f6ce64
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282686
+  packageName: KayKit - City Builder Bits (for Unity)
+  packageVersion: 1.0.0
+  assetPath: Assets/KayKit/Packs/Bits/KayKit - City Builder Bits (for Unity)/Prefabs/car_taxi.prefab
+  uploadId: 678574

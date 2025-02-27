@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 633c617a124d757419e090f4b0555b42
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282686
+  packageName: KayKit - City Builder Bits (for Unity)
+  packageVersion: 1.0.0
+  assetPath: Assets/KayKit/Packs/Bits/KayKit - City Builder Bits (for Unity)/Prefabs/road_straight.prefab
+  uploadId: 678574

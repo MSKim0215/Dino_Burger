@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 65fadbd31e84d7d4d912fe6d7dd3c8a8
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282686
+  packageName: KayKit - City Builder Bits (for Unity)
+  packageVersion: 1.0.0
+  assetPath: Assets/KayKit/Packs/Bits/KayKit - City Builder Bits (for Unity)/Prefabs/building_C_withoutBase.prefab
+  uploadId: 678574

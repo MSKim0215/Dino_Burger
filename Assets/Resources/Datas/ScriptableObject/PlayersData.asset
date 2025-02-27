@@ -16,6 +16,7 @@ MonoBehaviour:
   PlayerDataList:
   - Name: "\uD50C\uB808\uC774\uC5B41"
     Type: 0
-    MoveSpeed: 12
-    RotateSpeed: 15
+    MoveSpeed: 8
+    RotateSpeed: 12
     HandLength: 1
+    ViewAngle: 5

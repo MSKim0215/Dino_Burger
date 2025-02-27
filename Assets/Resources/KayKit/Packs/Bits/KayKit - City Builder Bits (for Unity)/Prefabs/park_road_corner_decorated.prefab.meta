@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 358ee1d404851b449a13f2ed9ae26268
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282686
+  packageName: KayKit - City Builder Bits (for Unity)
+  packageVersion: 1.0.0
+  assetPath: Assets/KayKit/Packs/Bits/KayKit - City Builder Bits (for Unity)/Prefabs/park_road_corner_decorated.prefab
+  uploadId: 678574

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f201492aafa19274e8b892c52cc1133b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282686
+  packageName: KayKit - City Builder Bits (for Unity)
+  packageVersion: 1.0.0
+  assetPath: Assets/KayKit/Packs/Bits/KayKit - City Builder Bits (for Unity)/Prefabs/road_straight_crossing.prefab
+  uploadId: 678574

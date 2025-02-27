@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: afc504755fa76c1458f785acc16c2725
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 282686
+  packageName: KayKit - City Builder Bits (for Unity)
+  packageVersion: 1.0.0
+  assetPath: Assets/KayKit/Packs/Bits/KayKit - City Builder Bits (for Unity)/Prefabs/streetlight_old_single.prefab
+  uploadId: 678574
