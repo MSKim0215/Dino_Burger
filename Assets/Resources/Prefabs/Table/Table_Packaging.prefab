@@ -262,7 +262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6530527622101134810}
   m_Layer: 0
-  m_Name: PackagingTable
+  m_Name: Table_Packaging
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

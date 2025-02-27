@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 6465161601778206313}
   - component: {fileID: 8099902353272956261}
   m_Layer: 7
-  m_Name: TrashcanTable
+  m_Name: Table_Trashcan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

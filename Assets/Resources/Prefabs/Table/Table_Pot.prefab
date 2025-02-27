@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 2919500021835939305}
   - component: {fileID: 1952643263542932781}
   m_Layer: 7
-  m_Name: PotTable
+  m_Name: Table_Pot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 5470095940457986518}
   - component: {fileID: 5418976530900700860}
   m_Layer: 7
-  m_Name: CuttingBoardTable
+  m_Name: Table_CuttingBoard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
