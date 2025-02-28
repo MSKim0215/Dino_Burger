@@ -581,6 +581,12 @@ MonoBehaviour:
       createPrefab: {fileID: 5011149463025470885, guid: c408f4d33f096214688d3198d1dd3455, type: 3}
       createCount: 10
       maxCount: 25
+    - createObjectName: Canvas_Currency
+      poolType: 1
+      useScene: 2
+      createPrefab: {fileID: 1601692907232339313, guid: 5bbdfc63a501d48429f7116be57b7a4c, type: 3}
+      createCount: 10
+      maxCount: 10
     rootList:
     - {fileID: 365165892}
     - {fileID: 708651376}

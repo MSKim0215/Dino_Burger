@@ -1142,6 +1142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e1de283b5be63e44b054bc52f7129ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUpdate: 0
 --- !u!1 &4782684609380220640
 GameObject:
   m_ObjectHideFlags: 0
@@ -1324,6 +1325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e1de283b5be63e44b054bc52f7129ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUpdate: 0
 --- !u!1 &5218972883480077761
 GameObject:
   m_ObjectHideFlags: 0
@@ -1978,12 +1980,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c9f3953d77a0fd4cbcd0b28e0543e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rigid: {fileID: 0}
   data:
     Name: 
     Type: 0
     MoveSpeed: 0
     RotateSpeed: 0
     HandLength: 0
+    ViewAngle: 0
     MinimumToppingCount: 0
     MaximumToppingCount: 0
     Patience: 0
