@@ -98,6 +98,9 @@ namespace MSKim.Manager
 
         public override void Clear()
         {
+            pickupZoneGuestList.Clear();
+            waitingZoneGuestQueue.Clear();
+
             for (int i = activeObjectList.Count - 1; i >= 0; i--)
             {
                 var obj = activeObjectList[i];
