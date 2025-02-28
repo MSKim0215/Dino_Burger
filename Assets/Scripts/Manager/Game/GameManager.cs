@@ -13,7 +13,8 @@ namespace MSKim.Manager
         private int currentCoinAmount = 0;          // 인게임 재화
 
         [Header("Settings")]
-        [SerializeField] private List<Utils.CrateType> allowIncredientList = new();
+        [SerializeField] private List<Utils.CrateType> allowBurgerIngredients = new();
+        [SerializeField] private List<Utils.CrateType> allowStewIncredients = new();
 
         public event Action<int> OnChangeCurrencyEvent;    // 인게임 재화 수치 변경 이벤트
 
@@ -27,7 +28,8 @@ namespace MSKim.Manager
             }
         }
 
-        public List<Utils.CrateType> AllowIncredientList { get => allowIncredientList; }
+        public List<Utils.CrateType> AllowBurgerIncredients => allowBurgerIngredients;
+        public List<Utils.CrateType> AllowStewIncredients => allowStewIncredients;
 
         public bool CanMovePickupTable => Guest.CurrentPickupGuestCount < Zone.GetPickupTableCount();
 

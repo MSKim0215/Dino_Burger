@@ -101,7 +101,7 @@ public class OrderState : ICharacterState
     {
         var orderIngredients = new List<Utils.CrateType>();
         var toppingCount = UnityEngine.Random.Range(minCount, maxCount);
-        var allowList = Managers.Game.AllowIncredientList;
+        var allowList = Managers.Game.AllowBurgerIncredients;
 
         for(int i = 0; i < toppingCount; i++)
         {

@@ -11,9 +11,10 @@ namespace MSKim.UI
         private float currentTime = 0f;
         private float maxTime = 2f;
 
-        public void Initialize(int currencyAmount)
+        public void Initialize(int giveGoldAmount)
         {
-            view.SetPriceText(currencyAmount);
+            view.Initialize();
+            view.SetPriceText(giveGoldAmount);
 
             isInit = true;
         }
@@ -36,6 +37,7 @@ namespace MSKim.UI
         public override void Release()
         {
             isInit = false;
+            view.ResetGroup();
 
             base.Release();
         }

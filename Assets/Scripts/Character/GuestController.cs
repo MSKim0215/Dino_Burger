@@ -29,14 +29,14 @@ namespace MSKim.NonPlayer
         [SerializeField] private bool isOrderStew = false;
         [SerializeField] private bool isGetBurger = false;
         [SerializeField] private bool isGetStew = false;
-
+        [SerializeField] private Transform rootCurrency;
         [SerializeField] private List<Material> skinMatList = new();
         [SerializeField] private List<SkinnedMeshRenderer> skinRendererList = new();
 
         private RaycastHit handHit;
         private Ray handRay;
         private float holdPointZ;
-
+        private bool isRelease = false;
         private int waitingNumber;
         private int orderTableNumber;
         private MSKim.UI.OrderTicket orderTicket;
@@ -385,7 +385,24 @@ namespace MSKim.NonPlayer
                 {
                     isGetBurger = true;
                     OnOrderBurgerCheckEvent?.Invoke(isGetBurger);
-                    Destroy(myPickupTable.Give());
+                    myPickupTable.Give();
+                    burger.Release();
+
+                    int giveGoldAmount = 0;
+                    for (int i = 0; i < orderBurger.Count; i++)
+                    {
+                        giveGoldAmount += (int)(Managers.GameData.GetIngredientData(orderBurger[i]).GuestSellPrice +
+                            Managers.UserData.GetUpgradeAmount(Managers.GameData.GetIngredientData(orderBurger[i]).ItemPrice));
+                    }
+
+                    var currency = Managers.Pool.GetPoolObject("Canvas_Currency");
+                    if(currency.TryGetComponent<MSKim.UI.CurrencyCanvas>(out var component))
+                    {
+                        component.transform.position = rootCurrency.position;
+                        component.Initialize(giveGoldAmount);
+                    }
+
+                    Managers.Game.CurrentCoinAmount += giveGoldAmount;
                 }
             }
         }
@@ -402,11 +419,26 @@ namespace MSKim.NonPlayer
 
                 isGetStew = true;
                 OnOrderStewCheckEvent?.Invoke(isGetStew);
-                Destroy(myPickupTable.Give());
+                myPickupTable.Give();
+                stew.Release();
+
+                int giveGoldAmount = 0;
+                for (int i = 0; i < Managers.Game.AllowStewIncredients.Count; i++)
+                {
+                    var data = Managers.GameData.GetIngredientData(Managers.Game.AllowStewIncredients[i]);
+                    giveGoldAmount += (int)(data.GuestSellPrice + Managers.UserData.GetUpgradeAmount(data.ItemPrice));
+                }
+
+                var currency = Managers.Pool.GetPoolObject("Canvas_Currency");
+                if (currency.TryGetComponent<MSKim.UI.CurrencyCanvas>(out var component))
+                {
+                    component.transform.position = rootCurrency.position;
+                    component.Initialize(giveGoldAmount);
+                }
+
+                Managers.Game.CurrentCoinAmount += giveGoldAmount;
             }
         }
-
-        private bool isRelease = false;
 
         private void PatientTimer()
         {
@@ -416,20 +448,6 @@ namespace MSKim.NonPlayer
             {
                 ChangeState(ICharacterState.BehaviourState.OrderSuccess);
                 currentPatientTime = 0f;
-
-                int giveGoldAmount = 0;
-                for (int i = 0; i < orderBurger.Count; i++)
-                {
-                    giveGoldAmount += (int)(Managers.GameData.GetIngredientData(orderBurger[i]).GuestSellPrice +
-                        Managers.UserData.GetUpgradeAmount(Managers.GameData.GetIngredientData(orderBurger[i]).ItemPrice));
-                }
-
-                if (isOrderStew)
-                {
-                    giveGoldAmount += Managers.GameData.GetFoodData(Utils.FoodType.Stew).GuestSellPrice;
-                }
-
-                Managers.Game.CurrentCoinAmount += giveGoldAmount;
 
                 if (orderTicket != null)
                 {

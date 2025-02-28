@@ -470,7 +470,8 @@ MonoBehaviour:
       - {fileID: 5996507713573885615, guid: 25bc2d34280d56149b5e2828e9969ef8, type: 3}
       - {fileID: 2529852330503185278, guid: 0765c634baa041d41a282e3d33d47345, type: 3}
       - {fileID: 8750179691983508878, guid: c1af80ace574cc347b016eb359657312, type: 3}
-    allowIncredientList: 0100000002000000030000000400000005000000
+    allowBurgerIngredients: 0100000002000000030000000400000005000000
+    allowStewIncredients: 020000000300000004000000
   objectPoolManager:
     poolObjectList:
     - createObjectName: Guest

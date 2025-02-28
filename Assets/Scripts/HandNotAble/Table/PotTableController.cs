@@ -15,7 +15,6 @@ namespace MSKim.HandNotAble
         [SerializeField] private GameObject stewObject;
 
         [Header("Stew Settings")]
-        [SerializeField] private List<Utils.CrateType> stewIngredientList = new();
         [SerializeField] private List<Utils.CrateType> currentIngredientList = new();
 
         [Header("Stew Cooking Time")]
@@ -38,7 +37,7 @@ namespace MSKim.HandNotAble
 
             if(takeObject.TryGetComponent<HandAble.IngredientController>(out var ingredient))
             {
-                if (!stewIngredientList.Contains(ingredient.IngredientType)) return;
+                if (!Managers.Game.AllowStewIncredients.Contains(ingredient.IngredientType)) return;
                 if (IsContainIngredient(ingredient.IngredientType)) return;
 
                 currentIngredientList.Add(ingredient.IngredientType);
@@ -59,7 +58,7 @@ namespace MSKim.HandNotAble
 
         private void Boil()
         {
-            if (currentIngredientList.Count < stewIngredientList.Count) return;
+            if (currentIngredientList.Count < Managers.Game.AllowStewIncredients.Count) return;
 
             bool isTimeOver = currentCookTime >= Utils.BOIL_STEW_COOK_TIME;
             OnTriggerOriginActiveEvent(!isTimeOver);
