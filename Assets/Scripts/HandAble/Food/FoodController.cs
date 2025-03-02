@@ -25,9 +25,15 @@ namespace MSKim.HandAble
             currentYieldAmount = data.YieldAmount;
         }
 
-        public void Packaing()
+        public void Packaing(bool isActive = true)
         {
-            plate.SetActive(true);
+            plate.SetActive(isActive);
+        }
+
+        public override void Release()
+        {
+            Packaing(false);
+            base.Release();
         }
     }
 }
