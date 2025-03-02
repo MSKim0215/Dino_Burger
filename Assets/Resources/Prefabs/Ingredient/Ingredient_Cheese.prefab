@@ -84,6 +84,7 @@ MonoBehaviour:
   - {fileID: 4909299698062775951}
   - {fileID: 3694237532447138981}
   currentCookTime: 0
+  currentYieldAmount: 0
   ingredientRenderer: {fileID: 2901563933741729136}
   hitbox: {fileID: 5113191199447852626}
 --- !u!1001 &2666120056759299569
@@ -132,6 +133,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5190baedd8294b54f89cf0e5f4bc8041, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5190baedd8294b54f89cf0e5f4bc8041, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5190baedd8294b54f89cf0e5f4bc8041, type: 3}
+      propertyPath: m_LightProbeUsage
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 5190baedd8294b54f89cf0e5f4bc8041, type: 3}
@@ -218,6 +227,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 26aa7f138be87dc498d34dd3824e7f33, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 26aa7f138be87dc498d34dd3824e7f33, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 26aa7f138be87dc498d34dd3824e7f33, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -299,6 +316,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f7a22fb9a2b9ff4bb3caadea6ebef78, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 1f7a22fb9a2b9ff4bb3caadea6ebef78, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 1f7a22fb9a2b9ff4bb3caadea6ebef78, type: 3}
+      propertyPath: m_LightProbeUsage
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 1f7a22fb9a2b9ff4bb3caadea6ebef78, type: 3}

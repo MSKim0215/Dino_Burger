@@ -53,8 +53,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7, y: 0.50719917, z: 0.7}
-  m_Center: {x: 0, y: 0.25359958, z: 0}
+  m_Size: {x: 0.7, y: 0.5, z: 0.7}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!114 &7027789523447751974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,9 +80,9 @@ MonoBehaviour:
   ingredientStateObjects:
   - {fileID: 6127054472395197314}
   currentCookTime: 0
+  currentYieldAmount: 0
   ingredientRenderer: {fileID: 5622559299583224407}
   hitbox: {fileID: 5113191199447852626}
-  burgerPrefab: {fileID: 7507328935687779529, guid: cbe7f07eb2d60ea48a493c50b8133ccc, type: 3}
 --- !u!1001 &6469071518094112467
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -129,6 +129,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e47d10a0c2138664d9b741cad139bc6d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: e47d10a0c2138664d9b741cad139bc6d, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: e47d10a0c2138664d9b741cad139bc6d, type: 3}
+      propertyPath: m_LightProbeUsage
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e47d10a0c2138664d9b741cad139bc6d, type: 3}
