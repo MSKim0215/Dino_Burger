@@ -70,7 +70,7 @@ namespace MSKim.UI
 
         public void SetCurrencyText(int currencyAmount)
         {
-            currencyText.text = string.Format("{0:#,0}", currencyAmount);
+            currencyText.CountingTo(currencyAmount, "{0:#,0}");
         }
     }
 }

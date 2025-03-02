@@ -9,7 +9,7 @@ namespace MSKim.UI
 
         private void Start()
         {
-            view.Initialize(this);
+            view.Initialize();
         }
     }
 }
