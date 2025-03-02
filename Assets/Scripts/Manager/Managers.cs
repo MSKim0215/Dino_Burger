@@ -10,8 +10,10 @@ namespace MSKim.Manager
         [SerializeField] private UserDataManager userDataManager = new();
         [SerializeField] private GameDataManager gameDataManager = new();
         [SerializeField] private GameManager gameManager = new();
+        [SerializeField] private TitleManager titleManager = new();
         [SerializeField] private ObjectPoolManager objectPoolManager = new();
-        [SerializeField] private WaypointManager waypointManager = new();
+        [SerializeField] private WaypointManager titleWaypointManager = new();
+        [SerializeField] private WaypointManager gameWaypointManager = new();
 
         private FileManager fileManager = new();
 
@@ -32,10 +34,13 @@ namespace MSKim.Manager
 
         public static GameManager Game => Instance.gameManager;
 
+        public static TitleManager Title => Instance.titleManager;
 
         public static ObjectPoolManager Pool => Instance.objectPoolManager;
 
-        public static WaypointManager Waypoint => Instance.waypointManager;
+        public static WaypointManager TitleWaypoint => Instance.titleWaypointManager;
+
+        public static WaypointManager GameWaypoint => Instance.gameWaypointManager;
 
         public static FileManager File => Instance.fileManager;
 
@@ -54,11 +59,13 @@ namespace MSKim.Manager
                 gameDataManager.Initialize();
                 fileManager.Initialize();
                 userDataManager.Initialize();
+                titleManager.Initialize();
+                titleWaypointManager.Initialize();
             }
             else if(currentSceneType == Utils.SceneType.MainGame)
             {
                 gameManager.Initialize();
-                waypointManager.Initialize();
+                gameWaypointManager.Initialize();
             }
         }
 
@@ -88,6 +95,7 @@ namespace MSKim.Manager
             if (currentSceneType == Utils.SceneType.Title)
             {
                 userDataManager.OnUpdate();
+                titleManager.OnUpdate();
             }
             else if(currentSceneType == Utils.SceneType.MainGame)
             {

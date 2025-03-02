@@ -16,6 +16,8 @@ namespace MSKim.UI
 
         public void OnStartEvent()
         {
+            Managers.Title.TitleGuest.Clear();
+            Managers.Title.TitleCar.Clear();
             SceneManager.LoadScene(1);
         }
 

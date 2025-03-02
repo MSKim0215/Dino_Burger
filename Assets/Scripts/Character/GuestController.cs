@@ -110,7 +110,16 @@ namespace MSKim.NonPlayer
             view.Initialize(this);
 
             holdPointZ = transform.position.z;
-            CurrentWaypointType = Utils.WaypointType.MoveStore;
+
+            if(Managers.CurrentSceneType == Utils.SceneType.Title)
+            {
+                CurrentWaypointType = transform.position.x > 0 ? Utils.WaypointType.Outside_L : Utils.WaypointType.Outside_R;
+            }
+            else
+            {
+                CurrentWaypointType = Utils.WaypointType.MoveStore;
+            }
+
             currentPatientTime = 0f;
 
             ChangeState(ICharacterState.BehaviourState.Move);
@@ -150,12 +159,24 @@ namespace MSKim.NonPlayer
 
         private bool IsAtLastWaypoint()
         {
-            return (currentPointIndex >= Managers.Waypoint.GetCurrentWaypointMaxIndex(currentWaypointType));
+            if(Managers.CurrentSceneType == Utils.SceneType.Title)
+            {
+                return currentPointIndex >= Managers.TitleWaypoint.GetCurrentWaypointMaxIndex(currentWaypointType);
+            }
+            return (currentPointIndex >= Managers.GameWaypoint.GetCurrentWaypointMaxIndex(currentWaypointType));
         }
 
         public override void MovePosition()
         {
-            var targetPoint = Managers.Waypoint.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
+            Vector3 targetPoint;
+            if (Managers.CurrentSceneType == Utils.SceneType.Title)
+            {
+                targetPoint = Managers.TitleWaypoint.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
+            }
+            else
+            {
+                targetPoint = Managers.GameWaypoint.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
+            }
 
             if(ShouldHoldZPosition())
             {
@@ -185,7 +206,15 @@ namespace MSKim.NonPlayer
 
         public override void MoveRotation()
         {
-            var targetPoint = Managers.Waypoint.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
+            Vector3 targetPoint;
+            if (Managers.CurrentSceneType == Utils.SceneType.Title)
+            {
+                targetPoint = Managers.TitleWaypoint.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
+            }
+            else
+            {
+                targetPoint = Managers.GameWaypoint.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
+            }
             
             if (currentWaypointType == Utils.WaypointType.Outside_L || currentWaypointType == Utils.WaypointType.Outside_R ||
                 (currentWaypointType == Utils.WaypointType.MoveStore && currentPointIndex == 0) ||
@@ -259,17 +288,34 @@ namespace MSKim.NonPlayer
 
         private void CheckDistance()
         {
-            var targetPoint = Managers.Waypoint.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
+            Vector3 targetPoint;
+            if (Managers.CurrentSceneType == Utils.SceneType.Title)
+            {
+                targetPoint = Managers.TitleWaypoint.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
+            }
+            else
+            {
+                targetPoint = Managers.GameWaypoint.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
+            }
 
             if (IsMoveOutside())
             {   // 거리 -> 거리 퇴장
-                int maxIndex = Managers.Waypoint.GetCurrentWaypointMaxIndex(currentWaypointType) - 1;
+                int maxIndex;
+                if (Managers.CurrentSceneType == Utils.SceneType.Title)
+                {
+                    maxIndex = Managers.TitleWaypoint.GetCurrentWaypointMaxIndex(currentWaypointType) - 1;
+                }
+                else
+                {
+                    maxIndex = Managers.GameWaypoint.GetCurrentWaypointMaxIndex(currentWaypointType) - 1;
+                }
+
                 currentDistance = Mathf.Abs(targetPoint.x - transform.position.x);
                 NextPointIndex(maxIndex <= currentPointIndex);
             }
             else if (IsMovePickupOutside())
             {   // 픽업 테이블 -> 거리 퇴장
-                int maxIndex = Managers.Waypoint.GetCurrentWaypointMaxIndex(currentWaypointType) - 1;
+                int maxIndex = Managers.GameWaypoint.GetCurrentWaypointMaxIndex(currentWaypointType) - 1;
                 currentDistance = GetDistanceWithPointIndex(maxIndex, targetPoint);
                 NextPointIndex(maxIndex <= currentPointIndex);
             }
@@ -550,7 +596,14 @@ namespace MSKim.NonPlayer
 
         public override void Release()
         {
-            Managers.Game.Guest.Remove(gameObject);
+            if(Managers.CurrentSceneType == Utils.SceneType.Title)
+            {
+                Managers.Title.TitleGuest.Remove(gameObject);
+            }
+            else
+            {
+                Managers.Game.Guest.Remove(gameObject);
+            }
 
             ChangeState(ICharacterState.BehaviourState.None);
 

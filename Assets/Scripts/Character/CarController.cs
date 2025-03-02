@@ -54,11 +54,21 @@ namespace MSKim.NonPlayer
         public void Initialize(Utils.CarType carType, Utils.CarWaypointType pointType)
         {
             data = Managers.GameData.GetCarData(carType);
-            skinMeshFilter.mesh = Managers.Game.Car.MeshDict[carType];
+            
             CurrentWaypointType = pointType;
 
-            targetPoint = Managers.Waypoint.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
-            maxIndex = Managers.Waypoint.GetCurrentWaypointMaxIndex(currentWaypointType) - 1;
+            if (Managers.CurrentSceneType == Utils.SceneType.Title)
+            {
+                skinMeshFilter.mesh = Managers.Title.TitleCar.MeshDict[carType];
+                targetPoint = Managers.TitleWaypoint.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
+                maxIndex = Managers.TitleWaypoint.GetCurrentWaypointMaxIndex(currentWaypointType) - 1;
+            }
+            else
+            {
+                skinMeshFilter.mesh = Managers.Game.Car.MeshDict[carType];
+                targetPoint = Managers.GameWaypoint.GetCurrentWaypoint(currentWaypointType, currentPointIndex);
+                maxIndex = Managers.GameWaypoint.GetCurrentWaypointMaxIndex(currentWaypointType) - 1;
+            }
 
             isStop = false;
             isRelease = false;
@@ -153,7 +163,14 @@ namespace MSKim.NonPlayer
 
         public override void Release()
         {
-            Managers.Game.Car.Remove(gameObject);
+            if(Managers.CurrentSceneType == Utils.SceneType.Title)
+            {
+                Managers.Title.TitleCar.Remove(gameObject);
+            }
+            else
+            {
+                Managers.Game.Car.Remove(gameObject);
+            }
 
             frontRight.motorTorque = 0;
             frontLeft.motorTorque = 0;

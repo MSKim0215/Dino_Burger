@@ -3,10 +3,100 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[Serializable]
+public class GuestSpawner : Spawner
+{
+    protected const int SPAWN_MIN_TIME = 3;
+    protected const int SPAWN_MAX_TIME = 7;
+
+    protected const int SPAWN_MIN_POSITION = 17;
+    protected const int SPAWN_MAX_POSITION = 22;
+
+    protected override void SetSpawnPoint()
+    {
+        if (!spawnPoint.IsEmptyPoint())
+        {
+            spawnPoint.Clear();
+        }
+
+        var root = GameObject.Find("GuestSpawnPoints").transform;
+
+        for (int i = 0; i < root.childCount; i++)
+        {
+            spawnPoint.AddPoint(root.GetChild(i));
+        }
+    }
+
+    protected override void Spawn() { }
+
+    protected Vector3 GetSpawnPosition()
+    {
+        var spawnPoint = this.spawnPoint.GetRandomPoint();
+        return new(spawnPoint.position.x, spawnPoint.position.y, UnityEngine.Random.Range(SPAWN_MIN_POSITION, SPAWN_MAX_POSITION));
+    }
+
+    protected override int GetSpawnTime()
+    {
+        return UnityEngine.Random.Range(SPAWN_MIN_TIME, SPAWN_MAX_TIME);
+    }
+
+    public override void Clear() { }
+
+    public override void Remove(GameObject removeTarget)
+    {
+        if (activeObjectList.Count <= 0) return;
+        if (!activeObjectList.Contains(removeTarget)) return;
+
+        activeObjectList.Remove(removeTarget);
+    }
+}
+
 namespace MSKim.Manager
 {
     [Serializable]
-    public class GuestManager : Spawner
+    public class TitleGuestManager : GuestSpawner
+    {
+        protected new const int SPAWN_MIN_TIME = 1;
+        protected new const int SPAWN_MAX_TIME = 3;
+
+        protected override void Spawn()
+        {
+            var spawnObject = Managers.Pool.GetPoolObject("Title_Guest");
+
+            if (spawnObject.TryGetComponent<NonPlayer.GuestController>(out var guest))
+            {
+                guest.transform.position = GetSpawnPosition();
+                guest.Initialize();
+                activeObjectList.Add(spawnObject);
+            }
+
+            maxSpawnTime = GetSpawnTime();
+            currSpawnTime = 0f;
+        }
+
+        public override void Clear()
+        {
+            for (int i = activeObjectList.Count - 1; i >= 0; i--)
+            {
+                var obj = activeObjectList[i];
+
+                if (obj == null)
+                {
+                    Remove(obj);
+                }
+                else
+                {
+                    if (obj.TryGetComponent<NonPlayer.GuestController>(out var guest))
+                    {
+                        guest?.Release();
+                    }
+                }
+            }
+        }
+    }
+
+    [Serializable]
+    public class GuestManager : GuestSpawner
     {
         private List<NonPlayer.GuestController> pickupZoneGuestList = new();
         private Queue<NonPlayer.GuestController> waitingZoneGuestQueue = new();
@@ -16,12 +106,6 @@ namespace MSKim.Manager
 
         private int pickupCount;
         private int waitCount;
-
-        private const int SPAWN_MIN_TIME = 3;
-        private const int SPAWN_MAX_TIME = 7;
-
-        private const int SPAWN_MIN_POSITION = 17;
-        private const int SPAWN_MAX_POSITION = 22;
 
         public int CurrentPickupGuestCount => pickupZoneGuestList.Count;
 
@@ -37,21 +121,6 @@ namespace MSKim.Manager
             this.waitCount = waitCount;
 
             SetSeat();
-        }
-
-        protected override void SetSpawnPoint()
-        {
-            if (!spawnPoint.IsEmptyPoint())
-            {
-                spawnPoint.Clear();
-            }
-
-            var root = GameObject.Find("GuestSpawnPoints").transform;
-
-            for (int i = 0; i < root.childCount; i++)
-            {
-                spawnPoint.AddPoint(root.GetChild(i));
-            }
         }
 
         private void SetSeat()
@@ -85,17 +154,6 @@ namespace MSKim.Manager
             currSpawnTime = 0f;
         }
 
-        private Vector3 GetSpawnPosition()
-        {
-            var spawnPoint = this.spawnPoint.GetRandomPoint();
-            return new(spawnPoint.position.x, spawnPoint.position.y, UnityEngine.Random.Range(SPAWN_MIN_POSITION, SPAWN_MAX_POSITION));
-        }
-
-        protected override int GetSpawnTime()
-        {
-            return UnityEngine.Random.Range(SPAWN_MIN_TIME, SPAWN_MAX_TIME);
-        }
-
         public override void Clear()
         {
             pickupZoneGuestList.Clear();
@@ -117,14 +175,6 @@ namespace MSKim.Manager
                     }
                 }
             }
-        }
-
-        public override void Remove(GameObject removeTarget)
-        {
-            if (activeObjectList.Count <= 0) return;
-            if (!activeObjectList.Contains(removeTarget)) return;
-
-            activeObjectList.Remove(removeTarget);
         }
 
         public void AddPickupZone(NonPlayer.GuestController guest)
