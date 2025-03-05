@@ -74,6 +74,7 @@ namespace MSKim.HandNotAble
                 if (createObj.TryGetComponent<HandAble.FoodController>(out var stew))
                 {
                     stew.Initialize(Utils.FoodType.Stew);
+                    view.SetCountText(stew.YieldAmount);
                 }
 
                 createObj.SetActive(false);
@@ -95,6 +96,7 @@ namespace MSKim.HandNotAble
                 stewObject.SetActive(false);
                 currentIngredientList.Clear();
                 hand.HandUpObject.SetActive(true);
+                view.SetCountText(0);
                 return base.Give();
             }
 
@@ -105,6 +107,7 @@ namespace MSKim.HandNotAble
             }
 
             stew.YieldAmount--;
+            view.SetCountText(stew.YieldAmount);
 
             return createObj;
         }

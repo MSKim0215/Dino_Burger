@@ -8,7 +8,7 @@ namespace MSKim.HandNotAble
     public class CuttingBoardTableController : TableControllerUseUI, IToolInterAction
     {
         [Header("Table View")]
-        [SerializeField] private UI.TableView view;
+        [SerializeField] private UI.CuttingBoardTableView view;
 
         [Header("Tool Hand")]
         [SerializeField] private Hand toolHand = null;
@@ -57,7 +57,11 @@ namespace MSKim.HandNotAble
                 return base.Give();
             }
 
-            if (ingredient.YieldAmount <= 1) return base.Give();
+            if (ingredient.YieldAmount <= 1)
+            {
+                view.SetCountText(0);
+                return base.Give();
+            }
 
             var createObj = Managers.Pool.GetPoolObject(cratePrefabNameDict[ingredient.IngredientType]);
             if (createObj.TryGetComponent<HandAble.IngredientController>(out var controller))
@@ -66,6 +70,7 @@ namespace MSKim.HandNotAble
             }
 
             ingredient.YieldAmount--;
+            view.SetCountText(ingredient.YieldAmount);
 
             return createObj;
         }
@@ -92,6 +97,7 @@ namespace MSKim.HandNotAble
             if (isTimeOver)
             {
                 ingredient.SetIngredientState(Utils.IngredientState.CutOver);
+                view.SetCountText(ingredient.YieldAmount);
                 return;
             }
 

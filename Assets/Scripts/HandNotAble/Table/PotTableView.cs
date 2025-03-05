@@ -1,6 +1,7 @@
 using MSKim.Manager;
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -46,9 +47,20 @@ namespace MSKim.HandNotAble.UI
         }
 
         [Serializable]
+        public class CountCanvas : CanvasGroup
+        {
+            [SerializeField] private TextMeshProUGUI countText;
+
+            public void SetCountText(int amount)
+            {
+                SetActiveRoot(amount > 0);
+                countText.text = amount.ToString();
+            }
+        }
+
+        [Serializable]
         public class InputBox
         {
-            [SerializeField] private GameObject box = null;
             [SerializeField] private GameObject frame = null;
             [SerializeField] private Image icon = null;
 
@@ -70,6 +82,7 @@ namespace MSKim.HandNotAble.UI
 
         [SerializeField] private SpeechCanvas speechCanvas = null;
         [SerializeField] private CompleteCanvas completeCanvas = null;
+        [SerializeField] private CountCanvas countCanvas = null;
 
         public override void Initialize<T>(T controller)
         {
@@ -81,5 +94,7 @@ namespace MSKim.HandNotAble.UI
             this.controller.OnSetupValueCompleteEvent(completeCanvas.Active);
             this.controller.OnSetupOutputIngredientEvent(completeCanvas.UnActive);
         }
+
+        public void SetCountText(int amount) => countCanvas.SetCountText(amount);
     }
 }
