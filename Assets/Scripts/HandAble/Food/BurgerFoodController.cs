@@ -1,3 +1,4 @@
+using MSKim.Manager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,6 @@ namespace MSKim.HandAble
         [Header("Other Object")]
         [SerializeField] private Renderer bottom;
         [SerializeField] private Renderer top;
-
-        [Header("Allow Ingredient List")]
-        [SerializeField] private List<Utils.CrateType> allowIngredientList = new();
 
         [Header("Current Ingredient List")]
         [SerializeField] private List<IngredientController> ingredientList = new();
@@ -43,6 +41,8 @@ namespace MSKim.HandAble
 
             currentHeight = bottom.bounds.size.y;
 
+            if (correctionHeightDict.Count > 0) return;
+
             correctionHeightDict.Add(Utils.CrateType.Cheese, 0.06f);
             correctionHeightDict.Add(Utils.CrateType.Onion, 0.05f);
             correctionHeightDict.Add(Utils.CrateType.Lettuce, 0.05f);
@@ -54,7 +54,7 @@ namespace MSKim.HandAble
 
             if (ingredientObject.TryGetComponent<IngredientController>(out var ingredient))
             {
-                if (!allowIngredientList.Contains(ingredient.IngredientType)) return;
+                if (!Managers.Game.AllowBurgerIncredients.Contains(ingredient.IngredientType)) return;
 
                 ingredientObject.transform.SetParent(transform);
                 ingredientObject.transform.localPosition = Vector3.zero;
@@ -90,6 +90,19 @@ namespace MSKim.HandAble
         public List<Utils.CrateType> GetCurrentIncredients()
         {
             return ingredientList.Select(ingredient => ingredient.IngredientType).ToList();
+        }
+
+        public override void Release()
+        {
+            for(int i = ingredientList.Count - 1; i >= 0; i--)
+            {
+                ingredientList[i].Release();
+            }
+
+            ingredientList.Clear();
+                
+            view.Release();
+            base.Release();
         }
     }
 }

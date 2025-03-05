@@ -107,5 +107,12 @@ namespace MSKim.HandAble
             CurrentCookTime = copyTarget.CurrentCookTime;
             ingredientState = copyTarget.IngredientState;
         }
+
+        public override void Release()
+        {
+            ingredientState = Utils.IngredientState.Basic;
+
+            base.Release();
+        }
     }
 }

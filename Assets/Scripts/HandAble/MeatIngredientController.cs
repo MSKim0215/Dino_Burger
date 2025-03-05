@@ -36,5 +36,12 @@ namespace MSKim.HandAble
                 }
             }
         }
+
+        public override void Release()
+        {
+            IsGrillOver = false;
+
+            base.Release();
+        }
     }
 }

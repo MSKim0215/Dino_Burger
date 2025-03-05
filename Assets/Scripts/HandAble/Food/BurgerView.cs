@@ -29,13 +29,21 @@ namespace MSKim.HandAble.UI
                 box.SetActive(true);
             }
 
-            public void AddCount()
+            public void Release()
+            {
+                ClearCount();
+                box.SetActive(false);
+            }
+
+            private void ClearCount() => count = 0;
+
+            private void AddCount()
             {
                 count++;
                 SetCount(count);
             }
 
-            public void SetCount(int count) => countText.text = $"x {count}";
+            private void SetCount(int count) => countText.text = $"x {count}";
         }
 
         private BurgerFoodController controller = null;
@@ -56,6 +64,14 @@ namespace MSKim.HandAble.UI
             if (inputBox == null) return;
 
             inputBox.Initialize(inputIngredient.IngredientType);
+        }
+
+        public void Release()
+        {
+            for(int i = 0; i < inputBoxList.Count; i++)
+            {
+                inputBoxList[i].Release();
+            }
         }
     }
 }
