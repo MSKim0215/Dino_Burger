@@ -17,49 +17,71 @@
 
 </br>
 
-## 3. 클래스 구조 설계
-
-## 4. 핵심 기능
-이 게임의 목표는 손님이 주문한 음식을 요리하여 최대한 많은 손님을 만족하게 만드는 것을 목표로 합니다.
-사용자는 햄버거에 들어가는 토핑을 확인하고, 해당되는 토핑을 손질하고 넣어서 만들 수 있습니다.
-토핑의 종류에 따라 조리 방식이 다릅니다.
+## 3. 핵심 기능
+- Car와 Guest NPC는 게임 시작 시 지정된 좌표에서 생성되어 각각의 관리자가 제어합니다.
+  - NPC는 Waypoint로 이동하고 State 패턴으로 상태를 관리합니다.
+    - Guest는 가게 상황에 따라 입장하거나 대기하며, 시간 내 음식을 받지 못하면 퇴장합니다.
+    - Car는 바퀴 기반으로 움직이며 앞차 감지 시 정차합니다.
 
 <details>
 <summary><b>핵심 기능 설명 펼치기</b></summary>
 <div markdown="1">
 
-### 4.1. 전체 흐름
-이미지 첨부
-
-- **기능** 📌 [코드 확인]()
-  - 기능 설명
-
-### 4.2. NPC Spawn
+### 3.1. NPC Spawn
 ![Guest Spawner](https://github.com/user-attachments/assets/48a913c4-0c12-4b61-89e0-12c53683303f)
 
 - **Spawner 초기화** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/26f141d32664c3031c122082ff2f87f32028f7fd/Assets/Scripts/Manager/Game/GuestManager.cs#L15)
   - 게임이 시작되면 미리 설정된 좌표를 불러와 생성 좌표를 초기화합니다.
-
 - **NPC 생성** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/26f141d32664c3031c122082ff2f87f32028f7fd/Assets/Scripts/Manager/Game/GuestManager.cs#L142)
   - 일정 시간마다 지정된 좌표에 NPC를 생성합니다.
   - 생성은 오브젝트 풀 매니저를 통해 이루어집니다.
- 
 - **NPC 종류**
   - Car와 Guest로 구성되어 있으며, 각각 해당 Spawner와 Manager가 관리합니다.
 
-### 4.3. NPC Controller
+### 3.2. NPC Controller
+![Waypoints](https://github.com/user-attachments/assets/bacc1852-58c0-4769-b015-ef2cf7205e34)
 
-### 4.4. Player Controller
+- **Waypoint 관리** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/60bad920ddef8afa78d04c82898a29378f8cdaea/Assets/Scripts/Manager/Game/WaypointManager.cs#L44)
+  - 게임 시작 시 Waypoint 타입별 좌표값을 초기화합니다.
+  - 설정된 Waypoint 타입에 따라 다음 이동 좌표를 제공합니다.
 
-### 4.5. Food Controller
+![Guest Controller](https://github.com/user-attachments/assets/52cf0b40-bc91-4305-915e-02d5ceb36406)
+
+- **State 패턴** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/60bad920ddef8afa78d04c82898a29378f8cdaea/Assets/Scripts/Utils/State/CharacterState.cs#L235)
+  - 캐릭터의 현재 상태를 관리합니다.
+    - 상태 전환 시 실행되는 함수들을 관리합니다.
+- **Guest 동작** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/60bad920ddef8afa78d04c82898a29378f8cdaea/Assets/Scripts/Character/GuestController.cs#L152)
+  - 목표 Waypoint를 기준으로 이동을 설정하고 실행합니다.
+    - 지정된 좌표에 도달하면 다음 좌표를 목표로 설정합니다.
+  - 가게 입장 가능 여부를 판단하고 행동합니다.
+    - 자연스러운 동선을 위해 확률 기반으로 가게 내부 이동을 결정합니다.
+    - 픽업존과 웨이팅존이 모두 가득 찬 경우에는 내부 이동이 결정되어도 입장하지 않습니다.
+  - 픽업존이 가득 찬 경우 웨이팅존으로 이동합니다.
+  - 주문 후 인내시간 내에 음식을 수령하거나 실패하면 퇴장합니다.
+    - 주문은 가능한 재료 중에서 무작위로 선택됩니다.
+
+<figure class="half">  
+  <img src="https://github.com/user-attachments/assets/89c20685-af82-4e2b-a20e-68fff5e1799f" alt="바퀴의 회전력으로 이동" width="350">
+  <img src="https://github.com/user-attachments/assets/b0344baf-6fa7-4992-8220-2bad166bb3ba" alt="지면과 닿지 않으면 이동 불가" width="350"> 
+</figure>
+
+- **Car 동작** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/60bad920ddef8afa78d04c82898a29378f8cdaea/Assets/Scripts/Character/CarController.cs#L77)
+  - Guest와 동일하게 목표 Waypoint를 기준으로 이동을 설정하고 실행합니다.
+  - 자연스러운 이동을 위해 Wheel Collider를 사용했습니다.
+    - 자동차 바퀴는 가속 힘에 비례하여 회전하며, 이 회전력으로 전진합니다.
+  - 일정 거리 내에 다른 Car가 감지되면 제동력이 발생하여 정차합니다.
+
+### 3.3. Player Controller
+
+### 3.4. Food Controller
 
 </div>
 </details>
 
 </br>
 
-## 5. 핵심 트러블 슈팅
-### 5.1. 예시 문제 이름
+## 4. 핵심 트러블 슈팅
+### 4.1. 예시 문제 이름
 - 처음에 어떤 방식으로 구현했는지, 왜 그것을 사용했는지 이유를 적는다.
 
 - 하지만 그로 인해 발생한 or 어떠한 이유로 인해 더 효율적인 것이 있다는 것을 알게 되어서 개선하려고 한다.
@@ -93,7 +115,7 @@
 
 </br>
 
-## 6. 그 외 트러블 슈팅
+## 5. 그 외 트러블 슈팅
 <details>
 <summary>예시 오류</summary>
 <div markdown="1">
@@ -108,5 +130,5 @@
 
 </br>
 
-## 7. 회고 / 느낀점
+## 6. 회고 / 느낀점
 > 필요하다면 추가
