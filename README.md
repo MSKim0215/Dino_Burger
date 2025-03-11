@@ -35,6 +35,17 @@
   - 기능 설명
 
 ### 4.2. NPC Spawn
+![Guest Spawner](https://github.com/user-attachments/assets/48a913c4-0c12-4b61-89e0-12c53683303f)
+
+- **Spawner 초기화** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/26f141d32664c3031c122082ff2f87f32028f7fd/Assets/Scripts/Manager/Game/GuestManager.cs#L15)
+  - 게임이 시작되면 미리 설정된 좌표를 불러와 생성 좌표를 초기화합니다.
+
+- **NPC 생성** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/26f141d32664c3031c122082ff2f87f32028f7fd/Assets/Scripts/Manager/Game/GuestManager.cs#L142)
+  - 일정 시간마다 지정된 좌표에 NPC를 생성합니다.
+  - 생성은 오브젝트 풀 매니저를 통해 이루어집니다.
+ 
+- **NPC 종류**
+  - Car와 Guest로 구성되어 있으며, 각각 해당 Spawner와 Manager가 관리합니다.
 
 ### 4.3. NPC Controller
 
