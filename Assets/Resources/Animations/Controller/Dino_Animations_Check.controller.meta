@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2dcee1cf18efbfb468e73765705f1469
+timeCreated: 1470462113
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 139016
+  packageName: Dino
+  packageVersion: 3.0
+  assetPath: Assets/Suriyun/Dino/Animations/Dino_Animations_Check.controller
+  uploadId: 688141

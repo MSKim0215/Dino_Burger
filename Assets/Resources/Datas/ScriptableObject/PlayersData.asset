@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d812772a0dab364dbbd95a4c733331f, type: 3}
+  m_Name: PlayersData
+  m_EditorClassIdentifier: 
+  Json: {fileID: 4900000, guid: 4ea127c5f06271448964750886ef17d9, type: 3}
+  PlayerDataList:
+  - Name: "\uD50C\uB808\uC774\uC5B41"
+    Type: 0
+    MoveSpeed: 8
+    RotateSpeed: 12
+    HandLength: 1
+    ViewAngle: 5
