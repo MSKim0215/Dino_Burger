@@ -1,4 +1,4 @@
-# 📌 디노버거
+![Player Controller](https://github.com/user-attachments/assets/a65d215d-2a06-4790-9080-680f9a17b6f3)# 📌 디노버거
 >요리 & 시뮬레이션 게임  
 >게임 이미지 스크린샷  
 >https://youtube.co.kr (시연 영상)
@@ -72,6 +72,14 @@
   - 일정 거리 내에 다른 Car가 감지되면 제동력이 발생하여 정차합니다.
 
 ### 3.3. Player Controller
+![Player Controller](https://github.com/user-attachments/assets/8be398ee-8647-49f3-988f-698c20bb9057)
+
+- **물체 인식** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/be5cbcaedd21fb791f62fd10d971912d028e8fe8/Assets/Scripts/Character/PlayerController.cs#L143)
+  - 
+
+- **상호작용**- 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/be5cbcaedd21fb791f62fd10d971912d028e8fe8/Assets/Scripts/Utils/Hand.cs#L5)
+  - 물체를 보유할 수 있는 오브젝트는 모두 Hand를 갖고 시작합니다.
+  - 상호작용을 하는 두 오브젝트 중 하나라도 HandObject를 가지고 있다면 주고 받을 수 있습니다.
 
 ### 3.4. Food Controller
 
