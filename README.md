@@ -1,4 +1,4 @@
-![Player Controller](https://github.com/user-attachments/assets/a65d215d-2a06-4790-9080-680f9a17b6f3)# 📌 디노버거
+# 📌 디노버거
 >요리 & 시뮬레이션 게임  
 >게임 이미지 스크린샷  
 >https://youtube.co.kr (시연 영상)
@@ -75,11 +75,21 @@
 ![Player Controller](https://github.com/user-attachments/assets/8be398ee-8647-49f3-988f-698c20bb9057)
 
 - **물체 인식** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/be5cbcaedd21fb791f62fd10d971912d028e8fe8/Assets/Scripts/Character/PlayerController.cs#L143)
-  - 
+  - 정면으로 부채꼴 형태로 Raycast를 쏘면서 물체를 인식합니다.
+    - 수많은 Ray 중에 가장 많이 걸린 오브젝트를 mostDetected로 지정합니다.
+    - 해당 오브젝트가 Table 타입이라면 Highlight를 활성화 시킵니다.
+  - 감지된 오브젝트가 Wall, Table 타입이면 더 이상 Player가 움직이지 않습니다.
 
-- **상호작용**- 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/be5cbcaedd21fb791f62fd10d971912d028e8fe8/Assets/Scripts/Utils/Hand.cs#L5)
+- **물체 교환** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/be5cbcaedd21fb791f62fd10d971912d028e8fe8/Assets/Scripts/Utils/Hand.cs#L5)
   - 물체를 보유할 수 있는 오브젝트는 모두 Hand를 갖고 시작합니다.
   - 상호작용을 하는 두 오브젝트 중 하나라도 HandObject를 가지고 있다면 주고 받을 수 있습니다.
+ 
+- **상호 작용** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/be5cbcaedd21fb791f62fd10d971912d028e8fe8/Assets/Scripts/HandNotAble/Table/CuttingBoardTableController.cs#L89)
+  - Player와 상호작용이 가능한 오브젝트 타입은 Table, Crate 타입이 있습니다.
+    - Table: 테이블 / Crate: 재료 상자
+  - 그 중에서 도마 테이블 같은 경우에는 특수한 상호작용이 있는데, 도마 손질이 가능한 재료인 경우에만 발동합니다.
+  - 재료 상자에 다시 재료를 넣을 수 있는 경우는 재료의 상태가 원본 상태일 경우에만 가능합니다.
+    - 다른 State일 경우 반환이 불가능합니다.
 
 ### 3.4. Food Controller
 
