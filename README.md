@@ -18,47 +18,74 @@
 </br>
 
 ## 3. 핵심 기능
-- Car와 Guest NPC는 게임 시작 시 지정된 좌표에서 생성되어 각각의 **관리자가 제어**합니다.
-  - NPC는 Waypoint로 이동하고 **State 패턴으로 상태**를 관리합니다.
-    - Guest는 가게 상황에 따라 입장하거나 대기하며, 시간 내 음식을 받지 못하면 퇴장합니다.
-    - Car는 **바퀴 기반으로 움직이며** 앞차 감지 시 정차합니다.
+![Base](https://github.com/user-attachments/assets/e106a068-4135-4a8f-995b-db6d5eed7c4a)
+- 본 시스템은 MVC 아키텍쳐를 기반으로 하여, Controller가 Data와 View 계층을 효율적으로 관리합니다.
+- Controller는 Data 계층으로부터 수신한 정보를 분석하고 처리하여 시스템의 핵심 로직을 수행합니다.
+- View 계층은 Controller의 지시에 따라 사용자 인터페이스를 갱신하며, Controller로부터 전달받은 데이터를 시각적으로 표현합니다.
+
+</br>
+
+- **NPC 시스템**
+  - 체계적인 NPC 생성 및 관리를 위한 Spawner 시스템을 구현했습니다.
+  - 효율적인 동선 관리를 위해 Waypoint 시스템과 상태 머신을 도입하여 NPC의 행동을 최적화했습니다.
+- **Player 시스템**
+  - 정밀한 물체 감지 및 상호작용을 위한 Raycast 시스템을 구현했습니다.
+  - 직관적인 물체 조작을 위해 Hand 시스템을 도입하고, 다양한 오브젝트와의 유기적인 상호작용 메커니즘을 구현했습니다.
+- **Food 시스템**
+  - 최적화된 리소스 관리를 위해 오브젝트 풀링 시스템을 적용하여 효율적인 자원 활용을 하도록 구현했습니다.
+
+</br>
 
 <details>
 <summary><b>핵심 기능 설명 펼치기</b></summary>
 <div markdown="1">
 
-### 3.1. NPC Spawn
-![Guest Spawner](https://github.com/user-attachments/assets/48a913c4-0c12-4b61-89e0-12c53683303f)
+</br>
 
-- **Spawner 초기화** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/26f141d32664c3031c122082ff2f87f32028f7fd/Assets/Scripts/Manager/Game/GuestManager.cs#L15)
-  - 게임이 시작되면 미리 설정된 좌표를 불러와 생성 좌표를 초기화합니다.
-- **NPC 생성** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/26f141d32664c3031c122082ff2f87f32028f7fd/Assets/Scripts/Manager/Game/GuestManager.cs#L142)
-  - 일정 시간마다 지정된 좌표에 NPC를 생성합니다.
-  - 생성은 오브젝트 풀 매니저를 통해 이루어집니다.
-- **NPC 종류**
-  - Car와 Guest로 구성되어 있으며, 각각 해당 Spawner와 Manager가 관리합니다.
+### 3.1. NPC 생성 시스템
+<details>
+  <summary><b>클래스 구조도</b></summary>
+  <div markdown="2">
+    <img src="https://github.com/user-attachments/assets/48a913c4-0c12-4b61-89e0-12c53683303f">
+  </div>
+</details>
 
-### 3.2. NPC Controller
-![Waypoints](https://github.com/user-attachments/assets/bacc1852-58c0-4769-b015-ef2cf7205e34)
+- **초기 환경 구성** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/26f141d32664c3031c122082ff2f87f32028f7fd/Assets/Scripts/Manager/Game/GuestManager.cs#L15)
+  - 시스템 시작 시 사전 정의된 생성 위치를 설정하여 초기화를 수행합니다.
+- **캐릭터 생성 프로세스** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/26f141d32664c3031c122082ff2f87f32028f7fd/Assets/Scripts/Manager/Game/GuestManager.cs#L142)
+  - 최적화된 오브젝트 풀 시스템을 활용하여 지정된 위치에서 NPC를 주기적으로 생성합니다.
+- **캐릭터 분류 체계**
+  - 차량(Car)과 손님(Guest) 두 종류로 구분되며, 각각 전용 Spawner와 Manager를 통해 체계적으로 관리됩니다.
+ 
+</br>
 
-- **Waypoint 관리** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/60bad920ddef8afa78d04c82898a29378f8cdaea/Assets/Scripts/Manager/Game/WaypointManager.cs#L44)
-  - 게임 시작 시 Waypoint 타입별 좌표값을 초기화합니다.
-  - 설정된 Waypoint 타입에 따라 다음 이동 좌표를 제공합니다.
+### 3.2. NPC 제어 시스템
+<details>
+  <summary><b>클래스 구조도</b></summary>
+  <div markdown="2">
+    <img src="https://github.com/user-attachments/assets/bacc1852-58c0-4769-b015-ef2cf7205e34">
+  </div>
+</details>
 
-![Guest Controller](https://github.com/user-attachments/assets/52cf0b40-bc91-4305-915e-02d5ceb36406)
+- **이동 경로 시스템** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/60bad920ddef8afa78d04c82898a29378f8cdaea/Assets/Scripts/Manager/Game/WaypointManager.cs#L44)
+  - 시스템 초기화 시 객체 유형별 이동 좌표를 설정하고 경로 데이터를 관리합니다.
 
-- **State 패턴** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/60bad920ddef8afa78d04c82898a29378f8cdaea/Assets/Scripts/Utils/State/CharacterState.cs#L235)
-  - 캐릭터의 현재 상태를 관리합니다.
-    - 상태 전환 시 실행되는 함수들을 관리합니다.
-- **Guest 동작** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/60bad920ddef8afa78d04c82898a29378f8cdaea/Assets/Scripts/Character/GuestController.cs#L152)
-  - 목표 Waypoint를 기준으로 이동을 설정하고 실행합니다.
-    - 지정된 좌표에 도달하면 다음 좌표를 목표로 설정합니다.
-  - 가게 입장 가능 여부를 판단하고 행동합니다.
-    - 자연스러운 동선을 위해 확률 기반으로 가게 내부 이동을 결정합니다.
-    - 픽업존과 웨이팅존이 모두 가득 찬 경우에는 내부 이동이 결정되어도 입장하지 않습니다.
-  - 픽업존이 가득 찬 경우 웨이팅존으로 이동합니다.
-  - 주문 후 인내시간 내에 음식을 수령하거나 실패하면 퇴장합니다.
-    - 주문은 가능한 재료 중에서 무작위로 선택됩니다.
+<details>
+  <summary><b>클래스 구조도</b></summary>
+  <div markdown="2">
+    <img src="https://github.com/user-attachments/assets/52cf0b40-bc91-4305-915e-02d5ceb36406">
+  </div>
+</details>
+
+- **상태 관리 패턴** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/60bad920ddef8afa78d04c82898a29378f8cdaea/Assets/Scripts/Utils/State/CharacterState.cs#L235)
+  - 체계적으로 NPC 상태를 전환하고 행동 로직을 실행합니다.
+
+- **캐릭터 행동 프로세스** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/60bad920ddef8afa78d04c82898a29378f8cdaea/Assets/Scripts/Character/GuestController.cs#L152)
+  - 목표로 지정된 좌표를 향해 이동을 수행합니다.
+    - 해당 좌표에 도달하면 다음 순서의 좌표를 새로운 목표 지점으로 설정합니다.
+  - 웨이팅존과 픽업존의 수용 한도 초과 시 추가 입장이 제한됩니다.
+  - 픽업존이 만석일 경우, 자동으로 웨이팅존으로 경로가 재설정됩니다.
+  - 제한시간 내에 음식을 수령하거나 받지 못하면 가게를 떠납니다.
 
 <figure class="half">  
   <img src="https://github.com/user-attachments/assets/89c20685-af82-4e2b-a20e-68fff5e1799f" alt="바퀴의 회전력으로 이동" width="350">
@@ -66,32 +93,67 @@
 </figure>
 
 - **Car 동작** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/60bad920ddef8afa78d04c82898a29378f8cdaea/Assets/Scripts/Character/CarController.cs#L77)
-  - Guest와 동일하게 목표 Waypoint를 기준으로 이동을 설정하고 실행합니다.
-  - 자연스러운 이동을 위해 Wheel Collider를 사용했습니다.
-    - 자동차 바퀴는 가속 힘에 비례하여 회전하며, 이 회전력으로 전진합니다.
-  - 일정 거리 내에 다른 Car가 감지되면 제동력이 발생하여 정차합니다.
+  - Wheel Collider의 가속력으로 바퀴 회전을 하여 자연스러운 주행이 가능합니다.
+  - 전방 차량을 Raycast로 감지하여 정차합니다.
 
-### 3.3. Player Controller
-![Player Controller](https://github.com/user-attachments/assets/8be398ee-8647-49f3-988f-698c20bb9057)
+</br>
+  
+### 3.3. Player 제어 시스템
+<details>
+  <summary><b>클래스 구조도</b></summary>
+  <div markdown="2">
+    <img src="https://github.com/user-attachments/assets/8be398ee-8647-49f3-988f-698c20bb9057">
+  </div>
+</details>
 
-- **물체 인식** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/be5cbcaedd21fb791f62fd10d971912d028e8fe8/Assets/Scripts/Character/PlayerController.cs#L143)
-  - 정면으로 부채꼴 형태로 Raycast를 쏘면서 물체를 인식합니다.
-    - 수많은 Ray 중에 가장 많이 걸린 오브젝트를 mostDetected로 지정합니다.
-    - 해당 오브젝트가 Table 타입이라면 Highlight를 활성화 시킵니다.
-  - 감지된 오브젝트가 Wall, Table 타입이면 더 이상 Player가 움직이지 않습니다.
+- **물체 인지 메커니즘** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/be5cbcaedd21fb791f62fd10d971912d028e8fe8/Assets/Scripts/Character/PlayerController.cs#L143)
+  - 전방 부채꼴 형태의 Raycast를 통해 객체를 검출하며, 가장 높은 빈도로 감지되는 객체를 우선 선별합니다.
+    - Table 유형 객체는 시각적 피드백이 제공되며, Wall/Table 감지 시 이동이 자동 제한됩니다.
 
-- **물체 교환** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/be5cbcaedd21fb791f62fd10d971912d028e8fe8/Assets/Scripts/Utils/Hand.cs#L5)
-  - 물체를 보유할 수 있는 오브젝트는 모두 Hand를 갖고 시작합니다.
-  - 상호작용을 하는 두 오브젝트 중 하나라도 HandObject를 가지고 있다면 주고 받을 수 있습니다.
+- **객체 상호작용** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/be5cbcaedd21fb791f62fd10d971912d028e8fe8/Assets/Scripts/Utils/Hand.cs#L5)
+  - 모든 상호작용 대상 객체는 Hand 컴포넌트가 구현되어 있습니다.
+  - HandObject가 null이 아닌 객체들 간 상호 교환이 가능하도록 설계되었습니다.
  
-- **상호 작용** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/be5cbcaedd21fb791f62fd10d971912d028e8fe8/Assets/Scripts/HandNotAble/Table/CuttingBoardTableController.cs#L89)
-  - Player와 상호작용이 가능한 오브젝트 타입은 Table, Crate 타입이 있습니다.
-    - Table: 테이블 / Crate: 재료 상자
-  - 그 중에서 도마 테이블 같은 경우에는 특수한 상호작용이 있는데, 도마 손질이 가능한 재료인 경우에만 발동합니다.
-  - 재료 상자에 다시 재료를 넣을 수 있는 경우는 재료의 상태가 원본 상태일 경우에만 가능합니다.
-    - 다른 State일 경우 반환이 불가능합니다.
+- **기능별 상호작용 체계** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/be5cbcaedd21fb791f62fd10d971912d028e8fe8/Assets/Scripts/HandNotAble/Table/CuttingBoardTableController.cs#L89)
+  - Table 및 Crate(재료 보관함)와의 상호작용이 구현되어 있습니다.
+  - 조리대에서는 지정된 재료만 가공이 허용됩니다.
+  - 재료 보관함은 미가공 상태의 재료만 수납이 가능합니다.
 
-### 3.4. Food Controller
+</br>
+
+### 3.4. Food 제어 시스템
+<details>
+  <summary><b>클래스 구조도</b></summary>
+  <div markdown="2">
+    <img src="https://github.com/user-attachments/assets/8638fa4a-49a3-40c1-a4e8-8eae4d7aa0f5">
+  </div>
+</details>
+
+- **햄버거빵 가공 프로세스** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/be5cbcaedd21fb791f62fd10d971912d028e8fe8/Assets/Scripts/HandAble/BunIncredientController.cs#L8)
+  - 재료 조합 시 햄버거로의 자동 전환이 이루어집니다.
+  - 효율적인 오브젝트 풀링을 통해 음식 생성을 최적화합니다.
+
+<details>
+  <summary><b>클래스 구조도</b></summary>
+  <div markdown="2">
+    <img src="https://github.com/user-attachments/assets/2eea027e-8e16-4525-bb9a-bfaef5251905">
+  </div>
+</details>
+
+- **햄버거 스택 시스템** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/be5cbcaedd21fb791f62fd10d971912d028e8fe8/Assets/Scripts/HandAble/Food/BurgerFoodController.cs#L51)
+  - 재료가 규격화된 모델링 기준에 따라 체계적으로 적층됩니다.
+  - 재료 구성 정보를 실시간 인터페이스로 시각화합니다.
+
+<details>
+  <summary><b>클래스 구조도</b></summary>
+  <div markdown="2">
+    <img src="https://github.com/user-attachments/assets/49b5b6f5-52fb-48cc-9804-9314619ddef7">
+  </div>
+</details>
+
+- **스튜 제작 시스템** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/be5cbcaedd21fb791f62fd10d971912d028e8fe8/Assets/Scripts/HandNotAble/Table/PotTableController.cs#L59)
+  - 지정된 재료 투입 시점부터 조리 공정이 개시됩니다.
+  - 재고 소진 시 자동으로 기본 상태로 초기화됩니다.
 
 </div>
 </details>
