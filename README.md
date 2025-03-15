@@ -110,6 +110,7 @@
 </br>
   
 ### 3.3. Player 제어 시스템
+<img src="https://github.com/user-attachments/assets/040c59df-bf49-4cc9-853f-6dc5bf18071a" width="350">
 <details>
   <summary><b>클래스 구조도</b></summary>
   <div markdown="2">
@@ -120,11 +121,22 @@
 - **물체 인지 메커니즘** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/be5cbcaedd21fb791f62fd10d971912d028e8fe8/Assets/Scripts/Character/PlayerController.cs#L143)
   - 전방 부채꼴 형태의 Raycast를 통해 객체를 검출하며, 가장 높은 빈도로 감지되는 객체를 우선 선별합니다.
     - Table 유형 객체는 시각적 피드백이 제공되며, Wall/Table 감지 시 이동이 자동 제한됩니다.
+   
+</br>
+
+<img src="https://github.com/user-attachments/assets/a1784f56-45d6-44eb-bebf-0ba479da4d26" width="350">
+<img src="https://github.com/user-attachments/assets/9132d73c-eabf-481b-be22-e849929a8452" width="350">
 
 - **객체 상호작용** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/be5cbcaedd21fb791f62fd10d971912d028e8fe8/Assets/Scripts/Utils/Hand.cs#L5)
   - 모든 상호작용 대상 객체는 Hand 컴포넌트가 구현되어 있습니다.
   - HandObject가 null이 아닌 객체들 간 상호 교환이 가능하도록 설계되었습니다.
- 
+
+</br>
+
+<img src="https://github.com/user-attachments/assets/64cd1c74-7bd2-4e5a-bfd2-84bc3507d130" width="233">
+<img src="https://github.com/user-attachments/assets/50ef5dab-39f6-4deb-9737-1e75d861d1ac" width="233">
+<img src="https://github.com/user-attachments/assets/6fbb5a41-6c40-42a4-ad3a-fbb02d22fb6f" width="233">
+
 - **기능별 상호작용 체계** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/be5cbcaedd21fb791f62fd10d971912d028e8fe8/Assets/Scripts/HandNotAble/Table/CuttingBoardTableController.cs#L89)
   - Table 및 Crate(재료 보관함)와의 상호작용이 구현되어 있습니다.
   - 조리대에서는 지정된 재료만 가공이 허용됩니다.
