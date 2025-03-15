@@ -61,6 +61,7 @@
 </br>
 
 ### 3.2. NPC 제어 시스템
+<img src="https://github.com/user-attachments/assets/0f416d26-b610-4304-aacd-100c78a1e01e" width="700">
 <details>
   <summary><b>클래스 구조도</b></summary>
   <div markdown="2">
@@ -70,6 +71,11 @@
 
 - **이동 경로 시스템** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/60bad920ddef8afa78d04c82898a29378f8cdaea/Assets/Scripts/Manager/Game/WaypointManager.cs#L44)
   - 시스템 초기화 시 객체 유형별 이동 좌표를 설정하고 경로 데이터를 관리합니다.
+
+</br>
+
+<img src="https://github.com/user-attachments/assets/7955241c-3589-4f06-afac-d74e5da4beca" width="350">
+<img src="https://github.com/user-attachments/assets/99904970-5576-4cfb-8adf-12e7ecb4bde5" width="350">
 
 <details>
   <summary><b>클래스 구조도</b></summary>
@@ -81,6 +87,10 @@
 - **상태 관리 패턴** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/60bad920ddef8afa78d04c82898a29378f8cdaea/Assets/Scripts/Utils/State/CharacterState.cs#L235)
   - 체계적으로 NPC 상태를 전환하고 행동 로직을 실행합니다.
 
+
+<img src="https://github.com/user-attachments/assets/227c0355-fe6c-4464-8682-eb7dccd6b32a" width="350">
+<img src="https://github.com/user-attachments/assets/0a710202-76d4-4751-a7bc-01df65a13569" width="350">
+
 - **캐릭터 행동 프로세스** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/60bad920ddef8afa78d04c82898a29378f8cdaea/Assets/Scripts/Character/GuestController.cs#L152)
   - 목표로 지정된 좌표를 향해 이동을 수행합니다.
     - 해당 좌표에 도달하면 다음 순서의 좌표를 새로운 목표 지점으로 설정합니다.
@@ -88,10 +98,10 @@
   - 픽업존이 만석일 경우, 자동으로 웨이팅존으로 경로가 재설정됩니다.
   - 제한시간 내에 음식을 수령하거나 받지 못하면 가게를 떠납니다.
 
-<figure class="half">  
-  <img src="https://github.com/user-attachments/assets/89c20685-af82-4e2b-a20e-68fff5e1799f" width="350">
-  <img src="https://github.com/user-attachments/assets/b0344baf-6fa7-4992-8220-2bad166bb3ba" width="350"> 
-</figure>
+</br>
+
+<img src="https://github.com/user-attachments/assets/89c20685-af82-4e2b-a20e-68fff5e1799f" width="350">
+<img src="https://github.com/user-attachments/assets/b0344baf-6fa7-4992-8220-2bad166bb3ba" width="350"> 
 
 - **Car 동작** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/60bad920ddef8afa78d04c82898a29378f8cdaea/Assets/Scripts/Character/CarController.cs#L77)
   - Wheel Collider의 가속력으로 바퀴 회전을 하여 자연스러운 주행이 가능합니다.
