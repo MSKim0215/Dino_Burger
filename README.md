@@ -43,6 +43,7 @@
 </br>
 
 ### 3.1. NPC 생성 시스템
+<img src="https://github.com/user-attachments/assets/82fcc4a3-c74e-4ab7-a98f-a13cc6fe5e9b" width="700">
 <details>
   <summary><b>클래스 구조도</b></summary>
   <div markdown="2">
@@ -88,8 +89,8 @@
   - 제한시간 내에 음식을 수령하거나 받지 못하면 가게를 떠납니다.
 
 <figure class="half">  
-  <img src="https://github.com/user-attachments/assets/89c20685-af82-4e2b-a20e-68fff5e1799f" alt="바퀴의 회전력으로 이동" width="350">
-  <img src="https://github.com/user-attachments/assets/b0344baf-6fa7-4992-8220-2bad166bb3ba" alt="지면과 닿지 않으면 이동 불가" width="350"> 
+  <img src="https://github.com/user-attachments/assets/89c20685-af82-4e2b-a20e-68fff5e1799f" width="350">
+  <img src="https://github.com/user-attachments/assets/b0344baf-6fa7-4992-8220-2bad166bb3ba" width="350"> 
 </figure>
 
 - **Car 동작** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/60bad920ddef8afa78d04c82898a29378f8cdaea/Assets/Scripts/Character/CarController.cs#L77)
