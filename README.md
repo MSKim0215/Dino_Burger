@@ -8,7 +8,7 @@
 
 > 시연 영상 (유튜브)
 > 
-> [![Video Label](http://img.youtube.com/vi/0YiHpXQZ0Qo/0.jpg)](https://youtube/0YiHpXQZ0Qo)
+> [![Video Label](http://img.youtube.com/vi/0YiHpXQZ0Qo/0.jpg)](https://youtu.be/0YiHpXQZ0Qo)
 
 </br>
 
