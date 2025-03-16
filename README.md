@@ -42,7 +42,7 @@
 
 </br>
 
-### 3.1. NPC 생성 시스템
+### 3.1. NPC 시스템
 <img src="https://github.com/user-attachments/assets/82fcc4a3-c74e-4ab7-a98f-a13cc6fe5e9b" width="700">
 <details>
   <summary><b>클래스 구조도</b></summary>
@@ -57,10 +57,9 @@
   - 최적화된 오브젝트 풀 시스템을 활용하여 지정된 위치에서 NPC를 주기적으로 생성합니다.
 - **캐릭터 분류 체계**
   - 차량(Car)과 손님(Guest) 두 종류로 구분되며, 각각 전용 Spawner와 Manager를 통해 체계적으로 관리됩니다.
- 
+
 </br>
 
-### 3.2. NPC 제어 시스템
 <img src="https://github.com/user-attachments/assets/0f416d26-b610-4304-aacd-100c78a1e01e" width="700">
 <details>
   <summary><b>클래스 구조도</b></summary>
@@ -109,7 +108,7 @@
 
 </br>
   
-### 3.3. Player 제어 시스템
+### 3.2. Player 시스템
 <img src="https://github.com/user-attachments/assets/040c59df-bf49-4cc9-853f-6dc5bf18071a" width="350">
 <details>
   <summary><b>클래스 구조도</b></summary>
@@ -144,7 +143,8 @@
 
 </br>
 
-### 3.4. Food 제어 시스템
+### 3.3. Food 시스템
+<img src="https://github.com/user-attachments/assets/9718edbf-7bbc-4812-a009-34dba6ef056a" width="350">
 <details>
   <summary><b>클래스 구조도</b></summary>
   <div markdown="2">
@@ -155,7 +155,10 @@
 - **햄버거빵 가공 프로세스** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/be5cbcaedd21fb791f62fd10d971912d028e8fe8/Assets/Scripts/HandAble/BunIncredientController.cs#L8)
   - 재료 조합 시 햄버거로의 자동 전환이 이루어집니다.
   - 효율적인 오브젝트 풀링을 통해 음식 생성을 최적화합니다.
+ 
+</br>
 
+<img src="https://github.com/user-attachments/assets/8d0b65cd-3bf7-4ef6-8f42-e797633293ca" width="350">
 <details>
   <summary><b>클래스 구조도</b></summary>
   <div markdown="2">
@@ -167,6 +170,9 @@
   - 재료가 규격화된 모델링 기준에 따라 체계적으로 적층됩니다.
   - 재료 구성 정보를 실시간 인터페이스로 시각화합니다.
 
+</br>
+
+<img src="https://github.com/user-attachments/assets/400813ed-5243-48d1-ae39-558d8b15bc1b" width="350">
 <details>
   <summary><b>클래스 구조도</b></summary>
   <div markdown="2">
