@@ -1,7 +1,10 @@
 # 📌 디노버거
->요리 & 시뮬레이션 게임  
->게임 이미지 스크린샷  
->https://youtube.co.kr (시연 영상)
+>요리 & 시뮬레이션 게임
+>
+> <img src="https://github.com/user-attachments/assets/b99f475b-b743-4c37-b013-c9ca933453d8" width="350">
+> <img src="https://github.com/user-attachments/assets/e7ed2358-534a-4c04-bcce-65cf8f408da8" width="350">
+>
+> https://youtube.co.kr (시연 영상)
 
 </br>
 
@@ -51,7 +54,7 @@
   </div>
 </details>
 
-- **초기 환경 구성** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/26f141d32664c3031c122082ff2f87f32028f7fd/Assets/Scripts/Manager/Game/GuestManager.cs#L15)
+- **초기 환경 구성** 📌 <a href="https://github.com/MSKim0215/Dino_Burger/blob/26f141d32664c3031c122082ff2f87f32028f7fd/Assets/Scripts/Manager/Game/GuestManager.cs" target="_blank">코드 확인</a>
   - 시스템 시작 시 사전 정의된 생성 위치를 설정하여 초기화를 수행합니다.
 - **캐릭터 생성 프로세스** 📌 [코드 확인](https://github.com/MSKim0215/Dino_Burger/blob/26f141d32664c3031c122082ff2f87f32028f7fd/Assets/Scripts/Manager/Game/GuestManager.cs#L142)
   - 최적화된 오브젝트 풀 시스템을 활용하여 지정된 위치에서 NPC를 주기적으로 생성합니다.
