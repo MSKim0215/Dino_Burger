@@ -3,8 +3,12 @@
 >
 > <img src="https://github.com/user-attachments/assets/b99f475b-b743-4c37-b013-c9ca933453d8" width="350">
 > <img src="https://github.com/user-attachments/assets/e7ed2358-534a-4c04-bcce-65cf8f408da8" width="350">
->
-> https://youtube.co.kr (시연 영상)
+
+</br>
+
+> 시연 영상 (유튜브)
+> 
+> [![Video Label](http://img.youtube.com/vi/0YiHpXQZ0Qo/0.jpg)](https://youtube/0YiHpXQZ0Qo)
 
 </br>
 
