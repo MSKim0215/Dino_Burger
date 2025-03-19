@@ -23,7 +23,13 @@ namespace MSKim.UI
 
         public void OnMultiEvent()
         {
-            CreatePopup("MultiPopupUI");
+            var popup = CreatePopup("MultiPopupUI");
+            if (popup == null) return;
+
+            if(popup.TryGetComponent<MultiPopup>(out var multi))
+            {
+                //multi.OnRefreshList();
+            }
         }
 
         public void OnShopEvent()
@@ -31,14 +37,16 @@ namespace MSKim.UI
             CreatePopup("ShopPopupUI");
         }
 
-        private void CreatePopup(string popupName)
+        private GameObject CreatePopup(string popupName)
         {
             var popup = Managers.Pool.GetPoolObject(popupName);
-            if (popup == null) return;
+            if (popup == null) return null;
 
             popup.transform.SetParent(view.UIRoot);
             popup.transform.localScale = Vector3.one;
             popup.transform.localPosition = Vector3.zero;
+
+            return popup;
         }
 
         public void OnExitEvent()

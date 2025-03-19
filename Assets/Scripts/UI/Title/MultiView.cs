@@ -26,6 +26,7 @@ namespace MSKim.UI
         private MultiPopup controller;
 
         [SerializeField] private CommonButton backButton;
+        [SerializeField] private GameObject loading;
 
         public void Initialize(MultiPopup controller)
         {
@@ -37,5 +38,12 @@ namespace MSKim.UI
         {
             backButton.OnClickEvent(controller.OnBackEvent);
         }
+
+        public void ActiveLoading()
+        {
+            loading.SetActive(true);
+        }
+
+        public void UnActiveLoading() => loading.SetActive(false);
     }
 }
