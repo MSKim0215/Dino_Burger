@@ -25,7 +25,8 @@ namespace MSKim.UI
         private Title controller;
 
         [SerializeField] private Transform uiRoot = null;
-        [SerializeField] private CommonButton startButton = null;
+        [SerializeField] private CommonButton singleButton = null;
+        [SerializeField] private CommonButton multiButton = null;
         [SerializeField] private CommonButton shopButton = null;
         [SerializeField] private CommonButton exitButton = null;
 
@@ -39,7 +40,8 @@ namespace MSKim.UI
 
         private void BindEvent()
         {
-            startButton.OnClickEvent(controller.OnStartEvent);
+            singleButton.OnClickEvent(controller.OnSingleEvent);
+            multiButton.OnClickEvent(controller.OnMultiEvent);
             shopButton.OnClickEvent(controller.OnShopEvent);
             exitButton.OnClickEvent(controller.OnExitEvent);
         }

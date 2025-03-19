@@ -14,11 +14,16 @@ namespace MSKim.UI
             view.Initialize(this);
         }
 
-        public void OnStartEvent()
+        public void OnSingleEvent()
         {
             Managers.Title.TitleGuest.Clear();
             Managers.Title.TitleCar.Clear();
             SceneManager.LoadScene(1);
+        }
+
+        public void OnMultiEvent()
+        {
+
         }
 
         public void OnShopEvent()
@@ -33,7 +38,7 @@ namespace MSKim.UI
 
         public void OnExitEvent()
         {
-
+            Application.Quit();
         }
     }
 }
