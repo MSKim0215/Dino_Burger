@@ -848,6 +848,12 @@ MonoBehaviour:
       createPrefab: {fileID: 5011149463025470885, guid: c408f4d33f096214688d3198d1dd3455, type: 3}
       createCount: 10
       maxCount: 25
+    - createObjectName: MultiPopupUI
+      poolType: 1
+      useScene: 1
+      createPrefab: {fileID: 5763627315479576569, guid: 183eb99ed755dfb43b0fa20864b8a670, type: 3}
+      createCount: 1
+      maxCount: 1
     rootList:
     - {fileID: 365165892}
     - {fileID: 708651376}

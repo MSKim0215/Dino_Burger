@@ -52,8 +52,8 @@ public static class Utils
 
     public enum SceneType
     {
-        None, Title, MainGame
-    }   // 타이틀, 메인게임
+        None, Title, MainGame, ServerRoom
+    }   // 타이틀, 메인게임, 서버 대기방
 
     public enum PoolType
     {

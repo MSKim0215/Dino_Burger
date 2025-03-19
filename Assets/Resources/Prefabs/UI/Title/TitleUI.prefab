@@ -649,8 +649,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   view:
     uiRoot: {fileID: 0}
-    startButton:
+    singleButton:
       button: {fileID: 7641625384478784239}
+    multiButton:
+      button: {fileID: 6975324839840228290}
     shopButton:
       button: {fileID: 2847807791830602537}
     exitButton:

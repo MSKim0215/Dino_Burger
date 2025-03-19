@@ -23,17 +23,22 @@ namespace MSKim.UI
 
         public void OnMultiEvent()
         {
-
+            CreatePopup("MultiPopupUI");
         }
 
         public void OnShopEvent()
         {
-            var shopPopup = Managers.Pool.GetPoolObject("ShopPopupUI");
-            if (shopPopup == null) return;
+            CreatePopup("ShopPopupUI");
+        }
 
-            shopPopup.transform.SetParent(view.UIRoot);
-            shopPopup.transform.localScale = Vector3.one;
-            shopPopup.transform.localPosition = Vector3.zero;
+        private void CreatePopup(string popupName)
+        {
+            var popup = Managers.Pool.GetPoolObject(popupName);
+            if (popup == null) return;
+
+            popup.transform.SetParent(view.UIRoot);
+            popup.transform.localScale = Vector3.one;
+            popup.transform.localPosition = Vector3.zero;
         }
 
         public void OnExitEvent()
