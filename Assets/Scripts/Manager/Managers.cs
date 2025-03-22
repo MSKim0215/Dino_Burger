@@ -14,6 +14,7 @@ namespace MSKim.Manager
         [SerializeField] private ObjectPoolManager objectPoolManager = new();
         [SerializeField] private WaypointManager titleWaypointManager = new();
         [SerializeField] private WaypointManager gameWaypointManager = new();
+        [SerializeField] private NetManager netManager = new();
 
         private FileManager fileManager = new();
 
@@ -44,6 +45,8 @@ namespace MSKim.Manager
 
         public static FileManager File => Instance.fileManager;
 
+        public static NetManager Net => Instance.netManager;
+
         public static Utils.SceneType CurrentSceneType => Instance.currentSceneType;
 
         public void Initialize(Utils.SceneType nextSceneType)
@@ -56,6 +59,7 @@ namespace MSKim.Manager
 
             if (currentSceneType == Utils.SceneType.Title)
             {
+                netManager.Initialize();
                 gameDataManager.Initialize();
                 fileManager.Initialize();
                 userDataManager.Initialize();

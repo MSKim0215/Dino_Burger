@@ -1,3 +1,4 @@
+using MSKim.Manager;
 using System;
 using UnityEngine;
 using UnityEngine.Events;
@@ -26,6 +27,8 @@ namespace MSKim.UI
 
         [SerializeField] private Transform uiRoot = null;
         [SerializeField] private CommonButton startButton = null;
+        [SerializeField] private CommonButton multiButton = null;
+        [SerializeField] private CommonButton matchButton = null;
         [SerializeField] private CommonButton shopButton = null;
         [SerializeField] private CommonButton exitButton = null;
 
@@ -42,6 +45,7 @@ namespace MSKim.UI
             startButton.OnClickEvent(controller.OnStartEvent);
             shopButton.OnClickEvent(controller.OnShopEvent);
             exitButton.OnClickEvent(controller.OnExitEvent);
+            matchButton.OnClickEvent(Managers.Net.StartMatching);
         }
     }
 }
