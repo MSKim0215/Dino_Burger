@@ -33,7 +33,7 @@ namespace MSKim.UI
 
         public void OnExitEvent()
         {
-
+            Application.Quit();
         }
     }
 }

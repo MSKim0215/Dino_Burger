@@ -1,5 +1,7 @@
+using System;
 using System.Threading.Tasks;
 using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Lobbies;
@@ -13,6 +15,8 @@ namespace MSKim.Manager
     {
         private Lobby currentLobby;
 
+        public event Action<string> OnCreateLobbyEvent;
+
         public override async void Initialize()
         {
             base.Initialize();
@@ -22,6 +26,36 @@ namespace MSKim.Manager
             if(!AuthenticationService.Instance.IsSignedIn)
             {
                 await AuthenticationService.Instance.SignInAnonymouslyAsync();
+            }
+        }
+
+        public async void JoinGameWithCode(string joinCode)
+        {
+            if(string.IsNullOrEmpty(joinCode))
+            {
+                Debug.Log("JoinCode is Error.");
+                return;
+            }
+
+            try
+            {
+                var joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
+                NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(
+                    joinAllocation.RelayServer.IpV4,
+                    (ushort)joinAllocation.RelayServer.Port,
+                    joinAllocation.AllocationIdBytes,
+                    joinAllocation.Key,
+                    joinAllocation.ConnectionData,
+                    joinAllocation.HostConnectionData
+                    );
+
+                StartClient();
+
+                Debug.Log("Join Game with Code Success!");
+            }
+            catch(RelayServiceException e)
+            {
+                Debug.Log($"Game Join Failed... => {e}");
             }
         }
 
@@ -60,6 +94,11 @@ namespace MSKim.Manager
                 Debug.Log($"Lobby Found Failed... => {e}");
             }
             return null;
+        }
+
+        public async void CreateLobby()
+        {
+            await CreateNewLobby();
         }
 
         private async Task CreateNewLobby()
@@ -102,6 +141,7 @@ namespace MSKim.Manager
             {
                 var allocation = await RelayService.Instance.CreateAllocationAsync(lobby.MaxPlayers);
                 var joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+                OnCreateLobbyEvent?.Invoke(joinCode);
 
                 Debug.Log($"Releay Server Allocate Success...! JoinCode => {joinCode}");
             }
