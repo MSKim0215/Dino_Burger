@@ -1,37 +1,19 @@
-using System;
 using System.Threading.Tasks;
-using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
+using Unity.Netcode;
 using Unity.Services.Authentication;
-using Unity.Services.Core;
-using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
+using Unity.Services.Lobbies;
 using Unity.Services.Relay;
 using UnityEngine;
 
 namespace MSKim.Manager
 {
-    public class NetManager : BaseManager
+    public partial class NetManager : BaseManager
     {
-        private Lobby currentLobby;
-
-        public event Action<string> OnCreateLobbyEvent;
-
-        public override async void Initialize()
-        {
-            base.Initialize();
-
-            await UnityServices.InitializeAsync();
-
-            if(!AuthenticationService.Instance.IsSignedIn)
-            {
-                await AuthenticationService.Instance.SignInAnonymouslyAsync();
-            }
-        }
-
         public async void JoinGameWithCode(string joinCode)
         {
-            if(string.IsNullOrEmpty(joinCode))
+            if (string.IsNullOrEmpty(joinCode))
             {
                 Debug.Log("JoinCode is Error.");
                 return;
@@ -53,7 +35,7 @@ namespace MSKim.Manager
 
                 Debug.Log("Join Game with Code Success!");
             }
-            catch(RelayServiceException e)
+            catch (RelayServiceException e)
             {
                 Debug.Log($"Game Join Failed... => {e}");
             }
@@ -61,7 +43,7 @@ namespace MSKim.Manager
 
         public async void StartMatching()
         {
-            if(!AuthenticationService.Instance.IsSignedIn)
+            if (!AuthenticationService.Instance.IsSignedIn)
             {
                 Debug.Log("you are not signedIn.");
                 return;
@@ -69,7 +51,7 @@ namespace MSKim.Manager
 
             currentLobby = await FindAvailableLobby();
 
-            if(currentLobby == null)
+            if (currentLobby == null)
             {
                 await CreateNewLobby();
             }
@@ -84,12 +66,12 @@ namespace MSKim.Manager
             try
             {
                 var queryResponse = await LobbyService.Instance.QueryLobbiesAsync();
-                if(queryResponse.Results.Count > 0)
+                if (queryResponse.Results.Count > 0)
                 {
                     return queryResponse.Results[0];
                 }
             }
-            catch(LobbyServiceException e)
+            catch (LobbyServiceException e)
             {
                 Debug.Log($"Lobby Found Failed... => {e}");
             }
@@ -105,10 +87,10 @@ namespace MSKim.Manager
         {
             try
             {
-                currentLobby = await LobbyService.Instance.CreateLobbyAsync("Random Match Room", 2);
-                
-                Debug.Log($"Create New Room => {currentLobby.Id}");     
-            
+                currentLobby = await LobbyService.Instance.CreateLobbyAsync("Random Match Room", maxPlayers);
+
+                Debug.Log($"Create New Room => {currentLobby.Id}");
+
                 await AllocateRelayServerAndJoin(currentLobby);
 
                 StartHost();
@@ -124,12 +106,12 @@ namespace MSKim.Manager
             try
             {
                 currentLobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobbyId);
-                
+
                 Debug.Log($"Connect to Room! => {currentLobby.Id}");
-                
+
                 StartClient();
             }
-            catch(LobbyServiceException e)
+            catch (LobbyServiceException e)
             {
                 Debug.Log($"Lobby Connected Failed... => {e}");
             }
@@ -145,7 +127,7 @@ namespace MSKim.Manager
 
                 Debug.Log($"Releay Server Allocate Success...! JoinCode => {joinCode}");
             }
-            catch(RelayServiceException e)
+            catch (RelayServiceException e)
             {
                 Debug.Log($"Releay Server Allocate Failed... => {e}");
             }
@@ -155,6 +137,23 @@ namespace MSKim.Manager
         {
             NetworkManager.Singleton.StartHost();
             Debug.Log("Host Start");
+
+            NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+            NetworkManager.Singleton.OnClientDisconnectCallback += OnHostDisconnected;
+        }
+
+        private void OnClientConnected(ulong clientId)
+        {
+            OnPlayerJoined();
+        }
+
+        private void OnHostDisconnected(ulong clientId)
+        {
+            if(NetworkManager.Singleton.IsHost)
+            {
+                NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
+                NetworkManager.Singleton.OnClientDisconnectCallback -= OnHostDisconnected;
+            }
         }
 
         private void StartClient()
