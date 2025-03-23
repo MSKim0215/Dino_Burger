@@ -10,7 +10,7 @@ namespace MSKim.Manager
         private Lobby currentLobby;
 
         private const int maxPlayers = 2;
-        private string gameSceneName = "MainGame";
+        private string gameSceneName = "MultiGame";
 
         public event Action<string> OnCreateLobbyEvent;
 

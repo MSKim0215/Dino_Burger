@@ -1,4 +1,6 @@
+using MSKim.Manager;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public abstract class Spawner : BaseManager
